@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Windows/WindowStyle.uss?fileID=7433441132597879392&amp;guid=80d59a0d12b88b64fb3406bae5117ab3&amp;type=3#WindowStyle" />
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
+    <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center; bottom: 0;">
+        <ui:VisualElement name="Border" style="flex-grow: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 255, 250); border-right-color: rgb(0, 255, 250); border-top-color: rgb(0, 255, 250); border-bottom-color: rgb(0, 255, 250); background-color: rgb(0, 9, 25); padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px;">
+            <ui:Label text="セーブデータ一覧" style="color: rgb(255, 255, 255);" />
+            <ui:Button text="×" style="position: absolute; align-items: stretch; align-self: auto; right: 2px; width: 50px; height: 50px;" />
+            <ui:Button text="Button" />
+            <ui:Button text="Button" />
+            <ui:Button text="Button" />
+            <ui:Button text="Button" />
+            <ui:Button text="Button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
