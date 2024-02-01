@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Windows/WindowStyle.uss?fileID=7433441132597879392&amp;guid=80d59a0d12b88b64fb3406bae5117ab3&amp;type=3#WindowStyle" />
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: column; align-items: center; justify-content: center; align-self: auto;">
+        <ui:VisualElement name="Border" style="flex-grow: 0; border-top-width: 2px; border-left-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-color: rgb(0, 190, 255); border-right-color: rgb(0, 190, 255); border-top-color: rgb(0, 190, 255); border-bottom-color: rgb(0, 190, 255); background-color: rgb(0, 4, 41); right: auto; bottom: auto; width: 800px; height: auto; align-self: auto; align-items: stretch; flex-direction: column; justify-content: flex-start; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+            <ui:Label text="シナリオ選択" name="Title" style="color: rgb(255, 255, 255);" />
+            <ui:Button text="×" name="Close" style="width: 50px; height: 50px; align-self: flex-end; position: absolute; right: 5px;" />
+            <ui:VisualElement name="Body" style="flex-grow: 1; align-items: stretch; justify-content: space-around; height: 368px;">
+                <ui:Button text="序章" name="Button" />
+                <ui:Button text="群雄割拠" />
+                <ui:Button text="天下四分" />
+                <ui:Button text="魔王" />
+                <ui:Button text="シャッフル" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
