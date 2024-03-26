@@ -226,6 +226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _document: {fileID: 1257746122}
+  saves: {fileID: 1670116352}
+  selectScenario: {fileID: 1802808734}
 --- !u!1 &1315396283
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1670116351}
   - component: {fileID: 1670116350}
+  - component: {fileID: 1670116352}
   m_Layer: 5
   m_Name: SaveDataListWindow
   m_TagString: Untagged
@@ -411,6 +414,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1670116352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670116349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 142da9c993042654fba50bd176466997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _document: {fileID: 1670116350}
 --- !u!1 &1802808731
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1802808733}
   - component: {fileID: 1802808732}
+  - component: {fileID: 1802808734}
   m_Layer: 0
   m_Name: SelectScenarioWindow
   m_TagString: Untagged
@@ -459,6 +476,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1802808734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802808731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef172e3af5b75b44299e40a9da9bc9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _document: {fileID: 1802808732}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

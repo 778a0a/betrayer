@@ -3,9 +3,14 @@ using UnityEngine;
 
 public partial class TitleSceneUI : MonoBehaviour
 {
+    [SerializeField] private SaveDataListWindow saves;
+    [SerializeField] private SelectScenarioWindow selectScenario;
+
     private void OnEnable()
     {
         InitializeDocument();
+        saves.Hide();
+        selectScenario.Hide();
 
         StartGame.clicked += StartGame_clicked;
         OpenSeting.clicked += OpenSeting_clicked;
@@ -15,6 +20,7 @@ public partial class TitleSceneUI : MonoBehaviour
 
     private void StartGame_clicked()
     {
+        saves.Show();
     }
 
     private void OpenSeting_clicked()
