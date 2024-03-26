@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -56,6 +58,11 @@ public class Character
     /// 軍勢
     /// </summary>
     public Force Force { get; set; }
+
+    /// <summary>
+    /// プレーヤーならtrue
+    /// </summary>
+    public bool IsPlayer { get; set; }
 }
 
 /// <summary>
@@ -75,6 +82,10 @@ public class Soldier
     /// HP
     /// </summary>
     public int Hp { get; set; }
+
+    public int MaxHp => Level * 10;
+
+    public bool IsEmptySlot { get; set; }
 }
 
 /// <summary>
@@ -86,6 +97,8 @@ public class Force
     /// 兵士
     /// </summary>
     public Soldier[] Soldiers { get; set; }
+
+    public bool HasEmptySlot => Soldiers.Any(s => s.IsEmptySlot);
 }
 
 /// <summary>
@@ -157,10 +170,57 @@ public class MapGrid
 
 public class Initializer
 {
-    /// <summary>
-    /// マップを初期化します。
-    /// </summary>
-    public MapGrid CreateMapGrid(int size)
+
+    public CharacterManager CreateCharacters()
+    {
+
+
+        return new CharacterManager();
+    }
+}
+
+public class CharacterManager
+{
+    public Character[] Characters { get; set; }
+}
+
+public class CountryManager
+{
+    public List<Country> Countries { get; set; }
+}
+
+
+public static class Util
+{
+    public static TEnum[] EnumArray<TEnum>()
+    {
+        return (TEnum[])Enum.GetValues(typeof(TEnum));
+    }
+}
+
+
+
+
+public class DefaultData
+{
+    public static readonly List<string> NameList = new() { "アイリス", "アクエリアス", "アステル", "アストレア", "アトラス", "アネモネ", "アマンダ", "アリアドネ", "アリアナ", "アリエル", "アリシア", "アルタイル", "アルバート", "アーサー", "イカロス", "イグレイン" "イザベラ", "イゼリア", "イゼルト", "イゾルデ", "イリス", "イーリス", "ウィリアム", "エスメラルダ", "エドワード", "エマ", "エルシア", "エルロン", "エレノア", "オスカー", "オベロン", "オリオン", "オリビア", "オーロラ", "カトリーナ", "カリオペ", "ガイアス", "キャスパー", "グリフィン", "ケイルン", "ケイロス", "ケルベロス", "ザファーラ", "ザフィール", "ザンダー", "シエナ", "シエラ", "シャーロット", "シルバーン", "ジェームズ", "ジャスパー", "ジャスミン", "ジョージ", "ジークフリート" "セバスチャン", "セレスタ", "セレスティア", "セレーネ", "ゼノン", "ゼファー", "ゼラン", "ソフィア", "ソレイユ", "タリシア", "チャールズ", "デューン", "トリスタン", "ドラゴミール", "ドリアン", "ナイア", "ナオミ", "ナディア", "ネメア", "ネロ", "ノクターン", "ハイペリオン", "ビアンカ", "ビクトリア", "ファエリン", "フェニックス", "フリージア", "フレデリック", "プロメテウス", "ヘリオス", "ヘンリー", "ペルシヴァル", "マーガレット", "ミリアム", "ライオネル", "ライラ", "ラベンダー", "リリス", "ルシアン", "ルナ", "レイモンド", "レイヴン", "レオナルド", "ロザリンド", "ロゼッタ", "ローエン", "ローズマリー", "ヴァルカン", "ヴィオレット", };
+    public static Character[] GetDefaultCharacterList()
+    {
+        var rand = new System.Random(0);
+        return NameList.Select((name, i) =>
+        {
+            return new Character()
+            {
+                Id = i,
+                Name = name,
+                Attack = rand.Next(1, 100),
+                Defense = rand.Next(1, 100),
+                Intelligence = rand.Next(1, 100),
+            };
+        }).ToArray();
+    }
+
+    public static MapGrid CreateMapGrid(int size)
     {
         var map = new MapGrid();
         map.Areas = new Area[size, size];
@@ -181,23 +241,199 @@ public class Initializer
         return map;
     }
 
-    public CharacterManager CreateCharacters()
+    public static WorldData InitializeDefaultData()
     {
+        var rand = new System.Random(0);
+        var countryCount = 9;
+        var vassalCount = 3;
+        var characters = GetDefaultCharacterList();
+        var map = CreateMapGrid(9);
+        var charas = new List<Character>(characters);
 
+        var countries = new List<Country>();
+        for (int iCountry = 0; iCountry < countryCount; iCountry++)
+        {
+            // 適当なキャラを君主として選ぶ。
+            var ruler = charas[rand.Next(0, charas.Count)];
+            ruler.Gold = 100;
+            ruler.Prestige = 10;
+            charas.Remove(ruler);
 
-        return new CharacterManager();
+            var country = new Country
+            {
+                Id = iCountry,
+                Ruler = ruler,
+                Vassals = new List<Character>(),
+                Areas = new List<Area>(),
+            };
+            countries.Add(country);
+            // 適当なキャラを配下に割り当てる。
+            for (int iChar = 0; iChar < vassalCount; iChar++)
+            {
+                var vassal = charas[rand.Next(0, charas.Count)];
+                vassal.Gold = 10 * (1 + iChar);
+                vassal.Prestige = iChar * 2;
+                vassal.SalaryRatio = 10 * iChar;
+                charas.Remove(vassal);
+                country.Vassals.Add(vassal);
+            }
+            ruler.SalaryRatio = 100 - country.Vassals.Sum(v => v.SalaryRatio);
+
+            // 適当なエリアを割り当てる。
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    var area = map.Areas[y + 3 * (iCountry / 3), x + 3 * (iCountry % 3)];
+                    country.Areas.Add(area);
+                }
+            }
+        }
+        
+        return new WorldData()
+        {
+            Characters = characters,
+            Countries = countries,
+            Map = map,
+        };
     }
 }
 
-public class CharacterManager
+public class WorldData
 {
     public Character[] Characters { get; set; }
-}
+    public List<Country> Countries { get; set; }
+    public MapGrid Map { get; set; }
 
-public static class Util
-{
-    public static TEnum[] EnumArray<TEnum>()
+    private const int HireSoldierCost = 5;
+    private bool CanHireSoldier(Character chara)
     {
-        return (TEnum[])Enum.GetValues(typeof(TEnum));
+        return chara.Force.HasEmptySlot && chara.Gold >= HireSoldierCost;
+    }
+    private void HireSoldier(Character chara)
+    {
+        Assert.IsTrue(CanHireSoldier(chara));
+        chara.Gold -= HireSoldierCost;
+        var targetSlot = chara.Force.Soldiers.First(s => s.IsEmptySlot);
+        targetSlot.IsEmptySlot = false;
+        targetSlot.Level = 1;
+        targetSlot.Experience = 0;
+        targetSlot.Hp = targetSlot.MaxHp;
+    }
+
+    private int TrainSoldiersCost(Force force)
+    {
+        var averageLevel = force.Soldiers.Average(s => s.Level);
+        return (int)averageLevel;
+    }
+
+    private bool CanTrainSoldiers(Character chara)
+    {
+        return chara.Gold >= TrainSoldiersCost(chara.Force);
+    }
+
+    private void TrainSoldiers(Character chara)
+    {
+        Assert.IsTrue(CanTrainSoldiers(chara));
+        chara.Gold -= TrainSoldiersCost(chara.Force);
+        foreach (var soldier in chara.Force.Soldiers)
+        {
+            soldier.Experience += 1;
+            if (soldier.Experience >= soldier.Level * 10)
+            {
+                soldier.Level += 1;
+                soldier.Experience = 0;
+                soldier.Hp = soldier.MaxHp;
+            }
+        }
+    }
+
+    public void IncomePhase()
+    {
+        // 国毎の処理を行う。
+        foreach (var country in Countries)
+        {
+            // 支配領域数に応じて収入を得る。
+            var totalIncome = country.Areas.Count * 10;
+            var remainingIncome = totalIncome;
+            // 各キャラに給料を支払う。
+            foreach (var chara in country.Vassals)
+            {
+                var salary = totalIncome * chara.SalaryRatio / 100;
+                chara.Gold += salary;
+                remainingIncome -= salary;
+            }
+            country.Ruler.Gold += remainingIncome;
+        }
+
+        // 未所属の処理を行う。
+        var freeCharas = Characters.Where(IsFree).ToArray();
+        foreach (var chara in freeCharas)
+        {
+            chara.Gold += Random.Range(0, 5);
+        }
+    }
+
+    public void PersonalActionPhase()
+    {
+        // ランダムな順番で行動させる。
+        var charas = Characters.OrderBy(c => Random.value).ToArray();
+        for (int i = 0; i < charas.Length; i++)
+        {
+            var chara = charas[i];
+            // プレイヤーの場合
+            if (chara.IsPlayer)
+            {
+            }
+            // NPCの場合
+            else
+            {
+                // 兵が雇えるなら雇う。
+                while (CanHireSoldier(chara))
+                {
+                    HireSoldier(chara);
+                }
+                // 訓練できるなら訓練する。
+                while (CanTrainSoldiers(chara))
+                {
+                    TrainSoldiers(chara);
+                }
+            }
+        }
+    }
+
+    private bool IsRuler(Character chara) => Countries.Any(c => c.Ruler == chara);
+    private bool IsVassal(Character chara) => Countries.Any(c => c.Vassals.Contains(chara));
+    private bool IsFree(Character chara) => !IsRuler(chara) && !IsVassal(chara);
+    
+    public void StrategyPhase()
+    {
+        // ランダムな順番で行動させる。
+        var charas = Characters.Where(c => !IsFree(c)).OrderBy(c => Random.value).ToArray();
+        for (int i = 0; i < charas.Length; i++)
+        {
+            var chara = charas[i];
+            // プレイヤーの場合
+            if (chara.IsPlayer)
+            {
+            }
+            // NPCの場合
+            else
+            {
+                // 君主の場合
+                if (IsRuler(chara))
+                {
+                    // 配下を雇う
+                    // 侵攻する
+                    // 解雇する
+                    // 懲罰攻撃する
+                }
+                // 配下の場合
+                else
+                {
+                    // 忠誠度が一定以下なら、一定確率で反乱を起こす。
+                }
+            }
+        }
     }
 }
