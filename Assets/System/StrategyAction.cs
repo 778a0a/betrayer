@@ -4,71 +4,178 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.Assertions;
+using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 
 public class StrategyActions
 {
-    public static TrainSoldiersStrategyAction TrainSoldiers { get; } = new();
-    public static HireSoldierStrategyAction HireSoldier { get; } = new();
-
-}
-
-/// <summary>
-/// 兵士を訓練します。
-/// </summary>
-public class TrainSoldiersStrategyAction : StrategyActionBase
-{
-    public override int Cost(Character chara)
+    /// <summary>
+    /// ランダムに配下を雇います。
+    /// </summary>
+    public static HireVassalRandomlyAction HireVassalRandomly { get; } = new();
+    public class HireVassalRandomlyAction : StrategyActionBase
     {
-        var averageLevel = chara.Force.Soldiers.Average(s => s.Level);
-        return (int)averageLevel;
-    }
-
-    public override void Do(Character chara)
-    {
-        Assert.IsTrue(CanDo(chara));
-        chara.Gold -= Cost(chara);
-        foreach (var soldier in chara.Force.Soldiers)
+        public override int Cost(Character chara, WorldData world) => 8;
+        public override bool CanDo(Character chara, WorldData world)
         {
-            if (soldier.IsEmptySlot) continue;
-            soldier.Experience += 1;
-            // 十分経験値が貯まればレベルアップする。
-            if (soldier.Experience >= soldier.Level * 10)
+            if (chara.Gold < Cost(chara, world)) return false;
+            if (!world.IsRuler(chara)) return false;
+            if (!world.Characters.Any(world.IsFree)) return false;
+
+            // 配下の枠に空きがなければ実行不可。
+            var country = world.CountryOf(chara);
+            if (country.Vassals.Count >= country.VassalCountMax) return false;
+
+            return true;
+        }
+            //chara.Gold >= Cost(chara, world) &&
+            //world.IsRuler(chara) &&
+            //world.Characters.Any(world.IsFree) &&
+
+        public override void Do(Character chara, WorldData world)
+        {
+            Assert.IsTrue(CanDo(chara, world));
+            chara.Gold -= Cost(chara, world);
+
+            // ランダムに所属なしのキャラを選ぶ。
+            var target = world.Characters
+                .Where(world.IsFree)
+                .RandomPick();
+
+            // 配下にする。
+            var country = world.CountryOf(chara);
+            var existingMembers = country.Members;
+            country.Vassals.Add(target);
+            target.Contribution = 0;
+
+            // 給料配分を設定する。
+            const int MinimumRatio = 10;
+            target.SalaryRatio = MinimumRatio;
+            // 既存の配下の配分を調整する。
+            var remainingRatio = target.SalaryRatio;
+            while (remainingRatio > 0)
             {
-                soldier.Level += 1;
-                soldier.Experience = 0;
-                soldier.Hp = soldier.MaxHp;
+                foreach (var member in existingMembers)
+                {
+                    if (member.SalaryRatio <= MinimumRatio) continue;
+                    member.SalaryRatio--;
+                    remainingRatio--;
+                    if (remainingRatio <= 0) break;
+                }
             }
         }
     }
-}
 
-/// <summary>
-/// 兵士を雇います。
-/// </summary>
-public class HireSoldierStrategyAction : StrategyActionBase
-{
-    public override int Cost(Character chara) => 5;
-    public override bool CanDo(Character chara) => chara.Force.HasEmptySlot && chara.Gold >= Cost(chara);
-
-    public override void Do(Character chara)
+    /// <summary>
+    /// ランダムに隣接国に侵攻します。
+    /// </summary>
+    public static AttackRandomlyAction AttackRandomly { get; } = new();
+    public class AttackRandomlyAction : StrategyActionBase
     {
-        Assert.IsTrue(CanDo(chara));
-        chara.Gold -= Cost(chara);
+        public override int Cost(Character chara, WorldData world) => 5;
+        public override bool CanDo(Character chara, WorldData world)
+        {
+            if (chara.Gold < Cost(chara, world)) return false;
+            if (!world.IsRuler(chara)) return false;
 
-        var targetSlot = chara.Force.Soldiers.First(s => s.IsEmptySlot);
-        targetSlot.IsEmptySlot = false;
-        targetSlot.Level = 1;
-        targetSlot.Experience = 0;
-        targetSlot.Hp = targetSlot.MaxHp;
+            var country = world.CountryOf(chara);
+            // 全員行動済みならNG。
+            if (country.Members.All(c => c.IsAttacked)) return false;
+
+            // 侵攻できるエリアがないならNG。
+            var neighborAreas = GetAttackableAreas(world, country);
+            if (neighborAreas.Count == 0) return false;
+
+            return base.CanDo(chara, world);
+        }
+
+        public override void Do(Character chara, WorldData world)
+        {
+            Assert.IsTrue(CanDo(chara, world));
+            chara.Gold -= Cost(chara, world);
+
+            var country = world.CountryOf(chara);
+            var neighborAreas = GetAttackableAreas(world, country);
+            var targetArea = neighborAreas.RandomPick();
+            var targetCountry = world.CountryOf(targetArea);
+
+            var attacker = country.Members.Where(c => !c.IsAttacked).RandomPick();
+            var defender = targetCountry.Members.Where(c => !c.IsAttacked).RandomPickDefault();
+
+            // 侵攻する。
+            var result = world.Battle(targetArea, attacker, defender);
+            attacker.IsAttacked = true;
+            if (result == BattleResult.AttackerWin)
+            {
+                attacker.Contribution += 2;
+                if (defender != null) defender.Contribution += 1;
+                country.Areas.Add(targetArea);
+                targetCountry.Areas.Remove(targetArea);
+                // 領土がなくなったら国を削除する。
+                if (targetCountry.Areas.Count == 0)
+                {
+                    world.Countries.Remove(targetCountry);
+                }
+            }
+            else
+            {
+                attacker.Contribution += 1;
+                defender.Contribution += 2;
+            }
+        }
+
+        private static List<Area> GetAttackableAreas(WorldData world, Country country)
+        {
+            var neighborAreas = new List<Area>();
+            foreach (var area in country.Areas)
+            {
+                var neighbors = world.Map.GetNeighbors(area);
+                foreach (var neighbor in neighbors)
+                {
+                    // 自国か同盟国ならスキップする。
+                    var owner = world.CountryOf(neighbor);
+                    if (owner == country || owner == country.Ally) continue;
+                    neighborAreas.Add(neighbor);
+                }
+            }
+
+            return neighborAreas;
+        }
     }
-}
 
+    /// <summary>
+    /// 配下を解雇します。
+    /// </summary>
+    public static FireVassalMostWeakAction FireVassalMostWeak { get; } = new();
+    public class FireVassalMostWeakAction : StrategyActionBase
+    {
+        public override int Cost(Character chara, WorldData world) => 1;
+        public override bool CanDo(Character chara, WorldData world)
+        {
+            if (!world.IsRuler(chara)) return false;
+            var country = world.CountryOf(chara);
+            return country.Vassals.Count > 0;
+        }
+
+        public override void Do(Character chara, WorldData world)
+        {
+            Assert.IsTrue(CanDo(chara, world));
+            chara.Gold -= Cost(chara, world);
+
+            var country = world.CountryOf(chara);
+            var target = country.Vassals.OrderBy(c => c.Power).First();
+            country.Vassals.Remove(target);
+        }
+    }
+
+    // 懲罰攻撃する
+    // 同盟を結ぶ
+}
 
 public class StrategyActionBase
 {
-    public virtual int Cost(Character chara) => 0;
-    public virtual bool CanDo(Character chara) => chara.Gold >= Cost(chara);
-    public virtual void Do(Character chara) { }
+    public virtual int Cost(Character chara, WorldData world) => 0;
+    public virtual bool CanDo(Character chara, WorldData world) => chara.Gold >= Cost(chara, world);
+    public virtual void Do(Character chara, WorldData world) { }
 }

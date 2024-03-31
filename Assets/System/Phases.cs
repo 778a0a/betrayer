@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEngine.TextCore.Text;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -66,6 +64,12 @@ public class PersonalActionPhase : PhaseBase
                 // 訓練できるなら訓練する。
                 while (PersonalActions.TrainSoldiers.CanDo(chara))
                 {
+                    // 君主の場合、戦略フェイズで行動するために多少お金を残しておく。
+                    if (IsRuler(chara))
+                    {
+                        if (chara.Gold < 15) break;
+                    }
+
                     PersonalActions.TrainSoldiers.Do(chara);
                 }
             }
@@ -85,6 +89,7 @@ public class StrategyActionPhase : PhaseBase
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
+            var country = World.CountryOf(chara);
             // プレイヤーの場合
             if (chara.IsPlayer)
             {
@@ -102,11 +107,30 @@ public class StrategyActionPhase : PhaseBase
                 // 君主の場合
                 if (IsRuler(chara))
                 {
-                    // 配下を雇う
-                    // 侵攻する
-                    // 解雇する
-                    // 懲罰攻撃する
-                    // 同盟を結ぶ
+                    // 配下が足りていないなら配下を雇う。
+                    while (StrategyActions.HireVassalRandomly.CanDo(chara, World))
+                    {
+                        StrategyActions.HireVassalRandomly.Do(chara, World);
+                    }
+                    // 配下が多すぎるなら解雇する。
+                    while (StrategyActions.FireVassalMostWeak.CanDo(chara, World))
+                    {
+                        var isOver = country.Vassals.Count > country.VassalCountMax;
+                        if (!isOver) break;
+                        StrategyActions.FireVassalMostWeak.Do(chara, World);
+                    }
+                    // 侵攻する。
+                    while (StrategyActions.AttackRandomly.CanDo(chara, World))
+                    {
+                        // 防衛可能なメンバーが少ないなら侵攻しない。
+                        var freeMembers = country.Members.Where(c => !c.IsAttacked).Count();
+                        if (freeMembers <= 1)
+                        {
+                            break;
+                        }
+
+                        StrategyActions.AttackRandomly.Do(chara, World);
+                    }
                 }
                 // 配下の場合
                 else
@@ -118,7 +142,24 @@ public class StrategyActionPhase : PhaseBase
     }
 }
 
-
+/// <summary>
+/// 終了フェイズ
+/// </summary>
+public class EndPhase : PhaseBase
+{
+    public override void Phase()
+    {
+        for (int i = 0; i < Characters.Length; i++)
+        {
+            var chara = Characters[i];
+            chara.IsAttacked = false;
+            foreach (var s in chara.Force.Soldiers)
+            {
+                s.Hp = s.MaxHp;
+            }
+        }
+    }
+}
 
 public class PhaseBase
 {
