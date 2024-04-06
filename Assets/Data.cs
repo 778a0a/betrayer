@@ -187,9 +187,14 @@ public class Country
     public Country Ally { get; set; }
 
     /// <summary>
+    /// マップの国の色のインデックス
+    /// </summary>
+    public int ColorIndex { get; set; }
+
+    /// <summary>
     /// 雇える配下の最大数
     /// </summary>
-    public int VassalCountMax => Math.Clamp(Areas.Count / 3, 3, 9);
+    public int VassalCountMax => Math.Clamp(Areas.Count / 3, 4, 9);
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 }
@@ -202,8 +207,9 @@ public class MapGrid
     public int Width { get; }
     public int Height { get; }
     public Area[] Areas { get; set; }
-    
-    public Area GetArea(MapPosition p) => Areas[GetIndex(p)];
+
+    public Area GetIndexOf(int index) => Areas[index];
+    public Area GetArea(MapPosition p) => GetIndexOf(GetIndex(p));
     public int GetIndex(MapPosition p) => p.y * Width + p.x;
     public MapPosition GetXY(int index) => MapPosition.Of(index % Width, index / Width);
 
@@ -275,17 +281,17 @@ public class DefaultData
         return map;
     }
 
-    public static WorldData InitializeDefaultData()
+    public static WorldData InitializeDefaultData(TilemapData tilemapData)
     {
         var rand = new System.Random(0);
-        var countryCount = 9;
-        var vassalCount = 3;
         var characters = GetDefaultCharacterList();
         var map = CreateMapGrid(9);
         var charas = new List<Character>(characters);
 
+        var countryIdToColorId = new HashSet<int>(tilemapData.countryTileIndex).ToArray();
+
         var countries = new List<Country>();
-        for (int iCountry = 0; iCountry < countryCount; iCountry++)
+        for (int iCountry = 0; iCountry < countryIdToColorId.Length; iCountry++)
         {
             // 適当なキャラを君主として選ぶ。
             var ruler = charas[rand.Next(0, charas.Count)];
@@ -299,9 +305,22 @@ public class DefaultData
                 Ruler = ruler,
                 Vassals = new List<Character>(),
                 Areas = new List<Area>(),
+                ColorIndex = countryIdToColorId[iCountry],
             };
             countries.Add(country);
+
+            // エリアを割り当てる。
+            for (int iArea = 0; iArea < map.Areas.Length; iArea++)
+            {
+                if (tilemapData.countryTileIndex[iArea] == country.ColorIndex)
+                {
+                    var area = map.GetIndexOf(iArea);
+                    country.Areas.Add(area);
+                }
+            }
+
             // 適当なキャラを配下に割り当てる。
+            var vassalCount = country.VassalCountMax - 1;
             for (int iChar = 0; iChar < vassalCount; iChar++)
             {
                 var vassal = charas[rand.Next(0, charas.Count)];
@@ -312,16 +331,6 @@ public class DefaultData
                 country.Vassals.Add(vassal);
             }
             ruler.SalaryRatio = 100 - country.Vassals.Sum(v => v.SalaryRatio);
-
-            // 適当なエリアを割り当てる。
-            for (int y = 0; y < 3; y++)
-            {
-                for (int x = 0; x < 3; x++)
-                {
-                    var area = map.GetArea(MapPosition.Of(y + 3 * (iCountry / 3), x + 3 * (iCountry % 3)));
-                    country.Areas.Add(area);
-                }
-            }
         }
         
         return new WorldData()
