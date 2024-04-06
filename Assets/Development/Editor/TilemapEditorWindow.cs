@@ -111,10 +111,3 @@ public class TilemapEditorWindow : EditorWindow
         }
     }
 }
-
-public class TilemapData : ScriptableObject
-{
-    public const int Width = 8;
-    public const int Height = 8;
-    public int[] countryTileIndex = new int[Width * Height];
-}
