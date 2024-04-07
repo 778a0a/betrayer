@@ -33,11 +33,12 @@ public class BattleManager
     
     public static float TerrainDamageAdjustment(Terrain t) => t switch
     {
-        Terrain.Swamp => 1.30f,
+        Terrain.LargeRiver => 1.30f,
         Terrain.River => 1.25f,
-        Terrain.Wasteland => 1.05f,
         Terrain.Plain => 1.0f,
+        Terrain.Hill => 0.9f,
         Terrain.Forest => 0.75f,
+        Terrain.Mountain => 0.60f,
         Terrain.Fort => 0.5f,
         _ => 1.0f
     };

@@ -166,11 +166,12 @@ public struct MapPosition
 /// </summary>
 public enum Terrain
 {
-    Swamp,
+    LargeRiver,
     River,
-    Wasteland,
     Plain,
+    Hill,
     Forest,
+    Mountain,
     Fort,
 }
 
