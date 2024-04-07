@@ -64,6 +64,7 @@ public class StrategyActions
                     if (remainingRatio <= 0) break;
                 }
             }
+            chara.SalaryRatio = 100 - country.Vassals.Sum(v => v.SalaryRatio);
         }
     }
 
