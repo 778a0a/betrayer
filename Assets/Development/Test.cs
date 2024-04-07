@@ -8,23 +8,49 @@ public class Test : MonoBehaviour
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap tilemap;
 
-    [SerializeField] private Tile[] countryTiles;
-    [SerializeField] private Tile[] connectionTiles;
+    [SerializeField] private TilesHolder tilesHolder;
+
+    [SerializeField] private TilemapData initialTilemapData;
+
+    [SerializeField] private WorldData world;
+
+    private PhaseManager phases;
 
     // Start is called before the first frame update
     void Start()
     {
-        tilemap.SetTile(new Vector3Int(0, 0, 0), countryTiles[20]);
-        tilemap.SetTile(new Vector3Int(1, 0, 0), countryTiles[20]);
-        tilemap.SetTile(new Vector3Int(2, 0, 0), countryTiles[20]);
-        tilemap.SetTile(new Vector3Int(0, -1, 0), countryTiles[20]);
-        tilemap.SetTile(new Vector3Int(0, -2, 0), countryTiles[20]);
-        tilemap.SetTile(new Vector3Int(0, -3, 0), countryTiles[20]);
+        world = DefaultData.InitializeDefaultData(initialTilemapData);
+        phases = new PhaseManager(world);
+        DrawCountryTile();
+
+        StartCoroutine(DoMainLoop());
     }
 
     // Update is called once per frame
-    void Update()
+    private IEnumerator DoMainLoop()
     {
-        
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            phases.Income.Phase();
+            phases.PersonalAction.Phase();
+            phases.StrategyAction.Phase();
+            phases.End.Phase();
+            DrawCountryTile();
+        }
+    }
+
+    private void DrawCountryTile()
+    {
+        var index2Tile = tilesHolder.countries;
+        foreach (var country in world.Countries)
+        {
+            var colorIndex = country.ColorIndex;
+            foreach (var area in country.Areas)
+            {
+                var pos = area.Position;
+                tilemap.SetTile(pos.Vector3Int, index2Tile[country.ColorIndex]);
+            }
+        }
     }
 }

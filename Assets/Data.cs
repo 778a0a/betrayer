@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -145,6 +146,7 @@ public struct MapPosition
     public readonly MapPosition Left => Of(x - 1, y);
     public readonly MapPosition Right => Of(x + 1, y);
 
+    public readonly Vector3Int Vector3Int => new(x, -y, 0);
 }
 
 /// <summary>
@@ -204,8 +206,8 @@ public class Country
 /// </summary>
 public class MapGrid
 {
-    public int Width { get; }
-    public int Height { get; }
+    public int Width { get; set; }
+    public int Height { get; set; }
     public Area[] Areas { get; set; }
 
     public Area GetIndexOf(int index) => Areas[index];
@@ -264,6 +266,8 @@ public class DefaultData
     public static MapGrid CreateMapGrid(int size)
     {
         var map = new MapGrid();
+        map.Width = size;
+        map.Height = size;
         map.Areas = new Area[size * size];
         var terrains = Util.EnumArray<Terrain>();
         var nextId = 1;
@@ -275,17 +279,28 @@ public class DefaultData
                 area.Id = nextId++;
                 area.AttackSideTerrain = terrains[Random.Range(0, terrains.Length)];
                 area.DefenseSideTerrain = terrains[Random.Range(0, terrains.Length)];
+                area.Position = MapPosition.Of(x, y);
                 map.Areas[y * size + x] = area;
             }
         }
         return map;
     }
 
+    public static Force DefaultForce()
+    {
+        return new Force()
+        {
+            Soldiers = Enumerable.Range(0, 10)
+                .Select(i => new Soldier() { Level = 1, IsEmptySlot = false })
+                .ToArray(),
+        };
+    }
+
     public static WorldData InitializeDefaultData(TilemapData tilemapData)
     {
         var rand = new System.Random(0);
         var characters = GetDefaultCharacterList();
-        var map = CreateMapGrid(9);
+        var map = CreateMapGrid(TilemapData.Width);
         var charas = new List<Character>(characters);
 
         var countryIdToColorId = new HashSet<int>(tilemapData.countryTileIndex).ToArray();
@@ -297,6 +312,7 @@ public class DefaultData
             var ruler = charas[rand.Next(0, charas.Count)];
             ruler.Gold = 100;
             ruler.Prestige = 10;
+            ruler.Force = DefaultForce();
             charas.Remove(ruler);
 
             var country = new Country
@@ -325,12 +341,21 @@ public class DefaultData
             {
                 var vassal = charas[rand.Next(0, charas.Count)];
                 vassal.Gold = 10 * (1 + iChar);
-                vassal.Prestige = iChar * 2;
-                vassal.SalaryRatio = 10 * iChar;
+                vassal.Prestige = (1 + iChar) * 2;
+                vassal.SalaryRatio = 10 + 5 * iChar;
+                vassal.Force = DefaultForce();
                 charas.Remove(vassal);
                 country.Vassals.Add(vassal);
             }
             ruler.SalaryRatio = 100 - country.Vassals.Sum(v => v.SalaryRatio);
+        }
+
+        // 未所属のキャラを初期化する。
+        foreach (var chara in charas)
+        {
+            chara.Gold = 10;
+            chara.Prestige = 0;
+            chara.Force = DefaultForce();
         }
         
         return new WorldData()

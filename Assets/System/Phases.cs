@@ -163,7 +163,7 @@ public class EndPhase : PhaseBase
 
 public class PhaseBase
 {
-    public WorldData World { get; }
+    public WorldData World { get; set; }
     public Character[] Characters => World.Characters;
     public List<Country> Countries => World.Countries;
     public MapGrid Map => World.Map;
@@ -172,4 +172,22 @@ public class PhaseBase
     public bool IsFree(Character chara) => World.IsFree(chara);
 
     public virtual void Phase() { }
+}
+
+public class PhaseManager
+{
+    public readonly IncomePhase Income = new();
+    public readonly PersonalActionPhase PersonalAction = new();
+    public readonly StrategyActionPhase StrategyAction = new();
+    public readonly EndPhase End = new();
+
+    public PhaseBase[] Phases => new PhaseBase[] { Income, PersonalAction, StrategyAction, End };
+    public PhaseManager(WorldData world)
+    {
+        foreach (var phase in Phases)
+        {
+            phase.World = world;
+        }
+    }
+
 }
