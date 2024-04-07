@@ -244,19 +244,6 @@ public class MapGrid
     }
 }
 
-public static class Util
-{
-    public static TEnum[] EnumArray<TEnum>()
-    {
-        return (TEnum[])Enum.GetValues(typeof(TEnum));
-    }
-
-    public static T RandomPick<T>(this IList<T> list) => list[Random.Range(0, list.Count)];
-    public static T RandomPick<T>(this IEnumerable<T> list) => list.ElementAt(Random.Range(0, list.Count()));
-    public static T RandomPickDefault<T>(this IList<T> list) => list.Count == 0 ? default : RandomPick(list);
-    public static T RandomPickDefault<T>(this IEnumerable<T> list) => list.Count() == 0 ? default : RandomPick(list);
-}
-
 public class DefaultData
 {
     public static readonly List<string> NameList = new() { "アイリス", "アクエリアス", "アステル", "アストレア", "アトラス", "アネモネ", "アマンダ", "アリアドネ", "アリアナ", "アリエル", "アリシア", "アルタイル", "アルバート", "アーサー", "イカロス", "イグレイン", "イザベラ", "イゼリア", "イゼルト", "イゾルデ", "イリス", "イーリス", "ウィリアム", "エスメラルダ", "エドワード", "エマ", "エルシア", "エルロン", "エレノア", "オスカー", "オベロン", "オリオン", "オリビア", "オーロラ", "カトリーナ", "カリオペ", "ガイアス", "キャスパー", "グリフィン", "ケイルン", "ケイロス", "ケルベロス", "ザファーラ", "ザフィール", "ザンダー", "シエナ", "シエラ", "シャーロット", "シルバーン", "ジェームズ", "ジャスパー", "ジャスミン", "ジョージ", "ジークフリート", "セバスチャン", "セレスタ", "セレスティア", "セレーネ", "ゼノン", "ゼファー", "ゼラン", "ソフィア", "ソレイユ", "タリシア", "チャールズ", "デューン", "トリスタン", "ドラゴミール", "ドリアン", "ナイア", "ナオミ", "ナディア", "ネメア", "ネロ", "ノクターン", "ハイペリオン", "ビアンカ", "ビクトリア", "ファエリン", "フェニックス", "フリージア", "フレデリック", "プロメテウス", "ヘリオス", "ヘンリー", "ペルシヴァル", "マーガレット", "ミリアム", "ライオネル", "ライラ", "ラベンダー", "リリス", "ルシアン", "ルナ", "レイモンド", "レイヴン", "レオナルド", "ロザリンド", "ロゼッタ", "ローエン", "ローズマリー", "ヴァルカン", "ヴィオレット", };
@@ -378,42 +365,4 @@ public class DefaultData
             Map = map,
         };
     }
-}
-
-public class WorldData
-{
-    public Character[] Characters { get; set; }
-    public List<Country> Countries { get; set; }
-    public MapGrid Map { get; set; }
-
-    public bool IsRuler(Character chara) => Countries.Any(c => c.Ruler == chara);
-    public bool IsVassal(Character chara) => Countries.Any(c => c.Vassals.Contains(chara));
-    public bool IsFree(Character chara) => !IsRuler(chara) && !IsVassal(chara);
-
-    public Country CountryOf(Character chara) => Countries.FirstOrDefault(c => c.Ruler == chara || c.Vassals.Contains(chara));
-    public Country CountryOf(Area area) => Countries.FirstOrDefault(c => c.Areas.Contains(area));
-
-    public BattleResult Battle(Area targetArea, Character attacker, Character defender)
-    {
-        Debug.Log($"[戦闘処理] {attacker.Name} -> {defender.Name} at {targetArea.Position}");
-        if (defender == null)
-        {
-            Debug.Log($"[戦闘処理] 防御側がいないので侵攻側の勝利です。");
-            return BattleResult.AttackerWin;
-        }
-
-        var result = Util.EnumArray<BattleResult>().RandomPick();
-        Debug.Log($"[戦闘処理] 結果: {result}");
-        return result;
-    }
-
-    public override string ToString() => $"WorldData {Characters.Length} characters, {Countries.Count} countries";
-}
-
-public enum BattleResult
-{
-    None = 0,
-    AttackerWin,
-    DefenderWin,
-    Draw,
 }
