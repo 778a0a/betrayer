@@ -31,12 +31,12 @@ public class Test : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
             phases.Income.Phase();
             phases.PersonalAction.Phase();
             phases.StrategyAction.Phase();
             phases.End.Phase();
             DrawCountryTile();
+            yield return new WaitForSeconds(1.0f);
         }
     }
 

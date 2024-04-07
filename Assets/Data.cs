@@ -74,6 +74,8 @@ public class Character
     /// （内部データ）強さ
     /// </summary>
     public int Power => (Attack + Defense + Intelligence) / 3 * Force.Power;
+
+    public override string ToString() => $"{Name} G:{Gold} P:{Power} (A:{Attack} D:{Defense} I:{Intelligence})";
 }
 
 /// <summary>
@@ -97,6 +99,9 @@ public class Soldier
     public int MaxHp => Level * 10;
 
     public bool IsEmptySlot { get; set; }
+
+    public override string ToString() => IsEmptySlot ? "Empty" : $"Lv{Level} HP{Hp}/{MaxHp} Exp:{Experience}";
+    public string ToShortString() => IsEmptySlot ? "E" : $"{Level}";
 }
 
 /// <summary>
@@ -112,6 +117,8 @@ public class Force
     public bool HasEmptySlot => Soldiers.Any(s => s.IsEmptySlot);
 
     public int Power => Soldiers.Sum(s => s.IsEmptySlot ? 0 : s.Level);
+
+    public override string ToString() => $"Power:{Power} ({string.Join(",", Soldiers.Select(s => s.ToShortString()))})";
 }
 
 /// <summary>
@@ -133,6 +140,8 @@ public class Area
     public Terrain DefenseSideTerrain { get; set; }
 
     public MapPosition Position { get; set; }
+
+    public override string ToString() => $"Area {Position} ({AttackSideTerrain} -> {DefenseSideTerrain})";
 }
 
 public struct MapPosition
@@ -147,6 +156,8 @@ public struct MapPosition
     public readonly MapPosition Right => Of(x + 1, y);
 
     public readonly Vector3Int Vector3Int => new(x, -y, 0);
+
+    public override string ToString() => $"({x}, {y})";
 }
 
 /// <summary>
@@ -196,9 +207,11 @@ public class Country
     /// <summary>
     /// 雇える配下の最大数
     /// </summary>
-    public int VassalCountMax => Math.Clamp(Areas.Count / 3, 4, 9);
+    public int VassalCountMax => Math.Clamp(Areas.Count / 3, 3, 9);
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
+
+    public override string ToString() => $"Country {Id} ({Areas.Count} areas) {Ruler.Name}";
 }
 
 /// <summary>
@@ -382,14 +395,19 @@ public class WorldData
 
     public BattleResult Battle(Area targetArea, Character attacker, Character defender)
     {
+        Debug.Log($"[戦闘処理] {attacker.Name} -> {defender.Name} at {targetArea.Position}");
         if (defender == null)
         {
+            Debug.Log($"[戦闘処理] 防御側がいないので侵攻側の勝利です。");
             return BattleResult.AttackerWin;
         }
 
-        // TODO
-        return Util.EnumArray<BattleResult>().RandomPick();
+        var result = Util.EnumArray<BattleResult>().RandomPick();
+        Debug.Log($"[戦闘処理] 結果: {result}");
+        return result;
     }
+
+    public override string ToString() => $"WorldData {Characters.Length} characters, {Countries.Count} countries";
 }
 
 public enum BattleResult

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -12,11 +13,13 @@ public class IncomePhase : PhaseBase
 {
     public override void Phase()
     {
+        Debug.Log("[収入フェイズ] 開始");
         // 国毎の処理を行う。
         foreach (var country in Countries)
         {
             // 支配領域数に応じて収入を得る。
             var totalIncome = country.Areas.Count * 10;
+            Debug.Log($"[収入フェイズ] {country.Id} 総収入: {totalIncome}");
             var remainingIncome = totalIncome;
             // 各キャラに給料を支払う。
             foreach (var chara in country.Vassals)
@@ -24,16 +27,22 @@ public class IncomePhase : PhaseBase
                 var salary = totalIncome * chara.SalaryRatio / 100;
                 chara.Gold += salary;
                 remainingIncome -= salary;
+                Debug.Log($"[収入フェイズ] {country.Id} {chara.Name} {chara.Gold} (+{salary})");
             }
             country.Ruler.Gold += remainingIncome;
+            Debug.Log($"[収入フェイズ] {country.Id} {country.Ruler.Name} {country.Ruler.Gold} (+{remainingIncome})");
         }
 
         // 未所属の処理を行う。
+        Debug.Log($"[収入フェイズ] 未所属の処理を行います。");
         var freeCharas = Characters.Where(IsFree).ToArray();
         foreach (var chara in freeCharas)
         {
-            chara.Gold += Random.Range(0, 5);
+            var income = Random.Range(0, 5);
+            chara.Gold += income;
+            Debug.Log($"[収入フェイズ] {chara.Name} {chara.Gold} (+{income})");
         }
+        Debug.Log("[収入フェイズ] 終了");
     }
 }
 
@@ -44,14 +53,17 @@ public class PersonalActionPhase : PhaseBase
 {
     public override void Phase()
     {
+        Debug.Log("[個人フェイズ] 開始");
         // ランダムな順番で行動させる。
         var charas = Characters.OrderBy(c => Random.value).ToArray();
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
+            Debug.Log($"[個人フェイズ] {chara.Name} の行動を開始します。G:{chara.Gold} ({i + 1}/{charas.Length})");
             // プレイヤーの場合
             if (chara.IsPlayer)
             {
+                Debug.Log($"[個人フェイズ] プレイヤーのターン");
             }
             // NPCの場合
             else
@@ -60,6 +72,7 @@ public class PersonalActionPhase : PhaseBase
                 while (PersonalActions.HireSoldier.CanDo(chara))
                 {
                     PersonalActions.HireSoldier.Do(chara);
+                    Debug.Log($"[個人フェイズ] 兵を雇いました。(残りG:{chara.Gold})");
                 }
                 // 訓練できるなら訓練する。
                 while (PersonalActions.TrainSoldiers.CanDo(chara))
@@ -71,9 +84,11 @@ public class PersonalActionPhase : PhaseBase
                     }
 
                     PersonalActions.TrainSoldiers.Do(chara);
+                    Debug.Log($"[個人フェイズ] 兵を訓練しました。(残りG:{chara.Gold})");
                 }
             }
         }
+        Debug.Log("[個人フェイズ] 終了");
     }
 }
 
@@ -84,15 +99,18 @@ public class StrategyActionPhase : PhaseBase
 {
     public override void Phase()
     {
+        Debug.Log("[戦略フェイズ] 開始");
         // ランダムな順番で行動させる。
         var charas = Characters.Where(c => !IsFree(c)).OrderBy(c => Random.value).ToArray();
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
+
             var country = World.CountryOf(chara);
             // プレイヤーの場合
             if (chara.IsPlayer)
             {
+                Debug.Log($"[戦略フェイズ] プレイヤーのターン");
                 if (IsRuler(chara))
                 {
 
@@ -107,10 +125,13 @@ public class StrategyActionPhase : PhaseBase
                 // 君主の場合
                 if (IsRuler(chara))
                 {
+                    Debug.Log($"[戦略フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
+
                     // 配下が足りていないなら配下を雇う。
                     while (StrategyActions.HireVassalRandomly.CanDo(chara, World))
                     {
                         StrategyActions.HireVassalRandomly.Do(chara, World);
+                        Debug.Log($"[戦略フェイズ] 配下を雇いました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
                     // 配下が多すぎるなら解雇する。
                     while (StrategyActions.FireVassalMostWeak.CanDo(chara, World))
@@ -118,6 +139,7 @@ public class StrategyActionPhase : PhaseBase
                         var isOver = country.Vassals.Count > country.VassalCountMax;
                         if (!isOver) break;
                         StrategyActions.FireVassalMostWeak.Do(chara, World);
+                        Debug.Log($"[戦略フェイズ] 配下を解雇しました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
                     // 侵攻する。
                     while (StrategyActions.AttackRandomly.CanDo(chara, World))
@@ -129,6 +151,7 @@ public class StrategyActionPhase : PhaseBase
                             break;
                         }
 
+                        Debug.Log($"[戦略フェイズ] 侵攻します。");
                         StrategyActions.AttackRandomly.Do(chara, World);
                     }
                 }
@@ -139,6 +162,7 @@ public class StrategyActionPhase : PhaseBase
                 }
             }
         }
+        Debug.Log("[戦略フェイズ] 終了");
     }
 }
 
