@@ -173,6 +173,7 @@ public class EndPhase : PhaseBase
 {
     public override void Phase()
     {
+        Debug.Log("[終了フェイズ] 開始");
         for (int i = 0; i < Characters.Length; i++)
         {
             var chara = Characters[i];
@@ -182,6 +183,7 @@ public class EndPhase : PhaseBase
                 s.Hp = s.MaxHp;
             }
         }
+        Debug.Log("[終了フェイズ] 終了");
     }
 }
 
