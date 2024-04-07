@@ -2010,6 +2010,7 @@ MonoBehaviour:
   tilemap: {fileID: 363626498}
   tilesHolder: {fileID: 11400000, guid: d9c9edefee682ea43baf4396cbb9ae74, type: 2}
   initialTilemapData: {fileID: 11400000, guid: d2f3195c1571fee4798809429c500526, type: 2}
+  wait: 0
 --- !u!4 &1334333006
 Transform:
   m_ObjectHideFlags: 0
