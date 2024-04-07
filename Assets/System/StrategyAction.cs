@@ -104,7 +104,7 @@ public class StrategyActions
             var defender = targetCountry.Members.Where(c => !c.IsAttacked).RandomPickDefault();
 
             // 侵攻する。
-            var result = world.Battle(targetArea, attacker, defender);
+            var result = BattleManager.Battle(targetArea, attacker, defender);
             attacker.IsAttacked = true;
             if (result == BattleResult.AttackerWin)
             {

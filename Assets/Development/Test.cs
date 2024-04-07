@@ -14,6 +14,8 @@ public class Test : MonoBehaviour
 
     [SerializeField] private WorldData world;
 
+    [SerializeField] private float wait = 1;
+
     private PhaseManager phases;
 
     // Start is called before the first frame update
@@ -36,7 +38,7 @@ public class Test : MonoBehaviour
             phases.StrategyAction.Phase();
             phases.End.Phase();
             DrawCountryTile();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(wait);
         }
     }
 

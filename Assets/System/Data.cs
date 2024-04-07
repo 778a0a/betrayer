@@ -99,6 +99,7 @@ public class Soldier
     public int MaxHp => Level * 10;
 
     public bool IsEmptySlot { get; set; }
+    public bool IsAlive => !IsEmptySlot && Hp > 0;
 
     public override string ToString() => IsEmptySlot ? "Empty" : $"Lv{Level} HP{Hp}/{MaxHp} Exp:{Experience}";
     public string ToShortString() => IsEmptySlot ? "E" : $"{Level}";
