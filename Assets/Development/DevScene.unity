@@ -2018,7 +2018,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314475712}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2854,6 +2854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334333006}
   - component: {fileID: 1334333005}
+  - component: {fileID: 1334333007}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -2877,7 +2878,8 @@ MonoBehaviour:
   tilemap: {fileID: 363626498}
   tilesHolder: {fileID: 11400000, guid: d9c9edefee682ea43baf4396cbb9ae74, type: 2}
   initialTilemapData: {fileID: 11400000, guid: d2f3195c1571fee4798809429c500526, type: 2}
-  wait: 0
+  wait: 0.1
+  tilemapHelper: {fileID: 1334333007}
 --- !u!4 &1334333006
 Transform:
   m_ObjectHideFlags: 0
@@ -2893,6 +2895,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1334333007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334333004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d05f1de4b692834e8d1e4f8a88c1c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilesHolder: {fileID: 11400000, guid: d9c9edefee682ea43baf4396cbb9ae74, type: 2}
+  terrainTilemap: {fileID: 1314475715}
+  verticalConnectionTilemap: {fileID: 725259006}
+  horizontalConnectionTilemap: {fileID: 1706717992}
 --- !u!1 &1706717989
 GameObject:
   m_ObjectHideFlags: 0

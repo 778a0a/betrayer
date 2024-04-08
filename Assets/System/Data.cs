@@ -132,17 +132,22 @@ public class Area
     /// </summary>
     public int Id { get; set; }
     /// <summary>
-    /// 攻撃側の地形
+    /// 地形
     /// </summary>
-    public Terrain AttackSideTerrain { get; set; }
-    /// <summary>
-    /// 防御側の地形
-    /// </summary>
-    public Terrain DefenseSideTerrain { get; set; }
+    public Terrain Terrain { get; set; }
 
     public MapPosition Position { get; set; }
 
-    public override string ToString() => $"Area {Position} ({AttackSideTerrain} -> {DefenseSideTerrain})";
+    public Direction GetDirectionTo(Area target)
+    {
+        if (Position.x < target.Position.x) return Direction.Right;
+        if (Position.x > target.Position.x) return Direction.Left;
+        if (Position.y < target.Position.y) return Direction.Down;
+        if (Position.y > target.Position.y) return Direction.Up;
+        throw new InvalidOperationException();
+    }
+
+    public override string ToString() => $"Area {Position} ({Terrain})";
 }
 
 public struct MapPosition
@@ -221,6 +226,7 @@ public class Country
 /// </summary>
 public class MapGrid
 {
+    public TilemapHelper Helper { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
     public Area[] Areas { get; set; }
@@ -265,13 +271,13 @@ public class DefaultData
         }).ToArray();
     }
 
-    public static MapGrid CreateMapGrid(int size)
+    public static MapGrid CreateMapGrid(int size, TilemapHelper helper)
     {
         var map = new MapGrid();
+        map.Helper = helper;
         map.Width = size;
         map.Height = size;
         map.Areas = new Area[size * size];
-        var terrains = Util.EnumArray<Terrain>();
         var nextId = 1;
         for (int y = 0; y < size; y++)
         {
@@ -279,9 +285,8 @@ public class DefaultData
             {
                 var area = new Area();
                 area.Id = nextId++;
-                area.AttackSideTerrain = terrains[Random.Range(0, terrains.Length)];
-                area.DefenseSideTerrain = terrains[Random.Range(0, terrains.Length)];
                 area.Position = MapPosition.Of(x, y);
+                area.Terrain = helper.GetTerrain(area.Position);
                 map.Areas[y * size + x] = area;
             }
         }
@@ -298,11 +303,11 @@ public class DefaultData
         };
     }
 
-    public static WorldData InitializeDefaultData(TilemapData tilemapData)
+    public static WorldData InitializeDefaultData(TilemapData tilemapData, TilemapHelper helper)
     {
         var rand = new System.Random(0);
         var characters = GetDefaultCharacterList();
-        var map = CreateMapGrid(TilemapData.Width);
+        var map = CreateMapGrid(TilemapData.Width, helper);
         var charas = new List<Character>(characters);
 
         var countryIdToColorId = new HashSet<int>(tilemapData.countryTileIndex).ToArray();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
@@ -104,8 +105,11 @@ public class StrategyActions
             var attacker = country.Members.Where(c => !c.IsAttacked).RandomPick();
             var defender = targetCountry.Members.Where(c => !c.IsAttacked).RandomPickDefault();
 
+            // 攻撃側のエリアを決定する。一番攻撃側が有利なエリアを選ぶ。
+            var sourceArea = GetAttackSourceArea(world.Map, targetArea, country);
+
             // 侵攻する。
-            var result = BattleManager.Battle(targetArea, attacker, defender);
+            var result = BattleManager.Battle(world.Map, sourceArea, targetArea, attacker, defender);
             attacker.IsAttacked = true;
             if (result == BattleResult.AttackerWin)
             {
@@ -124,6 +128,28 @@ public class StrategyActions
                 attacker.Contribution += 1;
                 defender.Contribution += 2;
             }
+        }
+
+        /// <summary>
+        /// もっとも攻撃側が有利なエリアを取得します。
+        /// </summary>
+        /// <returns></returns>
+        private static Area GetAttackSourceArea(MapGrid map, Area target, Country attackCountry)
+        {
+            return map
+                // 攻撃対象の隣接エリアを取得する。
+                .GetNeighbors(target)
+                // 自国のエリアのみに絞り込む。
+                .Where(a => attackCountry.Areas.Contains(a))
+                // もっとも攻撃側が有利なエリアを取得する。
+                .OrderBy(a =>
+                {
+                    var dir = a.GetDirectionTo(target);
+                    var attackerTerrain = map.Helper.GetAttackerTerrain(a.Position, dir);
+                    var adj = BattleManager.TerrainDamageAdjustment(attackerTerrain);
+                    return adj;
+                })
+                .First();
         }
 
         private static List<Area> GetAttackableAreas(WorldData world, Country country)

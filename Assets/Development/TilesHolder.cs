@@ -8,4 +8,5 @@ public class TilesHolder : ScriptableObject
 {
     public Tile[] countries;
     public Tile[] connections;
+    public Tile[] terrains;
 }

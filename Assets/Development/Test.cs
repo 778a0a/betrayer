@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +17,14 @@ public class Test : MonoBehaviour
 
     [SerializeField] private float wait = 1;
 
+    [SerializeField] private TilemapHelper tilemapHelper;
+
     private PhaseManager phases;
 
     // Start is called before the first frame update
     void Start()
     {
-        world = DefaultData.InitializeDefaultData(initialTilemapData);
+        world = DefaultData.InitializeDefaultData(initialTilemapData, tilemapHelper);
         phases = new PhaseManager(world);
         DrawCountryTile();
 

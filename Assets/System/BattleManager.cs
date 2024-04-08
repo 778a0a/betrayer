@@ -12,9 +12,13 @@ using Random = UnityEngine.Random;
 
 public class BattleManager
 {
-    public static BattleResult Battle(Area targetArea, Character attacker, Character defender)
+    public static BattleResult Battle(MapGrid map, Area sourceArea, Area targetArea, Character attacker, Character defender)
     {
-        Debug.Log($"[戦闘処理] {attacker.Name} -> {defender.Name} at {targetArea.Position}");
+        var dir = sourceArea.GetDirectionTo(targetArea);
+        var attackerTerrain = map.Helper.GetAttackerTerrain(sourceArea.Position, dir);
+        var defenderTerrain = targetArea.Terrain;
+        Debug.Log($"[戦闘処理] {attacker.Name}({attacker.Power}) -> {defender.Name}({defender.Power}) at {sourceArea.Position} -> {targetArea.Position}");
+        Debug.Log($"[戦闘処理] 攻撃側地形: {attackerTerrain} 防御側地形: {defenderTerrain}");
         if (defender == null)
         {
             Debug.Log($"[戦闘処理] 防御側がいないので侵攻側の勝利です。");
@@ -23,7 +27,7 @@ public class BattleManager
 
         while (attacker.Force.Soldiers.Any(s => s.IsAlive) && defender.Force.Soldiers.Any(s => s.IsAlive))
         {
-            Tick(targetArea, attacker, defender);
+            Tick(attackerTerrain, defenderTerrain, attacker, defender);
         }
         var result = attacker.Force.Soldiers.Any(s => s.IsAlive) ? BattleResult.AttackerWin : BattleResult.DefenderWin;
         Debug.Log($"[戦闘処理] 結果: {result}");
@@ -33,7 +37,7 @@ public class BattleManager
     
     public static float TerrainDamageAdjustment(Terrain t) => t switch
     {
-        Terrain.LargeRiver => 1.30f,
+        Terrain.LargeRiver => 1.40f,
         Terrain.River => 1.25f,
         Terrain.Plain => 1.0f,
         Terrain.Hill => 0.9f,
@@ -43,7 +47,7 @@ public class BattleManager
         _ => 1.0f
     };
 
-    private static void Tick(Area targetArea, Character attacker, Character defender)
+    private static void Tick(Terrain attackerTerrain, Terrain defenderTerrain, Character attacker, Character defender)
     {
         foreach (var sol in attacker.Force.Soldiers)
         {
@@ -55,7 +59,7 @@ public class BattleManager
                 (attacker.Attack / 100f) *
                 (1 - defender.Defense / 100f) *
                 Random.Range(0.8f, 1.2f) *
-                TerrainDamageAdjustment(targetArea.DefenseSideTerrain);
+                TerrainDamageAdjustment(defenderTerrain);
 
             var damage = Math.Min(1, sol.Level * adj);
             target.Hp = (int)Math.Max(0, target.Hp - damage);
@@ -75,7 +79,7 @@ public class BattleManager
                 (Math.Max(defender.Attack, defender.Defense) / 100f) *
                 (1 - attacker.Defense / 100f) *
                 Random.Range(0.8f, 1.2f) *
-                TerrainDamageAdjustment(targetArea.AttackSideTerrain);
+                TerrainDamageAdjustment(attackerTerrain);
 
             var damage = Math.Min(1, sol.Level * adj);
             target.Hp = (int)Math.Max(0, target.Hp - damage);
