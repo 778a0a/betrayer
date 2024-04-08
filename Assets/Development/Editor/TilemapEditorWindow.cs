@@ -66,7 +66,7 @@ public class TilemapEditorWindow : EditorWindow
 
         var data = CreateInstance<TilemapData>();
 
-        var tilesHolder = AssetDatabase.LoadAssetAtPath<TilesHolder>("Assets/Development/Editor/TilesHolder.asset");
+        var tilesHolder = AssetDatabase.LoadAssetAtPath<TilesHolder>("Assets/Development/TilesHolder.asset");
         Debug.Log(tilesHolder.countries.Length);
 
         // ヒエラルキーからCountryTilemapを取得する。
@@ -92,7 +92,7 @@ public class TilemapEditorWindow : EditorWindow
         var path = Path.Combine(saveDirectory, filename + ".asset");
         var data = AssetDatabase.LoadAssetAtPath<TilemapData>(path);
 
-        var tilesHolder = AssetDatabase.LoadAssetAtPath<TilesHolder>("Assets/Development/Editor/TilesHolder.asset");
+        var tilesHolder = AssetDatabase.LoadAssetAtPath<TilesHolder>("Assets/Development/TilesHolder.asset");
         var tilemap = GameObject.Find("CountryTilemap").GetComponent<Tilemap>();
         for (int x = 0; x < TilemapData.Width; x++)
         {
