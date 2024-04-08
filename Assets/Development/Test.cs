@@ -41,6 +41,11 @@ public class Test : MonoBehaviour
             phases.StrategyAction.Phase();
             phases.End.Phase();
             DrawCountryTile();
+            if (world.Countries.Count == 1)
+            {
+                Debug.Log($"ゲーム終了 勝者: {world.Countries[0]}");
+                yield break;
+            }
             yield return new WaitForSeconds(wait);
         }
     }
