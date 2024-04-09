@@ -7,6 +7,27 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
+/// 開始フェイズ
+/// </summary>
+public class StartPhase : PhaseBase
+{
+    public override void Phase()
+    {
+        Debug.Log("[開始フェイズ] 開始");
+        for (int i = 0; i < Characters.Length; i++)
+        {
+            var chara = Characters[i];
+            chara.IsAttacked = false;
+            foreach (var s in chara.Force.Soldiers)
+            {
+                s.Hp = s.MaxHp;
+            }
+        }
+        Debug.Log("[開始フェイズ] 終了");
+    }
+}
+
+/// <summary>
 /// 収入フェイズ
 /// </summary>
 public class IncomePhase : PhaseBase
@@ -166,27 +187,6 @@ public class StrategyActionPhase : PhaseBase
     }
 }
 
-/// <summary>
-/// 終了フェイズ
-/// </summary>
-public class EndPhase : PhaseBase
-{
-    public override void Phase()
-    {
-        Debug.Log("[終了フェイズ] 開始");
-        for (int i = 0; i < Characters.Length; i++)
-        {
-            var chara = Characters[i];
-            chara.IsAttacked = false;
-            foreach (var s in chara.Force.Soldiers)
-            {
-                s.Hp = s.MaxHp;
-            }
-        }
-        Debug.Log("[終了フェイズ] 終了");
-    }
-}
-
 public class PhaseBase
 {
     public WorldData World { get; set; }
@@ -202,12 +202,12 @@ public class PhaseBase
 
 public class PhaseManager
 {
+    public readonly StartPhase Start = new();
     public readonly IncomePhase Income = new();
     public readonly PersonalActionPhase PersonalAction = new();
     public readonly StrategyActionPhase StrategyAction = new();
-    public readonly EndPhase End = new();
 
-    public PhaseBase[] Phases => new PhaseBase[] { Income, PersonalAction, StrategyAction, End };
+    public PhaseBase[] Phases => new PhaseBase[] { Start, Income, PersonalAction, StrategyAction };
     public PhaseManager(WorldData world)
     {
         foreach (var phase in Phases)

@@ -17,6 +17,10 @@ public class Character
     /// </summary>
     public int Id { get; set; }
     /// <summary>
+    /// 顔画像インデックス
+    /// </summary>
+    public int ImageIndex { get; set; }
+    /// <summary>
     /// 名前
     /// </summary>
     public string Name { get; set; }
@@ -33,6 +37,10 @@ public class Character
     /// 智謀
     /// </summary>
     public int Intelligence { get; set; }
+    /// <summary>
+    /// 野心
+    /// </summary>
+    public int Ambition { get; set; }
 
     /// <summary>
     /// 所持金
@@ -214,7 +222,7 @@ public class Country
     /// <summary>
     /// 雇える配下の最大数
     /// </summary>
-    public int VassalCountMax => Math.Clamp(Areas.Count / 3, 3, 8);
+    public int VassalCountMax => Math.Clamp((int)Math.Ceiling(Areas.Count / 2f), 2, 8);
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 
@@ -260,16 +268,21 @@ public class DefaultData
         var rand = new System.Random(0);
         return NameList.Select((name, i) =>
         {
+            var luck = rand.Next(0, 10) * 2;
             return new Character()
             {
                 Id = i,
                 Name = name,
-                Attack = rand.Next(1, 100),
-                Defense = rand.Next(1, 100),
-                Intelligence = rand.Next(1, 100),
+                Attack = Math.Min(Dice(10, 10) + Random.Range(-20, 20) + luck, 100),
+                Defense = Math.Min(Dice(10, 10) + Random.Range(-20, 20) + luck, 100),
+                Intelligence = Math.Min(Dice(10, 10) + Random.Range(-20, 20) + luck, 100),
+                Ambition = Math.Min(Dice(10, 10) + Random.Range(-20, 20), 100),
             };
         }).ToArray();
     }
+    private static int Dice(int sides) => Random.Range(1, sides + 1);
+    private static int Dice(int sides, int count) => Enumerable.Range(0, count).Sum(_ => Dice(sides));
+
 
     public static MapGrid CreateMapGrid(int size, TilemapHelper helper)
     {
