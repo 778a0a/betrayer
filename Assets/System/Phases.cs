@@ -39,7 +39,7 @@ public class IncomePhase : PhaseBase
         foreach (var country in Countries)
         {
             // 支配領域数に応じて収入を得る。
-            var totalIncome = country.Areas.Count * 10;
+            var totalIncome = country.Areas.Select(IncomeOf).Sum();
             Debug.Log($"[収入フェイズ] {country.Id} 総収入: {totalIncome}");
             var remainingIncome = totalIncome;
             // 各キャラに給料を支払う。
@@ -65,6 +65,16 @@ public class IncomePhase : PhaseBase
         }
         Debug.Log("[収入フェイズ] 終了");
     }
+
+    private int IncomeOf(Area a) => a.Terrain switch
+    {
+        Terrain.Plain => 10,
+        Terrain.Hill => 7,
+        Terrain.Forest => 5,
+        Terrain.Mountain => 3,
+        Terrain.Fort => 20,
+        _ => 1,
+    };
 }
 
 /// <summary>
