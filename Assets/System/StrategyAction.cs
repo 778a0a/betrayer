@@ -44,8 +44,11 @@ public class StrategyActions
                 .Where(world.IsFree)
                 .RandomPick();
 
-            // 配下にする。
             var country = world.CountryOf(chara);
+            // 最新の給料配分を反映する。
+            chara.SalaryRatio = 100 - country.Vassals.Sum(v => v.SalaryRatio);
+
+            // 配下にする。
             var existingMembers = country.Members;
             country.Vassals.Add(target);
             target.Contribution = 0;
