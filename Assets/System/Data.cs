@@ -163,6 +163,7 @@ public struct MapPosition
     public int x;
     public int y;
 
+    public static MapPosition FromGrid(Vector3Int grid) => new() { x = grid.x, y = -grid.y };
     public static MapPosition Of(int x, int y) => new() { x = x, y = y };
     public readonly MapPosition Up => Of(x, y - 1);
     public readonly MapPosition Down => Of(x, y + 1);
@@ -226,7 +227,7 @@ public class Country
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 
-    public override string ToString() => $"Country {Id} ({Areas.Count} areas) {Ruler.Name}";
+    public override string ToString() => $"Country ID:{Id} ({Areas.Count} areas) {Ruler.Name}";
 }
 
 /// <summary>
@@ -318,7 +319,7 @@ public class DefaultData
 
     public static WorldData InitializeDefaultData(TilemapData tilemapData, TilemapHelper helper)
     {
-        var rand = new System.Random(0);
+        var rand = new System.Random((int)DateTime.Now.Ticks);
         var characters = GetDefaultCharacterList();
         var map = CreateMapGrid(TilemapData.Width, helper);
         var charas = new List<Character>(characters);

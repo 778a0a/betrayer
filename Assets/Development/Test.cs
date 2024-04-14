@@ -29,11 +29,13 @@ public class Test : MonoBehaviour
     void Start()
     {
         //world = DefaultData.InitializeDefaultData(initialTilemapData, tilemapHelper);
+        //SaveData.SaveWorldData(world);
+        //return;
+
         world = SaveData.LoadWorldData(tilemapHelper);
         phases = new PhaseManager(world);
         DrawCountryTile();
 
-        //SaveData.SaveWorldData(world);
 
         StartCoroutine(DoMainLoop());
     }
