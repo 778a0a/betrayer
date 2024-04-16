@@ -83,6 +83,8 @@ public class Character
     /// </summary>
     public int Power => (Attack + Defense + Intelligence) / 3 * Force.Power;
 
+    public string debugImagePath { get; set; }
+
     public override string ToString() => $"{Name} G:{Gold} P:{Power} (A:{Attack} D:{Defense} I:{Intelligence})";
 }
 
