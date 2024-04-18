@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -52,6 +54,7 @@ public class AreaInfoEditorWindow : EditorWindow
         }
     }
 
+    private bool showFree = false;
     private Vector2 scrollPosition = Vector2.zero;
     void OnGUI()
     {
@@ -60,11 +63,31 @@ public class AreaInfoEditorWindow : EditorWindow
         {
             isLocked = !isLocked;
         }
+        GUILayout.BeginHorizontal();
         GUILayout.Label("ロック: " + isLocked);
+        if (GUILayout.Button("ロックトグル", GUILayout.Width(100)))
+        {
+            isLocked = !isLocked;
+        }
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button("所属なしを表示"))
+        {
+            showFree = !showFree;
+        }
+
+
         if (GUILayout.Button("保存"))
         {
             SaveData.SaveWorldData(world);
         }
+
+        if (showFree)
+        {
+            DrawFree();
+            return;
+        }
+
 
         if (targetArea == null)
         {
@@ -88,16 +111,55 @@ public class AreaInfoEditorWindow : EditorWindow
         GUILayout.EndScrollView();
     }
 
+    private int currentPage = 0;
+    private int characterPerPage = 4;
+    private void DrawFree()
+    {
+        GUILayout.Label("所属なし");
+        var frees = world.Characters
+            .Where(c => world.CountryOf(c) == null)
+            .OrderBy(c => c.debugMemo)
+            .ToArray();
+        var pageCount = frees.Length / characterPerPage;
+        
+        GUILayout.BeginHorizontal();
+        // 前後ボタン
+        if (GUILayout.Button("前へ"))
+        {
+            currentPage = Mathf.Max(0, currentPage - 1);
+        }
+        if (GUILayout.Button("次へ"))
+        {
+            currentPage = Mathf.Min(pageCount, currentPage + 1);
+        }
+        // 現在のページとページ数
+        GUILayout.Label($"{currentPage + 1}/{pageCount + 1}");
+        GUILayout.EndHorizontal();
+
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+        var startIndex = currentPage * characterPerPage;
+        var endIndex = Mathf.Min((currentPage + 1) * characterPerPage, frees.Length);
+        for (int i = startIndex; i < endIndex; i++)
+        {
+            DrawCharacter(frees[i]);
+        }
+
+        GUILayout.EndScrollView();
+
+    }
+
     private void DrawCharacter(Character chara)
     {
         GUILayout.BeginHorizontal();
         GUILayout.BeginVertical();
-        GUILayout.Label(chara.ToString());
+        GUILayout.Label($"ID: {chara.Id}");
+        GUILayout.Label($"{chara}");
         // Attack Defense Intelligenceをテキストボックスで並べる。
         // それぞれの値を変更できるようにする。
         chara.Attack = EditorGUILayout.IntField("Attack", chara.Attack);
         chara.Defense = EditorGUILayout.IntField("Defense", chara.Defense);
         chara.Intelligence = EditorGUILayout.IntField("Intelligence", chara.Intelligence);
+        chara.debugMemo = EditorGUILayout.TextField("メモ", chara.debugMemo);
         chara.debugImagePath = EditorGUILayout.TextField("顔画像", chara.debugImagePath);
         chara.debugImagePath = DrawDropArea(chara.debugImagePath);
         
