@@ -111,14 +111,34 @@ public class AreaInfoEditorWindow : EditorWindow
         GUILayout.EndScrollView();
     }
 
+    private Dictionary<int, int> characterId2Order;
     private int currentPage = 0;
     private int characterPerPage = 4;
     private void DrawFree()
     {
+        if (GUILayout.Button("順番リフレッシュ"))
+        {
+            characterId2Order = null;
+            GUI.FocusControl(null);
+        }
+
         GUILayout.Label("所属なし");
+        if (characterId2Order == null)
+        {
+            characterId2Order = new Dictionary<int, int>();
+            var characters = world.Characters
+                .Where(c => world.CountryOf(c) == null)
+                .OrderBy(c => c.debugMemo)
+                .ToArray();
+            for (int i = 0; i < characters.Length; i++)
+            {
+                characterId2Order[characters[i].Id] = i;
+            }
+        }
+
         var frees = world.Characters
             .Where(c => world.CountryOf(c) == null)
-            .OrderBy(c => c.debugMemo)
+            .OrderBy(c => characterId2Order[c.Id])
             .ToArray();
         var pageCount = frees.Length / characterPerPage;
         
@@ -127,10 +147,12 @@ public class AreaInfoEditorWindow : EditorWindow
         if (GUILayout.Button("前へ"))
         {
             currentPage = Mathf.Max(0, currentPage - 1);
+            GUI.FocusControl(null);
         }
         if (GUILayout.Button("次へ"))
         {
             currentPage = Mathf.Min(pageCount, currentPage + 1);
+            GUI.FocusControl(null);
         }
         // 現在のページとページ数
         GUILayout.Label($"{currentPage + 1}/{pageCount + 1}");
@@ -146,6 +168,22 @@ public class AreaInfoEditorWindow : EditorWindow
 
         GUILayout.EndScrollView();
 
+    }
+
+    private Queue<string> cacheQueue = new();
+    private Dictionary<string, Texture2D> cacheImages = new();
+    private Texture2D LoadImage(string path)
+    {
+        if (cacheImages.TryGetValue(path, out var tex))
+        {
+            return tex;
+        }
+
+        var image = File.ReadAllBytes(path);
+        tex = new Texture2D(1, 1);
+        tex.LoadImage(image);
+        cacheImages[path] = tex;
+        return tex;
     }
 
     private void DrawCharacter(Character chara)
@@ -168,9 +206,7 @@ public class AreaInfoEditorWindow : EditorWindow
         GUILayout.BeginVertical();
         if (chara.debugImagePath != null)
         {
-            var image = File.ReadAllBytes(chara.debugImagePath);
-            var tex = new Texture2D(1, 1);
-            tex.LoadImage(image);
+            var tex = LoadImage(chara.debugImagePath);
             GUILayout.Box(tex, new GUIStyle() { fixedWidth = 200, fixedHeight = 200 });
         }
         else
