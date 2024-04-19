@@ -38,9 +38,9 @@ public class Character
     /// </summary>
     public int Intelligence { get; set; }
     /// <summary>
-    /// 野心
+    /// 忠誠基本値
     /// </summary>
-    public int Ambition { get; set; }
+    public int LoyaltyBase { get; set; }
 
     /// <summary>
     /// 所持金
@@ -280,7 +280,7 @@ public class DefaultData
                 Attack = Math.Min(Dice(10, 10) + Random.Range(-20, 20) + luck, 100),
                 Defense = Math.Min(Dice(10, 10) + Random.Range(-20, 20) + luck, 100),
                 Intelligence = Math.Min(Dice(10, 10) + Random.Range(-20, 20) + luck, 100),
-                Ambition = Math.Min(Dice(10, 10) + Random.Range(-20, 20), 100),
+                LoyaltyBase = Math.Min(Dice(10, 10) + Random.Range(-20, 20), 100),
             };
         }).ToArray();
     }

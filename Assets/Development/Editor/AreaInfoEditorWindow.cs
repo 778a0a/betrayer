@@ -96,6 +96,29 @@ public class AreaInfoEditorWindow : EditorWindow
         }
         Debug.Assert(targetCountry != null);
 
+        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.PageUp)
+        {
+            var index = world.Countries.IndexOf(targetCountry);
+            var newIndex = index - 1;
+            if (newIndex < 0) newIndex = world.Countries.Count - 1;
+            targetCountry = world.Countries[newIndex];
+            targetArea = targetCountry.Areas[0];
+
+            GUI.FocusControl(null);
+            Repaint();
+        }
+        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.PageDown)
+        {
+            var index = world.Countries.IndexOf(targetCountry);
+            var newIndex = index + 1;
+            if (newIndex >= world.Countries.Count) newIndex = 0;
+            targetCountry = world.Countries[newIndex];
+            targetArea = targetCountry.Areas[0];
+
+            GUI.FocusControl(null);
+            Repaint();
+        }
+
         GUILayout.Label($"エリア {targetArea}");
         GUILayout.Label($"所有国 {targetCountry}");
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -154,6 +177,20 @@ public class AreaInfoEditorWindow : EditorWindow
             currentPage = Mathf.Min(pageCount, currentPage + 1);
             GUI.FocusControl(null);
         }
+
+        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.PageUp)
+        {
+            currentPage = Mathf.Max(0, currentPage - 1);
+            GUI.FocusControl(null);
+            Repaint();
+        }
+        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.PageDown)
+        {
+            currentPage = Mathf.Min(pageCount, currentPage + 1);
+            GUI.FocusControl(null);
+            Repaint();
+        }
+
         // 現在のページとページ数
         GUILayout.Label($"{currentPage + 1}/{pageCount + 1}");
         GUILayout.EndHorizontal();
@@ -197,6 +234,7 @@ public class AreaInfoEditorWindow : EditorWindow
         chara.Attack = EditorGUILayout.IntField("Attack", chara.Attack);
         chara.Defense = EditorGUILayout.IntField("Defense", chara.Defense);
         chara.Intelligence = EditorGUILayout.IntField("Intelligence", chara.Intelligence);
+        chara.LoyaltyBase = EditorGUILayout.IntField("LoyaltyBase", chara.LoyaltyBase);
         chara.debugMemo = EditorGUILayout.TextField("メモ", chara.debugMemo);
         chara.debugImagePath = EditorGUILayout.TextField("顔画像", chara.debugImagePath);
         chara.debugImagePath = DrawDropArea(chara.debugImagePath);
@@ -221,7 +259,7 @@ public class AreaInfoEditorWindow : EditorWindow
 
     private string DrawDropArea(string path)
     {
-        var dropArea = GUILayoutUtility.GetRect(100f, 50.0f, GUILayout.ExpandWidth(true));
+        var dropArea = GUILayoutUtility.GetRect(100f, 40.0f, GUILayout.ExpandWidth(true));
         GUI.Box(dropArea, "Drop Image Here");
         var e = Event.current;
         switch (e.type)
