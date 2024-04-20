@@ -59,9 +59,11 @@ public class AreaInfoEditorWindow : EditorWindow
     void OnGUI()
     {
         // lキーが押されたらロック状態をトグルする。
-        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.L)
+        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.F1)
         {
             isLocked = !isLocked;
+            GUI.FocusControl(null);
+            Repaint();
         }
         GUILayout.BeginHorizontal();
         GUILayout.Label("ロック: " + isLocked);
