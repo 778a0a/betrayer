@@ -40,7 +40,7 @@ public class AreaInfoEditorWindow : EditorWindow
     {
 
         var ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+        var hit = Physics2D.GetRayIntersection(ray);
         if (hit.collider != null)
         {
             var posGrid = grid.WorldToCell(hit.point);
@@ -49,6 +49,7 @@ public class AreaInfoEditorWindow : EditorWindow
             {
                 targetArea = world.Map.GetArea(pos);
                 targetCountry = world.CountryOf(targetArea);
+                GUI.FocusControl(null);
             }
             Repaint();
         }

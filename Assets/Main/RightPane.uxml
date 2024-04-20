@@ -1,0 +1,54 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
+    <engine:VisualElement style="flex-grow: 1; background-color: rgb(255, 255, 255); align-self: flex-end; width: 420px;">
+        <engine:Label text="地形情報" style="-unity-font-style: bold;" />
+        <engine:VisualElement name="CellInformation" style="flex-grow: 0; flex-direction: row;">
+            <engine:Label text="地形" />
+            <engine:Label text="丘陵" name="labelTerrain" />
+            <engine:Label text="座標" style="margin-top: 4px; margin-right: 4px;" />
+            <engine:Label text="(10, 10)" name="labelPosition" />
+        </engine:VisualElement>
+        <engine:Label text="勢力情報" style="-unity-font-style: bold;" />
+        <engine:VisualElement style="flex-grow: 0; flex-direction: column;">
+            <engine:Image name="imageRuler" style="flex-grow: 0; width: 200px; height: 200px; flex-shrink: 0;" />
+            <engine:VisualElement style="flex-grow: 0;">
+                <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                    <engine:Label text="君主" />
+                    <engine:Label name="labelRulerName" text="アトラス" />
+                </engine:VisualElement>
+                <engine:VisualElement style="flex-grow: 1; flex-direction: row; flex-wrap: wrap;">
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="領地数" />
+                        <engine:Label name="labelAreaCount" text="10" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="総収入" />
+                        <engine:Label name="labelTotalIncome" text="10" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="総資金" />
+                        <engine:Label name="labelTotalGold" text="10" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="総人数" />
+                        <engine:Label name="labelMemberCount" text="10" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="総兵数" />
+                        <engine:Label name="labelSoldierCount" text="10" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="総戦力" />
+                        <engine:Label name="labelTotalPower" text="10" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="同盟" />
+                        <engine:Label name="labelAlly" text="なし" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:Label text="人物情報" name="Label" style="-unity-font-style: bold;" />
+        <engine:VisualElement style="flex-grow: 1;" />
+    </engine:VisualElement>
+</engine:UXML>

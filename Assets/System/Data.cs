@@ -161,7 +161,7 @@ public class Area
     public override string ToString() => $"Area {Position} ({Terrain})";
 }
 
-public struct MapPosition
+public struct MapPosition : IEquatable<MapPosition>
 {
     public int x;
     public int y;
@@ -175,7 +175,11 @@ public struct MapPosition
 
     public readonly Vector3Int Vector3Int => new(x, -y, 0);
 
-    public override string ToString() => $"({x}, {y})";
+    public override readonly string ToString() => $"({x}, {y})";
+
+    public readonly bool Equals(MapPosition other) => x == other.x && y == other.y;
+    public static bool operator ==(MapPosition left, MapPosition right) => left.Equals(right);
+    public static bool operator !=(MapPosition left, MapPosition right) => !(left == right);
 }
 
 /// <summary>

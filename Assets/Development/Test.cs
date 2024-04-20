@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Unity.Burst.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -23,6 +25,8 @@ public class Test : MonoBehaviour
 
     [SerializeField] private TilemapHelper tilemapHelper;
 
+    [SerializeField] private RightPane rightPane;
+
     private PhaseManager phases;
 
     // Start is called before the first frame update
@@ -37,8 +41,23 @@ public class Test : MonoBehaviour
         DrawCountryTile();
 
 
-        StartCoroutine(DoMainLoop());
+        //StartCoroutine(DoMainLoop());
     }
+
+    private MapPosition prevPosition;
+    private void Update()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.GetRayIntersection(ray);
+        var posGrid = grid.WorldToCell(hit.point);
+        var pos = MapPosition.FromGrid(posGrid);
+        if (prevPosition != pos)
+        {
+            prevPosition = pos;
+            rightPane.ShowCellInformation(world, pos);
+        }
+    }
+
 
     // Update is called once per frame
     private IEnumerator DoMainLoop()
