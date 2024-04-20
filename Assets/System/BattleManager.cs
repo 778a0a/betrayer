@@ -12,6 +12,9 @@ using Random = UnityEngine.Random;
 
 public class BattleManager
 {
+    /// <summary>
+    /// 戦闘を行います。
+    /// </summary>
     public static BattleResult Battle(MapGrid map, Area sourceArea, Area targetArea, Character attacker, Character defender)
     {
         var dir = sourceArea.GetDirectionTo(targetArea);
@@ -89,4 +92,21 @@ public class BattleManager
             }
         }
     }
+
+    /// <summary>
+    /// 戦闘後の回復処理
+    /// </summary>
+    public static void Recover(Character c, bool win)
+    {
+        foreach (var s in c.Force.Soldiers)
+        {
+            if (!s.IsAlive) continue;
+
+            var baseAmount = s.MaxHp * (win ? 0.1f : 0.05f);
+            var adj = Mathf.Max(0, (c.Intelligence - 80) / 100f / 2);
+            var amount = (int)(baseAmount * (1 + adj));
+            s.Hp = Mathf.Min(s.MaxHp, s.Hp + amount);
+        }
+    }
+
 }

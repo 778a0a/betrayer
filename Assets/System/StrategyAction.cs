@@ -117,7 +117,13 @@ public class StrategyActions
             if (result == BattleResult.AttackerWin)
             {
                 attacker.Contribution += 2;
-                if (defender != null) defender.Contribution += 1;
+                BattleManager.Recover(attacker, true);
+                if (defender != null)
+                {
+                    defender.Contribution += 1;
+                    BattleManager.Recover(defender, false);
+                }
+
                 country.Areas.Add(targetArea);
                 targetCountry.Areas.Remove(targetArea);
                 // 領土がなくなったら国を削除する。
@@ -129,7 +135,9 @@ public class StrategyActions
             else
             {
                 attacker.Contribution += 1;
+                BattleManager.Recover(attacker, false);
                 defender.Contribution += 2;
+                BattleManager.Recover(defender, true);
             }
         }
 
