@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,39 +53,25 @@ public class BattleManager
 
     private static void Tick(Terrain attackerTerrain, Terrain defenderTerrain, Character attacker, Character defender)
     {
-        foreach (var sol in attacker.Force.Soldiers)
+        // 両方の兵士をランダムな順番の配列にいれる。
+        var all = attacker.Force.Soldiers.Select(s => (soldier: s, owner: attacker, opponent: defender, terrain: defenderTerrain, atk: attacker.Attack, def: defender.Defense))
+            .Concat(defender.Force.Soldiers.Select(s => (soldier: s, owner: defender, opponent: attacker, terrain: attackerTerrain, atk: defender.Defense, def: attacker.Attack)))
+            .Where(x => x.soldier.IsAlive)
+            .OrderBy(_ => Random.value)
+            .ToArray();
+
+        foreach (var (soldier, owner, opponent, terrain, atk, def) in all)
         {
-            if (!sol.IsAlive) continue;
-            var target = defender.Force.Soldiers.Where(s => s.IsAlive).RandomPickDefault();
+            if (!soldier.IsAlive) continue;
+            var target = opponent.Force.Soldiers.Where(s => s.IsAlive).RandomPickDefault();
             if (target == null) continue;
-
             var adj =
-                (attacker.Attack / 100f) *
-                (1 - defender.Defense / 100f) *
+                (soldier.Level + atk / 10f) *
+                (1 - (def - 50) / 100f) *
                 Random.Range(0.8f, 1.2f) *
-                TerrainDamageAdjustment(defenderTerrain);
+                TerrainDamageAdjustment(terrain);
 
-            var damage = Math.Min(1, sol.Level * adj);
-            target.Hp = (int)Math.Max(0, target.Hp - damage);
-            if (target.Hp == 0)
-            {
-                target.IsEmptySlot = true;
-            }
-        }
-
-        foreach (var sol in defender.Force.Soldiers)
-        {
-            if (!sol.IsAlive) continue;
-            var target = attacker.Force.Soldiers.Where(s => s.IsAlive).RandomPickDefault();
-            if (target == null) continue;
-
-            var adj =
-                (Math.Max(defender.Attack, defender.Defense) / 100f) *
-                (1 - attacker.Defense / 100f) *
-                Random.Range(0.8f, 1.2f) *
-                TerrainDamageAdjustment(attackerTerrain);
-
-            var damage = Math.Min(1, sol.Level * adj);
+            var damage = Math.Min(1, soldier.Level * adj);
             target.Hp = (int)Math.Max(0, target.Hp - damage);
             if (target.Hp == 0)
             {
