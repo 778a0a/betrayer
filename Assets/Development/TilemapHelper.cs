@@ -11,6 +11,12 @@ public class TilemapHelper : MonoBehaviour
     [SerializeField] private Tilemap verticalConnectionTilemap;
     [SerializeField] private Tilemap horizontalConnectionTilemap;
 
+    public Sprite GetCountryImage(Country country)
+    {
+        var tile = tilesHolder.countries[country.ColorIndex];
+        return tile.sprite;
+    }
+
     public Terrain GetTerrain(MapPosition pos)
     {
         var tile = terrainTilemap.GetTile(pos.Vector3Int);

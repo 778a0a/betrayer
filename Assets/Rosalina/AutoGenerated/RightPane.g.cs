@@ -19,6 +19,8 @@ public partial class RightPane
 
     public Label labelPosition { get; private set; }
 
+    public Image imageCountryColor { get; private set; }
+
     public Label labelRulerName { get; private set; }
 
     public Label labelAreaCount { get; private set; }
@@ -33,19 +35,20 @@ public partial class RightPane
 
     public Label labelTotalPower { get; private set; }
 
+    public Image imageAllyCountryColor { get; private set; }
+
     public Label labelAlly { get; private set; }
 
     public Image imageRuler { get; private set; }
 
     public VisualElement CellInformation { get; private set; }
 
-    public Label Label { get; private set; }
-
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
     {
         labelTerrain = Root?.Q<Label>("labelTerrain");
         labelPosition = Root?.Q<Label>("labelPosition");
+        imageCountryColor = Root?.Q<Image>("imageCountryColor");
         labelRulerName = Root?.Q<Label>("labelRulerName");
         labelAreaCount = Root?.Q<Label>("labelAreaCount");
         labelTotalIncome = Root?.Q<Label>("labelTotalIncome");
@@ -53,9 +56,9 @@ public partial class RightPane
         labelMemberCount = Root?.Q<Label>("labelMemberCount");
         labelSoldierCount = Root?.Q<Label>("labelSoldierCount");
         labelTotalPower = Root?.Q<Label>("labelTotalPower");
+        imageAllyCountryColor = Root?.Q<Image>("imageAllyCountryColor");
         labelAlly = Root?.Q<Label>("labelAlly");
         imageRuler = Root?.Q<Image>("imageRuler");
         CellInformation = Root?.Q<VisualElement>("CellInformation");
-        Label = Root?.Q<Label>("Label");
     }
 }

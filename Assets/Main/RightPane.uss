@@ -1,0 +1,10 @@
+.CountryInfo-Label {
+    width: 110px;
+    -unity-text-align: middle-left;
+    font-size: 35px;
+}
+
+.CountryInfo-Value {
+    width: 80px;
+    -unity-text-align: upper-left;
+}

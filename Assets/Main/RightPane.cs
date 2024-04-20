@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public partial class RightPane : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public partial class RightPane : MonoBehaviour
 
         // 勢力情報
         imageRuler.image = FaceImageManager.Instance.GetImage(ruler);
+        imageCountryColor.sprite = world.Map.Helper.GetCountryImage(country);
+        imageCountryColor.style.backgroundColor = new StyleColor(Color.white);
         labelRulerName.text = ruler.Name;
         labelAreaCount.text = country.Areas.Count.ToString();
         labelTotalIncome.text = "xxx";
@@ -30,7 +33,17 @@ public partial class RightPane : MonoBehaviour
         labelMemberCount.text = country.Members.Count().ToString();
         labelSoldierCount.text = country.Members.SelectMany(m => m.Force.Soldiers.Select(s => s.Hp)).Sum().ToString();
         labelTotalPower.text = country.Members.Select(m => m.Power).Sum().ToString();
-        labelAlly.text = country.Ally == null ? "なし" : country.Ally.Ruler.Name;
+        if (country.Ally != null)
+        {
+            labelAlly.text = country.Ally.Ruler.Name;
+            imageAllyCountryColor.sprite = world.Map.Helper.GetCountryImage(country.Ally);
+        }
+        else
+        {
+            labelAlly.text = "なし";
+            imageAllyCountryColor.sprite = null;
+            imageAllyCountryColor.style.visibility = Visibility.Hidden;
+        }
 
         // 人物情報
     }
@@ -41,6 +54,7 @@ public class FaceImageManager
     public static FaceImageManager Instance { get; } = new();
 
     private Dictionary<string, Texture2D> cacheImages = new();
+    public void ClearCache() => cacheImages.Clear();
 
     public Texture2D GetImage(Character chara)
     {

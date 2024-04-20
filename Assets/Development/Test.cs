@@ -36,6 +36,8 @@ public class Test : MonoBehaviour
         //SaveData.SaveWorldData(world);
         //return;
 
+        FaceImageManager.Instance.ClearCache();
+
         world = SaveData.LoadWorldData(tilemapHelper);
         phases = new PhaseManager(world);
         DrawCountryTile();
