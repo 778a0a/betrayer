@@ -9,15 +9,6 @@
     -unity-text-align: middle-left;
 }
 
-.MemberInfo-Cell {
-    font-size: 30px;
-    width: 65px;
-}
-
-.MemberInfo-Col-Name {
-    width: 220px;
-}
-
 .CharaInfo-Label {
     width: 80px;
     -unity-text-align: middle-left;
@@ -34,5 +25,8 @@
     background-color: rgb(124, 255, 138);
     width: 50px;
     height: 50px;
-    margin-right: 5px;
+    margin-right: 11px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
 }

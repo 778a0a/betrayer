@@ -43,31 +43,13 @@ public partial class RightPane
 
     public Image imageRuler { get; private set; }
 
-    public Label labelCharaStatus { get; private set; }
-
-    public Label labelCharaName { get; private set; }
-
-    public Label labelCharaAttack { get; private set; }
-
-    public Label labelCharaDefence { get; private set; }
-
-    public Label labelCharaIntelligence { get; private set; }
-
-    public Label labelCharaLoyalty { get; private set; }
-
-    public Label labelCharaPrestige { get; private set; }
-
-    public Label labelCharaContribution { get; private set; }
-
-    public Label labelCharaSalaryRatio { get; private set; }
-
-    public VisualElement Soldiers { get; private set; }
-
-    public VisualElement VisualElement { get; private set; }
-
-    public Image imageChara { get; private set; }
-
     public VisualElement CellInformation { get; private set; }
+
+    public VisualElement CountryInfo { get; private set; }
+
+    public CharacterTable CharacterTable { get; private set; }
+
+    public CharacterInfo CharacterInfo { get; private set; }
 
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
@@ -86,18 +68,9 @@ public partial class RightPane
         imageAllyCountryColor = Root?.Q<Image>("imageAllyCountryColor");
         labelAlly = Root?.Q<Label>("labelAlly");
         imageRuler = Root?.Q<Image>("imageRuler");
-        labelCharaStatus = Root?.Q<Label>("labelCharaStatus");
-        labelCharaName = Root?.Q<Label>("labelCharaName");
-        labelCharaAttack = Root?.Q<Label>("labelCharaAttack");
-        labelCharaDefence = Root?.Q<Label>("labelCharaDefence");
-        labelCharaIntelligence = Root?.Q<Label>("labelCharaIntelligence");
-        labelCharaLoyalty = Root?.Q<Label>("labelCharaLoyalty");
-        labelCharaPrestige = Root?.Q<Label>("labelCharaPrestige");
-        labelCharaContribution = Root?.Q<Label>("labelCharaContribution");
-        labelCharaSalaryRatio = Root?.Q<Label>("labelCharaSalaryRatio");
-        Soldiers = Root?.Q<VisualElement>("Soldiers");
-        VisualElement = Root?.Q<VisualElement>("VisualElement");
-        imageChara = Root?.Q<Image>("imageChara");
         CellInformation = Root?.Q<VisualElement>("CellInformation");
+        CountryInfo = Root?.Q<VisualElement>("CountryInfo");
+        CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
+        CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
     }
 }

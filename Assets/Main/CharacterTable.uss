@@ -1,0 +1,10 @@
+.MemberInfo-Cell {
+    font-size: 30px;
+    width: 65px;
+    -unity-text-align: middle-center;
+}
+
+.MemberInfo-Col-Name {
+    width: 200px;
+    -unity-text-align: middle-left;
+}

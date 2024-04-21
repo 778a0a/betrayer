@@ -9,14 +9,28 @@ public partial class RightPane : MonoBehaviour
     private void OnEnable()
     {
         InitializeDocument();
+        CharacterTable.Initialize();
+        CharacterTable.RowMouseMove += CharacterTable_RowMouseMove; ;
+
     }
+
+    private void CharacterTable_RowMouseMove(object sender, Character chara)
+    {
+        if (chara == characterInfoTarget) return;
+        characterInfoTarget = chara;
+        CharacterInfo.SetData(chara, country);
+    }
+
+    private Country country;
+    private Area area;
+    private Character characterInfoTarget;
 
     public void ShowCellInformation(WorldData world, MapPosition pos)
     {
-        var area = world.Map.GetArea(pos);
-        var country = world.CountryOf(area);
+        area = world.Map.GetArea(pos);
+        country = world.CountryOf(area);
         var ruler = country.Ruler;
-
+        characterInfoTarget = ruler;
 
         // 地形情報
         labelTerrain.text = area.Terrain.ToString();
@@ -45,7 +59,10 @@ public partial class RightPane : MonoBehaviour
             imageAllyCountryColor.style.visibility = Visibility.Hidden;
         }
 
-        // 人物情報
+        // 人物情報テーブル
+        CharacterTable.SetData(country);
+        // 人物詳細
+        CharacterInfo.SetData(ruler, country);
     }
 }
 

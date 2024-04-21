@@ -24,3 +24,11 @@ MonoBehaviour:
     _path: Assets/Windows/SelectScenarioWindow.uxml
   - _type: 0
     _path: Assets/Main/RightPane.uxml
+  - _type: 1
+    _path: Assets/Main/CharacterTable.uxml
+  - _type: 1
+    _path: Assets/Main/CharacterTableRowItem.uxml
+  - _type: 1
+    _path: Assets/Main/CharacterInfoSoldierIcon.uxml
+  - _type: 1
+    _path: Assets/Main/CharacterInfo.uxml

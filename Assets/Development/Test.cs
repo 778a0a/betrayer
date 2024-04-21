@@ -49,14 +49,17 @@ public class Test : MonoBehaviour
     private MapPosition prevPosition;
     private void Update()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var hit = Physics2D.GetRayIntersection(ray);
-        var posGrid = grid.WorldToCell(hit.point);
-        var pos = MapPosition.FromGrid(posGrid);
-        if (prevPosition != pos)
+        if (Input.GetMouseButtonDown(0))
         {
-            prevPosition = pos;
-            rightPane.ShowCellInformation(world, pos);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var hit = Physics2D.GetRayIntersection(ray);
+            var posGrid = grid.WorldToCell(hit.point);
+            var pos = MapPosition.FromGrid(posGrid);
+            if (prevPosition != pos)
+            {
+                prevPosition = pos;
+                rightPane.ShowCellInformation(world, pos);
+            }
         }
     }
 
