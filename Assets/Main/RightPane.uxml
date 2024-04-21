@@ -76,5 +76,59 @@
                 <engine:Label text="25" class="MemberInfo-Cell MemberInfo-Col-SalaryRatio" />
             </engine:VisualElement>
         </engine:VisualElement>
+        <engine:VisualElement style="flex-grow: 1;">
+            <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                <engine:VisualElement name="VisualElement" style="flex-grow: 1;">
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="君主" name="labelCharaStatus" style="font-size: 35px;" />
+                        <engine:Label name="labelCharaName" text="アトラス" style="font-size: 35px;" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row; flex-wrap: wrap;">
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="攻撃" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaAttack" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="防衛" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaDefence" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="智謀" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaIntelligence" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="忠誠" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaLoyalty" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="名声" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaPrestige" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="功績" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaContribution" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="給料%" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaSalaryRatio" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="Soldiers" style="flex-grow: 1; flex-direction: row;">
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                        <engine:VisualElement class="CharaInfo-Soldier-Item" style="flex-grow: 1;" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+                <engine:Image name="imageChara" style="flex-grow: 0; width: 200px; height: 200px; flex-shrink: 0; background-color: rgba(0, 229, 255, 0.35); align-self: center;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
