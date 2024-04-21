@@ -29,6 +29,8 @@ public partial class CharacterInfoSoldierIcon
         }
 
         panelContainer.style.backgroundColor = levelToColor[s.Level];
+        panelContainer.tooltip = s.ToString();
+        labelLevel.text = s.Level.ToString();
         labelHp.text = s.Hp.ToString();
     }
 }

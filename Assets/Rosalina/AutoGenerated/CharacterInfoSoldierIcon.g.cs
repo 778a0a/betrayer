@@ -14,6 +14,8 @@ using UnityEngine.UIElements;
 
 public partial class CharacterInfoSoldierIcon
 {
+    public Label labelLevel { get; private set; }
+
     public Label labelHp { get; private set; }
 
     public VisualElement panelContainer { get; private set; }
@@ -23,6 +25,7 @@ public partial class CharacterInfoSoldierIcon
     public CharacterInfoSoldierIcon(VisualElement root)
     {
         Root = root;
+        labelLevel = Root?.Q<Label>("labelLevel");
         labelHp = Root?.Q<Label>("labelHp");
         panelContainer = Root?.Q<VisualElement>("panelContainer");
     }
