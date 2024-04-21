@@ -56,5 +56,9 @@
         </engine:VisualElement>
         <engine:Instance template="CharacterTable" name="CharacterTable" />
         <engine:Instance template="CharacterInfo" name="CharacterInfo" />
+        <engine:VisualElement style="flex-grow: 1; flex-direction: row; margin-right: 0; margin-top: 10px;">
+            <engine:Button text="次フェイズ" name="buttonNextPhase" />
+            <engine:Button text="次ターン" name="buttonNextTurn" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

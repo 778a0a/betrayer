@@ -43,6 +43,10 @@ public partial class RightPane
 
     public Image imageRuler { get; private set; }
 
+    public Button buttonNextPhase { get; private set; }
+
+    public Button buttonNextTurn { get; private set; }
+
     public VisualElement CellInformation { get; private set; }
 
     public VisualElement CountryInfo { get; private set; }
@@ -68,6 +72,8 @@ public partial class RightPane
         imageAllyCountryColor = Root?.Q<Image>("imageAllyCountryColor");
         labelAlly = Root?.Q<Label>("labelAlly");
         imageRuler = Root?.Q<Image>("imageRuler");
+        buttonNextPhase = Root?.Q<Button>("buttonNextPhase");
+        buttonNextTurn = Root?.Q<Button>("buttonNextTurn");
         CellInformation = Root?.Q<VisualElement>("CellInformation");
         CountryInfo = Root?.Q<VisualElement>("CountryInfo");
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));

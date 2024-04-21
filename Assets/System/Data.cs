@@ -180,6 +180,8 @@ public struct MapPosition : IEquatable<MapPosition>
     public readonly bool Equals(MapPosition other) => x == other.x && y == other.y;
     public static bool operator ==(MapPosition left, MapPosition right) => left.Equals(right);
     public static bool operator !=(MapPosition left, MapPosition right) => !(left == right);
+    public override readonly bool Equals(object obj) => obj is MapPosition other && Equals(other);
+    public override readonly int GetHashCode() => HashCode.Combine(x, y);
 }
 
 /// <summary>

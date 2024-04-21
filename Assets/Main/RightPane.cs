@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine.UIElements;
 
 public partial class RightPane : MonoBehaviour
 {
+    public event EventHandler<RightPaneButton> RightPaneButtonClick;
+    public enum RightPaneButton
+    {
+        NextPhase,
+        NextTurn,
+    }
 
     private void OnEnable()
     {
@@ -12,6 +19,8 @@ public partial class RightPane : MonoBehaviour
         CharacterTable.Initialize();
         CharacterTable.RowMouseMove += CharacterTable_RowMouseMove; ;
 
+        buttonNextPhase.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextPhase);
+        buttonNextTurn.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextTurn);
     }
 
     private void CharacterTable_RowMouseMove(object sender, Character chara)
