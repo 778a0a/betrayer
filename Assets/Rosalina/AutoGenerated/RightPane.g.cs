@@ -15,6 +15,8 @@ public partial class RightPane
 {
     [SerializeField]
     private UIDocument _document;
+    public Label Label { get; private set; }
+
     public Label labelTerrain { get; private set; }
 
     public Label labelPosition { get; private set; }
@@ -46,6 +48,7 @@ public partial class RightPane
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
     {
+        Label = Root?.Q<Label>("Label");
         labelTerrain = Root?.Q<Label>("labelTerrain");
         labelPosition = Root?.Q<Label>("labelPosition");
         imageCountryColor = Root?.Q<Image>("imageCountryColor");

@@ -8,3 +8,12 @@
     width: 80px;
     -unity-text-align: upper-left;
 }
+
+.MemberInfo-Cell {
+    font-size: 30px;
+    width: 65px;
+}
+
+.MemberInfo-Col-Name {
+    width: 220px;
+}
