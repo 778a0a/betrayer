@@ -47,6 +47,10 @@ public partial class RightPane
 
     public Button buttonNextTurn { get; private set; }
 
+    public Button buttonAuto { get; private set; }
+
+    public Button buttonHold { get; private set; }
+
     public VisualElement CellInformation { get; private set; }
 
     public VisualElement CountryInfo { get; private set; }
@@ -74,6 +78,8 @@ public partial class RightPane
         imageRuler = Root?.Q<Image>("imageRuler");
         buttonNextPhase = Root?.Q<Button>("buttonNextPhase");
         buttonNextTurn = Root?.Q<Button>("buttonNextTurn");
+        buttonAuto = Root?.Q<Button>("buttonAuto");
+        buttonHold = Root?.Q<Button>("buttonHold");
         CellInformation = Root?.Q<VisualElement>("CellInformation");
         CountryInfo = Root?.Q<VisualElement>("CountryInfo");
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));

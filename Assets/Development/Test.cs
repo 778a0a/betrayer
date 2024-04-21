@@ -62,6 +62,14 @@ public class Test : MonoBehaviour
                 setHoldOnHoldEnd = false;
                 holdOnTurnEnd = true;
                 break;
+            case RightPane.RightPaneButton.Auto:
+                hold = false;
+                setHoldOnHoldEnd = false;
+                holdOnTurnEnd = false;
+                break;
+            case RightPane.RightPaneButton.Hold:
+                hold = true;
+                break;
         }
     }
 

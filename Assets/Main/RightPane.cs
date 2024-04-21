@@ -11,6 +11,8 @@ public partial class RightPane : MonoBehaviour
     {
         NextPhase,
         NextTurn,
+        Auto,
+        Hold,
     }
 
     private void OnEnable()
@@ -21,6 +23,8 @@ public partial class RightPane : MonoBehaviour
 
         buttonNextPhase.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextPhase);
         buttonNextTurn.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextTurn);
+        buttonAuto.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.Auto);
+        buttonHold.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.Hold);
     }
 
     private void CharacterTable_RowMouseMove(object sender, Character chara)
