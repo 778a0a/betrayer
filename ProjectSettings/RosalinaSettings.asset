@@ -32,3 +32,5 @@ MonoBehaviour:
     _path: Assets/Main/CharacterInfoSoldierIcon.uxml
   - _type: 1
     _path: Assets/Main/CharacterInfo.uxml
+  - _type: 1
+    _path: Assets/Main/CountryInfo.uxml

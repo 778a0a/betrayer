@@ -15,34 +15,6 @@ public partial class RightPane
 {
     [SerializeField]
     private UIDocument _document;
-    public Label Label { get; private set; }
-
-    public Label labelTerrain { get; private set; }
-
-    public Label labelPosition { get; private set; }
-
-    public Image imageCountryColor { get; private set; }
-
-    public Label labelRulerName { get; private set; }
-
-    public Label labelAreaCount { get; private set; }
-
-    public Label labelTotalIncome { get; private set; }
-
-    public Label labelTotalGold { get; private set; }
-
-    public Label labelMemberCount { get; private set; }
-
-    public Label labelSoldierCount { get; private set; }
-
-    public Label labelTotalPower { get; private set; }
-
-    public Image imageAllyCountryColor { get; private set; }
-
-    public Label labelAlly { get; private set; }
-
-    public Image imageRuler { get; private set; }
-
     public Button buttonNextPhase { get; private set; }
 
     public Button buttonNextTurn { get; private set; }
@@ -51,38 +23,15 @@ public partial class RightPane
 
     public Button buttonHold { get; private set; }
 
-    public VisualElement CellInformation { get; private set; }
-
-    public VisualElement CountryInfo { get; private set; }
-
-    public CharacterTable CharacterTable { get; private set; }
-
-    public CharacterInfo CharacterInfo { get; private set; }
+    public CountryInfo CountryInfo { get; private set; }
 
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
     {
-        Label = Root?.Q<Label>("Label");
-        labelTerrain = Root?.Q<Label>("labelTerrain");
-        labelPosition = Root?.Q<Label>("labelPosition");
-        imageCountryColor = Root?.Q<Image>("imageCountryColor");
-        labelRulerName = Root?.Q<Label>("labelRulerName");
-        labelAreaCount = Root?.Q<Label>("labelAreaCount");
-        labelTotalIncome = Root?.Q<Label>("labelTotalIncome");
-        labelTotalGold = Root?.Q<Label>("labelTotalGold");
-        labelMemberCount = Root?.Q<Label>("labelMemberCount");
-        labelSoldierCount = Root?.Q<Label>("labelSoldierCount");
-        labelTotalPower = Root?.Q<Label>("labelTotalPower");
-        imageAllyCountryColor = Root?.Q<Image>("imageAllyCountryColor");
-        labelAlly = Root?.Q<Label>("labelAlly");
-        imageRuler = Root?.Q<Image>("imageRuler");
         buttonNextPhase = Root?.Q<Button>("buttonNextPhase");
         buttonNextTurn = Root?.Q<Button>("buttonNextTurn");
         buttonAuto = Root?.Q<Button>("buttonAuto");
         buttonHold = Root?.Q<Button>("buttonHold");
-        CellInformation = Root?.Q<VisualElement>("CellInformation");
-        CountryInfo = Root?.Q<VisualElement>("CountryInfo");
-        CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
-        CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
+        CountryInfo = new CountryInfo(Root?.Q<VisualElement>("CountryInfo"));
     }
 }

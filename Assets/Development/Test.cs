@@ -87,7 +87,7 @@ public class Test : MonoBehaviour
                 if (prevPosition != pos)
                 {
                     prevPosition = pos;
-                    rightPane.ShowCellInformation(world, pos);
+                    rightPane.CountryInfo.ShowCellInformation(world, pos);
                 }
             }
         }
