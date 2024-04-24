@@ -34,3 +34,9 @@ MonoBehaviour:
     _path: Assets/Main/CharacterInfo.uxml
   - _type: 1
     _path: Assets/Main/CountryInfo.uxml
+  - _type: 1
+    _path: Assets/Main/CountryRulerInfo.uxml
+  - _type: 1
+    _path: Assets/Main/IndividualPhaseUI.uxml
+  - _type: 1
+    _path: Assets/Main/SoldierInfoLarge.uxml

@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public partial class CharacterInfoSoldierIcon
 {
-    private Color[] levelToColor = new[]
+    public static Color[] levelToColor = new[]
     {
         Util.Color("#FFFFFF"), // (白)
         Util.Color("#FFE0E0"), // (明るいピンク)

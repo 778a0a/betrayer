@@ -9,6 +9,7 @@ public partial class RightPane : MonoBehaviour
     public event EventHandler<RightPaneButton> RightPaneButtonClick;
     public enum RightPaneButton
     {
+        ToggleDebugUI,
         NextPhase,
         NextTurn,
         Auto,
@@ -18,8 +19,10 @@ public partial class RightPane : MonoBehaviour
     private void OnEnable()
     {
         InitializeDocument();
+        IndividualPhaseUI.Initialize();
         CountryInfo.Initialize();
-
+        
+        buttonToggleDebugUI.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextPhase);
         buttonNextTurn.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextTurn);
         buttonAuto.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.Auto);

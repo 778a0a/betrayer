@@ -12,22 +12,29 @@ using UnityEngine.Tilemaps;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private Grid grid;
-    [SerializeField] private Tilemap tilemap;
+    public static Test Instance { get; private set; }
 
-    [SerializeField] private TilesHolder tilesHolder;
+    [SerializeField] public Grid grid;
+    [SerializeField] public Tilemap tilemap;
 
-    [SerializeField] private TilemapData initialTilemapData;
+    [SerializeField] public TilesHolder tilesHolder;
 
-    [SerializeField] private WorldData world;
+    [SerializeField] public TilemapData initialTilemapData;
 
-    [SerializeField] private float wait = 1;
+    [SerializeField] public WorldData world;
 
-    [SerializeField] private TilemapHelper tilemapHelper;
+    [SerializeField] public float wait = 1;
 
-    [SerializeField] private RightPane rightPane;
+    [SerializeField] public TilemapHelper tilemapHelper;
 
-    private PhaseManager phases;
+    [SerializeField] public RightPane rightPane;
+
+    public PhaseManager phases;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +50,12 @@ public class Test : MonoBehaviour
         DrawCountryTile();
 
         rightPane.RightPaneButtonClick += RightPane_RightPaneButtonClick;
+        rightPane.IndividualPhaseUI.ActionButtonClicked += IndividualPhaseUI_ActionButtonClicked;
+        rightPane.CountryInfo.CloseButtonClicked += (sender, e) =>
+        {
+            rightPane.CountryInfo.Root.style.display = UnityEngine.UIElements.DisplayStyle.None;
+            rightPane.IndividualPhaseUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.Flex;
+        };
 
         hold = true;
         holdOnTurnEnd = true;
@@ -50,10 +63,41 @@ public class Test : MonoBehaviour
         StartCoroutine(DoMainLoop());
     }
 
+    private void IndividualPhaseUI_ActionButtonClicked(object sender, IndividualPhaseUI.ActionButton e)
+    {
+        switch (e)
+        {
+            case IndividualPhaseUI.ActionButton.ShowInfo:
+                rightPane.IndividualPhaseUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.None;
+                rightPane.CountryInfo.Root.style.display = UnityEngine.UIElements.DisplayStyle.Flex;
+                break;
+            case IndividualPhaseUI.ActionButton.HireSoldier:
+                break;
+            case IndividualPhaseUI.ActionButton.TrainSoldiers:
+                break;
+            case IndividualPhaseUI.ActionButton.GetJob:
+                break;
+            case IndividualPhaseUI.ActionButton.Resign:
+                break;
+            case IndividualPhaseUI.ActionButton.Rebel:
+                break;
+            case IndividualPhaseUI.ActionButton.BecomeIndependent:
+                break;
+            case IndividualPhaseUI.ActionButton.ShowSystemMenu:
+                break;
+            case IndividualPhaseUI.ActionButton.EndTurn:
+                hold = false;
+                break;
+        }
+    }
+
     private void RightPane_RightPaneButtonClick(object sender, RightPane.RightPaneButton e)
     {
         switch (e)
         {
+            case RightPane.RightPaneButton.ToggleDebugUI:
+                rightPane.DebugUI.visible = !rightPane.DebugUI.visible;
+                break;
             case RightPane.RightPaneButton.NextPhase:
                 hold = false;
                 break;
@@ -115,13 +159,13 @@ public class Test : MonoBehaviour
             phases.Start.Phase();
             
             yield return HoldIfNeeded();
-            phases.Income.Phase();
+            yield return phases.Income.Phase();
 
             yield return HoldIfNeeded();
-            phases.PersonalAction.Phase();
+            yield return phases.PersonalAction.Phase();
             
             yield return HoldIfNeeded();
-            phases.StrategyAction.Phase();
+            yield return phases.StrategyAction.Phase();
             
             DrawCountryTile();
             if (world.Countries.Count == 1)

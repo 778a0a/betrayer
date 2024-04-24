@@ -15,6 +15,10 @@ public partial class RightPane
 {
     [SerializeField]
     private UIDocument _document;
+    public IndividualPhaseUI IndividualPhaseUI { get; private set; }
+
+    public CountryInfo CountryInfo { get; private set; }
+
     public Button buttonNextPhase { get; private set; }
 
     public Button buttonNextTurn { get; private set; }
@@ -23,15 +27,23 @@ public partial class RightPane
 
     public Button buttonHold { get; private set; }
 
-    public CountryInfo CountryInfo { get; private set; }
+    public Button buttonToggleDebugUI { get; private set; }
+
+    public VisualElement DebugUI { get; private set; }
+
+    public VisualElement DebugUIParent { get; private set; }
 
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
     {
+        IndividualPhaseUI = new IndividualPhaseUI(Root?.Q<VisualElement>("IndividualPhaseUI"));
+        CountryInfo = new CountryInfo(Root?.Q<VisualElement>("CountryInfo"));
         buttonNextPhase = Root?.Q<Button>("buttonNextPhase");
         buttonNextTurn = Root?.Q<Button>("buttonNextTurn");
         buttonAuto = Root?.Q<Button>("buttonAuto");
         buttonHold = Root?.Q<Button>("buttonHold");
-        CountryInfo = new CountryInfo(Root?.Q<VisualElement>("CountryInfo"));
+        buttonToggleDebugUI = Root?.Q<Button>("buttonToggleDebugUI");
+        DebugUI = Root?.Q<VisualElement>("DebugUI");
+        DebugUIParent = Root?.Q<VisualElement>("DebugUIParent");
     }
 }

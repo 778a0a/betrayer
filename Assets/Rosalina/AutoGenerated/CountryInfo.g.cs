@@ -20,35 +20,15 @@ public partial class CountryInfo
 
     public Label labelPosition { get; private set; }
 
-    public Image imageCountryColor { get; private set; }
-
-    public Label labelRulerName { get; private set; }
-
-    public Label labelAreaCount { get; private set; }
-
-    public Label labelTotalIncome { get; private set; }
-
-    public Label labelTotalGold { get; private set; }
-
-    public Label labelMemberCount { get; private set; }
-
-    public Label labelSoldierCount { get; private set; }
-
-    public Label labelTotalPower { get; private set; }
-
-    public Image imageAllyCountryColor { get; private set; }
-
-    public Label labelAlly { get; private set; }
-
-    public Image imageRuler { get; private set; }
-
     public VisualElement CellInformation { get; private set; }
 
-    public VisualElement Country { get; private set; }
+    public CountryRulerInfo CountryRulerInfo { get; private set; }
 
     public CharacterTable CharacterTable { get; private set; }
 
     public CharacterInfo CharacterInfo { get; private set; }
+
+    public Button buttonClose { get; private set; }
 
     public VisualElement Root { get; }
 
@@ -58,20 +38,10 @@ public partial class CountryInfo
         Label = Root?.Q<Label>("Label");
         labelTerrain = Root?.Q<Label>("labelTerrain");
         labelPosition = Root?.Q<Label>("labelPosition");
-        imageCountryColor = Root?.Q<Image>("imageCountryColor");
-        labelRulerName = Root?.Q<Label>("labelRulerName");
-        labelAreaCount = Root?.Q<Label>("labelAreaCount");
-        labelTotalIncome = Root?.Q<Label>("labelTotalIncome");
-        labelTotalGold = Root?.Q<Label>("labelTotalGold");
-        labelMemberCount = Root?.Q<Label>("labelMemberCount");
-        labelSoldierCount = Root?.Q<Label>("labelSoldierCount");
-        labelTotalPower = Root?.Q<Label>("labelTotalPower");
-        imageAllyCountryColor = Root?.Q<Image>("imageAllyCountryColor");
-        labelAlly = Root?.Q<Label>("labelAlly");
-        imageRuler = Root?.Q<Image>("imageRuler");
         CellInformation = Root?.Q<VisualElement>("CellInformation");
-        Country = Root?.Q<VisualElement>("Country");
+        CountryRulerInfo = new CountryRulerInfo(Root?.Q<VisualElement>("CountryRulerInfo"));
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
         CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
+        buttonClose = Root?.Q<Button>("buttonClose");
     }
 }

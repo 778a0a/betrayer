@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class StartPhase : PhaseBase
 {
-    public override void Phase()
+    public override IEnumerator Phase()
     {
         Debug.Log("[開始フェイズ] 開始");
         for (int i = 0; i < Characters.Length; i++)
@@ -24,6 +25,7 @@ public class StartPhase : PhaseBase
             }
         }
         Debug.Log("[開始フェイズ] 終了");
+        yield break;
     }
 }
 
@@ -32,7 +34,7 @@ public class StartPhase : PhaseBase
 /// </summary>
 public class IncomePhase : PhaseBase
 {
-    public override void Phase()
+    public override IEnumerator Phase()
     {
         Debug.Log("[収入フェイズ] 開始");
         // 国毎の処理を行う。
@@ -64,6 +66,7 @@ public class IncomePhase : PhaseBase
             Debug.Log($"[収入フェイズ] {chara.Name} {chara.Gold} (+{income})");
         }
         Debug.Log("[収入フェイズ] 終了");
+        yield break;
     }
 
     private int IncomeOf(Area a) => a.Terrain switch
@@ -82,14 +85,19 @@ public class IncomePhase : PhaseBase
 /// </summary>
 public class PersonalActionPhase : PhaseBase
 {
-    public override void Phase()
+    public override IEnumerator Phase()
     {
+        Test.Instance.rightPane.IndividualPhaseUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.Flex;
+
         Debug.Log("[個人フェイズ] 開始");
         // ランダムな順番で行動させる。
         var charas = Characters.OrderBy(c => Random.value).ToArray();
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
+            Test.Instance.rightPane.IndividualPhaseUI.SetData(chara, World);
+            yield return new WaitForSeconds(0.05f);
+
             Debug.Log($"[個人フェイズ] {chara.Name} の行動を開始します。G:{chara.Gold} ({i + 1}/{charas.Length})");
             // プレイヤーの場合
             if (chara.IsPlayer)
@@ -120,6 +128,7 @@ public class PersonalActionPhase : PhaseBase
             }
         }
         Debug.Log("[個人フェイズ] 終了");
+        yield break;
     }
 }
 
@@ -128,7 +137,7 @@ public class PersonalActionPhase : PhaseBase
 /// </summary>
 public class StrategyActionPhase : PhaseBase
 {
-    public override void Phase()
+    public override IEnumerator Phase()
     {
         Debug.Log("[戦略フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -194,6 +203,7 @@ public class StrategyActionPhase : PhaseBase
             }
         }
         Debug.Log("[戦略フェイズ] 終了");
+        yield break;
     }
 }
 
@@ -207,7 +217,7 @@ public class PhaseBase
     public bool IsVassal(Character chara) => World.IsVassal(chara);
     public bool IsFree(Character chara) => World.IsFree(chara);
 
-    public virtual void Phase() { }
+    public virtual IEnumerator Phase() { yield break; }
 }
 
 public class PhaseManager
