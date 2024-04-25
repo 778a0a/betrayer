@@ -65,15 +65,27 @@ public class Test : MonoBehaviour
 
     private void IndividualPhaseUI_ActionButtonClicked(object sender, IndividualPhaseUI.ActionButton e)
     {
+        var chara = rightPane.IndividualPhaseUI.debugCurrentChara;
+        var indivUI = rightPane.IndividualPhaseUI;
         switch (e)
         {
             case IndividualPhaseUI.ActionButton.ShowInfo:
-                rightPane.IndividualPhaseUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.None;
+                indivUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.None;
                 rightPane.CountryInfo.Root.style.display = UnityEngine.UIElements.DisplayStyle.Flex;
                 break;
             case IndividualPhaseUI.ActionButton.HireSoldier:
+                if (PersonalActions.HireSoldier.CanDo(chara))
+                {
+                    PersonalActions.HireSoldier.Do(chara);
+                    indivUI.SetData(chara, world);
+                }
                 break;
             case IndividualPhaseUI.ActionButton.TrainSoldiers:
+                if (PersonalActions.TrainSoldiers.CanDo(chara))
+                {
+                    PersonalActions.TrainSoldiers.Do(chara);
+                    indivUI.SetData(chara, world);
+                }
                 break;
             case IndividualPhaseUI.ActionButton.GetJob:
                 break;
@@ -139,8 +151,8 @@ public class Test : MonoBehaviour
 
     private bool holdOnTurnEnd = false;
     private bool setHoldOnHoldEnd = false;
-    private bool hold = false;
-    private IEnumerator HoldIfNeeded()
+    public bool hold = false;
+    public IEnumerator HoldIfNeeded()
     {
         while (hold)
         {
@@ -156,7 +168,7 @@ public class Test : MonoBehaviour
         while (true)
         {
             yield return HoldIfNeeded();
-            phases.Start.Phase();
+            yield return phases.Start.Phase();
             
             yield return HoldIfNeeded();
             yield return phases.Income.Phase();

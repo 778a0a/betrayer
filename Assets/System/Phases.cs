@@ -103,6 +103,8 @@ public class PersonalActionPhase : PhaseBase
             if (chara.IsPlayer)
             {
                 Debug.Log($"[個人フェイズ] プレイヤーのターン");
+                Test.Instance.hold = true;
+                yield return Test.Instance.HoldIfNeeded();
             }
             // NPCの場合
             else

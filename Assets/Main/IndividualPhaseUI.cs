@@ -61,8 +61,10 @@ public partial class IndividualPhaseUI
     }
 
     private SoldierInfoLarge[] soldiers;
+    public Character debugCurrentChara;
     public void SetData(Character chara, WorldData world)
     {
+        debugCurrentChara = chara;
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
         labelTitle.text = "将軍";
