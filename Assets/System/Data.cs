@@ -237,6 +237,42 @@ public class Country
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 
     public override string ToString() => $"Country ID:{Id} ({Areas.Count} areas) {Ruler.Name}";
+
+    /// <summary>
+    /// 配下を追加して給料配分を調整します。
+    /// </summary>
+    public void AddVassal(Character target)
+    {
+        // 最新の給料配分を反映する。
+        Ruler.SalaryRatio = 100 - Vassals.Sum(v => v.SalaryRatio);
+
+        // 配下にする。
+        var existingMembers = Members;
+        Vassals.Add(target);
+        target.Contribution /= 10;
+
+        // 給料配分を設定する。
+        const int MinimumRatio = 10;
+        target.SalaryRatio = MinimumRatio;
+        // 既存の配下の配分を調整する。
+        var remainingRatio = target.SalaryRatio;
+        while (remainingRatio > 0)
+        {
+            foreach (var member in existingMembers)
+            {
+                if (member.SalaryRatio <= MinimumRatio) continue;
+                member.SalaryRatio--;
+                remainingRatio--;
+                if (remainingRatio <= 0) break;
+            }
+        }
+        Ruler.SalaryRatio = 100 - Vassals.Sum(v => v.SalaryRatio);
+    }
+
+    public void RecalculateSalary()
+    {
+        Ruler.SalaryRatio = 100 - Vassals.Sum(v => v.SalaryRatio);
+    }
 }
 
 /// <summary>

@@ -30,9 +30,6 @@ public class StrategyActions
 
             return true;
         }
-            //chara.Gold >= Cost(chara, world) &&
-            //world.IsRuler(chara) &&
-            //world.Characters.Any(world.IsFree) &&
 
         public override void Do(Character chara, WorldData world)
         {
@@ -44,31 +41,9 @@ public class StrategyActions
                 .Where(world.IsFree)
                 .RandomPick();
 
-            var country = world.CountryOf(chara);
-            // 最新の給料配分を反映する。
-            chara.SalaryRatio = 100 - country.Vassals.Sum(v => v.SalaryRatio);
-
             // 配下にする。
-            var existingMembers = country.Members;
-            country.Vassals.Add(target);
-            target.Contribution = 0;
-
-            // 給料配分を設定する。
-            const int MinimumRatio = 10;
-            target.SalaryRatio = MinimumRatio;
-            // 既存の配下の配分を調整する。
-            var remainingRatio = target.SalaryRatio;
-            while (remainingRatio > 0)
-            {
-                foreach (var member in existingMembers)
-                {
-                    if (member.SalaryRatio <= MinimumRatio) continue;
-                    member.SalaryRatio--;
-                    remainingRatio--;
-                    if (remainingRatio <= 0) break;
-                }
-            }
-            chara.SalaryRatio = 100 - country.Vassals.Sum(v => v.SalaryRatio);
+            var country = world.CountryOf(chara);
+            country.AddVassal(target);
         }
     }
 

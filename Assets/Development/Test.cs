@@ -46,6 +46,7 @@ public class Test : MonoBehaviour
         FaceImageManager.Instance.ClearCache();
 
         world = SaveData.LoadWorldData(tilemapHelper);
+        PersonalActions.Initialize(world);
         phases = new PhaseManager(world);
         DrawCountryTile();
 
@@ -88,12 +89,32 @@ public class Test : MonoBehaviour
                 }
                 break;
             case IndividualPhaseUI.ActionButton.GetJob:
+                if (PersonalActions.GetJob.CanDo(chara))
+                {
+                    PersonalActions.GetJob.Do(chara);
+                    indivUI.SetData(chara, world);
+                }
                 break;
             case IndividualPhaseUI.ActionButton.Resign:
+                if (PersonalActions.Resign.CanDo(chara))
+                {
+                    PersonalActions.Resign.Do(chara);
+                    indivUI.SetData(chara, world);
+                }
                 break;
             case IndividualPhaseUI.ActionButton.Rebel:
+                if (PersonalActions.Rebel.CanDo(chara))
+                {
+                    PersonalActions.Rebel.Do(chara);
+                    indivUI.SetData(chara, world);
+                }
                 break;
             case IndividualPhaseUI.ActionButton.BecomeIndependent:
+                if (PersonalActions.BecomeIndependent.CanDo(chara))
+                {
+                    PersonalActions.BecomeIndependent.Do(chara);
+                    indivUI.SetData(chara, world);
+                }
                 break;
             case IndividualPhaseUI.ActionButton.ShowSystemMenu:
                 break;
