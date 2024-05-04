@@ -24,6 +24,17 @@ public class StartPhase : PhaseBase
                 s.Hp = s.MaxHp;
             }
         }
+
+
+        if (Countries.Count == 2)
+        {
+            if (Countries[0].Ally != null)
+            {
+                Countries[0].Ally = null;
+                Countries[1].Ally = null;
+                Debug.Log($"[開始フェイズ] 残り勢力数が2になったため、同盟が解消されました。");
+            }
+        }
         Debug.Log("[開始フェイズ] 終了");
         yield break;
     }
@@ -87,7 +98,7 @@ public class PersonalActionPhase : PhaseBase
 {
     public override IEnumerator Phase()
     {
-        Test.Instance.rightPane.IndividualPhaseUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.Flex;
+        Test.Instance.rightPane.ShowIndividualUI();
 
         Debug.Log("[個人フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -141,6 +152,8 @@ public class StrategyActionPhase : PhaseBase
 {
     public override IEnumerator Phase()
     {
+        Test.Instance.rightPane.ShowStrategyUI();
+
         Debug.Log("[戦略フェイズ] 開始");
         // ランダムな順番で行動させる。
         var charas = Characters.Where(c => !IsFree(c)).OrderBy(c => Random.value).ToArray();
@@ -149,42 +162,40 @@ public class StrategyActionPhase : PhaseBase
             var chara = charas[i];
 
             var country = World.CountryOf(chara);
-            // プレイヤーの場合
-            if (chara.IsPlayer)
-            {
-                Debug.Log($"[戦略フェイズ] プレイヤーのターン");
-                if (IsRuler(chara))
-                {
 
-                }
-                else
-                {
-                }
-            }
-            // NPCの場合
-            else
+            // 君主の場合
+            if (IsRuler(chara))
             {
-                // 君主の場合
-                if (IsRuler(chara))
+                Test.Instance.rightPane.StrategyPhaseUI.SetData(chara, World);
+
+                // プレイヤーの場合
+                if (chara.IsPlayer)
+                {
+                    Debug.Log($"[戦略フェイズ] プレイヤーのターン");
+                    Test.Instance.hold = true;
+                    yield return Test.Instance.HoldIfNeeded();
+                }
+                // NPCの場合
+                else
                 {
                     Debug.Log($"[戦略フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
 
                     // 配下が足りていないなら配下を雇う。
-                    while (StrategyActions.HireVassalRandomly.CanDo(chara, World))
+                    while (StrategyActions.HireVassal.CanDo(chara))
                     {
-                        StrategyActions.HireVassalRandomly.Do(chara, World);
+                        StrategyActions.HireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を雇いました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
                     // 配下が多すぎるなら解雇する。
-                    while (StrategyActions.FireVassalMostWeak.CanDo(chara, World))
+                    while (StrategyActions.FireVassal.CanDo(chara))
                     {
                         var isOver = country.Vassals.Count > country.VassalCountMax;
                         if (!isOver) break;
-                        StrategyActions.FireVassalMostWeak.Do(chara, World);
+                        StrategyActions.FireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を解雇しました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
                     // 侵攻する。
-                    while (StrategyActions.AttackRandomly.CanDo(chara, World))
+                    while (StrategyActions.AttackRandomly.CanDo(chara))
                     {
                         // 防衛可能なメンバーが少ないなら侵攻しない。
                         var freeMembers = country.Members.Where(c => !c.IsAttacked).Count();
@@ -194,10 +205,32 @@ public class StrategyActionPhase : PhaseBase
                         }
 
                         Debug.Log($"[戦略フェイズ] 侵攻します。");
-                        StrategyActions.AttackRandomly.Do(chara, World);
+                        StrategyActions.AttackRandomly.Do(chara);
+                    }
+                    // 同盟する。
+                    if (StrategyActions.Ally.CanDo(chara) && Random.value < 0.05)
+                    {
+                        StrategyActions.Ally.Do(chara);
+                        Debug.Log($"[戦略フェイズ] 同盟しました。相手: {country.Ally}");
+                    }
+
+                    // 給料配分を調整する。
+                    if (StrategyActions.Organize.CanDo(chara))
+                    {
+                        StrategyActions.Organize.Do(chara);
+                        Debug.Log($"[戦略フェイズ] 給料配分を調整しました。");
                     }
                 }
-                // 配下の場合
+            }
+            // 配下の場合
+            else
+            {
+                // プレイヤーの場合
+                if (chara.IsPlayer)
+                {
+
+                }
+                // NPCの場合
                 else
                 {
                     // 忠誠度が一定以下なら、一定確率で反乱を起こす。

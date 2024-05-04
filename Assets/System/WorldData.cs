@@ -20,6 +20,12 @@ public class WorldData
 
     public Country CountryOf(Character chara) => Countries.FirstOrDefault(c => c.Ruler == chara || c.Vassals.Contains(chara));
     public Country CountryOf(Area area) => Countries.FirstOrDefault(c => c.Areas.Contains(area));
+    public Country[] Neighbors(Country country) =>
+        country.Areas.SelectMany(a => Map.GetNeighbors(a))
+        .Select(CountryOf)
+        .Distinct()
+        .Except(new[] { country })
+        .ToArray();
 
     public override string ToString() => $"WorldData {Characters.Length} characters, {Countries.Count} countries";
 }

@@ -30,6 +30,8 @@ public class Test : MonoBehaviour
     [SerializeField] public RightPane rightPane;
 
     public PhaseManager phases;
+    
+    private object prevUI = null;
 
     private void Awake()
     {
@@ -47,21 +49,82 @@ public class Test : MonoBehaviour
 
         world = SaveData.LoadWorldData(tilemapHelper);
         PersonalActions.Initialize(world);
+        StrategyActions.Initialize(world);
         phases = new PhaseManager(world);
         DrawCountryTile();
 
         rightPane.RightPaneButtonClick += RightPane_RightPaneButtonClick;
         rightPane.IndividualPhaseUI.ActionButtonClicked += IndividualPhaseUI_ActionButtonClicked;
+        rightPane.StrategyPhaseUI.ActionButtonClicked += StrategyPhaseUI_ActionButtonClicked;
         rightPane.CountryInfo.CloseButtonClicked += (sender, e) =>
         {
-            rightPane.CountryInfo.Root.style.display = UnityEngine.UIElements.DisplayStyle.None;
-            rightPane.IndividualPhaseUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.Flex;
+            if (prevUI == rightPane.IndividualPhaseUI)
+            { 
+                rightPane.ShowIndividualUI();
+            }
+            else if (prevUI == rightPane.StrategyPhaseUI)
+            {
+                rightPane.ShowStrategyUI();
+            }
         };
 
         hold = true;
         holdOnTurnEnd = true;
         setHoldOnHoldEnd = true;
         StartCoroutine(DoMainLoop());
+    }
+
+    private void StrategyPhaseUI_ActionButtonClicked(object sender, StrategyPhaseUI.ActionButton e)
+    {
+        var chara = rightPane.StrategyPhaseUI.debugCurrentChara;
+        var straUI = rightPane.StrategyPhaseUI;
+        switch (e)
+        {
+            case StrategyPhaseUI.ActionButton.ShowInfo:
+                rightPane.ShowCountryInfo();
+                prevUI = straUI;
+                break;
+            case StrategyPhaseUI.ActionButton.Organize:
+                if (StrategyActions.Organize.CanDo(chara))
+                {
+                    StrategyActions.Organize.Do(chara);
+                    straUI.SetData(chara, world);
+                }
+                break;
+            case StrategyPhaseUI.ActionButton.HireVassal:
+                if (StrategyActions.HireVassal.CanDo(chara))
+                {
+                    StrategyActions.HireVassal.Do(chara);
+                    straUI.SetData(chara, world);
+                }
+                break;
+            case StrategyPhaseUI.ActionButton.FireVassal:
+                if (StrategyActions.FireVassal.CanDo(chara))
+                {
+                    StrategyActions.FireVassal.Do(chara);
+                    straUI.SetData(chara, world);
+                }
+                break;
+            case StrategyPhaseUI.ActionButton.Ally:
+                if (StrategyActions.Ally.CanDo(chara))
+                {
+                    StrategyActions.Ally.Do(chara);
+                    straUI.SetData(chara, world);
+                }
+                break;
+            case StrategyPhaseUI.ActionButton.Resign:
+                if (StrategyActions.Resign.CanDo(chara))
+                {
+                    StrategyActions.Resign.Do(chara);
+                    straUI.SetData(chara, world);
+                }
+                break;
+            case StrategyPhaseUI.ActionButton.ShowSystemMenu:
+                break;
+            case StrategyPhaseUI.ActionButton.EndTurn:
+                hold = false;
+                break;
+        }
     }
 
     private void IndividualPhaseUI_ActionButtonClicked(object sender, IndividualPhaseUI.ActionButton e)
@@ -71,8 +134,8 @@ public class Test : MonoBehaviour
         switch (e)
         {
             case IndividualPhaseUI.ActionButton.ShowInfo:
-                indivUI.Root.style.display = UnityEngine.UIElements.DisplayStyle.None;
-                rightPane.CountryInfo.Root.style.display = UnityEngine.UIElements.DisplayStyle.Flex;
+                rightPane.ShowCountryInfo();
+                prevUI = indivUI;
                 break;
             case IndividualPhaseUI.ActionButton.HireSoldier:
                 if (PersonalActions.HireSoldier.CanDo(chara))

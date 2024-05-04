@@ -117,7 +117,7 @@ public class PersonalActions
             var country = World.CountryOf(chara);
             if (country.Ruler == chara)
             {
-                var newRuler = country.Vassals.RandomPick();
+                var newRuler = country.Vassals[0];
                 country.Ruler = newRuler;
                 country.Vassals.Remove(newRuler);
                 country.RecalculateSalary();

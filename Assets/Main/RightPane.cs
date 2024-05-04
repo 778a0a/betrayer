@@ -20,13 +20,35 @@ public partial class RightPane : MonoBehaviour
     {
         InitializeDocument();
         IndividualPhaseUI.Initialize();
+        StrategyPhaseUI.Initialize();
         CountryInfo.Initialize();
-        
+
         buttonToggleDebugUI.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextPhase);
         buttonNextTurn.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextTurn);
         buttonAuto.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.Auto);
         buttonHold.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.Hold);
+    }
+
+    public void ShowIndividualUI()
+    {
+        StrategyPhaseUI.Root.style.display = DisplayStyle.None;
+        CountryInfo.Root.style.display = DisplayStyle.None;
+        IndividualPhaseUI.Root.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowStrategyUI()
+    {
+        IndividualPhaseUI.Root.style.display = DisplayStyle.None;
+        CountryInfo.Root.style.display = DisplayStyle.None;
+        StrategyPhaseUI.Root.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowCountryInfo()
+    {
+        IndividualPhaseUI.Root.style.display = DisplayStyle.None;
+        StrategyPhaseUI.Root.style.display = DisplayStyle.None;
+        CountryInfo.Root.style.display = DisplayStyle.Flex;
     }
 }
 
