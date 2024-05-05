@@ -27,7 +27,7 @@ public class MartialActions
     public class AttackAction : MartialActionBase
     {
         public override bool CanSelect(Character chara) => World.IsRuler(chara);
-        public override int Cost(Character chara) => 5;
+        public override int Cost(Character chara) => 3;
         protected override bool CanDoCore(Character chara)
         {
             var country = World.CountryOf(chara);

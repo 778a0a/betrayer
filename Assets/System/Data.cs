@@ -86,6 +86,11 @@ public class Character
     public string debugImagePath { get; set; }
     public string debugMemo { get; set; }
 
+    /// <summary>
+    /// 恨み
+    /// </summary>
+    public int Urami { get; set; } = 0;
+
     public override string ToString() => $"{Name} G:{Gold} P:{Power} (A:{Attack} D:{Defense} I:{Intelligence})";
 }
 
@@ -266,12 +271,19 @@ public class Country
                 if (remainingRatio <= 0) break;
             }
         }
-        Ruler.SalaryRatio = 100 - Vassals.Sum(v => v.SalaryRatio);
+        RecalculateSalary();
     }
 
     public void RecalculateSalary()
     {
         Ruler.SalaryRatio = 100 - Vassals.Sum(v => v.SalaryRatio);
+        foreach (var vassal in Vassals)
+        {
+            var index = Vassals.IndexOf(vassal);
+            vassal.Loyalty = Mathf.Clamp(
+                vassal.LoyaltyBase + vassal.SalaryRatio + Vassals.Count - index - vassal.Urami,
+                0, 100);
+        }
     }
 }
 

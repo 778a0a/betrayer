@@ -119,6 +119,16 @@ public class PersonalActionPhase : PhaseBase
             // NPCの場合
             else
             {
+                //if (World.IsVassal(chara) && chara.Loyalty < 90)
+                //{
+                //    // 忠誠度が一定以下なら、一定確率で反抗的行動を行う。
+                //    var percent = (90 - chara.Loyalty) / 100f;
+                //    var hindo = 10;
+                //    if (Random.value <  percent / hindo)
+                //    {
+                //    }
+                //}
+
                 // 兵が雇えるなら雇う。
                 while (PersonalActions.HireSoldier.CanDo(chara))
                 {

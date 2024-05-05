@@ -38,11 +38,11 @@ public class PersonalActions
                 if (soldier.IsEmptySlot) continue;
                 soldier.Experience += 1;
                 // 十分経験値が貯まればレベルアップする。
-                if (soldier.Experience >= soldier.Level * 10)
+                if (soldier.Experience >= soldier.Level * 10 && soldier.Level < 13)
                 {
                     soldier.Level += 1;
                     soldier.Experience = 0;
-                    soldier.Hp = soldier.MaxHp;
+                    //soldier.Hp = soldier.MaxHp;
                 }
             }
         }
