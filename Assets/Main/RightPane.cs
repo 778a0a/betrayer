@@ -21,6 +21,7 @@ public partial class RightPane : MonoBehaviour
         InitializeDocument();
         IndividualPhaseUI.Initialize();
         StrategyPhaseUI.Initialize();
+        MartialPhaseUI.Initialize();
         CountryInfo.Initialize();
 
         buttonToggleDebugUI.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.ToggleDebugUI);
@@ -30,26 +31,38 @@ public partial class RightPane : MonoBehaviour
         buttonHold.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.Hold);
     }
 
+    public void ShowStrategyUI()
+    {
+        IndividualPhaseUI.Root.style.display = DisplayStyle.None;
+        MartialPhaseUI.Root.style.display = DisplayStyle.None;
+        CountryInfo.Root.style.display = DisplayStyle.None;
+        StrategyPhaseUI.Root.style.display = DisplayStyle.Flex;
+    }
+
     public void ShowIndividualUI()
     {
         StrategyPhaseUI.Root.style.display = DisplayStyle.None;
+        MartialPhaseUI.Root.style.display = DisplayStyle.None;
         CountryInfo.Root.style.display = DisplayStyle.None;
         IndividualPhaseUI.Root.style.display = DisplayStyle.Flex;
     }
 
-    public void ShowStrategyUI()
+    public void ShowMartialUI()
     {
+        StrategyPhaseUI.Root.style.display = DisplayStyle.None;
         IndividualPhaseUI.Root.style.display = DisplayStyle.None;
         CountryInfo.Root.style.display = DisplayStyle.None;
-        StrategyPhaseUI.Root.style.display = DisplayStyle.Flex;
+        MartialPhaseUI.Root.style.display = DisplayStyle.Flex;
     }
 
     public void ShowCountryInfo()
     {
         IndividualPhaseUI.Root.style.display = DisplayStyle.None;
         StrategyPhaseUI.Root.style.display = DisplayStyle.None;
+        MartialPhaseUI.Root.style.display = DisplayStyle.None;
         CountryInfo.Root.style.display = DisplayStyle.Flex;
     }
+
 }
 
 public class FaceImageManager

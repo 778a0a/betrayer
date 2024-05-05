@@ -194,21 +194,8 @@ public class StrategyActionPhase : PhaseBase
                         StrategyActions.FireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を解雇しました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
-                    // 侵攻する。
-                    while (StrategyActions.AttackRandomly.CanDo(chara))
-                    {
-                        // 防衛可能なメンバーが少ないなら侵攻しない。
-                        var freeMembers = country.Members.Where(c => !c.IsAttacked).Count();
-                        if (freeMembers <= 1)
-                        {
-                            break;
-                        }
-
-                        Debug.Log($"[戦略フェイズ] 侵攻します。");
-                        StrategyActions.AttackRandomly.Do(chara);
-                    }
                     // 同盟する。
-                    if (StrategyActions.Ally.CanDo(chara) && Random.value < 0.05)
+                    if (StrategyActions.Ally.CanDo(chara) && Random.value < 0.10)
                     {
                         StrategyActions.Ally.Do(chara);
                         Debug.Log($"[戦略フェイズ] 同盟しました。相手: {country.Ally}");
@@ -242,6 +229,74 @@ public class StrategyActionPhase : PhaseBase
     }
 }
 
+/// <summary>
+/// 軍事フェイズ
+/// </summary>
+public class MartialActionPhase : PhaseBase
+{
+    public override IEnumerator Phase()
+    {
+        Test.Instance.rightPane.ShowMartialUI();
+
+        Debug.Log("[軍事フェイズ] 開始");
+        // ランダムな順番で行動させる。
+        var charas = Characters.Where(c => !IsFree(c)).OrderBy(c => Random.value).ToArray();
+        for (int i = 0; i < charas.Length; i++)
+        {
+            var chara = charas[i];
+
+            var country = World.CountryOf(chara);
+
+            // 君主の場合
+            if (IsRuler(chara))
+            {
+                Test.Instance.rightPane.MartialPhaseUI.SetData(chara, World);
+
+                // プレイヤーの場合
+                if (chara.IsPlayer)
+                {
+                    Debug.Log($"[軍事フェイズ] プレイヤーのターン");
+                    Test.Instance.hold = true;
+                    yield return Test.Instance.HoldIfNeeded();
+                }
+                // NPCの場合
+                else
+                {
+                    Debug.Log($"[軍事フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
+
+                    // 侵攻する。
+                    while (MartialActions.Attack.CanDo(chara))
+                    {
+                        // 防衛可能なメンバーが少ないなら侵攻しない。
+                        var freeMembers = country.Members.Where(c => !c.IsAttacked).Count();
+                        if (freeMembers <= 1)
+                        {
+                            break;
+                        }
+
+                        Debug.Log($"[軍事フェイズ] 侵攻します。");
+                        MartialActions.Attack.Do(chara);
+                    }
+                }
+            }
+            // 配下の場合
+            else
+            {
+                // プレイヤーの場合
+                if (chara.IsPlayer)
+                {
+                }
+                // NPCの場合
+                else
+                {
+                }
+            }
+        }
+        Debug.Log("[軍事フェイズ] 終了");
+        yield break;
+    }
+}
+
 public class PhaseBase
 {
     public WorldData World { get; set; }
@@ -259,10 +314,11 @@ public class PhaseManager
 {
     public readonly StartPhase Start = new();
     public readonly IncomePhase Income = new();
-    public readonly PersonalActionPhase PersonalAction = new();
     public readonly StrategyActionPhase StrategyAction = new();
+    public readonly PersonalActionPhase PersonalAction = new();
+    public readonly MartialActionPhase MartialAction = new();
 
-    public PhaseBase[] Phases => new PhaseBase[] { Start, Income, PersonalAction, StrategyAction };
+    public PhaseBase[] Phases => new PhaseBase[] { Start, Income, StrategyAction, PersonalAction, MartialAction };
     public PhaseManager(WorldData world)
     {
         foreach (var phase in Phases)

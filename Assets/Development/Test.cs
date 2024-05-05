@@ -50,12 +50,14 @@ public class Test : MonoBehaviour
         world = SaveData.LoadWorldData(tilemapHelper);
         PersonalActions.Initialize(world);
         StrategyActions.Initialize(world);
+        MartialActions.Initialize(world);
         phases = new PhaseManager(world);
         DrawCountryTile();
 
         rightPane.RightPaneButtonClick += RightPane_RightPaneButtonClick;
-        rightPane.IndividualPhaseUI.ActionButtonClicked += IndividualPhaseUI_ActionButtonClicked;
         rightPane.StrategyPhaseUI.ActionButtonClicked += StrategyPhaseUI_ActionButtonClicked;
+        rightPane.IndividualPhaseUI.ActionButtonClicked += IndividualPhaseUI_ActionButtonClicked;
+        rightPane.MartialPhaseUI.ActionButtonClicked += MartialPhaseUI_ActionButtonClicked;
         rightPane.CountryInfo.CloseButtonClicked += (sender, e) =>
         {
             if (prevUI == rightPane.IndividualPhaseUI)
@@ -66,12 +68,69 @@ public class Test : MonoBehaviour
             {
                 rightPane.ShowStrategyUI();
             }
+            else if (prevUI == rightPane.MartialPhaseUI)
+            {
+                rightPane.ShowMartialUI();
+            }
         };
 
         hold = true;
         holdOnTurnEnd = true;
         setHoldOnHoldEnd = true;
         StartCoroutine(DoMainLoop());
+    }
+
+    private void MartialPhaseUI_ActionButtonClicked(object sender, MartialPhaseUI.ActionButton e)
+    {
+        var chara = rightPane.MartialPhaseUI.debugCurrentChara;
+        var mui = rightPane.MartialPhaseUI;
+        switch (e)
+        {
+            case MartialPhaseUI.ActionButton.ShowInfo:
+                rightPane.ShowCountryInfo();
+                prevUI = mui;
+                break;
+            case MartialPhaseUI.ActionButton.Attack:
+                if (MartialActions.Attack.CanDo(chara))
+                {
+                    MartialActions.Attack.Do(chara);
+                    mui.SetData(chara, world);
+                }
+                break;
+            case MartialPhaseUI.ActionButton.DecisiveBattle:
+                //if (MartialActions.DecisiveBattle.CanDo(chara))
+                //{
+                //    MartialActions.DecisiveBattle.Do(chara);
+                //    mui.SetData(chara, world);
+                //}
+                break;
+            case MartialPhaseUI.ActionButton.Provoke:
+                if (MartialActions.Provoke.CanDo(chara))
+                {
+                    MartialActions.Provoke.Do(chara);
+                    mui.SetData(chara, world);
+                }
+                break;
+            case MartialPhaseUI.ActionButton.Subdue:
+                if (MartialActions.Subdue.CanDo(chara))
+                {
+                    MartialActions.Subdue.Do(chara);
+                    mui.SetData(chara, world);
+                }
+                break;
+            case MartialPhaseUI.ActionButton.PrivateFight:
+                if (MartialActions.PrivateFight.CanDo(chara))
+                {
+                    MartialActions.PrivateFight.Do(chara);
+                    mui.SetData(chara, world);
+                }
+                break;
+            case MartialPhaseUI.ActionButton.ShowSystemMenu:
+                break;
+            case MartialPhaseUI.ActionButton.EndTurn:
+                hold = false;
+                break;
+        }
     }
 
     private void StrategyPhaseUI_ActionButtonClicked(object sender, StrategyPhaseUI.ActionButton e)
@@ -258,11 +317,14 @@ public class Test : MonoBehaviour
             yield return phases.Income.Phase();
 
             yield return HoldIfNeeded();
-            yield return phases.PersonalAction.Phase();
-            
-            yield return HoldIfNeeded();
             yield return phases.StrategyAction.Phase();
-            
+
+            yield return HoldIfNeeded();
+            yield return phases.PersonalAction.Phase();
+
+            yield return HoldIfNeeded();
+            yield return phases.MartialAction.Phase();
+
             DrawCountryTile();
             if (world.Countries.Count == 1)
             {

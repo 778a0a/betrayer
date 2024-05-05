@@ -106,118 +106,6 @@ public class StrategyActions
     }
 
     /// <summary>
-    /// ランダムに隣接国に侵攻します。
-    /// </summary>
-    public static AttackRandomlyAction AttackRandomly { get; } = new();
-    public class AttackRandomlyAction : StrategyActionBase
-    {
-        public override bool CanSelect(Character chara) => World.IsRuler(chara);
-        public override int Cost(Character chara) => 5;
-        protected override bool CanDoCore(Character chara)
-        {
-            var country = World.CountryOf(chara);
-            // 全員行動済みならNG。
-            if (country.Members.All(c => c.IsAttacked)) return false;
-
-            // 侵攻できるエリアがないならNG。
-            var neighborAreas = GetAttackableAreas(World, country);
-            if (neighborAreas.Count == 0) return false;
-
-            return true;
-        }
-
-        public override void Do(Character chara)
-        {
-            Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
-
-            var country = World.CountryOf(chara);
-            var neighborAreas = GetAttackableAreas(World, country);
-            var targetArea = neighborAreas.RandomPick();
-            var targetCountry = World.CountryOf(targetArea);
-
-            var attacker = country.Members.Where(c => !c.IsAttacked).RandomPick();
-            var defender = targetCountry.Members.Where(c => !c.IsAttacked).RandomPickDefault();
-
-            // 攻撃側のエリアを決定する。一番攻撃側が有利なエリアを選ぶ。
-            var sourceArea = GetAttackSourceArea(World.Map, targetArea, country);
-
-            // 侵攻する。
-            var result = BattleManager.Battle(World.Map, sourceArea, targetArea, attacker, defender);
-            attacker.IsAttacked = true;
-            if (result == BattleResult.AttackerWin)
-            {
-                attacker.Contribution += 2;
-                BattleManager.Recover(attacker, true);
-                if (defender != null)
-                {
-                    defender.Contribution += 1;
-                    BattleManager.Recover(defender, false);
-                }
-
-                country.Areas.Add(targetArea);
-                targetCountry.Areas.Remove(targetArea);
-                // 領土がなくなったら国を削除する。
-                if (targetCountry.Areas.Count == 0)
-                {
-                    World.Countries.Remove(targetCountry);
-                    foreach (var c in World.Countries)
-                    {
-                        if (c.Ally == targetCountry) c.Ally = null;
-                    }
-                }
-            }
-            else
-            {
-                attacker.Contribution += 1;
-                BattleManager.Recover(attacker, false);
-                defender.Contribution += 2;
-                BattleManager.Recover(defender, true);
-            }
-        }
-
-        /// <summary>
-        /// もっとも攻撃側が有利なエリアを取得します。
-        /// </summary>
-        /// <returns></returns>
-        private static Area GetAttackSourceArea(MapGrid map, Area target, Country attackCountry)
-        {
-            return map
-                // 攻撃対象の隣接エリアを取得する。
-                .GetNeighbors(target)
-                // 自国のエリアのみに絞り込む。
-                .Where(a => attackCountry.Areas.Contains(a))
-                // もっとも攻撃側が有利なエリアを取得する。
-                .OrderBy(a =>
-                {
-                    var dir = a.GetDirectionTo(target);
-                    var attackerTerrain = map.Helper.GetAttackerTerrain(a.Position, dir);
-                    var adj = BattleManager.TerrainDamageAdjustment(attackerTerrain);
-                    return adj;
-                })
-                .First();
-        }
-
-        private static List<Area> GetAttackableAreas(WorldData World, Country country)
-        {
-            var neighborAreas = new List<Area>();
-            foreach (var area in country.Areas)
-            {
-                var neighbors = World.Map.GetNeighbors(area);
-                foreach (var neighbor in neighbors)
-                {
-                    // 自国か同盟国ならスキップする。
-                    var owner = World.CountryOf(neighbor);
-                    if (owner == country || owner == country.Ally) continue;
-                    neighborAreas.Add(neighbor);
-                }
-            }
-
-            return neighborAreas;
-        }
-    }
-
-    /// <summary>
     /// 配下を解雇します。
     /// </summary>
     public static FireVassalAction FireVassal { get; } = new();
@@ -330,7 +218,6 @@ public class StrategyActions
         FireVassal,
         Ally,
         Resign,
-        AttackRandomly,
     };
 }
 

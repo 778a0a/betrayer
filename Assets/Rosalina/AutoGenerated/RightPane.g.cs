@@ -19,6 +19,8 @@ public partial class RightPane
 
     public StrategyPhaseUI StrategyPhaseUI { get; private set; }
 
+    public MartialPhaseUI MartialPhaseUI { get; private set; }
+
     public CountryInfo CountryInfo { get; private set; }
 
     public Button buttonNextPhase { get; private set; }
@@ -40,6 +42,7 @@ public partial class RightPane
     {
         IndividualPhaseUI = new IndividualPhaseUI(Root?.Q<VisualElement>("IndividualPhaseUI"));
         StrategyPhaseUI = new StrategyPhaseUI(Root?.Q<VisualElement>("StrategyPhaseUI"));
+        MartialPhaseUI = new MartialPhaseUI(Root?.Q<VisualElement>("MartialPhaseUI"));
         CountryInfo = new CountryInfo(Root?.Q<VisualElement>("CountryInfo"));
         buttonNextPhase = Root?.Q<Button>("buttonNextPhase");
         buttonNextTurn = Root?.Q<Button>("buttonNextTurn");

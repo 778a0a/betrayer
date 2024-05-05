@@ -17,6 +17,7 @@ public class WorldData
     public bool IsRuler(Character chara) => Countries.Any(c => c.Ruler == chara);
     public bool IsVassal(Character chara) => Countries.Any(c => c.Vassals.Contains(chara));
     public bool IsFree(Character chara) => !IsRuler(chara) && !IsVassal(chara);
+    public bool IsRulerOrVassal(Character chara) => IsRuler(chara) || IsVassal(chara);
 
     public Country CountryOf(Character chara) => Countries.FirstOrDefault(c => c.Ruler == chara || c.Vassals.Contains(chara));
     public Country CountryOf(Area area) => Countries.FirstOrDefault(c => c.Areas.Contains(area));
@@ -26,6 +27,28 @@ public class WorldData
         .Distinct()
         .Except(new[] { country })
         .ToArray();
+
+    /// <summary>
+    /// ある国の攻撃可能なエリアを取得します。
+    /// </summary>
+    public List<Area> GetAttackableAreas(Country country)
+    {
+        var neighborAreas = new List<Area>();
+        foreach (var area in country.Areas)
+        {
+            var neighbors = Map.GetNeighbors(area);
+            foreach (var neighbor in neighbors)
+            {
+                // 自国か同盟国ならスキップする。
+                var owner = CountryOf(neighbor);
+                if (owner == country || owner == country.Ally) continue;
+                neighborAreas.Add(neighbor);
+            }
+        }
+
+        return neighborAreas;
+    }
+
 
     public override string ToString() => $"WorldData {Characters.Length} characters, {Countries.Count} countries";
 }
