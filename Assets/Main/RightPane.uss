@@ -66,3 +66,11 @@
     width: 55px;
     height: 55px;
 }
+
+Label {
+    color: rgb(221, 221, 221);
+}
+
+.bg {
+    background-color: rgb(0, 17, 34);
+}
