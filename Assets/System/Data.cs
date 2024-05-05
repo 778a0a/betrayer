@@ -107,7 +107,7 @@ public class Soldier
     /// </summary>
     public int Hp { get; set; }
 
-    public int MaxHp => Level * 10;
+    public int MaxHp => Level * 5 + 30;
 
     public bool IsEmptySlot { get; set; }
     public bool IsAlive => !IsEmptySlot && Hp > 0;
