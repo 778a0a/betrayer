@@ -161,7 +161,12 @@ public class StrategyActions
                     .Except(neighbors)
                     .Where(c => c.Ally == null)
                     .ToList();
-                target = cands.RandomPick();
+                target = cands.RandomPickDefault();
+                if (target == null)
+                {
+                    Debug.Log($"{country} は同盟を結ぶ国がありませんでした。");
+                    return;
+                }
             }
             // 隣接国が複数ある場合は、その中からランダムに選ぶ。
             else
