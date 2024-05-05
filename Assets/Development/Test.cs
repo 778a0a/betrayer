@@ -274,33 +274,33 @@ public class Test : MonoBehaviour
 
     public void OnEnterStrategyPhase()
     {
-        //rightPane.ShowStrategyUI();
+        rightPane.ShowStrategyUI();
     }
 
     public void OnTickStrategyPhase(Character chara)
     {
-        //rightPane.StrategyPhaseUI.SetData(chara, world);
+        rightPane.StrategyPhaseUI.SetData(chara, world);
     }
 
     public void OnEnterIndividualPhase()
     {
-        //rightPane.ShowIndividualUI();
+        rightPane.ShowIndividualUI();
     }
 
     public void OnTickIndividualPhase(Character chara)
     {
-        //rightPane.IndividualPhaseUI.SetData(chara, world);
+        rightPane.IndividualPhaseUI.SetData(chara, world);
         //yield return new WaitForSeconds(0.05f);
     }
 
     public void OnEnterMartialPhase()
     {
-        //rightPane.ShowMartialUI();
+        rightPane.ShowMartialUI();
     }
 
     public void OnTickMartialPhase(Character chara)
     {
-        //rightPane.MartialPhaseUI.SetData(chara, world);
+        rightPane.MartialPhaseUI.SetData(chara, world);
     }
 
     private MapPosition prevPosition;

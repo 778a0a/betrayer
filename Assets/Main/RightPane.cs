@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,6 +23,7 @@ public partial class RightPane : MonoBehaviour
         IndividualPhaseUI.Initialize();
         StrategyPhaseUI.Initialize();
         MartialPhaseUI.Initialize();
+        SearchResultUI.Initialize();
         CountryInfo.Initialize();
 
         buttonToggleDebugUI.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.ToggleDebugUI);
@@ -33,36 +35,44 @@ public partial class RightPane : MonoBehaviour
 
     public void ShowStrategyUI()
     {
-        IndividualPhaseUI.Root.style.display = DisplayStyle.None;
-        MartialPhaseUI.Root.style.display = DisplayStyle.None;
-        CountryInfo.Root.style.display = DisplayStyle.None;
+        HideAllUI();
         StrategyPhaseUI.Root.style.display = DisplayStyle.Flex;
+        StrategyPhaseUI.Refresh();
     }
 
     public void ShowIndividualUI()
     {
-        StrategyPhaseUI.Root.style.display = DisplayStyle.None;
-        MartialPhaseUI.Root.style.display = DisplayStyle.None;
-        CountryInfo.Root.style.display = DisplayStyle.None;
+        HideAllUI();
         IndividualPhaseUI.Root.style.display = DisplayStyle.Flex;
     }
 
     public void ShowMartialUI()
     {
-        StrategyPhaseUI.Root.style.display = DisplayStyle.None;
-        IndividualPhaseUI.Root.style.display = DisplayStyle.None;
-        CountryInfo.Root.style.display = DisplayStyle.None;
+        HideAllUI();
         MartialPhaseUI.Root.style.display = DisplayStyle.Flex;
     }
 
     public void ShowCountryInfo()
     {
-        IndividualPhaseUI.Root.style.display = DisplayStyle.None;
-        StrategyPhaseUI.Root.style.display = DisplayStyle.None;
-        MartialPhaseUI.Root.style.display = DisplayStyle.None;
+        HideAllUI();
         CountryInfo.Root.style.display = DisplayStyle.Flex;
     }
 
+    public Awaitable<Character> ShowSearchResult(Character[] charas, WorldData world)
+    {
+        HideAllUI();
+        SearchResultUI.Root.style.display = DisplayStyle.Flex;
+        
+        return SearchResultUI.Show(charas, world);
+    }
+
+    private void HideAllUI()
+    {
+        foreach (var item in UIContainer.Children())
+        {
+            item.style.display = DisplayStyle.None;
+        }
+    }
 }
 
 public class FaceImageManager

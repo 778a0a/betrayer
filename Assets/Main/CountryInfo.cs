@@ -41,7 +41,7 @@ public partial class CountryInfo
         // 勢力情報
         CountryRulerInfo.SetData(country, world);
         // 人物情報テーブル
-        CharacterTable.SetData(country);
+        CharacterTable.SetData(country.Members, world);
         // 人物詳細
         CharacterInfo.SetData(ruler, country);
     }

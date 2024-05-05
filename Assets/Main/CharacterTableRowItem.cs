@@ -26,9 +26,10 @@ public partial class CharacterTableRowItem
         MouseDown?.Invoke(this, Character);
     }
 
-    public void SetData(Character chara, Country country)
+    public void SetData(Character chara, WorldData world)
     {
         Character = chara;
+        var country = world.CountryOf(chara);
         if (chara == null)
         {
             Root.style.visibility = Visibility.Hidden;
@@ -39,10 +40,20 @@ public partial class CharacterTableRowItem
         labelAttack.text = chara.Attack.ToString();
         labelDefense.text = chara.Defense.ToString();
         labelIntelligence.text = chara.Intelligence.ToString();
-        labelStatus.text = chara == country.Ruler ? "主" : "士";
-        labelLoyalty.text = chara.Loyalty.ToString();
+        if (country == null)
+        {
+            labelStatus.text = "無";
+            labelLoyalty.text = "--";
+            labelContribution.text = "--";
+            labelSalaryRatio.text = "--";
+        }
+        else
+        {
+            labelStatus.text = chara == country.Ruler ? "主" : "士";
+            labelLoyalty.text = chara.Loyalty.ToString();
+            labelContribution.text = chara.Contribution.ToString();
+            labelSalaryRatio.text = chara.SalaryRatio.ToString();
+        }
         labelPrestige.text = chara.Prestige.ToString();
-        labelContribution.text = chara.Contribution.ToString();
-        labelSalaryRatio.text = chara.SalaryRatio.ToString();
     }
 }

@@ -81,7 +81,7 @@ public class StrategyActions
             return true;
         }
 
-        public override void Do(Character chara)
+        public override async void Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);
@@ -98,10 +98,27 @@ public class StrategyActions
                 frees.Remove(cand);
             }
 
-            // 配下にする。
-            var country = World.CountryOf(chara);
-            var newVassal = candidates.OrderByDescending(c => c.Power).First();
-            country.AddVassal(newVassal);
+            if (chara.IsPlayer)
+            {
+                // どのキャラを配下にするか選択する。
+                var selected = await Test.Instance.rightPane.ShowSearchResult(candidates.ToArray(), World);
+                if (selected == null)
+                {
+                    Debug.Log("配下にするキャラが選択されませんでした。");
+                    Test.Instance.rightPane.ShowStrategyUI();
+                    return;
+                }
+                var country = World.CountryOf(chara);
+                country.AddVassal(selected);
+                Test.Instance.rightPane.ShowStrategyUI();
+            }
+            else
+            {
+                // 配下にする。
+                var country = World.CountryOf(chara);
+                var newVassal = candidates.OrderByDescending(c => c.Power).First();
+                country.AddVassal(newVassal);
+            }
         }
     }
 

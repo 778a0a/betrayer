@@ -44,3 +44,5 @@ MonoBehaviour:
     _path: Assets/Main/StrategyPhaseUI.uxml
   - _type: 1
     _path: Assets/Main/MartialPhaseUI.uxml
+  - _type: 1
+    _path: Assets/Main/SearchResult.uxml

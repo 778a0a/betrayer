@@ -24,6 +24,7 @@ public partial class CharacterInfo
         _ => throw new System.ArgumentOutOfRangeException(),
     };
 
+    public void SetData(Character chara, WorldData world) => SetData(chara, world.CountryOf(chara));
     public void SetData(Character chara, Country country)
     {
         Character = chara;
@@ -32,11 +33,22 @@ public partial class CharacterInfo
         labelCharaAttack.text = chara.Attack.ToString();
         labelCharaDefense.text = chara.Defense.ToString();
         labelCharaIntelligence.text = chara.Intelligence.ToString();
-        labelCharaStatus.text = chara == country.Ruler ? "主" : "士";
-        labelCharaLoyalty.text = chara.Loyalty.ToString();
+        if (country == null)
+        {
+            labelCharaStatus.text = "無";
+            labelCharaLoyalty.text = "--";
+            labelCharaContribution.text = "--";
+            labelCharaSalaryRatio.text = "--";
+        }
+        else
+        {
+            labelCharaStatus.text = chara == country.Ruler ? "主" : "士";
+            labelCharaLoyalty.text = chara.Loyalty.ToString();
+            labelCharaContribution.text = chara.Contribution.ToString();
+            labelCharaSalaryRatio.text = chara.SalaryRatio.ToString();
+        }
         labelCharaPrestige.text = chara.Prestige.ToString();
-        labelCharaContribution.text = chara.Contribution.ToString();
-        labelCharaSalaryRatio.text = chara.SalaryRatio.ToString();
+
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
 
         for (int i = 0; i < SoldierIconCount; i++)

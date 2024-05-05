@@ -44,23 +44,21 @@ public partial class CharacterTable
         7 => row07,
         8 => row08,
         9 => row09,
-        _ => throw new System.ArgumentOutOfRangeException(),
+        _ => throw new ArgumentOutOfRangeException(),
     };
 
-    public void SetData(Country c)
+    public void SetData(IEnumerable<Character> charas, WorldData world)
     {
-        var members = c.Members.ToArray();
-
+        var en = charas.GetEnumerator();
         for (int i = 0; i < RowCount; i++)
         {
-            var row = RowOf(i);
-            if (i < members.Length)
+            if (en.MoveNext())
             {
-                row.SetData(members[i], c);
+                RowOf(i).SetData(en.Current, world);
             }
             else
             {
-                row.SetData(null, c);
+                RowOf(i).SetData(null, world);
             }
         }
     }

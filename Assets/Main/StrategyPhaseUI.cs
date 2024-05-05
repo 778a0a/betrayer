@@ -58,13 +58,17 @@ public partial class StrategyPhaseUI
     }
 
     private SoldierInfoLarge[] soldiers;
+    private WorldData world;
     public Character debugCurrentChara;
+    public void Refresh() => SetData(debugCurrentChara, world);
     public void SetData(Character chara, WorldData world)
     {
+        this.world = world;
         debugCurrentChara = chara;
+        if (chara == null && world == null) return;
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
-        labelTitle.text = "è´åR";
+        labelTitle.text = "Â∞ÜËªç";
         labelYearsOfService.text = "88";
         labelSalaryRatio.text = chara.SalaryRatio.ToString();
 
