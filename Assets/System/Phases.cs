@@ -98,7 +98,7 @@ public class PersonalActionPhase : PhaseBase
 {
     public override IEnumerator Phase()
     {
-        Test.Instance.rightPane.ShowIndividualUI();
+        Test.Instance.OnEnterIndividualPhase();
 
         Debug.Log("[個人フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -106,8 +106,7 @@ public class PersonalActionPhase : PhaseBase
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
-            Test.Instance.rightPane.IndividualPhaseUI.SetData(chara, World);
-            yield return new WaitForSeconds(0.05f);
+            Test.Instance.OnTickIndividualPhase(chara);
 
             Debug.Log($"[個人フェイズ] {chara.Name} の行動を開始します。G:{chara.Gold} ({i + 1}/{charas.Length})");
             // プレイヤーの場合
@@ -152,7 +151,7 @@ public class StrategyActionPhase : PhaseBase
 {
     public override IEnumerator Phase()
     {
-        Test.Instance.rightPane.ShowStrategyUI();
+        Test.Instance.OnEnterStrategyPhase();
 
         Debug.Log("[戦略フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -160,13 +159,12 @@ public class StrategyActionPhase : PhaseBase
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
-
             var country = World.CountryOf(chara);
 
             // 君主の場合
             if (IsRuler(chara))
             {
-                Test.Instance.rightPane.StrategyPhaseUI.SetData(chara, World);
+                Test.Instance.OnTickStrategyPhase(chara);
 
                 // プレイヤーの場合
                 if (chara.IsPlayer)
@@ -236,7 +234,7 @@ public class MartialActionPhase : PhaseBase
 {
     public override IEnumerator Phase()
     {
-        Test.Instance.rightPane.ShowMartialUI();
+        Test.Instance.OnEnterMartialPhase();
 
         Debug.Log("[軍事フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -250,7 +248,7 @@ public class MartialActionPhase : PhaseBase
             // 君主の場合
             if (IsRuler(chara))
             {
-                Test.Instance.rightPane.MartialPhaseUI.SetData(chara, World);
+                Test.Instance.OnTickMartialPhase(chara);
 
                 // プレイヤーの場合
                 if (chara.IsPlayer)
