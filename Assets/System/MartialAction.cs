@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
-using static Unity.VisualScripting.Member;
 using Random = UnityEngine.Random;
 
 
