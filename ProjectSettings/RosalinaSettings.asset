@@ -15,13 +15,13 @@ MonoBehaviour:
   _isEnabled: 1
   _files:
   - _type: 0
-    _path: Assets/Title/TitleSceneUI.uxml
+    _path: Assets/Title/UI/TitleSceneUI.uxml
   - _type: 0
-    _path: Assets/Windows/SaveDataListWindow.uxml
+    _path: Assets/Title/UI/Windows/SaveDataListWindow.uxml
   - _type: 1
-    _path: Assets/Windows/SaveDataListWindowListItem.uxml
+    _path: Assets/Title/UI/Windows/SaveDataListWindowListItem.uxml
   - _type: 0
-    _path: Assets/Windows/SelectScenarioWindow.uxml
+    _path: Assets/Title/UI/Windows/SelectScenarioWindow.uxml
   - _type: 0
     _path: Assets/Main/UI/MainUI.uxml
   - _type: 1
