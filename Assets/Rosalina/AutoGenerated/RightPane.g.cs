@@ -21,9 +21,9 @@ public partial class RightPane
 
     public MartialPhaseUI MartialPhaseUI { get; private set; }
 
-    public SearchResult SearchResultUI { get; private set; }
-
     public CountryInfo CountryInfo { get; private set; }
+
+    public SelectCharacterUI SelectCharacterUI { get; private set; }
 
     public VisualElement UIContainer { get; private set; }
 
@@ -47,8 +47,8 @@ public partial class RightPane
         IndividualPhaseUI = new IndividualPhaseUI(Root?.Q<VisualElement>("IndividualPhaseUI"));
         StrategyPhaseUI = new StrategyPhaseUI(Root?.Q<VisualElement>("StrategyPhaseUI"));
         MartialPhaseUI = new MartialPhaseUI(Root?.Q<VisualElement>("MartialPhaseUI"));
-        SearchResultUI = new SearchResult(Root?.Q<VisualElement>("SearchResultUI"));
         CountryInfo = new CountryInfo(Root?.Q<VisualElement>("CountryInfo"));
+        SelectCharacterUI = new SelectCharacterUI(Root?.Q<VisualElement>("SelectCharacterUI"));
         UIContainer = Root?.Q<VisualElement>("UIContainer");
         buttonNextPhase = Root?.Q<Button>("buttonNextPhase");
         buttonNextTurn = Root?.Q<Button>("buttonNextTurn");

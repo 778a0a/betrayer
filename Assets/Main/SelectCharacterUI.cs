@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class SearchResult
+public partial class SelectCharacterUI
 {
     private AwaitableCompletionSource<Character> tcs;
 
@@ -36,10 +36,17 @@ public partial class SearchResult
     private Character characterInfoTarget;
     private WorldData world;
 
-    public Awaitable<Character> Show(Character[] charas, WorldData world)
+    public Awaitable<Character> Show(
+        string description,
+        string cancelText,
+        Character[] charas,
+        WorldData world)
     {
         tcs = new AwaitableCompletionSource<Character>();
         this.world = world;
+
+        labelDescription.text = description;
+        buttonClose.text = cancelText;
 
         // 人物情報テーブル
         CharacterTable.SetData(charas, world);

@@ -23,7 +23,7 @@ public partial class RightPane : MonoBehaviour
         IndividualPhaseUI.Initialize();
         StrategyPhaseUI.Initialize();
         MartialPhaseUI.Initialize();
-        SearchResultUI.Initialize();
+        SelectCharacterUI.Initialize();
         CountryInfo.Initialize();
 
         buttonToggleDebugUI.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.ToggleDebugUI);
@@ -61,9 +61,13 @@ public partial class RightPane : MonoBehaviour
     public Awaitable<Character> ShowSearchResult(Character[] charas, WorldData world)
     {
         HideAllUI();
-        SearchResultUI.Root.style.display = DisplayStyle.Flex;
+        SelectCharacterUI.Root.style.display = DisplayStyle.Flex;
         
-        return SearchResultUI.Show(charas, world);
+        return SelectCharacterUI.Show(
+            "採用する人物をクリックしてください。",
+            "採用しない",
+            charas,
+            world);
     }
 
     private void HideAllUI()

@@ -12,7 +12,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class SearchResult
+public partial class SelectCharacterUI
 {
     public CharacterTable CharacterTable { get; private set; }
 
@@ -20,13 +20,16 @@ public partial class SearchResult
 
     public Button buttonClose { get; private set; }
 
+    public Label labelDescription { get; private set; }
+
     public VisualElement Root { get; }
 
-    public SearchResult(VisualElement root)
+    public SelectCharacterUI(VisualElement root)
     {
         Root = root;
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
         CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
         buttonClose = Root?.Q<Button>("buttonClose");
+        labelDescription = Root?.Q<Label>("labelDescription");
     }
 }

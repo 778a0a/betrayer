@@ -45,4 +45,4 @@ MonoBehaviour:
   - _type: 1
     _path: Assets/Main/MartialPhaseUI.uxml
   - _type: 1
-    _path: Assets/Main/SearchResult.uxml
+    _path: Assets/Main/SelectCharacterUI.uxml
