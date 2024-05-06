@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
@@ -39,7 +40,7 @@ public partial class SelectCharacterUI
     public Awaitable<Character> Show(
         string description,
         string cancelText,
-        Character[] charas,
+        IList<Character> charas,
         WorldData world)
     {
         tcs = new AwaitableCompletionSource<Character>();

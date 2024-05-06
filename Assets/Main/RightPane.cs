@@ -70,6 +70,18 @@ public partial class RightPane : MonoBehaviour
             world);
     }
 
+    public Awaitable<Character> ShowFireVassalUI(Country country, WorldData world)
+    {
+        HideAllUI();
+        SelectCharacterUI.Root.style.display = DisplayStyle.Flex;
+
+        return SelectCharacterUI.Show(
+            "追放する人物をクリックしてください。",
+            "キャンセル",
+            country.Vassals,
+            world);
+    }
+
     private void HideAllUI()
     {
         foreach (var item in UIContainer.Children())

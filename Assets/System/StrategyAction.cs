@@ -135,14 +135,36 @@ public class StrategyActions
             return country.Vassals.Count > 0;
         }
 
-        public override void Do(Character chara)
+        public override async void Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);
 
             var country = World.CountryOf(chara);
-            var target = country.Vassals.OrderBy(c => c.Power).First();
-            country.Vassals.Remove(target);
+
+            if (chara.IsPlayer)
+            {
+                // どのキャラを解雇するか選択する。
+                var selected = await Test.Instance.rightPane.ShowFireVassalUI(country, World);
+                if (selected == null)
+                {
+                    Debug.Log("解雇するキャラが選択されませんでした。");
+                    Test.Instance.rightPane.ShowStrategyUI();
+                    return;
+                }
+                country.Vassals.Remove(selected);
+                country.RecalculateSalary();
+                Test.Instance.rightPane.ShowStrategyUI();
+
+            }
+            else
+            {
+                // 一番弱い配下を解雇する。
+                var target = country.Vassals.OrderBy(c => c.Power).First();
+                country.Vassals.Remove(target);
+                country.RecalculateSalary();
+            }
+
         }
     }
 
