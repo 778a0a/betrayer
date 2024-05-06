@@ -14,20 +14,15 @@ public class Test : MonoBehaviour
 {
     public static Test Instance { get; private set; }
 
-    [SerializeField] public Grid grid;
-    [SerializeField] public Tilemap tilemap;
-
-    [SerializeField] public TilesHolder tilesHolder;
-
     [SerializeField] public TilemapData initialTilemapData;
 
     [SerializeField] public WorldData world;
 
     [SerializeField] public float wait = 1;
 
-    [SerializeField] public TilemapHelper tilemapHelper;
-
     [SerializeField] public MainUI MainUI;
+
+    [SerializeField] public TilemapManager tilemap;
 
     public PhaseManager phases;
     
@@ -47,12 +42,16 @@ public class Test : MonoBehaviour
 
         FaceImageManager.Instance.ClearCache();
 
-        world = SaveData.LoadWorldData(tilemapHelper);
+        world = SaveData.LoadWorldData(tilemap.Helper);
         PersonalActions.Initialize(world);
         StrategyActions.Initialize(world);
         MartialActions.Initialize(world);
         phases = new PhaseManager(world);
-        DrawCountryTile();
+        tilemap.DrawCountryTile(world);
+        tilemap.TileClick += (sender, pos) =>
+        {
+            MainUI.CountryInfo.ShowCellInformation(world, pos);
+        };
 
         MainUI.MainUIButtonClick += MainUI_MainUIButtonClick;
         MainUI.StrategyPhase.ActionButtonClicked += StrategyPhaseScreen_ActionButtonClicked;
@@ -74,9 +73,9 @@ public class Test : MonoBehaviour
             }
         };
 
-        hold = true;
+        hold = false;
         holdOnTurnEnd = true;
-        setHoldOnHoldEnd = true;
+        setHoldOnHoldEnd = false;
         StartCoroutine(DoMainLoop());
     }
 
@@ -303,26 +302,6 @@ public class Test : MonoBehaviour
         MainUI.MartialPhase.SetData(chara, world);
     }
 
-    private MapPosition prevPosition;
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var hit = Physics2D.GetRayIntersection(ray);
-            if (hit.collider != null)
-            {
-                var posGrid = grid.WorldToCell(hit.point);
-                var pos = MapPosition.FromGrid(posGrid);
-                if (prevPosition != pos)
-                {
-                    prevPosition = pos;
-                    MainUI.CountryInfo.ShowCellInformation(world, pos);
-                }
-            }
-        }
-    }
-
     private bool holdOnTurnEnd = false;
     private bool setHoldOnHoldEnd = false;
     public bool hold = false;
@@ -356,7 +335,7 @@ public class Test : MonoBehaviour
             yield return HoldIfNeeded();
             yield return phases.MartialAction.Phase();
 
-            DrawCountryTile();
+            tilemap.DrawCountryTile(world);
             if (world.Countries.Count == 1)
             {
                 Debug.Log($"ゲーム終了 勝者: {world.Countries[0]}");
@@ -369,20 +348,6 @@ public class Test : MonoBehaviour
             {
                 hold = true;
                 yield return HoldIfNeeded();
-            }
-        }
-    }
-
-    private void DrawCountryTile()
-    {
-        var index2Tile = tilesHolder.countries;
-        foreach (var country in world.Countries)
-        {
-            var colorIndex = country.ColorIndex;
-            foreach (var area in country.Areas)
-            {
-                var pos = area.Position;
-                tilemap.SetTile(pos.Vector3Int, index2Tile[country.ColorIndex]);
             }
         }
     }

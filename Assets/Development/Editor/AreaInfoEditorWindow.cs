@@ -24,8 +24,8 @@ public class AreaInfoEditorWindow : EditorWindow
 
     void OnEnable()
     {
-        var helper = FindFirstObjectByType<TilemapHelper>();
-        world = SaveData.LoadWorldData(helper);
+        var tilemap = FindFirstObjectByType<TilemapManager>();
+        world = SaveData.LoadWorldData(tilemap.Helper);
         grid = FindFirstObjectByType<Grid>();
 
         SceneView.duringSceneGui += DuringSceneGUI;
