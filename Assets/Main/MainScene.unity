@@ -3850,6 +3850,7 @@ MonoBehaviour:
   - {fileID: 9197481963319205126, guid: 236e8f7c2ef13184bb562a68a8b02a80, type: 3}
   - {fileID: 9197481963319205126, guid: 4705ac56e5f7d1645a1085b3ffc5b81a, type: 3}
   - {fileID: 9197481963319205126, guid: 37e9ee5fdfdf7b6409f0346827028702, type: 3}
+  - {fileID: 9197481963319205126, guid: 8a9871ec905d43741b63398b3325586a, type: 3}
   _document: {fileID: 1796006451}
 --- !u!1 &1877343546
 GameObject:

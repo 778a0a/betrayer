@@ -11,6 +11,9 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class Character
 {
+    public static int SalaryRatioMin = 0;
+    public static int SalaryRatioMax = 100;
+
     /// <summary>
     /// ID
     /// </summary>

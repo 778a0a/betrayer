@@ -46,3 +46,5 @@ MonoBehaviour:
     _path: Assets/Main/UI/Screens/MartialPhaseScreen.uxml
   - _type: 1
     _path: Assets/Main/UI/Screens/SelectCharacterScreen.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Screens/OrganizeScreen.uxml

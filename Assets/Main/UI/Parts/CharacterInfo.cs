@@ -28,6 +28,14 @@ public partial class CharacterInfo
     public void SetData(Character chara, Country country)
     {
         Character = chara;
+
+        if (chara == null)
+        {
+            Root.style.visibility = Visibility.Hidden;
+            return;
+        }
+        Root.style.visibility = Visibility.Visible;
+
         labelCharaName.text = chara.Name;
         labelCharaName.text = chara.Name;
         labelCharaAttack.text = chara.Attack.ToString();

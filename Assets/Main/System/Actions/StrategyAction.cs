@@ -28,23 +28,32 @@ public class StrategyActions
         public override int Cost(Character chara) => 0;
         protected override bool CanDoCore(Character chara) => true;
 
-        public override void Do(Character chara)
+        public override async void Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);
 
             var country = World.CountryOf(chara);
-            // 貢献順に並び替える。
-            country.Vassals = country.Vassals.OrderBy(c => c.Contribution).ToList();
 
-            // 給料配分を調整する。
-            var salaryTable = table[country.Vassals.Count];
-            for (int i = 0; i < country.Vassals.Count; i++)
+            if (chara.IsPlayer)
             {
-                var vassal = country.Vassals[i];
-                vassal.SalaryRatio = salaryTable[i + 1];
+                await Test.Instance.MainUI.ShowOrganizeScreen(country, World);
+                Test.Instance.MainUI.ShowStrategyUI();
             }
-            country.RecalculateSalary();
+            else
+            {
+                // 貢献順に並び替える。
+                country.Vassals = country.Vassals.OrderBy(c => c.Contribution).ToList();
+
+                // 給料配分を調整する。
+                var salaryTable = table[country.Vassals.Count];
+                for (int i = 0; i < country.Vassals.Count; i++)
+                {
+                    var vassal = country.Vassals[i];
+                    vassal.SalaryRatio = salaryTable[i + 1];
+                }
+                country.RecalculateSalary();
+            }
         }
 
         private static readonly int[][] table = new[]

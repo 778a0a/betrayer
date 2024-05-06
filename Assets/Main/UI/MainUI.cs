@@ -19,16 +19,14 @@ public partial class MainUI : MonoBehaviour
 
     [SerializeField] private VisualTreeAsset[] screenVisualTreeAssets;
 
+    public CountryInfoScreen CountryInfo { get; private set; }
     public IndividualPhaseScreen IndividualPhase { get; private set; }
     public StrategyPhaseScreen StrategyPhase { get; private set; }
     public MartialPhaseScreen MartialPhase { get; private set; }
     public SelectCharacterScreen SelectCharacter { get; private set; }
-    public CountryInfoScreen CountryInfo { get; private set; }
-
-    private void OnEnable()
+    public OrganizeScreen Organize { get; private set; }
+    private void InitializeScreens()
     {
-        InitializeDocument();
-
         var screenProps = GetType()
             .GetProperties()
             .Where(p => p.PropertyType.GetInterface(nameof(IScreen)) != null);
@@ -54,6 +52,12 @@ public partial class MainUI : MonoBehaviour
         {
             throw new Exception("VisualTreeAsset not found.");
         }
+    }
+
+    private void OnEnable()
+    {
+        InitializeDocument();
+        InitializeScreens();
 
         buttonToggleDebugUI.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.NextPhase);
@@ -108,6 +112,16 @@ public partial class MainUI : MonoBehaviour
             "追放する人物をクリックしてください。",
             "キャンセル",
             country.Vassals,
+            world);
+    }
+
+    public Awaitable<bool> ShowOrganizeScreen(Country country, WorldData world)
+    {
+        HideAllUI();
+        Organize.Root.style.display = DisplayStyle.Flex;
+
+        return Organize.Show(
+            country,
             world);
     }
 
