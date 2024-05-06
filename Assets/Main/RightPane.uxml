@@ -1,19 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="IndividualPhaseUI" src="project://database/Assets/Main/IndividualPhaseUI.uxml?fileID=9197481963319205126&amp;guid=249a734ac53df1143af2f2a0dc45fd56&amp;type=3#IndividualPhaseUI" />
-    <ui:Template name="StrategyPhaseUI" src="project://database/Assets/Main/StrategyPhaseUI.uxml?fileID=9197481963319205126&amp;guid=236e8f7c2ef13184bb562a68a8b02a80&amp;type=3#StrategyPhaseUI" />
-    <ui:Template name="MartialPhaseUI" src="project://database/Assets/Main/MartialPhaseUI.uxml?fileID=9197481963319205126&amp;guid=4705ac56e5f7d1645a1085b3ffc5b81a&amp;type=3#MartialPhaseUI" />
-    <ui:Template name="CountryInfo" src="project://database/Assets/Main/CountryInfo.uxml?fileID=9197481963319205126&amp;guid=7a734a46fe324364e948881ba8f874b9&amp;type=3#CountryInfo" />
-    <ui:Template name="SelectCharacterUI" src="project://database/Assets/Main/SelectCharacterUI.uxml?fileID=9197481963319205126&amp;guid=37e9ee5fdfdf7b6409f0346827028702&amp;type=3#SelectCharacterUI" />
     <Style src="project://database/Assets/Main/RightPane.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#RightPane" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <ui:VisualElement class="bg" style="flex-grow: 1; align-self: flex-end; width: 840px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
-        <ui:VisualElement name="UIContainer" style="flex-grow: 0; position: relative; flex-shrink: 0;">
-            <ui:Instance template="IndividualPhaseUI" name="IndividualPhaseUI" />
-            <ui:Instance template="StrategyPhaseUI" name="StrategyPhaseUI" />
-            <ui:Instance template="MartialPhaseUI" name="MartialPhaseUI" />
-            <ui:Instance template="CountryInfo" name="CountryInfo" style="display: none; flex-shrink: 0;" />
-            <ui:Instance template="SelectCharacterUI" name="SelectCharacterUI" />
-        </ui:VisualElement>
+        <ui:VisualElement name="UIContainer" style="flex-grow: 0; position: relative; flex-shrink: 0;" />
     </ui:VisualElement>
     <ui:VisualElement name="DebugUIParent" picking-mode="Ignore" style="flex-grow: 1; position: absolute; left: 0; right: 0; bottom: 0; top: 0;">
         <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-right: 0; margin-top: 10px; position: relative; justify-content: flex-start;">

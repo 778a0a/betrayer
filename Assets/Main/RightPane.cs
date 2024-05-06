@@ -17,14 +17,50 @@ public partial class RightPane : MonoBehaviour
         Hold,
     }
 
+    [SerializeField] private VisualTreeAsset[] screenVisualTreeAssets;
+
+    public IndividualPhaseUI IndividualPhaseUI { get; private set; }
+    public StrategyPhaseUI StrategyPhaseUI { get; private set; }
+    public MartialPhaseUI MartialPhaseUI { get; private set; }
+    public SelectCharacterUI SelectCharacterUI { get; private set; }
+    public CountryInfo CountryInfo { get; private set; }
+
+    private IScreen[] _Screens;
+    private IScreen[] Screens => _Screens ??= GetType().GetProperties()
+        .Where(p => p.PropertyType.GetInterface(nameof(IScreen)) != null)
+        .Select(p => (IScreen)p.GetValue(this))
+        .ToArray();
+
     private void OnEnable()
     {
         InitializeDocument();
-        IndividualPhaseUI.Initialize();
-        StrategyPhaseUI.Initialize();
-        MartialPhaseUI.Initialize();
-        SelectCharacterUI.Initialize();
-        CountryInfo.Initialize();
+
+        var screenProps = GetType()
+            .GetProperties()
+            .Where(p => p.PropertyType.GetInterface(nameof(IScreen)) != null);
+        var assetNotFound = false;
+        Debug.Log(screenVisualTreeAssets.Length);
+        foreach (var screenProp in screenProps)
+        {
+            var asset = screenVisualTreeAssets.FirstOrDefault(a => a.name == screenProp.Name);
+            if (asset == null)
+            {
+                Debug.LogError($"VisualTreeAsset not found: {screenProp.Name}");
+                assetNotFound = true;
+                continue;
+            }
+
+            var element = asset.Instantiate();
+            var constructor = screenProp.PropertyType.GetConstructor(new[] { typeof(VisualElement) });
+            var screen = constructor.Invoke(new[] { element }) as IScreen;
+            screen.Initialize();
+            screenProp.SetValue(this, screen);
+            UIContainer.Add(element);
+        }
+        if (assetNotFound)
+        {
+            throw new Exception("VisualTreeAsset not found.");
+        }
 
         buttonToggleDebugUI.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => RightPaneButtonClick?.Invoke(this, RightPaneButton.NextPhase);
@@ -115,4 +151,10 @@ public class FaceImageManager
         return tex;
     }
 
+}
+
+
+public interface IScreen
+{
+    void Initialize();
 }

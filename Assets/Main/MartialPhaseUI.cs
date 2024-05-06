@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class MartialPhaseUI
+public partial class MartialPhaseUI : IScreen
 {
     public event EventHandler<ActionButton> ActionButtonClicked;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public partial class IndividualPhaseUI
+public partial class IndividualPhaseUI : IScreen
 {
     public event EventHandler<ActionButton> ActionButtonClicked;
 

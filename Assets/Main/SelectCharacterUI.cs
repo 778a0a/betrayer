@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class SelectCharacterUI
+public partial class SelectCharacterUI : IScreen
 {
     private AwaitableCompletionSource<Character> tcs;
 

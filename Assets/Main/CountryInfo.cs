@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class CountryInfo
+public partial class CountryInfo : IScreen
 {
     public event EventHandler CloseButtonClicked;
 

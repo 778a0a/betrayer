@@ -283,12 +283,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &363626495
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +341,6 @@ TilemapRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1208,7 +1207,6 @@ TilemapRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1915,7 +1913,6 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2181,7 +2178,6 @@ TilemapRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3117,7 +3113,6 @@ TilemapRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3837,9 +3832,6 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: f6d51f381bd16fc4a92342083809a272, type: 3}
   m_SortingOrder: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
 --- !u!114 &1796006452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3852,6 +3844,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652d196d16220ba4f9f67cb9a2d0ce6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenVisualTreeAssets:
+  - {fileID: 9197481963319205126, guid: 7a734a46fe324364e948881ba8f874b9, type: 3}
+  - {fileID: 9197481963319205126, guid: 249a734ac53df1143af2f2a0dc45fd56, type: 3}
+  - {fileID: 9197481963319205126, guid: 236e8f7c2ef13184bb562a68a8b02a80, type: 3}
+  - {fileID: 9197481963319205126, guid: 4705ac56e5f7d1645a1085b3ffc5b81a, type: 3}
+  - {fileID: 9197481963319205126, guid: 37e9ee5fdfdf7b6409f0346827028702, type: 3}
   _document: {fileID: 1796006451}
 --- !u!1 &1877343546
 GameObject:

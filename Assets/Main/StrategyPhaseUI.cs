@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class StrategyPhaseUI
+public partial class StrategyPhaseUI : IScreen
 {
     public event EventHandler<ActionButton> ActionButtonClicked;
 
