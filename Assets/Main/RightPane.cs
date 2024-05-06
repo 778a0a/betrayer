@@ -39,7 +39,6 @@ public partial class RightPane : MonoBehaviour
             .GetProperties()
             .Where(p => p.PropertyType.GetInterface(nameof(IScreen)) != null);
         var assetNotFound = false;
-        Debug.Log(screenVisualTreeAssets.Length);
         foreach (var screenProp in screenProps)
         {
             var asset = screenVisualTreeAssets.FirstOrDefault(a => a.name == screenProp.Name);
