@@ -1,0 +1,102 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="SoldierInfoLarge" src="project://database/Assets/Main/SoldierInfoLarge.uxml?fileID=9197481963319205126&amp;guid=9d1bddbc38fcec249a34521a838a749f&amp;type=3#SoldierInfoLarge" />
+    <engine:Template name="CountryRulerInfo" src="project://database/Assets/Main/CountryRulerInfo.uxml?fileID=9197481963319205126&amp;guid=8cb724703f2c9d7498eef4979f2a94b3&amp;type=3#CountryRulerInfo" />
+    <Style src="project://database/Assets/Main/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
+    <engine:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <engine:VisualElement name="ActionsPanel">
+            <engine:VisualElement style="flex-grow: 0;">
+                <engine:Label text="戦略フェイズ" style="font-size: 30px;" />
+                <engine:Button text="情報" name="buttonShowInfo" class="Action-Button" />
+                <engine:Button text="任命" name="buttonOrganize" class="Action-Button" />
+                <engine:Button text="探索" name="buttonHireVassal" class="Action-Button" />
+                <engine:Button text="追放" name="buttonFireVassal" class="Action-Button" />
+                <engine:Button text="同盟" name="buttonAlly" class="Action-Button" />
+                <engine:Button text="放浪" name="buttonResign" class="Action-Button" />
+                <engine:Button text="機能" name="buttonShowSystemMenu" class="Action-Button" />
+                <engine:Button text="完了" name="buttonEndTurn" class="Action-Button" />
+            </engine:VisualElement>
+            <engine:VisualElement>
+                <engine:VisualElement name="ActionCostPanel" style="flex-grow: 1; flex-direction: row;">
+                    <engine:Label text="消費金" style="width: 150px;" />
+                    <engine:Label name="labelCost" text="88" style="width: 90px;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="GoldPanel" style="flex-grow: 1; flex-direction: row;">
+                    <engine:Label text="資金" style="width: 150px;" />
+                    <engine:Label name="labelGold" text="888" style="width: 90px;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement style="flex-grow: 1;">
+            <engine:Label text="ここに説明文が表示されます。" name="labelHint" style="font-size: 30px;" />
+            <engine:VisualElement name="CharaPanel" style="flex-grow: 1;">
+                <engine:VisualElement style="flex-grow: 1;">
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;" />
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:VisualElement style="flex-grow: 0;">
+                            <engine:Image name="imageChara" style="flex-grow: 0; width: 250px; height: 250px; flex-shrink: 0; background-color: rgba(0, 229, 255, 0.35); align-self: center;" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 1;">
+                            <engine:Label text="ハイペリオン" name="labelName" />
+                            <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                                <engine:Label text="将軍" name="labelTitle" />
+                            </engine:VisualElement>
+                            <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                                <engine:Label text="勤続" />
+                                <engine:Label text="888" name="labelYearsOfService" />
+                            </engine:VisualElement>
+                            <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                                <engine:Label text="給料配分%" />
+                                <engine:Label text="888" name="labelSalaryRatio" />
+                            </engine:VisualElement>
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row; flex-wrap: wrap;">
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="攻撃" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaAttack" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="防衛" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaDefense" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="智謀" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaIntelligence" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="忠誠" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaLoyalty" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="名声" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaPrestige" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <engine:Label text="功績" class="CharaInfo-Label" />
+                            <engine:Label name="labelCharaContribution" text="10" class="CharaInfo-Value" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="Soldiers" style="flex-direction: row; flex-wrap: wrap;">
+                        <engine:Instance template="SoldierInfoLarge" name="soldier00" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier01" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier02" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier03" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier04" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier05" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier06" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier07" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier08" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier09" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier10" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier11" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier12" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier13" />
+                        <engine:Instance template="SoldierInfoLarge" name="soldier14" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+    <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" />
+</engine:UXML>

@@ -101,16 +101,16 @@ public class StrategyActions
             if (chara.IsPlayer)
             {
                 // どのキャラを配下にするか選択する。
-                var selected = await Test.Instance.rightPane.ShowSearchResult(candidates.ToArray(), World);
+                var selected = await Test.Instance.MainUI.ShowSearchResult(candidates.ToArray(), World);
                 if (selected == null)
                 {
                     Debug.Log("配下にするキャラが選択されませんでした。");
-                    Test.Instance.rightPane.ShowStrategyUI();
+                    Test.Instance.MainUI.ShowStrategyUI();
                     return;
                 }
                 var country = World.CountryOf(chara);
                 country.AddVassal(selected);
-                Test.Instance.rightPane.ShowStrategyUI();
+                Test.Instance.MainUI.ShowStrategyUI();
             }
             else
             {
@@ -145,16 +145,16 @@ public class StrategyActions
             if (chara.IsPlayer)
             {
                 // どのキャラを解雇するか選択する。
-                var selected = await Test.Instance.rightPane.ShowFireVassalUI(country, World);
+                var selected = await Test.Instance.MainUI.ShowFireVassalUI(country, World);
                 if (selected == null)
                 {
                     Debug.Log("解雇するキャラが選択されませんでした。");
-                    Test.Instance.rightPane.ShowStrategyUI();
+                    Test.Instance.MainUI.ShowStrategyUI();
                     return;
                 }
                 country.Vassals.Remove(selected);
                 country.RecalculateSalary();
-                Test.Instance.rightPane.ShowStrategyUI();
+                Test.Instance.MainUI.ShowStrategyUI();
 
             }
             else

@@ -27,7 +27,7 @@ public class Test : MonoBehaviour
 
     [SerializeField] public TilemapHelper tilemapHelper;
 
-    [SerializeField] public RightPane rightPane;
+    [SerializeField] public MainUI MainUI;
 
     public PhaseManager phases;
     
@@ -54,23 +54,23 @@ public class Test : MonoBehaviour
         phases = new PhaseManager(world);
         DrawCountryTile();
 
-        rightPane.RightPaneButtonClick += RightPane_RightPaneButtonClick;
-        rightPane.StrategyPhaseUI.ActionButtonClicked += StrategyPhaseUI_ActionButtonClicked;
-        rightPane.IndividualPhaseUI.ActionButtonClicked += IndividualPhaseUI_ActionButtonClicked;
-        rightPane.MartialPhaseUI.ActionButtonClicked += MartialPhaseUI_ActionButtonClicked;
-        rightPane.CountryInfo.CloseButtonClicked += (sender, e) =>
+        MainUI.MainUIButtonClick += MainUI_MainUIButtonClick;
+        MainUI.StrategyPhase.ActionButtonClicked += StrategyPhaseScreen_ActionButtonClicked;
+        MainUI.IndividualPhase.ActionButtonClicked += IndividualPhaseScreen_ActionButtonClicked;
+        MainUI.MartialPhase.ActionButtonClicked += MartialPhaseScreen_ActionButtonClicked;
+        MainUI.CountryInfo.CloseButtonClicked += (sender, e) =>
         {
-            if (prevUI == rightPane.IndividualPhaseUI)
+            if (prevUI == MainUI.IndividualPhase)
             { 
-                rightPane.ShowIndividualUI();
+                MainUI.ShowIndividualUI();
             }
-            else if (prevUI == rightPane.StrategyPhaseUI)
+            else if (prevUI == MainUI.StrategyPhase)
             {
-                rightPane.ShowStrategyUI();
+                MainUI.ShowStrategyUI();
             }
-            else if (prevUI == rightPane.MartialPhaseUI)
+            else if (prevUI == MainUI.MartialPhase)
             {
-                rightPane.ShowMartialUI();
+                MainUI.ShowMartialUI();
             }
         };
 
@@ -80,193 +80,193 @@ public class Test : MonoBehaviour
         StartCoroutine(DoMainLoop());
     }
 
-    private void MartialPhaseUI_ActionButtonClicked(object sender, MartialPhaseUI.ActionButton e)
+    private void MartialPhaseScreen_ActionButtonClicked(object sender, MartialPhaseScreen.ActionButton e)
     {
-        var chara = rightPane.MartialPhaseUI.debugCurrentChara;
-        var mui = rightPane.MartialPhaseUI;
+        var chara = MainUI.MartialPhase.debugCurrentChara;
+        var mui = MainUI.MartialPhase;
         switch (e)
         {
-            case MartialPhaseUI.ActionButton.ShowInfo:
-                rightPane.ShowCountryInfo();
+            case MartialPhaseScreen.ActionButton.ShowInfo:
+                MainUI.ShowCountryInfoScreen();
                 prevUI = mui;
                 break;
-            case MartialPhaseUI.ActionButton.Attack:
+            case MartialPhaseScreen.ActionButton.Attack:
                 if (MartialActions.Attack.CanDo(chara))
                 {
                     MartialActions.Attack.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;
-            case MartialPhaseUI.ActionButton.DecisiveBattle:
+            case MartialPhaseScreen.ActionButton.DecisiveBattle:
                 //if (MartialActions.DecisiveBattle.CanDo(chara))
                 //{
                 //    MartialActions.DecisiveBattle.Do(chara);
                 //    mui.SetData(chara, world);
                 //}
                 break;
-            case MartialPhaseUI.ActionButton.Provoke:
+            case MartialPhaseScreen.ActionButton.Provoke:
                 if (MartialActions.Provoke.CanDo(chara))
                 {
                     MartialActions.Provoke.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;
-            case MartialPhaseUI.ActionButton.Subdue:
+            case MartialPhaseScreen.ActionButton.Subdue:
                 if (MartialActions.Subdue.CanDo(chara))
                 {
                     MartialActions.Subdue.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;
-            case MartialPhaseUI.ActionButton.PrivateFight:
+            case MartialPhaseScreen.ActionButton.PrivateFight:
                 if (MartialActions.PrivateFight.CanDo(chara))
                 {
                     MartialActions.PrivateFight.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;
-            case MartialPhaseUI.ActionButton.ShowSystemMenu:
+            case MartialPhaseScreen.ActionButton.ShowSystemMenu:
                 break;
-            case MartialPhaseUI.ActionButton.EndTurn:
+            case MartialPhaseScreen.ActionButton.EndTurn:
                 hold = false;
                 break;
         }
     }
 
-    private void StrategyPhaseUI_ActionButtonClicked(object sender, StrategyPhaseUI.ActionButton e)
+    private void StrategyPhaseScreen_ActionButtonClicked(object sender, StrategyPhaseScreen.ActionButton e)
     {
-        var chara = rightPane.StrategyPhaseUI.debugCurrentChara;
-        var straUI = rightPane.StrategyPhaseUI;
+        var chara = MainUI.StrategyPhase.debugCurrentChara;
+        var straUI = MainUI.StrategyPhase;
         switch (e)
         {
-            case StrategyPhaseUI.ActionButton.ShowInfo:
-                rightPane.ShowCountryInfo();
+            case StrategyPhaseScreen.ActionButton.ShowInfo:
+                MainUI.ShowCountryInfoScreen();
                 prevUI = straUI;
                 break;
-            case StrategyPhaseUI.ActionButton.Organize:
+            case StrategyPhaseScreen.ActionButton.Organize:
                 if (StrategyActions.Organize.CanDo(chara))
                 {
                     StrategyActions.Organize.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
-            case StrategyPhaseUI.ActionButton.HireVassal:
+            case StrategyPhaseScreen.ActionButton.HireVassal:
                 if (StrategyActions.HireVassal.CanDo(chara))
                 {
                     StrategyActions.HireVassal.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
-            case StrategyPhaseUI.ActionButton.FireVassal:
+            case StrategyPhaseScreen.ActionButton.FireVassal:
                 if (StrategyActions.FireVassal.CanDo(chara))
                 {
                     StrategyActions.FireVassal.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
-            case StrategyPhaseUI.ActionButton.Ally:
+            case StrategyPhaseScreen.ActionButton.Ally:
                 if (StrategyActions.Ally.CanDo(chara))
                 {
                     StrategyActions.Ally.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
-            case StrategyPhaseUI.ActionButton.Resign:
+            case StrategyPhaseScreen.ActionButton.Resign:
                 if (StrategyActions.Resign.CanDo(chara))
                 {
                     StrategyActions.Resign.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
-            case StrategyPhaseUI.ActionButton.ShowSystemMenu:
+            case StrategyPhaseScreen.ActionButton.ShowSystemMenu:
                 break;
-            case StrategyPhaseUI.ActionButton.EndTurn:
+            case StrategyPhaseScreen.ActionButton.EndTurn:
                 hold = false;
                 break;
         }
     }
 
-    private void IndividualPhaseUI_ActionButtonClicked(object sender, IndividualPhaseUI.ActionButton e)
+    private void IndividualPhaseScreen_ActionButtonClicked(object sender, IndividualPhaseScreen.ActionButton e)
     {
-        var chara = rightPane.IndividualPhaseUI.debugCurrentChara;
-        var indivUI = rightPane.IndividualPhaseUI;
+        var chara = MainUI.IndividualPhase.debugCurrentChara;
+        var indivUI = MainUI.IndividualPhase;
         switch (e)
         {
-            case IndividualPhaseUI.ActionButton.ShowInfo:
-                rightPane.ShowCountryInfo();
+            case IndividualPhaseScreen.ActionButton.ShowInfo:
+                MainUI.ShowCountryInfoScreen();
                 prevUI = indivUI;
                 break;
-            case IndividualPhaseUI.ActionButton.HireSoldier:
+            case IndividualPhaseScreen.ActionButton.HireSoldier:
                 if (PersonalActions.HireSoldier.CanDo(chara))
                 {
                     PersonalActions.HireSoldier.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
-            case IndividualPhaseUI.ActionButton.TrainSoldiers:
+            case IndividualPhaseScreen.ActionButton.TrainSoldiers:
                 if (PersonalActions.TrainSoldiers.CanDo(chara))
                 {
                     PersonalActions.TrainSoldiers.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
-            case IndividualPhaseUI.ActionButton.GetJob:
+            case IndividualPhaseScreen.ActionButton.GetJob:
                 if (PersonalActions.GetJob.CanDo(chara))
                 {
                     PersonalActions.GetJob.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
-            case IndividualPhaseUI.ActionButton.Resign:
+            case IndividualPhaseScreen.ActionButton.Resign:
                 if (PersonalActions.Resign.CanDo(chara))
                 {
                     PersonalActions.Resign.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
-            case IndividualPhaseUI.ActionButton.Rebel:
+            case IndividualPhaseScreen.ActionButton.Rebel:
                 if (PersonalActions.Rebel.CanDo(chara))
                 {
                     PersonalActions.Rebel.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
-            case IndividualPhaseUI.ActionButton.BecomeIndependent:
+            case IndividualPhaseScreen.ActionButton.BecomeIndependent:
                 if (PersonalActions.BecomeIndependent.CanDo(chara))
                 {
                     PersonalActions.BecomeIndependent.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
-            case IndividualPhaseUI.ActionButton.ShowSystemMenu:
+            case IndividualPhaseScreen.ActionButton.ShowSystemMenu:
                 break;
-            case IndividualPhaseUI.ActionButton.EndTurn:
+            case IndividualPhaseScreen.ActionButton.EndTurn:
                 hold = false;
                 break;
         }
     }
 
-    private void RightPane_RightPaneButtonClick(object sender, RightPane.RightPaneButton e)
+    private void MainUI_MainUIButtonClick(object sender, MainUI.MainUIButton e)
     {
         switch (e)
         {
-            case RightPane.RightPaneButton.ToggleDebugUI:
-                rightPane.DebugUI.visible = !rightPane.DebugUI.visible;
+            case MainUI.MainUIButton.ToggleDebugUI:
+                MainUI.DebugUI.visible = !MainUI.DebugUI.visible;
                 break;
-            case RightPane.RightPaneButton.NextPhase:
+            case MainUI.MainUIButton.NextPhase:
                 hold = false;
                 break;
-            case RightPane.RightPaneButton.NextTurn:
+            case MainUI.MainUIButton.NextTurn:
                 hold = false;
                 setHoldOnHoldEnd = false;
                 holdOnTurnEnd = true;
                 break;
-            case RightPane.RightPaneButton.Auto:
+            case MainUI.MainUIButton.Auto:
                 hold = false;
                 setHoldOnHoldEnd = false;
                 holdOnTurnEnd = false;
                 break;
-            case RightPane.RightPaneButton.Hold:
+            case MainUI.MainUIButton.Hold:
                 hold = true;
                 break;
         }
@@ -274,33 +274,33 @@ public class Test : MonoBehaviour
 
     public void OnEnterStrategyPhase()
     {
-        rightPane.ShowStrategyUI();
+        MainUI.ShowStrategyUI();
     }
 
     public void OnTickStrategyPhase(Character chara)
     {
-        rightPane.StrategyPhaseUI.SetData(chara, world);
+        MainUI.StrategyPhase.SetData(chara, world);
     }
 
     public void OnEnterIndividualPhase()
     {
-        rightPane.ShowIndividualUI();
+        MainUI.ShowIndividualUI();
     }
 
     public void OnTickIndividualPhase(Character chara)
     {
-        rightPane.IndividualPhaseUI.SetData(chara, world);
+        MainUI.IndividualPhase.SetData(chara, world);
         //yield return new WaitForSeconds(0.05f);
     }
 
     public void OnEnterMartialPhase()
     {
-        rightPane.ShowMartialUI();
+        MainUI.ShowMartialUI();
     }
 
     public void OnTickMartialPhase(Character chara)
     {
-        rightPane.MartialPhaseUI.SetData(chara, world);
+        MainUI.MartialPhase.SetData(chara, world);
     }
 
     private MapPosition prevPosition;
@@ -317,7 +317,7 @@ public class Test : MonoBehaviour
                 if (prevPosition != pos)
                 {
                     prevPosition = pos;
-                    rightPane.CountryInfo.ShowCellInformation(world, pos);
+                    MainUI.CountryInfo.ShowCellInformation(world, pos);
                 }
             }
         }

@@ -1,0 +1,87 @@
+.CountryInfo-Label {
+    width: 110px;
+    -unity-text-align: middle-left;
+    font-size: 35px;
+}
+
+.CountryInfo-Value {
+    width: 80px;
+    -unity-text-align: middle-left;
+}
+
+.CharaInfo-Label {
+    width: 80px;
+    -unity-text-align: middle-left;
+    font-size: 30px;
+}
+
+.CharaInfo-Value {
+    width: 60px;
+    -unity-text-align: middle-left;
+    font-size: 35px;
+}
+
+.CharaInfo-Soldier-Item {
+    background-color: rgb(124, 255, 138);
+    width: 50px;
+    height: 50px;
+    margin-right: 11px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.Action-Button {
+}
+
+.SoldierInfoLarge-Label {
+    width: 15px;
+    font-size: 20px;
+    -unity-text-align: lower-left;
+    margin-top: 0;
+    margin-right: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.SoldierInfoLarge-Value {
+    width: 30px;
+    font-size: 25px;
+    -unity-text-align: middle-left;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 2px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.SoldierInfoLarge-Image {
+    width: 55px;
+    height: 55px;
+}
+
+Label {
+    color: rgb(221, 221, 221);
+}
+
+.bg {
+    background-color: rgb(0, 17, 34);
+}
+
+.MemberInfo-Cell {
+    font-size: 30px;
+    width: 65px;
+    -unity-text-align: middle-center;
+}
+
+.MemberInfo-Col-Name {
+    width: 200px;
+    -unity-text-align: middle-left;
+}
