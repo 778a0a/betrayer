@@ -9,6 +9,13 @@ public partial class CountryRulerInfo
 {
     public void SetData(Country country, WorldData world)
     {
+        if (country == null)
+        {
+            Root.style.visibility = Visibility.Hidden;
+            return;
+        }
+        Root.style.visibility = Visibility.Visible;
+
         imageRuler.image = FaceImageManager.Instance.GetImage(country.Ruler);
         imageCountryColor.sprite = world.Map.Helper.GetCountryImage(country);
         imageCountryColor.style.backgroundColor = new StyleColor(Color.white);

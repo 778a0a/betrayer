@@ -24,7 +24,9 @@ public partial class MainUI : MonoBehaviour
     public StrategyPhaseScreen StrategyPhase { get; private set; }
     public MartialPhaseScreen MartialPhase { get; private set; }
     public SelectCharacterScreen SelectCharacter { get; private set; }
+    public SelectCountryScreen SelectCountry { get; private set; }
     public OrganizeScreen Organize { get; private set; }
+
     private void InitializeScreens()
     {
         var screenProps = GetType()
@@ -48,7 +50,7 @@ public partial class MainUI : MonoBehaviour
             screenProp.SetValue(this, screen);
             UIContainer.Add(element);
         }
-        if (assetNotFound)
+        if (assetNotFound || screenProps.Any(p => p.GetValue(this) == null))
         {
             throw new Exception("VisualTreeAsset not found.");
         }
@@ -123,6 +125,14 @@ public partial class MainUI : MonoBehaviour
         return Organize.Show(
             country,
             world);
+    }
+
+    public Awaitable<Country> ShowSelectAllyScreen(Country country, WorldData world)
+    {
+        HideAllUI();
+        SelectCountry.Root.style.display = DisplayStyle.Flex;
+        
+        return SelectCountry.Show("同盟を結ぶ国を選択してください。", world);
     }
 
     private void HideAllUI()

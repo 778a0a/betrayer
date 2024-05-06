@@ -49,10 +49,10 @@ public partial class CharacterTable
 
     public void SetData(IEnumerable<Character> charas, WorldData world)
     {
-        var en = charas.GetEnumerator();
+        var en = charas?.GetEnumerator();
         for (int i = 0; i < RowCount; i++)
         {
-            if (en.MoveNext())
+            if (en?.MoveNext() ?? false)
             {
                 RowOf(i).SetData(en.Current, world);
             }

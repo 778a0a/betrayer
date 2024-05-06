@@ -192,12 +192,31 @@ public class StrategyActions
                 World.Countries.Except(new[] { country }).Any(c => c.Ally == null);
         }
 
-        public override void Do(Character chara)
+        public override async void Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
+            chara.Gold -= Cost(chara); // TODO
 
             var country = World.CountryOf(chara);
+
+            if (chara.IsPlayer)
+            {
+                var ally = await Test.Instance.MainUI.ShowSelectAllyScreen(country, World);
+                if (ally == null)
+                {
+                    Debug.Log("同盟を結ぶ国が選択されませんでした。");
+
+                }
+                else
+                {
+                    country.Ally = ally;
+                    ally.Ally = country;
+                    Debug.Log($"{country} と {ally} が同盟を結びました。");
+                }
+                Test.Instance.MainUI.ShowStrategyUI();
+                return;
+            }
+
             var neighbors = World.Neighbors(country);
 
             // 隣接国が1つしかない場合は、その国以外と同盟を結ぶ。
