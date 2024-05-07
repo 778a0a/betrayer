@@ -132,7 +132,41 @@ public partial class MainUI : MonoBehaviour
         HideAllUI();
         SelectCountry.Root.style.display = DisplayStyle.Flex;
         
-        return SelectCountry.Show("同盟を結ぶ国を選択してください。", world);
+        return SelectCountry.Show(
+            "同盟を結ぶ国を選択してください。",
+            world,
+            country =>
+            {
+                if (country.Ally != null)
+                {
+                    return (false, "すでに別の国と同盟を結んでいます。");
+                }
+                else
+                {
+                    return (true, "この国と同盟を結びますか？");
+                }
+            });
+    }
+
+    public Awaitable<Country> ShowGetJobScreen(WorldData world)
+    {
+        HideAllUI();
+        SelectCountry.Root.style.display = DisplayStyle.Flex;
+
+        return SelectCountry.Show(
+            "仕官する国を選択してください。",
+            world,
+            country =>
+            {
+                if (country.Vassals.Count >= country.VassalCountMax)
+                {
+                    return (false, "この国はこれ以上配下を雇えません。");
+                }
+                else
+                {
+                    return (true, "この国に仕官しますか？");
+                }
+            });
     }
 
     private void HideAllUI()

@@ -81,20 +81,28 @@ public class PersonalActions
         protected override bool CanDoCore(Character chara) =>
             World.Countries.Where(c => c.VassalCountMax > c.Vassals.Count).Any();
 
-        public override void Do(Character chara)
+        public override async void Do(Character chara)
         {
             Assert.IsTrue(CanSelect(chara));
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
+            chara.Gold -= Cost(chara); // TODO
 
-            var country = SelectContry();
-            country.AddVassal(chara);
-        }
-
-        private Country SelectContry()
-        {
-            var countries = World.Countries.Where(c => c.VassalCountMax > c.Vassals.Count);
-            return countries.RandomPick();
+            if (chara.IsPlayer)
+            {
+                var country = await Test.Instance.MainUI.ShowGetJobScreen(World);
+                if (country != null)
+                {
+                    country.AddVassal(chara);
+                }
+                Test.Instance.MainUI.ShowIndividualUI();
+                Test.Instance.MainUI.IndividualPhase.SetData(chara, World);
+            }
+            else
+            {
+                var countries = World.Countries.Where(c => c.VassalCountMax > c.Vassals.Count);
+                var country = countries.RandomPick();
+                country.AddVassal(chara);
+            }
         }
     }
 

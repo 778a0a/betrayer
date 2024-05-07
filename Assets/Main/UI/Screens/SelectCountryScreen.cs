@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -39,16 +40,9 @@ public partial class SelectCountryScreen : IScreen
         currentSelectedCountry = country;
         characterInfoTarget = null;
 
-        if (country.Ally != null)
-        {
-            labelDescription.text = $"すでに別の国と同盟を結んでいます。";
-            buttonSelect.SetEnabled(false);
-        }
-        else
-        {
-            labelDescription.text = $"この国と同盟を結びますか？";
-            buttonSelect.SetEnabled(true);
-        }
+        var (canSelect, description) = canSelectCountry(country);
+        labelDescription.text = description;
+        buttonSelect.SetEnabled(canSelect);
 
         // 勢力情報
         CountryRulerInfo.SetData(country, world);
@@ -61,13 +55,16 @@ public partial class SelectCountryScreen : IScreen
     private Character characterInfoTarget;
     private WorldData world;
     private Country currentSelectedCountry;
+    private Func<Country, (bool, string)> canSelectCountry;
 
     public Awaitable<Country> Show(
         string description,
-        WorldData world)
+        WorldData world,
+        Func<Country, (bool, string)> canSelectCountry)
     {
         tcs = new AwaitableCompletionSource<Country>();
         this.world = world;
+        this.canSelectCountry = canSelectCountry;
         characterInfoTarget = null;
         buttonSelect.SetEnabled(false);
 
