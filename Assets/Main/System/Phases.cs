@@ -189,7 +189,7 @@ public class StrategyActionPhase : PhaseBase
                     Debug.Log($"[戦略フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
 
                     // 配下が足りていないなら配下を雇う。
-                    while (StrategyActions.HireVassal.CanDo(chara))
+                    while (StrategyActions.HireVassal.CanDo(chara) && Random.value < 0.5f)
                     {
                         StrategyActions.HireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を雇いました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
