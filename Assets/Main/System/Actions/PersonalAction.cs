@@ -197,7 +197,7 @@ public class PersonalActions
             {
                 oldCountry.Areas.RandomPick(),
             };
-            while (Random.value < 0.4)
+            while (0.4.Chance())
             {
                 var neighbor = World.Map.GetNeighbors(areas.RandomPick())
                     .Where(a => World.CountryOf(a) == oldCountry && !areas.Contains(a))

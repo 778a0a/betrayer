@@ -102,7 +102,7 @@ public class PersonalActionPhase : PhaseBase
 
         Debug.Log("[個人フェイズ] 開始");
         // ランダムな順番で行動させる。
-        var charas = Characters.OrderBy(c => Random.value).ToArray();
+        var charas = Characters.ToArray().ShuffleInPlace();
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
@@ -165,7 +165,7 @@ public class StrategyActionPhase : PhaseBase
 
         Debug.Log("[戦略フェイズ] 開始");
         // ランダムな順番で行動させる。
-        var charas = Characters.Where(c => !IsFree(c)).OrderBy(c => Random.value).ToArray();
+        var charas = Characters.Where(c => !IsFree(c)).ToArray().ShuffleInPlace();
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
@@ -189,7 +189,7 @@ public class StrategyActionPhase : PhaseBase
                     Debug.Log($"[戦略フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
 
                     // 配下が足りていないなら配下を雇う。
-                    while (StrategyActions.HireVassal.CanDo(chara) && Random.value < 0.5f)
+                    while (StrategyActions.HireVassal.CanDo(chara) && 0.5.Chance())
                     {
                         StrategyActions.HireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を雇いました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
@@ -203,7 +203,7 @@ public class StrategyActionPhase : PhaseBase
                         Debug.Log($"[戦略フェイズ] 配下を解雇しました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
                     // 同盟する。
-                    if (StrategyActions.Ally.CanDo(chara) && Random.value < 0.10)
+                    if (StrategyActions.Ally.CanDo(chara) && 0.10.Chance())
                     {
                         StrategyActions.Ally.Do(chara);
                         Debug.Log($"[戦略フェイズ] 同盟しました。相手: {country.Ally}");
@@ -248,7 +248,7 @@ public class MartialActionPhase : PhaseBase
 
         Debug.Log("[軍事フェイズ] 開始");
         // ランダムな順番で行動させる。
-        var charas = Characters.Where(c => !IsFree(c)).OrderBy(c => Random.value).ToArray();
+        var charas = Characters.Where(c => !IsFree(c)).ToArray().ShuffleInPlace();
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
@@ -293,6 +293,10 @@ public class MartialActionPhase : PhaseBase
                 // プレイヤーの場合
                 if (chara.IsPlayer)
                 {
+                    Test.Instance.OnTickMartialPhase(chara);
+                    Debug.Log($"[軍事フェイズ] プレイヤーのターン");
+                    Test.Instance.hold = true;
+                    yield return Test.Instance.HoldIfNeeded();
                 }
                 // NPCの場合
                 else

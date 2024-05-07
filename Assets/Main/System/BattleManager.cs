@@ -57,8 +57,8 @@ public class BattleManager
         var all = attacker.Force.Soldiers.Select(s => (soldier: s, owner: attacker, opponent: defender, terrain: defenderTerrain, atk: attacker.Attack, def: defender.Defense))
             .Concat(defender.Force.Soldiers.Select(s => (soldier: s, owner: defender, opponent: attacker, terrain: attackerTerrain, atk: defender.Defense, def: attacker.Attack)))
             .Where(x => x.soldier.IsAlive)
-            .OrderBy(_ => Random.value)
-            .ToArray();
+            .ToArray()
+            .ShuffleInPlace();
 
         foreach (var (soldier, owner, opponent, terrain, atk, def) in all)
         {

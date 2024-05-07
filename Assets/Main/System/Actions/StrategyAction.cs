@@ -241,7 +241,7 @@ public class StrategyActions
                 target = neighbors.RandomPick();
             }
 
-            if (Random.value < 0.5)
+            if (0.5.Chance())
             {
                 country.Ally = target;
                 target.Ally = country;

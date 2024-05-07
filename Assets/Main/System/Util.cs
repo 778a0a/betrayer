@@ -10,6 +10,9 @@ using Random = UnityEngine.Random;
 
 public static class Util
 {
+    public static bool Chance(this float probability) => Random.value < probability;
+    public static bool Chance(this double probability) => Random.value < (float)probability;
+
     public static TEnum[] EnumArray<TEnum>()
     {
         return (TEnum[])Enum.GetValues(typeof(TEnum));
@@ -19,6 +22,19 @@ public static class Util
     public static T RandomPick<T>(this IEnumerable<T> list) => list.ElementAt(Random.Range(0, list.Count()));
     public static T RandomPickDefault<T>(this IList<T> list) => list.Count == 0 ? default : RandomPick(list);
     public static T RandomPickDefault<T>(this IEnumerable<T> list) => list.Count() == 0 ? default : RandomPick(list);
+    public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) => source.OrderBy(_ => Random.value);
+    public static T[] ShuffleInPlace<T>(this T[] source) => (T[])ShuffleInPlace((IList<T>)source);
+    public static IList<T> ShuffleInPlace<T>(this IList<T> source)
+    {
+        // Fisher-Yatesアルゴリズムでシャッフルを行う。
+        for (var i = source.Count - 1; i > 0; i--)
+        {
+            var j = Random.Range(0, i + 1);
+            (source[j], source[i]) = (source[i], source[j]);
+        }
+        return source;
+    }
+
 
     public static Color Color(string code)
     {
