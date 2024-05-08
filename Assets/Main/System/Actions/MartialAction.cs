@@ -214,15 +214,12 @@ public class MartialActions
             !chara.IsAttacked &&
             World.CountryOf(chara).Vassals.Count > 0;
 
-        public override void Do(Character chara)
+        public override async void Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
+            chara.Gold -= Cost(chara); // TODO
 
             var country = World.CountryOf(chara);
-
-            // 一番忠誠の低い配下を選ぶ。
-            var target = country.Vassals.OrderBy(c => c.Loyalty).First();
 
             // 戦う場所を決める。
             var (attack, defend) = country.Areas
@@ -232,19 +229,51 @@ public class MartialActions
                 .DefaultIfEmpty((country.Areas[0], country.Areas[0]))
                 .RandomPickDefault();
 
-            // 攻撃する。
-            var result = BattleManager.Battle(World.Map, attack, defend, chara, target);
-            chara.IsAttacked = true;
-            if (result == BattleResult.AttackerWin)
+            if (chara.IsPlayer)
             {
-                BattleManager.Recover(chara, true);
-                BattleManager.Recover(target, false);
-                country.Vassals.Remove(target);
+                var target = await Test.Instance.MainUI.ShowSubdueScreen(country, World);
+                if (target == null)
+                {
+                    Test.Instance.MainUI.ShowMartialUI();
+                    return;
+                }
+
+                // 攻撃する。
+                var result = BattleManager.Battle(World.Map, attack, defend, chara, target);
+                chara.IsAttacked = true;
+                if (result == BattleResult.AttackerWin)
+                {
+                    BattleManager.Recover(chara, true);
+                    BattleManager.Recover(target, false);
+                    country.Vassals.Remove(target);
+                }
+                else
+                {
+                    BattleManager.Recover(chara, false);
+                    BattleManager.Recover(target, true);
+                }
+                Test.Instance.MainUI.ShowMartialUI();
+                Test.Instance.MainUI.MartialPhase.SetData(chara, World);
             }
             else
             {
-                BattleManager.Recover(chara, false);
-                BattleManager.Recover(target, true);
+                // 一番忠誠の低い配下を選ぶ。
+                var target = country.Vassals.OrderBy(c => c.Loyalty).First();
+
+                // 攻撃する。
+                var result = BattleManager.Battle(World.Map, attack, defend, chara, target);
+                chara.IsAttacked = true;
+                if (result == BattleResult.AttackerWin)
+                {
+                    BattleManager.Recover(chara, true);
+                    BattleManager.Recover(target, false);
+                    country.Vassals.Remove(target);
+                }
+                else
+                {
+                    BattleManager.Recover(chara, false);
+                    BattleManager.Recover(target, true);
+                }
             }
         }
     }

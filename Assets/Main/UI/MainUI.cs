@@ -117,6 +117,21 @@ public partial class MainUI : MonoBehaviour
             world);
     }
 
+    /// <summary>
+    /// 討伐画面を表示します。
+    /// </summary>
+    public Awaitable<Character> ShowSubdueScreen(Country country, WorldData world)
+    {
+        HideAllUI();
+        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+
+        return SelectCharacter.Show(
+            "討伐する人物をクリックしてください。",
+            "キャンセル",
+            country.Vassals,
+            world);
+    }
+
     public Awaitable<bool> ShowOrganizeScreen(Country country, WorldData world)
     {
         HideAllUI();

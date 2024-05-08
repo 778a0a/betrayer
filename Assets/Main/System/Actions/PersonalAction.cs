@@ -112,7 +112,7 @@ public class PersonalActions
     public static ResignAction Resign { get; } = new();
     public class ResignAction : PersonalActionBase
     {
-        public override bool CanSelect(Character chara) => World.IsVassal(chara) || World.IsRuler(chara);
+        public override bool CanSelect(Character chara) => World.IsVassal(chara); // Rulerは戦略フェイズで可能
         public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara) =>
             World.CountryOf(chara).Vassals.Count > 0;
