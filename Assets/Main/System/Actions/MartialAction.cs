@@ -20,7 +20,7 @@ public class MartialActions
     }
 
     /// <summary>
-    /// ランダムに隣接国に侵攻します。
+    /// 隣接国に侵攻します。
     /// </summary>
     public static AttackAction Attack { get; } = new();
     public class AttackAction : MartialActionBase
@@ -40,17 +40,28 @@ public class MartialActions
             return true;
         }
 
-        public override void Do(Character chara)
+        public override async void Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
+            chara.Gold -= Cost(chara); // TODO
 
             var country = World.CountryOf(chara);
             var neighborAreas = World.GetAttackableAreas(country);
             var targetArea = neighborAreas.RandomPick();
             var targetCountry = World.CountryOf(targetArea);
 
+
             var attacker = country.Members.Where(c => !c.IsAttacked).RandomPick();
+            if (chara.IsPlayer)
+            {
+                attacker = await Test.Instance.MainUI.ShowSelectAttackerScreen(country, World);
+                if (attacker == null)
+                {
+                    Test.Instance.MainUI.ShowMartialUI();
+                    return;
+                }
+            }
+
             var defender = targetCountry.Members.Where(c => !c.IsAttacked).RandomPickDefault();
 
             // 攻撃側のエリアを決定する。一番攻撃側が有利なエリアを選ぶ。
@@ -71,6 +82,7 @@ public class MartialActions
 
                 country.Areas.Add(targetArea);
                 targetCountry.Areas.Remove(targetArea);
+                Test.Instance.tilemap.DrawCountryTile(World);
                 // 領土がなくなったら国を削除する。
                 if (targetCountry.Areas.Count == 0)
                 {
@@ -87,6 +99,13 @@ public class MartialActions
                 BattleManager.Recover(attacker, false);
                 defender.Contribution += 2;
                 BattleManager.Recover(defender, true);
+            }
+
+            if (chara.IsPlayer)
+            {
+                Test.Instance.MainUI.ShowMartialUI();
+                Test.Instance.MainUI.MartialPhase.SetData(chara, World);
+                Test.Instance.tilemap.DrawCountryTile(World);
             }
         }
 

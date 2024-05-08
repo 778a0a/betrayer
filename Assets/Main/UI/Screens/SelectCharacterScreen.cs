@@ -24,6 +24,7 @@ public partial class SelectCharacterScreen : IScreen
         // 選択された場合
         CharacterTable.RowMouseDown += (sender, chara) =>
         {
+            if (!(predCanSelect?.Invoke(chara) ?? true)) return;
             tcs.SetResult(chara);
         };
 
@@ -36,15 +37,18 @@ public partial class SelectCharacterScreen : IScreen
 
     private Character characterInfoTarget;
     private WorldData world;
+    private Predicate<Character> predCanSelect;
 
     public Awaitable<Character> Show(
         string description,
         string cancelText,
         IList<Character> charas,
-        WorldData world)
+        WorldData world, 
+        Predicate<Character> predCanSelect = null)
     {
         tcs = new AwaitableCompletionSource<Character>();
         this.world = world;
+        this.predCanSelect = predCanSelect;
 
         labelDescription.text = description;
         buttonClose.text = cancelText;

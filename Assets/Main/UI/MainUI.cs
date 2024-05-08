@@ -118,6 +118,22 @@ public partial class MainUI : MonoBehaviour
     }
 
     /// <summary>
+    /// 侵攻画面 攻撃側選択UIを表示します。
+    /// </summary>
+    public Awaitable<Character> ShowSelectAttackerScreen(Country country, WorldData world)
+    {
+        HideAllUI();
+        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+
+        return SelectCharacter.Show(
+            "侵攻を行う人物をクリックしてください。",
+            "キャンセル",
+            country.Members.ToList(),
+            world,
+            c => !c.IsAttacked);
+    }
+
+    /// <summary>
     /// 討伐画面を表示します。
     /// </summary>
     public Awaitable<Character> ShowSubdueScreen(Country country, WorldData world)
