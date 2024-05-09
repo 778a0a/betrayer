@@ -79,7 +79,7 @@ public class Test : MonoBehaviour
         StartCoroutine(DoMainLoop());
     }
 
-    private void MartialPhaseScreen_ActionButtonClicked(object sender, MartialPhaseScreen.ActionButton e)
+    private async void MartialPhaseScreen_ActionButtonClicked(object sender, MartialPhaseScreen.ActionButton e)
     {
         var chara = MainUI.MartialPhase.debugCurrentChara;
         var mui = MainUI.MartialPhase;
@@ -92,7 +92,7 @@ public class Test : MonoBehaviour
             case MartialPhaseScreen.ActionButton.Attack:
                 if (MartialActions.Attack.CanDo(chara))
                 {
-                    MartialActions.Attack.Do(chara);
+                    await MartialActions.Attack.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;
@@ -106,21 +106,21 @@ public class Test : MonoBehaviour
             case MartialPhaseScreen.ActionButton.Provoke:
                 if (MartialActions.Provoke.CanDo(chara))
                 {
-                    MartialActions.Provoke.Do(chara);
+                    await MartialActions.Provoke.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;
             case MartialPhaseScreen.ActionButton.Subdue:
                 if (MartialActions.Subdue.CanDo(chara))
                 {
-                    MartialActions.Subdue.Do(chara);
+                    await MartialActions.Subdue.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;
             case MartialPhaseScreen.ActionButton.PrivateFight:
                 if (MartialActions.PrivateFight.CanDo(chara))
                 {
-                    MartialActions.PrivateFight.Do(chara);
+                    await MartialActions.PrivateFight.Do(chara);
                     mui.SetData(chara, world);
                 }
                 break;

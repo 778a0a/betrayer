@@ -283,7 +283,16 @@ public class MartialActionPhase : PhaseBase
                         }
 
                         Debug.Log($"[軍事フェイズ] 侵攻します。");
-                        MartialActions.Attack.Do(chara);
+                        var waiting = true;
+
+                        Test.Instance.StartCoroutine(Attack());
+                        IEnumerator Attack()
+                        {
+                            MartialActions.Attack.Do(chara).GetAwaiter().OnCompleted(() => waiting = false);
+                            yield break;
+                        }
+
+                        yield return new WaitUntil(() => !waiting);
                     }
                 }
             }

@@ -40,18 +40,34 @@ public class MartialActions
             return true;
         }
 
-        public override async void Do(Character chara)
+        public override async Awaitable Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara); // TODO
 
             var country = World.CountryOf(chara);
+
+            // 攻撃先エリアを選択する。
             var neighborAreas = World.GetAttackableAreas(country);
             var targetArea = neighborAreas.RandomPick();
             var targetCountry = World.CountryOf(targetArea);
+            // プレーヤーの場合は攻め込むエリアを選択させる。
+            if (chara.IsPlayer)
+            {
+                targetArea = await Test.Instance.MainUI.ShowSelectAreaScreen(neighborAreas, World);
+                if (targetArea == null)
+                {
+                    Test.Instance.MainUI.ShowMartialUI();
+                    return;
+                }
+                targetCountry = World.CountryOf(targetArea);
+            }
+            // 一番有利なエリアから攻撃する。
+            var sourceArea = GetAttackSourceArea(World.Map, targetArea, country);
 
-
+            // 攻撃側キャラを選択する。
             var attacker = country.Members.Where(c => !c.IsAttacked).RandomPick();
+            // プレーヤーの場合は攻撃者を選択させる。
             if (chara.IsPlayer)
             {
                 attacker = await Test.Instance.MainUI.ShowSelectAttackerScreen(country, World);
@@ -62,10 +78,19 @@ public class MartialActions
                 }
             }
 
+            // 防衛側キャラを選択する。
             var defender = targetCountry.Members.Where(c => !c.IsAttacked).RandomPickDefault();
-
-            // 攻撃側のエリアを決定する。一番攻撃側が有利なエリアを選ぶ。
-            var sourceArea = GetAttackSourceArea(World.Map, targetArea, country);
+            // 防衛側の君主がプレーヤーの場合は防衛者を選択させる。
+            if (targetCountry.Ruler.IsPlayer)
+            {
+                defender = await Test.Instance.MainUI.ShowSelectDefenderScreen(
+                    sourceArea,
+                    country,
+                    attacker,
+                    targetArea,
+                    targetCountry,
+                    World);
+            }
 
             // 侵攻する。
             var result = BattleManager.Battle(World.Map, sourceArea, targetArea, attacker, defender);
@@ -101,7 +126,7 @@ public class MartialActions
                 BattleManager.Recover(defender, true);
             }
 
-            if (chara.IsPlayer)
+            if (chara.IsPlayer || targetCountry.Ruler.IsPlayer)
             {
                 Test.Instance.MainUI.ShowMartialUI();
                 Test.Instance.MainUI.MartialPhase.SetData(chara, World);
@@ -147,7 +172,7 @@ public class MartialActions
             return neighbors.Any();
         }
 
-        public override void Do(Character chara)
+        public override async Awaitable Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);
@@ -233,7 +258,7 @@ public class MartialActions
             !chara.IsAttacked &&
             World.CountryOf(chara).Vassals.Count > 0;
 
-        public override async void Do(Character chara)
+        public override async Awaitable Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara); // TODO
@@ -309,7 +334,7 @@ public class MartialActions
             !chara.IsAttacked &&
             World.CountryOf(chara).Vassals.Count > 1;
 
-        public override void Do(Character chara)
+        public override async Awaitable Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);
@@ -379,5 +404,5 @@ public class MartialActionBase
     /// <summary>
     /// アクションを実行します。
     /// </summary>
-    public virtual void Do(Character chara) { }
+    public virtual async Awaitable Do(Character chara) { }
 }

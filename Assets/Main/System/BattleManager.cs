@@ -21,7 +21,7 @@ public class BattleManager
         var dir = sourceArea.GetDirectionTo(targetArea);
         var attackerTerrain = map.Helper.GetAttackerTerrain(sourceArea.Position, dir);
         var defenderTerrain = targetArea.Terrain;
-        Debug.Log($"[戦闘処理] {attacker.Name}({attacker.Power}) -> {defender.Name}({defender.Power}) at {sourceArea.Position} -> {targetArea.Position}");
+        Debug.Log($"[戦闘処理] {attacker?.Name}({attacker?.Power}) -> {defender?.Name}({defender?.Power}) at {sourceArea?.Position} -> {targetArea?.Position}");
         Debug.Log($"[戦闘処理] 攻撃側地形: {attackerTerrain} 防御側地形: {defenderTerrain}");
         if (defender == null)
         {

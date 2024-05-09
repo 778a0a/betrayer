@@ -25,6 +25,8 @@ public partial class MainUI : MonoBehaviour
     public MartialPhaseScreen MartialPhase { get; private set; }
     public SelectCharacterScreen SelectCharacter { get; private set; }
     public SelectCountryScreen SelectCountry { get; private set; }
+    public SelectAreaScreen SelectArea { get; private set; }
+    
     public OrganizeScreen Organize { get; private set; }
 
     private void InitializeScreens()
@@ -52,7 +54,13 @@ public partial class MainUI : MonoBehaviour
         }
         if (assetNotFound || screenProps.Any(p => p.GetValue(this) == null))
         {
-            throw new Exception("VisualTreeAsset not found.");
+            // ゲームを強制終了する。
+            Debug.LogError("UI Documentが足りないので強制終了します。");
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 
@@ -148,6 +156,26 @@ public partial class MainUI : MonoBehaviour
             world);
     }
 
+    public Awaitable<Character> ShowSelectDefenderScreen(
+        Area attackerArea,
+        Country attackerCountry,
+        Character attacker,
+        Area defenderArea,
+        Country defenderCountry,
+        WorldData world)
+    {
+        HideAllUI();
+        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+        // TODO
+        return SelectCharacter.Show(
+            "防衛する人物をクリックしてください。",
+            "放棄する",
+            defenderCountry.Members.ToList(),
+            world,
+            c => !c.IsAttacked);
+    }
+
+
     public Awaitable<bool> ShowOrganizeScreen(Country country, WorldData world)
     {
         HideAllUI();
@@ -199,6 +227,29 @@ public partial class MainUI : MonoBehaviour
                 }
             });
     }
+
+    public Awaitable<Area> ShowSelectAreaScreen(List<Area> targetAreas, WorldData world)
+    {
+        HideAllUI();
+        SelectArea.Root.style.display = DisplayStyle.Flex;
+
+        return SelectArea.Show(
+            "侵攻する地域を選択してください。",
+            world,
+            a =>
+            {
+                if (targetAreas.Contains(a))
+                {
+                    return (true, "この地域に侵攻しますか？");
+                }
+                else
+                {
+                    return (false, "この地域には侵攻できません。");
+                }
+
+            });
+    }
+
 
     private void HideAllUI()
     {
