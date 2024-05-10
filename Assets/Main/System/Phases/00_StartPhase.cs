@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class StartPhase : PhaseBase
 {
-    public override IEnumerator Phase()
+    public override async Awaitable Phase()
     {
         Debug.Log("[開始フェイズ] 開始");
         for (int i = 0; i < Characters.Length; i++)
@@ -36,6 +36,5 @@ public class StartPhase : PhaseBase
             }
         }
         Debug.Log("[開始フェイズ] 終了");
-        yield break;
     }
 }

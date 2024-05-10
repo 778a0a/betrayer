@@ -35,5 +35,5 @@ public class PhaseBase
     public bool IsVassal(Character chara) => World.IsVassal(chara);
     public bool IsFree(Character chara) => World.IsFree(chara);
 
-    public virtual IEnumerator Phase() { yield break; }
+    public virtual async Awaitable Phase() { }
 }

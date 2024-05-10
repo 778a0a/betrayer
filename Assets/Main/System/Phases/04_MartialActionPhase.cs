@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class MartialActionPhase : PhaseBase
 {
-    public override IEnumerator Phase()
+    public override async Awaitable Phase()
     {
         Test.Instance.OnEnterMartialPhase();
 
@@ -37,7 +37,7 @@ public class MartialActionPhase : PhaseBase
                 {
                     Debug.Log($"[軍事フェイズ] プレイヤーのターン");
                     Test.Instance.hold = true;
-                    yield return Test.Instance.HoldIfNeeded();
+                    await Test.Instance.HoldIfNeeded();
                 }
                 // NPCの場合
                 else
@@ -55,16 +55,7 @@ public class MartialActionPhase : PhaseBase
                         }
 
                         Debug.Log($"[軍事フェイズ] 侵攻します。");
-                        var waiting = true;
-
-                        Test.Instance.StartCoroutine(Attack());
-                        IEnumerator Attack()
-                        {
-                            MartialActions.Attack.Do(chara).GetAwaiter().OnCompleted(() => waiting = false);
-                            yield break;
-                        }
-
-                        yield return new WaitUntil(() => !waiting);
+                        await MartialActions.Attack.Do(chara);
                     }
                 }
             }
@@ -77,7 +68,7 @@ public class MartialActionPhase : PhaseBase
                     Test.Instance.OnTickMartialPhase(chara);
                     Debug.Log($"[軍事フェイズ] プレイヤーのターン");
                     Test.Instance.hold = true;
-                    yield return Test.Instance.HoldIfNeeded();
+                    await Test.Instance.HoldIfNeeded();
                 }
                 // NPCの場合
                 else
@@ -86,6 +77,5 @@ public class MartialActionPhase : PhaseBase
             }
         }
         Debug.Log("[軍事フェイズ] 終了");
-        yield break;
     }
 }

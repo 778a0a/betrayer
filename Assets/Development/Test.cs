@@ -305,49 +305,49 @@ public class Test : MonoBehaviour
     private bool holdOnTurnEnd = false;
     private bool setHoldOnHoldEnd = false;
     public bool hold = false;
-    public IEnumerator HoldIfNeeded()
+    public async Awaitable HoldIfNeeded()
     {
         while (hold)
         {
-            yield return new WaitForSeconds(0.1f);
+            await Awaitable.WaitForSecondsAsync(0.1f);
         }
         hold = setHoldOnHoldEnd;
     }
 
 
     // Update is called once per frame
-    private IEnumerator DoMainLoop()
+    private async Awaitable DoMainLoop()
     {
         while (true)
         {
-            yield return HoldIfNeeded();
-            yield return phases.Start.Phase();
+            await HoldIfNeeded();
+            await phases.Start.Phase();
             
-            yield return HoldIfNeeded();
-            yield return phases.Income.Phase();
+            await HoldIfNeeded();
+            await phases.Income.Phase();
 
-            yield return HoldIfNeeded();
-            yield return phases.StrategyAction.Phase();
+            await HoldIfNeeded();
+            await phases.StrategyAction.Phase();
 
-            yield return HoldIfNeeded();
-            yield return phases.PersonalAction.Phase();
+            await HoldIfNeeded();
+            await phases.PersonalAction.Phase();
 
-            yield return HoldIfNeeded();
-            yield return phases.MartialAction.Phase();
+            await HoldIfNeeded();
+            await phases.MartialAction.Phase();
 
             tilemap.DrawCountryTile(world);
             if (world.Countries.Count == 1)
             {
                 Debug.Log($"ゲーム終了 勝者: {world.Countries[0]}");
-                yield break;
+                return;
             }
             
-            yield return new WaitForSeconds(wait);
+            await Awaitable.WaitForSecondsAsync(wait);
             
             if (holdOnTurnEnd)
             {
                 hold = true;
-                yield return HoldIfNeeded();
+                await HoldIfNeeded();
             }
         }
     }

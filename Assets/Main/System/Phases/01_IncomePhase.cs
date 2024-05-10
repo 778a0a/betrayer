@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class IncomePhase : PhaseBase
 {
-    public override IEnumerator Phase()
+    public override async Awaitable Phase()
     {
         Debug.Log("[収入フェイズ] 開始");
         // 国毎の処理を行う。
@@ -45,7 +45,6 @@ public class IncomePhase : PhaseBase
             Debug.Log($"[収入フェイズ] {chara.Name} {chara.Gold} (+{income})");
         }
         Debug.Log("[収入フェイズ] 終了");
-        yield break;
     }
 
     private int IncomeOf(Area a) => a.Terrain switch

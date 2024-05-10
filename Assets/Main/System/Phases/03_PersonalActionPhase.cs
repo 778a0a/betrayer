@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class PersonalActionPhase : PhaseBase
 {
-    public override IEnumerator Phase()
+    public override async Awaitable Phase()
     {
         Test.Instance.OnEnterIndividualPhase();
 
@@ -31,7 +31,7 @@ public class PersonalActionPhase : PhaseBase
             {
                 Debug.Log($"[個人フェイズ] プレイヤーのターン");
                 Test.Instance.hold = true;
-                yield return Test.Instance.HoldIfNeeded();
+                await Test.Instance.HoldIfNeeded();
             }
             // NPCの場合
             else
@@ -67,6 +67,5 @@ public class PersonalActionPhase : PhaseBase
             }
         }
         Debug.Log("[個人フェイズ] 終了");
-        yield break;
     }
 }

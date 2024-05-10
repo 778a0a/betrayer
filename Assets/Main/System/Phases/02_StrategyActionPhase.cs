@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class StrategyActionPhase : PhaseBase
 {
-    public override IEnumerator Phase()
+    public override async Awaitable Phase()
     {
         Test.Instance.OnEnterStrategyPhase();
 
@@ -36,7 +36,7 @@ public class StrategyActionPhase : PhaseBase
                 {
                     Debug.Log($"[戦略フェイズ] プレイヤーのターン");
                     Test.Instance.hold = true;
-                    yield return Test.Instance.HoldIfNeeded();
+                    await Test.Instance.HoldIfNeeded();
                 }
                 // NPCの場合
                 else
@@ -88,6 +88,5 @@ public class StrategyActionPhase : PhaseBase
             }
         }
         Debug.Log("[戦略フェイズ] 終了");
-        yield break;
     }
 }
