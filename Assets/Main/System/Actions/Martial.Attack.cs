@@ -17,7 +17,7 @@ partial class MartialActions
     public static AttackAction Attack { get; } = new();
     public class AttackAction : MartialActionBase
     {
-        public override bool CanSelect(Character chara) => World.IsRuler(chara);
+        public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);
         public override int Cost(Character chara) => 3;
         protected override bool CanDoCore(Character chara)
         {
