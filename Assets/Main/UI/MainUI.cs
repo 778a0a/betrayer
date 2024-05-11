@@ -186,6 +186,29 @@ public partial class MainUI : MonoBehaviour
             world);
     }
 
+    public Awaitable<Character> ShowSelectProvokingTargetScreen(
+        Country[] candidateCountries,
+        WorldData world)
+    {
+        HideAllUI();
+        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+
+        return SelectCharacter.ShowForProvoke(
+            "挑発する国を選択してください。",
+            world,
+            area =>
+            {
+                if (candidateCountries.Any(c => c.Areas.Contains(area)))
+                {
+                    return (true, "挑発する人物を選択してください。");
+                }
+                else
+                {
+                    return (false, "この国には挑発できません。");
+                }
+            });
+    }
+
     public Awaitable<Country> ShowSelectAllyScreen(Country country, WorldData world)
     {
         HideAllUI();

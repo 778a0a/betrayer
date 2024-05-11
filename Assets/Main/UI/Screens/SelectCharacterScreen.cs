@@ -63,4 +63,52 @@ public partial class SelectCharacterScreen : IScreen
     }
 
 
+    public Awaitable<Character> ShowForProvoke(
+        string description,
+        WorldData world,
+        Func<Area, (bool, string)> canSelectArea)
+    {
+        tcs = new AwaitableCompletionSource<Character>();
+        this.world = world;
+        this.predCanSelect = null;
+        characterInfoTarget = null;
+
+        labelDescription.text = description;
+
+        void OnTileClick(object sender, MapPosition pos)
+        {
+            var area = world.Map.GetArea(pos);
+            var country = world.CountryOf(area);
+            characterInfoTarget = null;
+
+            var (canSelect, description) = canSelectArea(area);
+            labelDescription.text = description;
+
+            if (canSelect)
+            {
+                CharacterTable.SetData(country.Members, world);
+                CharacterInfo.SetData(null, world);
+            }
+            else
+            {
+                CharacterTable.SetData(null, world);
+                CharacterInfo.SetData(null, world);
+            }
+
+        }
+
+        Test.Instance.tilemap.TileClick += OnTileClick;
+        tcs.Awaitable.GetAwaiter().OnCompleted(() =>
+        {
+            Test.Instance.tilemap.TileClick -= OnTileClick;
+        });
+
+        // 人物情報テーブル
+        CharacterTable.SetData(null, world);
+        // 人物詳細
+        CharacterInfo.SetData(null, world);
+
+        return tcs.Awaitable;
+    }
+
 }

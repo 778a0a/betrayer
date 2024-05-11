@@ -33,14 +33,33 @@ partial class MartialActions
 
             var country = World.CountryOf(chara);
             var neighborAreas = World.GetAttackableAreas(country);
-            var sourceArea = neighborAreas.RandomPick();
-            var sourceCountry = World.CountryOf(sourceArea);
 
-            var attacker = sourceCountry.Members.RandomPickDefault();
-            var defender = chara;
+            var attacker = default(Character);
+            if (chara.IsPlayer)
+            {
+                var neighborCountries = World.Neighbors(country).Where(c => c.Ally != country).ToArray();
+                attacker = await Test.Instance.MainUI.ShowSelectProvokingTargetScreen(
+                    neighborCountries,
+                    World);
+                if (attacker == null)
+                {
+                    Test.Instance.MainUI.ShowMartialUI();
+                    return;
+                }
+            }
+            else
+            {
+                var randArea = neighborAreas.RandomPick();
+                var randCountry = World.CountryOf(randArea);
+                attacker = randCountry.Members.RandomPickDefault();
+            }
+
+            var sourceCountry = World.CountryOf(attacker);
+            var sourceArea = neighborAreas.Where(sourceCountry.Areas.Contains).RandomPick();
 
             // 防衛側のエリアを決定する。一番防衛側が有利なエリアを選ぶ。
             var targetArea = GetDefenceArea(World.Map, sourceArea, country);
+            var defender = chara;
 
             // 侵攻する。
             var result = BattleManager.Battle(World.Map, sourceArea, targetArea, attacker, defender);
@@ -66,6 +85,7 @@ partial class MartialActions
                         if (c.Ally == country) c.Ally = null;
                     }
                 }
+                Test.Instance.tilemap.DrawCountryTile(World);
             }
             else
             {
@@ -73,6 +93,11 @@ partial class MartialActions
                 BattleManager.Recover(attacker, false);
                 defender.Contribution += 2;
                 BattleManager.Recover(defender, true);
+            }
+
+            if (chara.IsPlayer)
+            {
+                Test.Instance.MainUI.ShowMartialUI();
             }
         }
 
