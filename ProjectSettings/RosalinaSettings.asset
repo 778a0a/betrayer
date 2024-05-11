@@ -52,3 +52,5 @@ MonoBehaviour:
     _path: Assets/Main/UI/Screens/SelectCountryScreen.uxml
   - _type: 1
     _path: Assets/Main/UI/Screens/SelectAreaScreen.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Screens/RespondCountryActionScreen.uxml

@@ -26,7 +26,7 @@ public partial class MainUI : MonoBehaviour
     public SelectCharacterScreen SelectCharacter { get; private set; }
     public SelectCountryScreen SelectCountry { get; private set; }
     public SelectAreaScreen SelectArea { get; private set; }
-    
+    public RespondCountryActionScreen RespondCountryAction { get; private set; }
     public OrganizeScreen Organize { get; private set; }
 
     private void InitializeScreens()
@@ -250,8 +250,37 @@ public partial class MainUI : MonoBehaviour
             });
     }
 
+    public Awaitable<bool> ShowRespondAllyRequestScreen(
+        Country reqester,
+        WorldData world)
+    {
+        HideAllUI();
+        RespondCountryAction.Root.style.display = DisplayStyle.Flex;
 
-    private void HideAllUI()
+        return RespondCountryAction.Show(
+            "以下の勢力から同盟の申し込みがありました。",
+            "受諾",
+            "拒否",
+            reqester,
+            world);
+    }
+
+    public Awaitable<bool> ShowRespondJobOfferScreen(
+        Country reqester,
+        WorldData world)
+    {
+        HideAllUI();
+        RespondCountryAction.Root.style.display = DisplayStyle.Flex;
+
+        return RespondCountryAction.Show(
+            "以下の勢力から仕官の誘いがありました。",
+            "受諾",
+            "拒否",
+            reqester,
+            world);
+    }
+
+    public void HideAllUI()
     {
         foreach (var item in UIContainer.Children())
         {

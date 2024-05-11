@@ -64,6 +64,18 @@ partial class StrategyActions
                 // 配下にする。
                 var country = World.CountryOf(chara);
                 var newVassal = candidates.OrderByDescending(c => c.Power).First();
+
+                // プレイヤーの場合は選択肢を表示する。
+                if (newVassal.IsPlayer)
+                {
+                    var ok = await Test.Instance.MainUI.ShowRespondJobOfferScreen(country, World);
+                    //Test.Instance.MainUI.HideAllUI();
+                    if (!ok)
+                    {
+                        return;
+                    }
+                }
+
                 country.AddVassal(newVassal);
             }
         }

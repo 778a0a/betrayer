@@ -1,0 +1,17 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="CountryRulerInfo" src="project://database/Assets/Main/UI/Parts/CountryRulerInfo.uxml?fileID=9197481963319205126&amp;guid=8cb724703f2c9d7498eef4979f2a94b3&amp;type=3#CountryRulerInfo" />
+    <engine:Template name="CharacterTable" src="project://database/Assets/Main/UI/Parts/CharacterTable.uxml?fileID=9197481963319205126&amp;guid=f9d3bd81086d4614ebef680da3ffdaf1&amp;type=3#CharacterTable" />
+    <engine:Template name="CharacterInfo" src="project://database/Assets/Main/UI/Parts/CharacterInfo.uxml?fileID=9197481963319205126&amp;guid=040ff9351467d2543b73d34712de87fb&amp;type=3#CharacterInfo" />
+    <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
+    <Style src="project://database/Assets/_Misc/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
+    <engine:Label text="以下の勢力が同盟を申し込んできました。" name="labelDescription" />
+    <engine:VisualElement>
+        <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" />
+        <engine:Instance template="CharacterTable" name="CharacterTable" />
+        <engine:Instance template="CharacterInfo" name="CharacterInfo" />
+    </engine:VisualElement>
+    <engine:VisualElement style="flex-direction: row;">
+        <engine:Button name="buttonYes" text="はい" style="width: 200px;" />
+        <engine:Button name="buttonNo" text="いいえ" style="width: 200px;" />
+    </engine:VisualElement>
+</engine:UXML>
