@@ -12,7 +12,7 @@ public partial class SelectAreaScreen : IScreen
     {
         CharacterTable.Initialize();
 
-        // ƒ}ƒEƒXƒI[ƒo[
+        // ãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼æ™‚
         CharacterTable.RowMouseMove += (sender, chara) =>
         {
             if (chara == characterInfoTarget) return;
@@ -26,7 +26,7 @@ public partial class SelectAreaScreen : IScreen
             tcs.SetResult(currentSelectedArea);
         };
 
-        // ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚½ê‡
+        // ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚ŒãŸå ´åˆ
         buttonClose.clicked += () =>
         {
             tcs.SetResult(null);
@@ -44,11 +44,11 @@ public partial class SelectAreaScreen : IScreen
         labelDescription.text = description;
         buttonSelect.SetEnabled(canSelect);
 
-        // ¨—Íî•ñ
+        // å‹¢åŠ›æƒ…å ±
         CountryRulerInfo.SetData(country, world);
-        // l•¨î•ñƒe[ƒuƒ‹
+        // äººç‰©æƒ…å ±ãƒ†ãƒ¼ãƒ–ãƒ«
         CharacterTable.SetData(country.Members, world);
-        // l•¨Ú×
+        // äººç‰©è©³ç´°
         CharacterInfo.SetData(null, world);
     }
 
@@ -76,11 +76,11 @@ public partial class SelectAreaScreen : IScreen
             Test.Instance.tilemap.TileClick -= OnTileClick;
         });
 
-        // ¨—Íî•ñ
+        // å‹¢åŠ›æƒ…å ±
         CountryRulerInfo.SetData(null, world);
-        // l•¨î•ñƒe[ƒuƒ‹
+        // äººç‰©æƒ…å ±ãƒ†ãƒ¼ãƒ–ãƒ«
         CharacterTable.SetData(null, world);
-        // l•¨Ú×
+        // äººç‰©è©³ç´°
         CharacterInfo.SetData(null, world);
 
         return tcs.Awaitable;
