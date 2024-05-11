@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TextCore.Text;
 using Random = UnityEngine.Random;
@@ -21,7 +22,7 @@ partial class PersonalActions
             return (int)averageLevel;
         }
 
-        public override void Do(Character chara)
+        public override async Awaitable Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);

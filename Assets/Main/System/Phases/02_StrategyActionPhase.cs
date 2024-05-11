@@ -45,7 +45,7 @@ public class StrategyActionPhase : PhaseBase
                     // 配下が足りていないなら配下を雇う。
                     while (StrategyActions.HireVassal.CanDo(chara) && 0.5.Chance())
                     {
-                        StrategyActions.HireVassal.Do(chara);
+                        await StrategyActions.HireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を雇いました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
                     // 配下が多すぎるなら解雇する。
@@ -53,20 +53,20 @@ public class StrategyActionPhase : PhaseBase
                     {
                         var isOver = country.Vassals.Count > country.VassalCountMax;
                         if (!isOver) break;
-                        StrategyActions.FireVassal.Do(chara);
+                        await StrategyActions.FireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を解雇しました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
                     // 同盟する。
                     if (StrategyActions.Ally.CanDo(chara) && 0.10.Chance())
                     {
-                        StrategyActions.Ally.Do(chara);
+                        await StrategyActions.Ally.Do(chara);
                         Debug.Log($"[戦略フェイズ] 同盟しました。相手: {country.Ally}");
                     }
 
                     // 給料配分を調整する。
                     if (StrategyActions.Organize.CanDo(chara))
                     {
-                        StrategyActions.Organize.Do(chara);
+                        await StrategyActions.Organize.Do(chara);
                         Debug.Log($"[戦略フェイズ] 給料配分を調整しました。");
                     }
                 }

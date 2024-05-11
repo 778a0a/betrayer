@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TextCore.Text;
 using Random = UnityEngine.Random;
@@ -20,7 +21,7 @@ partial class PersonalActions
         protected override bool CanDoCore(Character chara) =>
             World.Countries.Where(c => c.VassalCountMax > c.Vassals.Count).Any();
 
-        public override async void Do(Character chara)
+        public override async Awaitable Do(Character chara)
         {
             Assert.IsTrue(CanSelect(chara));
             Assert.IsTrue(CanDo(chara));

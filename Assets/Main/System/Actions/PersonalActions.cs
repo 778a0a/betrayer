@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TextCore.Text;
 using Random = UnityEngine.Random;
@@ -48,5 +49,5 @@ public class PersonalActionBase
     /// <summary>
     /// アクションを実行します。
     /// </summary>
-    public virtual void Do(Character chara) { }
+    public virtual async Awaitable Do(Character chara) { }
 }

@@ -28,7 +28,7 @@ partial class StrategyActions
             return true;
         }
 
-        public override async void Do(Character chara)
+        public override async Awaitable Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);

@@ -52,5 +52,5 @@ public class StrategyActionBase
     /// <summary>
     /// アクションを実行します。
     /// </summary>
-    public virtual void Do(Character chara) { }
+    public virtual async Awaitable Do(Character chara) { }
 }

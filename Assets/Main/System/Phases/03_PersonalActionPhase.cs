@@ -49,7 +49,7 @@ public class PersonalActionPhase : PhaseBase
                 // 兵が雇えるなら雇う。
                 while (PersonalActions.HireSoldier.CanDo(chara))
                 {
-                    PersonalActions.HireSoldier.Do(chara);
+                    await PersonalActions.HireSoldier.Do(chara);
                     Debug.Log($"[個人フェイズ] 兵を雇いました。(残りG:{chara.Gold})");
                 }
                 // 訓練できるなら訓練する。
@@ -61,7 +61,7 @@ public class PersonalActionPhase : PhaseBase
                         if (chara.Gold < 15) break;
                     }
 
-                    PersonalActions.TrainSoldiers.Do(chara);
+                    await PersonalActions.TrainSoldiers.Do(chara);
                     Debug.Log($"[個人フェイズ] 兵を訓練しました。(残りG:{chara.Gold})");
                 }
             }

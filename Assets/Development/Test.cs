@@ -132,7 +132,7 @@ public class Test : MonoBehaviour
         }
     }
 
-    private void StrategyPhaseScreen_ActionButtonClicked(object sender, StrategyPhaseScreen.ActionButton e)
+    private async void StrategyPhaseScreen_ActionButtonClicked(object sender, StrategyPhaseScreen.ActionButton e)
     {
         var chara = MainUI.StrategyPhase.debugCurrentChara;
         var straUI = MainUI.StrategyPhase;
@@ -145,14 +145,14 @@ public class Test : MonoBehaviour
             case StrategyPhaseScreen.ActionButton.Organize:
                 if (StrategyActions.Organize.CanDo(chara))
                 {
-                    StrategyActions.Organize.Do(chara);
+                    await StrategyActions.Organize.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.HireVassal:
                 if (StrategyActions.HireVassal.CanDo(chara))
                 {
-                    StrategyActions.HireVassal.Do(chara);
+                    await StrategyActions.HireVassal.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
@@ -173,7 +173,7 @@ public class Test : MonoBehaviour
             case StrategyPhaseScreen.ActionButton.Resign:
                 if (StrategyActions.Resign.CanDo(chara))
                 {
-                    StrategyActions.Resign.Do(chara);
+                    await StrategyActions.Resign.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
@@ -185,7 +185,7 @@ public class Test : MonoBehaviour
         }
     }
 
-    private void IndividualPhaseScreen_ActionButtonClicked(object sender, IndividualPhaseScreen.ActionButton e)
+    private async void IndividualPhaseScreen_ActionButtonClicked(object sender, IndividualPhaseScreen.ActionButton e)
     {
         var chara = MainUI.IndividualPhase.debugCurrentChara;
         var indivUI = MainUI.IndividualPhase;
@@ -198,42 +198,42 @@ public class Test : MonoBehaviour
             case IndividualPhaseScreen.ActionButton.HireSoldier:
                 if (PersonalActions.HireSoldier.CanDo(chara))
                 {
-                    PersonalActions.HireSoldier.Do(chara);
+                    await PersonalActions.HireSoldier.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.TrainSoldiers:
                 if (PersonalActions.TrainSoldiers.CanDo(chara))
                 {
-                    PersonalActions.TrainSoldiers.Do(chara);
+                    await PersonalActions.TrainSoldiers.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.GetJob:
                 if (PersonalActions.GetJob.CanDo(chara))
                 {
-                    PersonalActions.GetJob.Do(chara);
+                    await PersonalActions.GetJob.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.Resign:
                 if (PersonalActions.Resign.CanDo(chara))
                 {
-                    PersonalActions.Resign.Do(chara);
+                    await PersonalActions.Resign.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.Rebel:
                 if (PersonalActions.Rebel.CanDo(chara))
                 {
-                    PersonalActions.Rebel.Do(chara);
+                    await PersonalActions.Rebel.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.BecomeIndependent:
                 if (PersonalActions.BecomeIndependent.CanDo(chara))
                 {
-                    PersonalActions.BecomeIndependent.Do(chara);
+                    await PersonalActions.BecomeIndependent.Do(chara);
                     indivUI.SetData(chara, world);
                 }
                 break;
