@@ -74,7 +74,18 @@ partial class StrategyActions
                 target = neighbors.RandomPick();
             }
 
-            if (0.5.Chance())
+            var ok = false;
+            if (target.Ruler.IsPlayer)
+            {
+                Debug.Log($"{country} が {target} に同盟を申し込みました。");
+                ok = await Test.Instance.MainUI.ShowRespondAllyRequestScreen(country, World);
+            }
+            else
+            {
+                ok = 0.5.Chance();
+            }
+
+            if (ok)
             {
                 country.Ally = target;
                 target.Ally = country;
