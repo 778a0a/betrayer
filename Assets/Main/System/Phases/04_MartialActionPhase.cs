@@ -30,12 +30,11 @@ public class MartialActionPhase : PhaseBase
             // 君主の場合
             if (IsRuler(chara))
             {
-                Test.Instance.OnTickMartialPhase(chara);
-
                 // プレイヤーの場合
                 if (chara.IsPlayer)
                 {
                     Debug.Log($"[軍事フェイズ] プレイヤーのターン");
+                    Test.Instance.OnTickMartialPhase(chara);
                     Test.Instance.hold = true;
                     await Test.Instance.HoldIfNeeded();
                 }

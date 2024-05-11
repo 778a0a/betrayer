@@ -23,13 +23,13 @@ public class PersonalActionPhase : PhaseBase
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
-            Test.Instance.OnTickIndividualPhase(chara);
 
             Debug.Log($"[個人フェイズ] {chara.Name} の行動を開始します。G:{chara.Gold} ({i + 1}/{charas.Length})");
             // プレイヤーの場合
             if (chara.IsPlayer)
             {
                 Debug.Log($"[個人フェイズ] プレイヤーのターン");
+                Test.Instance.OnTickIndividualPhase(chara);
                 Test.Instance.hold = true;
                 await Test.Instance.HoldIfNeeded();
             }

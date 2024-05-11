@@ -74,7 +74,7 @@ public class Test : MonoBehaviour
         };
 
         hold = false;
-        holdOnTurnEnd = true;
+        holdOnTurnEnd = false;
         setHoldOnHoldEnd = false;
         StartCoroutine(DoMainLoop());
     }

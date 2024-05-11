@@ -29,12 +29,11 @@ public class StrategyActionPhase : PhaseBase
             // 君主の場合
             if (IsRuler(chara))
             {
-                Test.Instance.OnTickStrategyPhase(chara);
-
                 // プレイヤーの場合
                 if (chara.IsPlayer)
                 {
                     Debug.Log($"[戦略フェイズ] プレイヤーのターン");
+                    Test.Instance.OnTickStrategyPhase(chara);
                     Test.Instance.hold = true;
                     await Test.Instance.HoldIfNeeded();
                 }
