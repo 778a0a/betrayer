@@ -18,5 +18,18 @@ public partial class BattleSoldierIcon
         
         var hpBarLength = new Length(soldier.Hp / (float)soldier.MaxHp * 100, LengthUnit.Percent);
         HPBarValue.style.width = hpBarLength;
+
+        var hpIsLow = soldier.Hp <= 10;
+        if (hpIsLow)
+        {
+            var orange = Util.Color("#FFA500");
+            labelHP.style.color = orange;
+            HPBarValue.style.backgroundColor = orange;
+        }
+        else
+        {
+            labelHP.style.color = Color.white;
+            HPBarValue.style.backgroundColor = Color.cyan;
+        }
     }
 }
