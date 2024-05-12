@@ -112,12 +112,18 @@ public class Soldier
     /// <summary>
     /// HP
     /// </summary>
-    public int Hp { get; set; }
+    public int Hp
+    {
+        get => (int)Mathf.Ceil(HpFloat);
+        set => HpFloat = value;
+    }
+
+    public float HpFloat { get; set; }
 
     public int MaxHp => Level * 5 + 30;
 
     public bool IsEmptySlot { get; set; }
-    public bool IsAlive => !IsEmptySlot && Hp > 0;
+    public bool IsAlive => !IsEmptySlot && HpFloat > 0;
 
     public override string ToString() => IsEmptySlot ? "Empty" : $"Lv{Level} HP{Hp}/{MaxHp} Exp:{Experience}";
     public string ToShortString() => IsEmptySlot ? "E" : $"{Level}";

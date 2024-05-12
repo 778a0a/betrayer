@@ -44,6 +44,7 @@ public class BattleManager
         }
 
         var result = default(BattleResult);
+        var tickCount = 0;
         while (
             attacker.Force.Soldiers.Any(s => s.IsAlive) &&
             defender.Force.Soldiers.Any(s => s.IsAlive))
@@ -59,7 +60,7 @@ public class BattleManager
                 }
             }
 
-            Tick(attackerTerrain, defenderTerrain, attacker, defender);
+            Tick(attackerTerrain, defenderTerrain, attacker, defender, tickCount++);
         }
 
         if (result == BattleResult.None)
@@ -74,52 +75,89 @@ public class BattleManager
             ui.Root.style.display = DisplayStyle.None;
         }
 
+        foreach (var sol in attacker.Force.Soldiers.Concat(defender.Force.Soldiers))
+        {
+            if (sol.Hp == 0)
+            {
+                sol.IsEmptySlot = true;
+            }
+        }
+
         return result;
     }
 
     
     public static float TerrainDamageAdjustment(Terrain t) => t switch
     {
-        Terrain.LargeRiver => 1.40f,
-        Terrain.River => 1.25f,
-        Terrain.Plain => 1.0f,
-        Terrain.Hill => 0.9f,
-        Terrain.Forest => 0.75f,
-        Terrain.Mountain => 0.60f,
-        Terrain.Fort => 0.5f,
-        _ => 1.0f
+        Terrain.LargeRiver => 0.40f,
+        Terrain.River => 0.25f,
+        Terrain.Plain => 0.0f,
+        Terrain.Hill => -0.1f,
+        Terrain.Forest => -0.25f,
+        Terrain.Mountain => -0.40f,
+        Terrain.Fort => -0.50f,
+        _ => 0f,
     };
 
     private static void Tick(
         Terrain attackerTerrain,
         Terrain defenderTerrain,
         Character attacker,
-        Character defender)
+        Character defender,
+        int tickCount)
     {
         // 両方の兵士をランダムな順番の配列にいれる。
-        var all = attacker.Force.Soldiers.Select(s => (soldier: s, owner: attacker, opponent: defender, terrain: defenderTerrain, atk: attacker.Attack, def: defender.Defense))
-            .Concat(defender.Force.Soldiers.Select(s => (soldier: s, owner: defender, opponent: attacker, terrain: attackerTerrain, atk: defender.Defense, def: attacker.Attack)))
+        var all = attacker.Force.Soldiers.Select(s => (soldier: s, owner: attacker, opponent: defender))
+            .Concat(defender.Force.Soldiers.Select(s => (soldier: s, owner: defender, opponent: attacker)))
             .Where(x => x.soldier.IsAlive)
             .ToArray()
             .ShuffleInPlace();
 
-        foreach (var (soldier, owner, opponent, terrain, atk, def) in all)
+        var baseAdjustment = new Dictionary<Character, float>
+        {
+            {attacker, BaseAdjustment(attacker.Attack, defender.Defense, attacker.Intelligence, defender.Intelligence, defenderTerrain, tickCount)},
+            {defender, BaseAdjustment(defender.Defense, attacker.Attack, defender.Intelligence, attacker.Intelligence, attackerTerrain, tickCount)},
+        };
+        static float BaseAdjustment(int atk, int def, int atkInt, int defInt, Terrain terrain, int tickCount)
+        {
+            var adj = 1f;
+            adj += (atk - 50) / 100f;
+            adj -= (def - 50) / 100f;
+            adj += (atkInt - 50) / 100f * Mathf.Min(1, tickCount / 10f);
+            adj -= (defInt - 50) / 100f * Mathf.Min(1, tickCount / 10f);
+            adj += TerrainDamageAdjustment(terrain);
+            return adj;
+        }
+        Debug.Log($"[戦闘処理] 基本調整値: atk:{baseAdjustment[attacker]:0.00} def:{baseAdjustment[defender]:0.00}");
+
+        var attackerTotalDamage = 0f;
+        var defenderTotalDamage = 0f;
+        foreach (var (soldier, owner, opponent) in all)
         {
             if (!soldier.IsAlive) continue;
             var target = opponent.Force.Soldiers.Where(s => s.IsAlive).RandomPickDefault();
             if (target == null) continue;
-            var adj =
-                (soldier.Level + atk / 10f) *
-                (1 - (def - 50) / 100f) *
-                Random.Range(0.8f, 1.2f) *
-                TerrainDamageAdjustment(terrain);
 
-            var damage = Math.Min(1, soldier.Level * adj);
-            target.Hp = (int)Math.Max(0, target.Hp - damage);
-            if (target.Hp == 0)
+            var adj = baseAdjustment[owner];
+            adj += Random.Range(-0.2f, 0.2f);
+            adj += soldier.Level / 10f;
+
+            var damage = Math.Max(0, adj);
+            target.HpFloat = (int)Math.Max(0, target.HpFloat - damage);
+
+            if (owner == attacker)
             {
-                target.IsEmptySlot = true;
+                attackerTotalDamage += damage;
             }
+            else
+            {
+                defenderTotalDamage += damage;
+            }
+        }
+
+        if (attacker.IsPlayer || defender.IsPlayer)
+        {
+            Debug.Log($"[戦闘処理] {attacker.Name}の総ダメージ: {attackerTotalDamage} {defender.Name}の総ダメージ: {defenderTotalDamage}");
         }
     }
 
