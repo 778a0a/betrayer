@@ -145,6 +145,14 @@ public class BattleManager
             var damage = Math.Max(0, adj);
             target.HpFloat = (int)Math.Max(0, target.HpFloat - damage);
 
+            soldier.Experience += 1 + Random.Range(0, 0.3f);
+            // 十分経験値が貯まればレベルアップする。
+            if (soldier.Experience >= soldier.Level * 10 && soldier.Level < 13)
+            {
+                soldier.Level += 1;
+                soldier.Experience = 0;
+            }
+
             if (owner == attacker)
             {
                 attackerTotalDamage += damage;

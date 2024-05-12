@@ -108,7 +108,7 @@ public class Soldier
     /// <summary>
     /// 経験値
     /// </summary>
-    public int Experience { get; set; }
+    public float Experience { get; set; }
     /// <summary>
     /// HP
     /// </summary>
