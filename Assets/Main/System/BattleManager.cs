@@ -69,6 +69,8 @@ public class BattleManager
         Debug.Log($"[戦闘処理] 結果: {result}");
         if (needUI)
         {
+            ui.SetData(attacker, attackerTerrain, defender, defenderTerrain);
+            await ui.WaitPlayerClick();
             ui.Root.style.display = DisplayStyle.None;
         }
 
