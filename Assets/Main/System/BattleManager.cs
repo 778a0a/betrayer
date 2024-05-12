@@ -9,6 +9,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class BattleManager
@@ -16,7 +17,12 @@ public class BattleManager
     /// <summary>
     /// 戦闘を行います。
     /// </summary>
-    public static BattleResult Battle(MapGrid map, Area sourceArea, Area targetArea, Character attacker, Character defender)
+    public static async Awaitable<BattleResult> Battle(
+        MapGrid map,
+        Area sourceArea,
+        Area targetArea,
+        Character attacker,
+        Character defender)
     {
         var dir = sourceArea.GetDirectionTo(targetArea);
         var attackerTerrain = map.Helper.GetAttackerTerrain(sourceArea.Position, dir);
@@ -29,12 +35,43 @@ public class BattleManager
             return BattleResult.AttackerWin;
         }
 
-        while (attacker.Force.Soldiers.Any(s => s.IsAlive) && defender.Force.Soldiers.Any(s => s.IsAlive))
+        var ui = Test.Instance.MainUI.BattleDialog;
+        var needUI = attacker.IsPlayer || defender.IsPlayer;
+        if (needUI)
         {
+            ui.Root.style.display = DisplayStyle.Flex;
+            ui.SetData(attacker, attackerTerrain, defender, defenderTerrain);
+        }
+
+        var result = default(BattleResult);
+        while (
+            attacker.Force.Soldiers.Any(s => s.IsAlive) &&
+            defender.Force.Soldiers.Any(s => s.IsAlive))
+        {
+            if (needUI)
+            {
+                ui.SetData(attacker, attackerTerrain, defender, defenderTerrain);
+                var shouldContinue = await ui.WaitPlayerClick();
+                if (!shouldContinue)
+                {
+                    result = attacker.IsPlayer ? BattleResult.DefenderWin : BattleResult.AttackerWin;
+                    break;
+                }
+            }
+
             Tick(attackerTerrain, defenderTerrain, attacker, defender);
         }
-        var result = attacker.Force.Soldiers.Any(s => s.IsAlive) ? BattleResult.AttackerWin : BattleResult.DefenderWin;
+
+        if (result == BattleResult.None)
+        {
+            result = attacker.Force.Soldiers.Any(s => s.IsAlive) ? BattleResult.AttackerWin : BattleResult.DefenderWin;
+        }
         Debug.Log($"[戦闘処理] 結果: {result}");
+        if (needUI)
+        {
+            ui.Root.style.display = DisplayStyle.None;
+        }
+
         return result;
     }
 
@@ -51,7 +88,11 @@ public class BattleManager
         _ => 1.0f
     };
 
-    private static void Tick(Terrain attackerTerrain, Terrain defenderTerrain, Character attacker, Character defender)
+    private static void Tick(
+        Terrain attackerTerrain,
+        Terrain defenderTerrain,
+        Character attacker,
+        Character defender)
     {
         // 両方の兵士をランダムな順番の配列にいれる。
         var all = attacker.Force.Soldiers.Select(s => (soldier: s, owner: attacker, opponent: defender, terrain: defenderTerrain, atk: attacker.Attack, def: defender.Defense))

@@ -8,10 +8,10 @@ public partial class BattleSoldierIcon
     {
         if (soldier.IsEmptySlot)
         {
-            Root.style.display = DisplayStyle.None;
+            Root.style.visibility = Visibility.Hidden;
             return;
         }
-        Root.style.display = DisplayStyle.Flex;
+        Root.style.visibility = Visibility.Visible;
 
         SoldierImage.style.backgroundColor = CharacterInfoSoldierIcon.levelToColor[soldier.Level];
         labelHP.text = soldier.Hp.ToString();

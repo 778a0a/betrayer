@@ -62,7 +62,7 @@ partial class MartialActions
             var defender = chara;
 
             // 侵攻する。
-            var result = BattleManager.Battle(World.Map, sourceArea, targetArea, attacker, defender);
+            var result = await BattleManager.Battle(World.Map, sourceArea, targetArea, attacker, defender);
             attacker.IsAttacked = true;
             if (result == BattleResult.AttackerWin)
             {

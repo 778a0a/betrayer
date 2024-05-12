@@ -30,7 +30,7 @@ partial class PersonalActions
 
             var target = country.Areas.RandomPick();
             var source = World.Map.GetNeighbors(target).RandomPick();
-            var result = BattleManager.Battle(World.Map, source, target, chara, ruler);
+            var result = await BattleManager.Battle(World.Map, source, target, chara, ruler);
             if (result == BattleResult.AttackerWin)
             {
                 var oldRuler = country.Ruler;

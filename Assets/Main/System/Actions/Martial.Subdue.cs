@@ -48,7 +48,7 @@ partial class MartialActions
                 }
 
                 // 攻撃する。
-                var result = BattleManager.Battle(World.Map, attack, defend, chara, target);
+                var result = await BattleManager.Battle(World.Map, attack, defend, chara, target);
                 chara.IsAttacked = true;
                 if (result == BattleResult.AttackerWin)
                 {
@@ -70,7 +70,7 @@ partial class MartialActions
                 var target = country.Vassals.OrderBy(c => c.Loyalty).First();
 
                 // 攻撃する。
-                var result = BattleManager.Battle(World.Map, attack, defend, chara, target);
+                var result = await BattleManager.Battle(World.Map, attack, defend, chara, target);
                 chara.IsAttacked = true;
                 if (result == BattleResult.AttackerWin)
                 {

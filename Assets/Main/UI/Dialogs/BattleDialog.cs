@@ -1,4 +1,6 @@
+using System.Runtime.CompilerServices;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -28,12 +30,12 @@ public partial class BattleDialog : IDialog
         AttackerName.text = attacker.Name;
         DefenderName.text = defender.Name;
 
-        for (var i = 0; i < _attackerSoldiers.Length; i++)
+        for (var i = 0; i < attacker.Force.Soldiers.Length; i++)
         {
             var soldier = attacker.Force.Soldiers[i];
             _attackerSoldiers[i].SetData(soldier);
         }
-        for (var i = 0; i < _defenderSoldiers.Length; i++)
+        for (var i = 0; i < defender.Force.Soldiers.Length; i++)
         {
             var soldier = defender.Force.Soldiers[i];
             _defenderSoldiers[i].SetData(soldier);
@@ -48,5 +50,28 @@ public partial class BattleDialog : IDialog
         labelDefenderDefence.text = defender.Defense.ToString();
         labelDefenderIntelligense.text = defender.Intelligence.ToString();
         labelDefenderTerrain.text = defenderTerrain.ToString();
+    }
+
+    public Awaitable<bool> WaitPlayerClick()
+    {
+        var tcs = new AwaitableCompletionSource<bool>();
+
+        buttonAttack.clicked += buttonAttackClicked;
+        void buttonAttackClicked()
+        {
+            tcs.SetResult(true);
+            buttonAttack.clicked -= buttonAttackClicked;
+            buttonRetreat.clicked -= buttonRetreatClicked;
+        }
+
+        buttonRetreat.clicked += buttonRetreatClicked;
+        void buttonRetreatClicked()
+        {
+            tcs.SetResult(false);
+            buttonAttack.clicked -= buttonAttackClicked;
+            buttonRetreat.clicked -= buttonRetreatClicked;
+        }
+
+        return tcs.Awaitable;
     }
 }
