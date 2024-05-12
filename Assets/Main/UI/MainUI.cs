@@ -68,6 +68,8 @@ public partial class MainUI : MonoBehaviour
     {
         InitializeDocument();
         InitializeScreens();
+        BattleDialog.Initialize();
+        BattleDialog.Root.style.display = DisplayStyle.None;
 
         buttonToggleDebugUI.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.NextPhase);
@@ -336,10 +338,4 @@ public class FaceImageManager
         return tex;
     }
 
-}
-
-
-public interface IScreen
-{
-    void Initialize();
 }

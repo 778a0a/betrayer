@@ -29,7 +29,11 @@ public partial class MainUI
 
     public VisualElement DebugUI { get; private set; }
 
+    public BattleDialog BattleDialog { get; private set; }
+
     public VisualElement DebugUIParent { get; private set; }
+
+    public VisualElement DialogHost { get; private set; }
 
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
@@ -41,6 +45,8 @@ public partial class MainUI
         buttonHold = Root?.Q<Button>("buttonHold");
         buttonToggleDebugUI = Root?.Q<Button>("buttonToggleDebugUI");
         DebugUI = Root?.Q<VisualElement>("DebugUI");
+        BattleDialog = new BattleDialog(Root?.Q<VisualElement>("BattleDialog"));
         DebugUIParent = Root?.Q<VisualElement>("DebugUIParent");
+        DialogHost = Root?.Q<VisualElement>("DialogHost");
     }
 }

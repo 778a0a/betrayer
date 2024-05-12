@@ -85,3 +85,18 @@ Label {
     width: 200px;
     -unity-text-align: middle-left;
 }
+
+.border {
+    border-left-color: rgb(0, 156, 143);
+    border-right-color: rgb(0, 156, 143);
+    border-top-color: rgb(0, 156, 143);
+    border-bottom-color: rgb(0, 156, 143);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
