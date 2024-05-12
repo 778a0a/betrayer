@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ public class AreaInfoEditorWindow : EditorWindow
     void OnEnable()
     {
         var tilemap = FindFirstObjectByType<TilemapManager>();
+        tilemap.GetType().GetMethod("Awake", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(tilemap, null);
         world = SaveData.LoadWorldData(tilemap.Helper);
         grid = FindFirstObjectByType<Grid>();
 
