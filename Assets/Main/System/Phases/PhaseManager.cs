@@ -16,10 +16,11 @@ public class PhaseManager
     public readonly MartialActionPhase MartialAction = new();
 
     public PhaseBase[] Phases => new PhaseBase[] { Start, Income, StrategyAction, PersonalAction, MartialAction };
-    public PhaseManager(WorldData world)
+    public PhaseManager(Test test, WorldData world)
     {
         foreach (var phase in Phases)
         {
+            phase.Test = test;
             phase.World = world;
         }
     }
@@ -34,6 +35,8 @@ public class PhaseBase
     public bool IsRuler(Character chara) => World.IsRuler(chara);
     public bool IsVassal(Character chara) => World.IsVassal(chara);
     public bool IsFree(Character chara) => World.IsFree(chara);
+
+    public Test Test { get; set; }
 
     public virtual async Awaitable Phase() { }
 }

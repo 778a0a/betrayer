@@ -16,7 +16,7 @@ public class StrategyActionPhase : PhaseBase
 {
     public override async Awaitable Phase()
     {
-        Test.Instance.OnEnterStrategyPhase();
+        Test.OnEnterStrategyPhase();
 
         Debug.Log("[戦略フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -33,9 +33,8 @@ public class StrategyActionPhase : PhaseBase
                 if (chara.IsPlayer)
                 {
                     Debug.Log($"[戦略フェイズ] プレイヤーのターン");
-                    Test.Instance.OnTickStrategyPhase(chara);
-                    Test.Instance.hold = true;
-                    await Test.Instance.HoldIfNeeded();
+                    Test.OnTickStrategyPhase(chara);
+                    await Test.WaitUserInteraction();
                 }
                 // NPCの場合
                 else

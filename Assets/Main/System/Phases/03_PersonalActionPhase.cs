@@ -15,7 +15,7 @@ public class PersonalActionPhase : PhaseBase
 {
     public override async Awaitable Phase()
     {
-        Test.Instance.OnEnterIndividualPhase();
+        Test.OnEnterIndividualPhase();
 
         Debug.Log("[個人フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -29,9 +29,8 @@ public class PersonalActionPhase : PhaseBase
             if (chara.IsPlayer)
             {
                 Debug.Log($"[個人フェイズ] プレイヤーのターン");
-                Test.Instance.OnTickIndividualPhase(chara);
-                Test.Instance.hold = true;
-                await Test.Instance.HoldIfNeeded();
+                Test.OnTickIndividualPhase(chara);
+                await Test.WaitUserInteraction();
             }
             // NPCの場合
             else

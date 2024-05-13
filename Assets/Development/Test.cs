@@ -46,7 +46,7 @@ public class Test : MonoBehaviour
         PersonalActions.Initialize(world);
         StrategyActions.Initialize(world);
         MartialActions.Initialize(world);
-        phases = new PhaseManager(world);
+        phases = new PhaseManager(this, world);
         tilemap.DrawCountryTile(world);
         tilemap.TileClick += (sender, pos) =>
         {
@@ -312,6 +312,12 @@ public class Test : MonoBehaviour
             await Awaitable.WaitForSecondsAsync(0.1f);
         }
         hold = setHoldOnHoldEnd;
+    }
+
+    public async Awaitable WaitUserInteraction()
+    {
+        hold = true;
+        await HoldIfNeeded();
     }
 
 

@@ -16,7 +16,7 @@ public class MartialActionPhase : PhaseBase
 {
     public override async Awaitable Phase()
     {
-        Test.Instance.OnEnterMartialPhase();
+        Test.OnEnterMartialPhase();
 
         Debug.Log("[軍事フェイズ] 開始");
         // ランダムな順番で行動させる。
@@ -34,9 +34,8 @@ public class MartialActionPhase : PhaseBase
                 if (chara.IsPlayer)
                 {
                     Debug.Log($"[軍事フェイズ] プレイヤーのターン");
-                    Test.Instance.OnTickMartialPhase(chara);
-                    Test.Instance.hold = true;
-                    await Test.Instance.HoldIfNeeded();
+                    Test.OnTickMartialPhase(chara);
+                    await Test.WaitUserInteraction();
                 }
                 // NPCの場合
                 else
@@ -64,10 +63,9 @@ public class MartialActionPhase : PhaseBase
                 // プレイヤーの場合
                 if (chara.IsPlayer)
                 {
-                    Test.Instance.OnTickMartialPhase(chara);
+                    Test.OnTickMartialPhase(chara);
                     Debug.Log($"[軍事フェイズ] プレイヤーのターン");
-                    Test.Instance.hold = true;
-                    await Test.Instance.HoldIfNeeded();
+                    await Test.WaitUserInteraction();
                 }
                 // NPCの場合
                 else
