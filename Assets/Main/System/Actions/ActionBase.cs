@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Assertions;
-using Random = UnityEngine.Random;
 
-public partial class StrategyActions
+public class ActionsBase<TActionBase> where TActionBase : ActionBase
 {
-    public StrategyActions(WorldData world)
+    public ActionsBase(WorldData world)
     {
         foreach (var action in Actions)
         {
@@ -18,15 +12,15 @@ public partial class StrategyActions
         }
     }
 
-    private StrategyActionBase[] Actions => GetType()
+    protected TActionBase[] Actions => GetType()
         .GetProperties()
-        .Where(p => p.PropertyType.IsSubclassOf(typeof(StrategyActionBase)))
+        .Where(p => p.PropertyType.IsSubclassOf(typeof(TActionBase)))
         .Select(p => p.GetValue(this))
-        .Cast<StrategyActionBase>()
+        .Cast<TActionBase>()
         .ToArray();
 }
 
-public class StrategyActionBase
+public class ActionBase
 {
     public WorldData World { get; set; }
 
@@ -54,4 +48,37 @@ public class StrategyActionBase
     /// アクションを実行します。
     /// </summary>
     public virtual async Awaitable Do(Character chara) { }
+}
+
+
+public partial class MartialActions : ActionsBase<MartialActionBase>
+{
+    public MartialActions(WorldData world) : base(world)
+    {
+    }
+}
+public class MartialActionBase : ActionBase
+{
+}
+
+
+public partial class PersonalActions : ActionsBase<PersonalActionBase>
+{
+    public PersonalActions(WorldData world) : base(world)
+    {
+    }
+}
+public class PersonalActionBase : ActionBase
+{
+}
+
+
+public partial class StrategyActions : ActionsBase<StrategyActionBase>
+{
+    public StrategyActions(WorldData world) : base(world)
+    {
+    }
+}
+public class StrategyActionBase : ActionBase
+{
 }
