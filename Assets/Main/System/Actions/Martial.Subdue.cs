@@ -40,10 +40,10 @@ partial class MartialActions
 
             if (chara.IsPlayer)
             {
-                var target = await Test.Instance.MainUI.ShowSubdueScreen(country, World);
+                var target = await UI.ShowSubdueScreen(country, World);
                 if (target == null)
                 {
-                    Test.Instance.MainUI.ShowMartialUI();
+                    UI.ShowMartialUI();
                     return;
                 }
 
@@ -61,8 +61,8 @@ partial class MartialActions
                     BattleManager.Recover(chara, false);
                     BattleManager.Recover(target, true);
                 }
-                Test.Instance.MainUI.ShowMartialUI();
-                Test.Instance.MainUI.MartialPhase.SetData(chara, World);
+                UI.ShowMartialUI();
+                UI.MartialPhase.SetData(chara, World);
             }
             else
             {

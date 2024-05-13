@@ -16,19 +16,20 @@ public class PhaseManager
     public readonly MartialActionPhase MartialAction = new();
 
     public PhaseBase[] Phases => new PhaseBase[] { Start, Income, StrategyAction, PersonalAction, MartialAction };
-    public PhaseManager(Test test, WorldData world)
+    public PhaseManager(GameCore core, Test test)
     {
         foreach (var phase in Phases)
         {
+            phase.Core = core;
             phase.Test = test;
-            phase.World = world;
         }
     }
 }
 
 public class PhaseBase
 {
-    public WorldData World { get; set; }
+    public GameCore Core { get; set; }
+    public WorldData World => Core.World;
     public Character[] Characters => World.Characters;
     public List<Country> Countries => World.Countries;
     public MapGrid Map => World.Map;
@@ -37,9 +38,9 @@ public class PhaseBase
     public bool IsFree(Character chara) => World.IsFree(chara);
 
     public Test Test { get; set; }
-    public StrategyActions StrategyActions => Test.StrategyActions;
-    public PersonalActions PersonalActions => Test.PersonalActions;
-    public MartialActions MartialActions => Test.MartialActions;
+    public StrategyActions StrategyActions => Core.StrategyActions;
+    public PersonalActions PersonalActions => Core.PersonalActions;
+    public MartialActions MartialActions => Core.MartialActions;
 
     public virtual async Awaitable Phase() { }
 }

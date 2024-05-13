@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ActionsBase<TActionBase> where TActionBase : ActionBase
 {
-    public ActionsBase(WorldData world)
+    public ActionsBase(GameCore core)
     {
         foreach (var action in Actions)
         {
-            action.World = world;
+            action.Core = core;
         }
     }
 
@@ -22,7 +22,10 @@ public class ActionsBase<TActionBase> where TActionBase : ActionBase
 
 public class ActionBase
 {
-    public WorldData World { get; set; }
+    public GameCore Core { get; set; }
+    protected WorldData World => Core.World;
+    protected MainUI UI => Core.MainUI;
+    protected TilemapManager Tilemap => Core.Tilemap; 
 
     /// <summary>
     /// 選択肢として表示可能ならtrue
@@ -53,7 +56,7 @@ public class ActionBase
 
 public partial class MartialActions : ActionsBase<MartialActionBase>
 {
-    public MartialActions(WorldData world) : base(world)
+    public MartialActions(GameCore core) : base(core)
     {
     }
 }
@@ -64,7 +67,7 @@ public class MartialActionBase : ActionBase
 
 public partial class PersonalActions : ActionsBase<PersonalActionBase>
 {
-    public PersonalActions(WorldData world) : base(world)
+    public PersonalActions(GameCore core) : base(core)
     {
     }
 }
@@ -75,7 +78,7 @@ public class PersonalActionBase : ActionBase
 
 public partial class StrategyActions : ActionsBase<StrategyActionBase>
 {
-    public StrategyActions(WorldData world) : base(world)
+    public StrategyActions(GameCore core) : base(core)
     {
     }
 }

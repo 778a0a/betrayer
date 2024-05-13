@@ -109,10 +109,10 @@ public partial class StrategyPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
-        buttonOrganize.SetEnabled(Test.Instance.StrategyActions.Organize.CanDo(chara));
-        buttonHireVassal.SetEnabled(Test.Instance.StrategyActions.HireVassal.CanDo(chara));
-        buttonFireVassal.SetEnabled(Test.Instance.StrategyActions.FireVassal.CanDo(chara));
-        buttonAlly.SetEnabled(Test.Instance.StrategyActions.Ally.CanDo(chara));
-        buttonResign.SetEnabled(Test.Instance.StrategyActions.Resign.CanDo(chara));
+        buttonOrganize.SetEnabled(GameCore.Instance.StrategyActions.Organize.CanDo(chara));
+        buttonHireVassal.SetEnabled(GameCore.Instance.StrategyActions.HireVassal.CanDo(chara));
+        buttonFireVassal.SetEnabled(GameCore.Instance.StrategyActions.FireVassal.CanDo(chara));
+        buttonAlly.SetEnabled(GameCore.Instance.StrategyActions.Ally.CanDo(chara));
+        buttonResign.SetEnabled(GameCore.Instance.StrategyActions.Resign.CanDo(chara));
     }
 }

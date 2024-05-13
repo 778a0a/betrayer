@@ -29,13 +29,13 @@ partial class PersonalActions
 
             if (chara.IsPlayer)
             {
-                var country = await Test.Instance.MainUI.ShowGetJobScreen(World);
+                var country = await UI.ShowGetJobScreen(World);
                 if (country != null)
                 {
                     country.AddVassal(chara);
                 }
-                Test.Instance.MainUI.ShowIndividualUI();
-                Test.Instance.MainUI.IndividualPhase.SetData(chara, World);
+                UI.ShowIndividualUI();
+                UI.IndividualPhase.SetData(chara, World);
             }
             else
             {

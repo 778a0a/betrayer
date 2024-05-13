@@ -70,10 +70,10 @@ public partial class SelectAreaScreen : IScreen
 
         labelDescription.text = description;
 
-        Test.Instance.tilemap.TileClick += OnTileClick;
+        GameCore.Instance.Tilemap.TileClick += OnTileClick;
         tcs.Awaitable.GetAwaiter().OnCompleted(() =>
         {
-            Test.Instance.tilemap.TileClick -= OnTileClick;
+            GameCore.Instance.Tilemap.TileClick -= OnTileClick;
         });
 
         // 勢力情報

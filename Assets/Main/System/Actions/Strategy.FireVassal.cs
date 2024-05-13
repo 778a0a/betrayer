@@ -33,16 +33,16 @@ partial class StrategyActions
             if (chara.IsPlayer)
             {
                 // どのキャラを解雇するか選択する。
-                var selected = await Test.Instance.MainUI.ShowFireVassalUI(country, World);
+                var selected = await UI.ShowFireVassalUI(country, World);
                 if (selected == null)
                 {
                     Debug.Log("解雇するキャラが選択されませんでした。");
-                    Test.Instance.MainUI.ShowStrategyUI();
+                    UI.ShowStrategyUI();
                     return;
                 }
                 country.Vassals.Remove(selected);
                 country.RecalculateSalary();
-                Test.Instance.MainUI.ShowStrategyUI();
+                UI.ShowStrategyUI();
 
             }
             else

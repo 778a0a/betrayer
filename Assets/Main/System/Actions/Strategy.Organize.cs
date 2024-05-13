@@ -28,8 +28,8 @@ partial class StrategyActions
 
             if (chara.IsPlayer)
             {
-                await Test.Instance.MainUI.ShowOrganizeScreen(country, World);
-                Test.Instance.MainUI.ShowStrategyUI();
+                await UI.ShowOrganizeScreen(country, World);
+                UI.ShowStrategyUI();
             }
             else
             {

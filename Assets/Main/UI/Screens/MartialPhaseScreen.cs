@@ -105,10 +105,10 @@ public partial class MartialPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
-        buttonAttack.SetEnabled(Test.Instance.MartialActions.Attack.CanDo(chara));
-        //buttonDecisiveBattle.SetEnabled(Test.Instance.MartialActions.DecisiveBattle.CanDo(chara));
-        buttonProvoke.SetEnabled(Test.Instance.MartialActions.Provoke.CanDo(chara));
-        buttonSubdue.SetEnabled(Test.Instance.MartialActions.Subdue.CanDo(chara));
-        buttonPrivateFight.SetEnabled(Test.Instance.MartialActions.PrivateFight.CanDo(chara));
+        buttonAttack.SetEnabled(GameCore.Instance.MartialActions.Attack.CanDo(chara));
+        //buttonDecisiveBattle.SetEnabled(GameCore.Instance.MartialActions.DecisiveBattle.CanDo(chara));
+        buttonProvoke.SetEnabled(GameCore.Instance.MartialActions.Provoke.CanDo(chara));
+        buttonSubdue.SetEnabled(GameCore.Instance.MartialActions.Subdue.CanDo(chara));
+        buttonPrivateFight.SetEnabled(GameCore.Instance.MartialActions.PrivateFight.CanDo(chara));
     }
 }

@@ -48,16 +48,16 @@ partial class StrategyActions
             if (chara.IsPlayer)
             {
                 // どのキャラを配下にするか選択する。
-                var selected = await Test.Instance.MainUI.ShowSearchResult(candidates.ToArray(), World);
+                var selected = await UI.ShowSearchResult(candidates.ToArray(), World);
                 if (selected == null)
                 {
                     Debug.Log("配下にするキャラが選択されませんでした。");
-                    Test.Instance.MainUI.ShowStrategyUI();
+                    UI.ShowStrategyUI();
                     return;
                 }
                 var country = World.CountryOf(chara);
                 country.AddVassal(selected);
-                Test.Instance.MainUI.ShowStrategyUI();
+                UI.ShowStrategyUI();
             }
             else
             {
@@ -68,8 +68,8 @@ partial class StrategyActions
                 // プレイヤーの場合は選択肢を表示する。
                 if (newVassal.IsPlayer)
                 {
-                    var ok = await Test.Instance.MainUI.ShowRespondJobOfferScreen(country, World);
-                    //Test.Instance.MainUI.HideAllUI();
+                    var ok = await UI.ShowRespondJobOfferScreen(country, World);
+                    //UI.HideAllUI();
                     if (!ok)
                     {
                         return;

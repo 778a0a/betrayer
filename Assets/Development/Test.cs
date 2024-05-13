@@ -6,30 +6,32 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework.Constraints;
 using Unity.Burst.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.LightTransport;
 using UnityEngine.Tilemaps;
 
 public class Test : MonoBehaviour
 {
     public static Test Instance { get; private set; }
 
-    [SerializeField] public TilemapData initialTilemapData;
+    [SerializeField] private TilemapData initialTilemapData;
 
-    [SerializeField] public WorldData world;
+    [SerializeField] private float wait = 1;
 
-    [SerializeField] public float wait = 1;
+    [SerializeField] private MainUI MainUI;
 
-    [SerializeField] public MainUI MainUI;
+    [SerializeField] private TilemapManager tilemap;
 
-    [SerializeField] public TilemapManager tilemap;
+    private GameCore core;
+    private WorldData world => core.World;
+    private PhaseManager phases => core.Phases;
+    private StrategyActions StrategyActions => core.StrategyActions;
+    private PersonalActions PersonalActions => core.PersonalActions;
+    private MartialActions MartialActions => core.MartialActions;
 
-    public PhaseManager phases;
-    public StrategyActions StrategyActions;
-    public PersonalActions PersonalActions;
-    public MartialActions MartialActions;
-    
     private object prevUI = null;
 
     private void Awake()
@@ -46,12 +48,8 @@ public class Test : MonoBehaviour
 
         FaceImageManager.Instance.ClearCache();
 
-        world = SaveData.LoadWorldData(tilemap.Helper);
-        PersonalActions = new(world);
-        StrategyActions = new(world);
-        MartialActions = new(world);
-        phases = new(this, world);
-        tilemap.DrawCountryTile(world);
+        GameCore.Instance = core = new GameCore(MainUI, tilemap, this);
+        tilemap.DrawCountryTile(core.World);
         tilemap.TileClick += (sender, pos) =>
         {
             MainUI.CountryInfo.ShowCellInformation(world, pos);

@@ -38,12 +38,12 @@ partial class MartialActions
             if (chara.IsPlayer)
             {
                 var neighborCountries = World.Neighbors(country).Where(c => c.Ally != country).ToArray();
-                attacker = await Test.Instance.MainUI.ShowSelectProvokingTargetScreen(
+                attacker = await UI.ShowSelectProvokingTargetScreen(
                     neighborCountries,
                     World);
                 if (attacker == null)
                 {
-                    Test.Instance.MainUI.ShowMartialUI();
+                    UI.ShowMartialUI();
                     return;
                 }
             }
@@ -85,7 +85,7 @@ partial class MartialActions
                         if (c.Ally == country) c.Ally = null;
                     }
                 }
-                Test.Instance.tilemap.DrawCountryTile(World);
+                Tilemap.DrawCountryTile(World);
             }
             else
             {
@@ -97,7 +97,7 @@ partial class MartialActions
 
             if (chara.IsPlayer)
             {
-                Test.Instance.MainUI.ShowMartialUI();
+                UI.ShowMartialUI();
             }
         }
 

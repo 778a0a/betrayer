@@ -34,7 +34,7 @@ partial class StrategyActions
 
             if (chara.IsPlayer)
             {
-                var ally = await Test.Instance.MainUI.ShowSelectAllyScreen(country, World);
+                var ally = await UI.ShowSelectAllyScreen(country, World);
                 if (ally == null)
                 {
                     Debug.Log("同盟を結ぶ国が選択されませんでした。");
@@ -46,7 +46,7 @@ partial class StrategyActions
                     ally.Ally = country;
                     Debug.Log($"{country} と {ally} が同盟を結びました。");
                 }
-                Test.Instance.MainUI.ShowStrategyUI();
+                UI.ShowStrategyUI();
                 return;
             }
 
@@ -78,8 +78,8 @@ partial class StrategyActions
             if (target.Ruler.IsPlayer)
             {
                 Debug.Log($"{country} が {target} に同盟を申し込みました。");
-                ok = await Test.Instance.MainUI.ShowRespondAllyRequestScreen(country, World);
-                Test.Instance.MainUI.ShowStrategyUI();
+                ok = await UI.ShowRespondAllyRequestScreen(country, World);
+                UI.ShowStrategyUI();
             }
             else
             {

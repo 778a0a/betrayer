@@ -46,10 +46,10 @@ partial class MartialActions
             // プレーヤーの場合は攻め込むエリアを選択させる。
             if (chara.IsPlayer)
             {
-                targetArea = await Test.Instance.MainUI.ShowSelectAreaScreen(neighborAreas, World);
+                targetArea = await UI.ShowSelectAreaScreen(neighborAreas, World);
                 if (targetArea == null)
                 {
-                    Test.Instance.MainUI.ShowMartialUI();
+                    UI.ShowMartialUI();
                     return;
                 }
                 targetCountry = World.CountryOf(targetArea);
@@ -62,10 +62,10 @@ partial class MartialActions
             // プレーヤーの場合は攻撃者を選択させる。
             if (chara.IsPlayer)
             {
-                attacker = await Test.Instance.MainUI.ShowSelectAttackerScreen(country, World);
+                attacker = await UI.ShowSelectAttackerScreen(country, World);
                 if (attacker == null)
                 {
-                    Test.Instance.MainUI.ShowMartialUI();
+                    UI.ShowMartialUI();
                     return;
                 }
             }
@@ -75,7 +75,7 @@ partial class MartialActions
             // 防衛側の君主がプレーヤーの場合は防衛者を選択させる。
             if (targetCountry.Ruler.IsPlayer)
             {
-                defender = await Test.Instance.MainUI.ShowSelectDefenderScreen(
+                defender = await UI.ShowSelectDefenderScreen(
                     sourceArea,
                     country,
                     attacker,
@@ -99,7 +99,7 @@ partial class MartialActions
 
                 country.Areas.Add(targetArea);
                 targetCountry.Areas.Remove(targetArea);
-                Test.Instance.tilemap.DrawCountryTile(World);
+                Tilemap.DrawCountryTile(World);
                 // 領土がなくなったら国を削除する。
                 if (targetCountry.Areas.Count == 0)
                 {
@@ -120,9 +120,9 @@ partial class MartialActions
 
             if (chara.IsPlayer || targetCountry.Ruler.IsPlayer)
             {
-                Test.Instance.MainUI.ShowMartialUI();
-                Test.Instance.MainUI.MartialPhase.SetData(chara, World);
-                Test.Instance.tilemap.DrawCountryTile(World);
+                UI.ShowMartialUI();
+                UI.MartialPhase.SetData(chara, World);
+                Tilemap.DrawCountryTile(World);
             }
         }
 

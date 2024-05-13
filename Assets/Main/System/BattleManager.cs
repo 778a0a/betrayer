@@ -35,7 +35,7 @@ public class BattleManager
             return BattleResult.AttackerWin;
         }
 
-        var ui = Test.Instance.MainUI.BattleDialog;
+        var ui = GameCore.Instance.MainUI.BattleDialog;
         var needUI = attacker.IsPlayer || defender.IsPlayer;
         if (needUI)
         {
