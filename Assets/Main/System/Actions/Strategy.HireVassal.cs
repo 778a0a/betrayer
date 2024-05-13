@@ -13,7 +13,7 @@ partial class StrategyActions
     /// <summary>
     /// 配下を雇います。
     /// </summary>
-    public static HireVassalAction HireVassal { get; } = new();
+    public HireVassalAction HireVassal { get; } = new();
     public class HireVassalAction : StrategyActionBase
     {
         public override int Cost(Character chara) => 8;

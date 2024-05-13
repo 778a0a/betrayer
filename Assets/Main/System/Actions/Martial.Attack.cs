@@ -14,7 +14,7 @@ partial class MartialActions
     /// <summary>
     /// 隣接国に侵攻します。
     /// </summary>
-    public static AttackAction Attack { get; } = new();
+    public AttackAction Attack { get; } = new();
     public class AttackAction : MartialActionBase
     {
         public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);

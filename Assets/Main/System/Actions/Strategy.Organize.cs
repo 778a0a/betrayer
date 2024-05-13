@@ -13,10 +13,10 @@ partial class StrategyActions
     /// <summary>
     /// 勢力の序列と給料配分を調整します。
     /// </summary>
-    public static OrganizeAction Organize { get; } = new();
+    public OrganizeAction Organize { get; } = new();
     public class OrganizeAction : StrategyActionBase
     {
-        public override int Cost(Character chara) => 0;
+        public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara) => true;
 
         public override async Awaitable Do(Character chara)

@@ -13,7 +13,7 @@ partial class PersonalActions
     /// <summary>
     /// 反乱を起こします。
     /// </summary>
-    public static RebelAction Rebel { get; } = new();
+    public RebelAction Rebel { get; } = new();
     public class RebelAction : PersonalActionBase
     {
         public override bool CanSelect(Character chara) => World.IsVassal(chara);

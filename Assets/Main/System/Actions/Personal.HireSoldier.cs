@@ -13,7 +13,7 @@ partial class PersonalActions
     /// <summary>
     /// 兵士を雇います。
     /// </summary>
-    public static HireSoldierAction HireSoldier { get; } = new();
+    public HireSoldierAction HireSoldier { get; } = new();
     public class HireSoldierAction : PersonalActionBase
     {
         public override int Cost(Character chara) => 5;

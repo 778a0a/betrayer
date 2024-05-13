@@ -13,7 +13,7 @@ partial class StrategyActions
     /// <summary>
     /// 配下を解雇します。
     /// </summary>
-    public static FireVassalAction FireVassal { get; } = new();
+    public FireVassalAction FireVassal { get; } = new();
     public class FireVassalAction : StrategyActionBase
     {
         public override int Cost(Character chara) => 1;

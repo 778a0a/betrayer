@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
@@ -25,6 +26,9 @@ public class Test : MonoBehaviour
     [SerializeField] public TilemapManager tilemap;
 
     public PhaseManager phases;
+    public StrategyActions StrategyActions;
+    public PersonalActions PersonalActions;
+    public MartialActions MartialActions;
     
     private object prevUI = null;
 
@@ -43,10 +47,10 @@ public class Test : MonoBehaviour
         FaceImageManager.Instance.ClearCache();
 
         world = SaveData.LoadWorldData(tilemap.Helper);
-        PersonalActions.Initialize(world);
-        StrategyActions.Initialize(world);
-        MartialActions.Initialize(world);
-        phases = new PhaseManager(this, world);
+        PersonalActions = new(world);
+        StrategyActions = new(world);
+        MartialActions = new(world);
+        phases = new(this, world);
         tilemap.DrawCountryTile(world);
         tilemap.TileClick += (sender, pos) =>
         {

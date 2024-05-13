@@ -13,7 +13,7 @@ partial class PersonalActions
     /// <summary>
     /// 大勢力から独立します。
     /// </summary>
-    public static BecomeIndependentAction BecomeIndependent { get; } = new();
+    public BecomeIndependentAction BecomeIndependent { get; } = new();
     public class BecomeIndependentAction : PersonalActionBase
     {
         public override bool CanSelect(Character chara) =>

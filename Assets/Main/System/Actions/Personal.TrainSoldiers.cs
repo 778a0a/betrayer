@@ -13,7 +13,7 @@ partial class PersonalActions
     /// <summary>
     /// 兵士を訓練します。
     /// </summary>
-    public static TrainSoldiersAction TrainSoldiers { get; } = new();
+    public TrainSoldiersAction TrainSoldiers { get; } = new();
     public class TrainSoldiersAction : PersonalActionBase
     {
         public override int Cost(Character chara)

@@ -14,7 +14,7 @@ partial class MartialActions
     /// <summary>
     /// 討伐
     /// </summary>
-    public static SubdueAction Subdue { get; } = new();
+    public SubdueAction Subdue { get; } = new();
     public class SubdueAction : MartialActionBase
     {
         public override bool CanSelect(Character chara) => World.IsRuler(chara);

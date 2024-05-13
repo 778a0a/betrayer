@@ -14,7 +14,7 @@ partial class MartialActions
     /// <summary>
     /// 私闘
     /// </summary>
-    public static PrivateFightAction PrivateFight { get; } = new();
+    public PrivateFightAction PrivateFight { get; } = new();
     public class PrivateFightAction : MartialActionBase
     {
         public override bool CanSelect(Character chara) => World.IsVassal(chara);

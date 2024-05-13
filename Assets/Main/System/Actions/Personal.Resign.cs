@@ -13,7 +13,7 @@ partial class PersonalActions
     /// <summary>
     /// 勢力を捨てて自由になります。
     /// </summary>
-    public static ResignAction Resign { get; } = new();
+    public ResignAction Resign { get; } = new();
     public class ResignAction : PersonalActionBase
     {
         public override bool CanSelect(Character chara) => World.IsVassal(chara); // Rulerは戦略フェイズで可能

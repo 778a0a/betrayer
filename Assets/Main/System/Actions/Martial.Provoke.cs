@@ -14,7 +14,7 @@ partial class MartialActions
     /// <summary>
     /// 挑発
     /// </summary>
-    public static ProvokeAction Provoke { get; } = new();
+    public ProvokeAction Provoke { get; } = new();
     public class ProvokeAction : MartialActionBase
     {
         public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);

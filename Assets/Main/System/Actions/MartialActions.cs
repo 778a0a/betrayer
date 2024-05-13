@@ -11,19 +11,20 @@ using Random = UnityEngine.Random;
 
 public partial class MartialActions
 {
-    public static void Initialize(WorldData world)
+    public MartialActions(WorldData world)
     {
-        var actions = typeof(MartialActions).GetProperties()
-            .Where(p => p.PropertyType.IsSubclassOf(typeof(MartialActionBase)))
-            .Select(p => p.GetValue(null))
-            .Cast<MartialActionBase>()
-            .ToList();
-
-        foreach (var action in actions)
+        foreach (var action in Actions)
         {
             action.World = world;
         }
     }
+
+    private MartialActionBase[] Actions => GetType()
+        .GetProperties()
+        .Where(p => p.PropertyType.IsSubclassOf(typeof(MartialActionBase)))
+        .Select(p => p.GetValue(this))
+        .Cast<MartialActionBase>()
+        .ToArray();
 }
 
 public class MartialActionBase

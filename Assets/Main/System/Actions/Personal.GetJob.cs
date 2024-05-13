@@ -13,7 +13,7 @@ partial class PersonalActions
     /// <summary>
     /// 既存勢力に仕官します。
     /// </summary>
-    public static GetJobAction GetJob { get; } = new();
+    public GetJobAction GetJob { get; } = new();
     public class GetJobAction : PersonalActionBase
     {
         public override bool CanSelect(Character chara) => World.IsFree(chara);

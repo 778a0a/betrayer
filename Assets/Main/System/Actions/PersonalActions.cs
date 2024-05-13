@@ -10,19 +10,20 @@ using Random = UnityEngine.Random;
 
 public partial class PersonalActions
 {
-    public static void Initialize(WorldData world)
+    public PersonalActions(WorldData world)
     {
-        var actions = typeof(PersonalActions).GetProperties()
-            .Where(p => p.PropertyType.IsSubclassOf(typeof(PersonalActionBase)))
-            .Select(p => p.GetValue(null))
-            .Cast<PersonalActionBase>()
-            .ToList();
-
-        foreach (var action in actions)
+        foreach (var action in Actions)
         {
             action.World = world;
         }
     }
+
+    private PersonalActionBase[] Actions => GetType()
+        .GetProperties()
+        .Where(p => p.PropertyType.IsSubclassOf(typeof(PersonalActionBase)))
+        .Select(p => p.GetValue(this))
+        .Cast<PersonalActionBase>()
+        .ToArray();
 }
 
 public class PersonalActionBase

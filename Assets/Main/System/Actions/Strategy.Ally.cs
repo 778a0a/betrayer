@@ -13,7 +13,7 @@ partial class StrategyActions
     /// <summary>
     /// 同盟を結びます。
     /// </summary>
-    public static AllyAction Ally { get; } = new();
+    public AllyAction Ally { get; } = new();
     public class AllyAction : StrategyActionBase
     {
         public override int Cost(Character chara) => 5;

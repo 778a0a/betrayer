@@ -13,7 +13,7 @@ partial class StrategyActions
     /// <summary>
     /// 勢力を捨てて放浪します。
     /// </summary>
-    public static ResignAction Resign { get; } = new();
+    public ResignAction Resign { get; } = new();
     public class ResignAction : StrategyActionBase
     {
         public override int Cost(Character chara) => 1;

@@ -37,6 +37,9 @@ public class PhaseBase
     public bool IsFree(Character chara) => World.IsFree(chara);
 
     public Test Test { get; set; }
+    public StrategyActions StrategyActions => Test.StrategyActions;
+    public PersonalActions PersonalActions => Test.PersonalActions;
+    public MartialActions MartialActions => Test.MartialActions;
 
     public virtual async Awaitable Phase() { }
 }

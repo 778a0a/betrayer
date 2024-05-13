@@ -108,11 +108,11 @@ public partial class IndividualPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
-        buttonHireSoldier.SetEnabled(PersonalActions.HireSoldier.CanDo(chara));
-        buttonTrainSoldiers.SetEnabled(PersonalActions.TrainSoldiers.CanDo(chara));
-        buttonGetJob.SetEnabled(PersonalActions.GetJob.CanDo(chara));
-        buttonResign.SetEnabled(PersonalActions.Resign.CanDo(chara));
-        buttonRebel.SetEnabled(PersonalActions.Rebel.CanDo(chara));
-        buttonBecomeIndependent.SetEnabled(PersonalActions.BecomeIndependent.CanDo(chara));
+        buttonHireSoldier.SetEnabled(Test.Instance.PersonalActions.HireSoldier.CanDo(chara));
+        buttonTrainSoldiers.SetEnabled(Test.Instance.PersonalActions.TrainSoldiers.CanDo(chara));
+        buttonGetJob.SetEnabled(Test.Instance.PersonalActions.GetJob.CanDo(chara));
+        buttonResign.SetEnabled(Test.Instance.PersonalActions.Resign.CanDo(chara));
+        buttonRebel.SetEnabled(Test.Instance.PersonalActions.Rebel.CanDo(chara));
+        buttonBecomeIndependent.SetEnabled(Test.Instance.PersonalActions.BecomeIndependent.CanDo(chara));
     }
 }
