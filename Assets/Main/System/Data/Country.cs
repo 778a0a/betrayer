@@ -40,7 +40,16 @@ public class Country
     /// <summary>
     /// 雇える配下の最大数
     /// </summary>
-    public int VassalCountMax => Math.Clamp((int)Math.Ceiling(Areas.Count / 2f), 2, 8);
+    public int VassalCountMax => Areas.Count switch
+    {
+        <= 4 => 2,
+        <= 6 => 3,
+        <= 9 => 4,
+        <= 13 => 5,
+        <= 18 => 6,
+        <= 24 => 7,
+        _ => 8,
+    };
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 
