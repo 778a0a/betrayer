@@ -53,6 +53,16 @@ public class Country
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 
+    public int TotalIncome => 10 + Areas.Select(IncomeOf).Sum();
+    private static int IncomeOf(Area a) => a.Terrain switch
+    {
+        Terrain.Plain => 10,
+        Terrain.Hill => 7,
+        Terrain.Forest => 5,
+        Terrain.Mountain => 3,
+        Terrain.Fort => 20,
+        _ => 1,
+    };
     public override string ToString() => $"Country ID:{Id} ({Areas.Count} areas) {Ruler.Name}";
 
     /// <summary>

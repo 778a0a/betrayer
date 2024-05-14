@@ -21,7 +21,7 @@ public partial class CountryRulerInfo
         imageCountryColor.style.backgroundColor = new StyleColor(Color.white);
         labelRulerName.text = country.Ruler.Name;
         labelAreaCount.text = country.Areas.Count.ToString();
-        labelTotalIncome.text = "xxx";
+        labelTotalIncome.text = country.TotalIncome.ToString();
         labelTotalGold.text = country.Members.Select(m => m.Gold).Sum().ToString();
         labelMemberCount.text = country.Members.Count().ToString();
         labelSoldierCount.text = country.Members.SelectMany(m => m.Force.Soldiers.Select(s => s.Hp)).Sum().ToString();
