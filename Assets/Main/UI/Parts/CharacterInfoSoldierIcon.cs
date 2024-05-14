@@ -30,12 +30,17 @@ public partial class CharacterInfoSoldierIcon
         {
             panelContainer.style.backgroundColor = Util.Color("#888");
             labelHp.text = "--";
+            labelLevel.text = "--";
+            HPBar.style.visibility = Visibility.Hidden;
             return;
         }
+        HPBar.style.visibility = Visibility.Visible;
 
         panelContainer.style.backgroundColor = levelToColor[s.Level];
         panelContainer.tooltip = s.ToString();
         labelLevel.text = s.Level.ToString();
         labelHp.text = s.Hp.ToString();
+
+        HPBarValue.style.width = new Length(s.Hp * 100 / s.MaxHp, LengthUnit.Percent);
     }
 }

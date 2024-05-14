@@ -8,7 +8,7 @@ public partial class CharacterInfo
 {
     public Character Character { get; private set; }
 
-    private const int SoldierIconCount = 10;
+    private const int SoldierIconCount = 15;
     private CharacterInfoSoldierIcon SoldierIconOf(int index) => index switch
     {
         0 => soldier00,
@@ -21,6 +21,11 @@ public partial class CharacterInfo
         7 => soldier07,
         8 => soldier08,
         9 => soldier09,
+        10 => soldier10,
+        11 => soldier11,
+        12 => soldier12,
+        13 => soldier13,
+        14 => soldier14,
         _ => throw new System.ArgumentOutOfRangeException(),
     };
 

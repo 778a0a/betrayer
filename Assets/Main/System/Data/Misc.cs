@@ -58,7 +58,7 @@ public class DefaultData
     {
         return new Force()
         {
-            Soldiers = Enumerable.Range(0, 10)
+            Soldiers = Enumerable.Range(0, 15)
                 .Select(i => new Soldier() { Level = 1, IsEmptySlot = false })
                 .ToArray(),
         };

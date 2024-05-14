@@ -52,6 +52,16 @@ public partial class CharacterInfo
 
     public CharacterInfoSoldierIcon soldier09 { get; private set; }
 
+    public CharacterInfoSoldierIcon soldier10 { get; private set; }
+
+    public CharacterInfoSoldierIcon soldier11 { get; private set; }
+
+    public CharacterInfoSoldierIcon soldier12 { get; private set; }
+
+    public CharacterInfoSoldierIcon soldier13 { get; private set; }
+
+    public CharacterInfoSoldierIcon soldier14 { get; private set; }
+
     public VisualElement Soldiers { get; private set; }
 
     public VisualElement VisualElement { get; private set; }
@@ -82,6 +92,11 @@ public partial class CharacterInfo
         soldier07 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier07"));
         soldier08 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier08"));
         soldier09 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier09"));
+        soldier10 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier10"));
+        soldier11 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier11"));
+        soldier12 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier12"));
+        soldier13 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier13"));
+        soldier14 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier14"));
         Soldiers = Root?.Q<VisualElement>("Soldiers");
         VisualElement = Root?.Q<VisualElement>("VisualElement");
         imageChara = Root?.Q<Image>("imageChara");

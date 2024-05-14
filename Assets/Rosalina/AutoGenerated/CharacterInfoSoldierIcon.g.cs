@@ -18,7 +18,13 @@ public partial class CharacterInfoSoldierIcon
 
     public Label labelHp { get; private set; }
 
+    public VisualElement HPBarValue { get; private set; }
+
+    public VisualElement HPBarBackground { get; private set; }
+
     public VisualElement panelContainer { get; private set; }
+
+    public VisualElement HPBar { get; private set; }
 
     public VisualElement Root { get; }
 
@@ -27,6 +33,9 @@ public partial class CharacterInfoSoldierIcon
         Root = root;
         labelLevel = Root?.Q<Label>("labelLevel");
         labelHp = Root?.Q<Label>("labelHp");
+        HPBarValue = Root?.Q<VisualElement>("HPBarValue");
+        HPBarBackground = Root?.Q<VisualElement>("HPBarBackground");
         panelContainer = Root?.Q<VisualElement>("panelContainer");
+        HPBar = Root?.Q<VisualElement>("HPBar");
     }
 }
