@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.LightTransport;
 using UnityEngine.Tilemaps;
@@ -14,12 +15,18 @@ public class TilemapManager : MonoBehaviour
     [SerializeField] private Tilemap terrainTilemap;
     [SerializeField] private Tilemap verticalConnectionTilemap;
     [SerializeField] private Tilemap horizontalConnectionTilemap;
+    [SerializeField] private Tilemap uiTilemap;
 
     public TilemapHelper Helper { get; private set; }
 
     private void Awake()
     {
-        Helper = new TilemapHelper(tilesHolder, terrainTilemap, verticalConnectionTilemap, horizontalConnectionTilemap);
+        Helper = new TilemapHelper(
+            tilesHolder,
+            terrainTilemap,
+            verticalConnectionTilemap,
+            horizontalConnectionTilemap,
+            uiTilemap);
     }
 
     void Update()
@@ -50,6 +57,16 @@ public class TilemapManager : MonoBehaviour
             }
         }
     }
+
+    public void SetExhausted(Country country, bool exhausted)
+    {
+        foreach (var area in country.Areas)
+        {
+            var pos = area.Position;
+            var tile = Helper.GetUITile(pos); 
+            tile.SetExhausted(exhausted);
+        }
+    }
 }
 
 public class TilemapHelper
@@ -58,16 +75,30 @@ public class TilemapHelper
     private readonly Tilemap terrainTilemap;
     private readonly Tilemap verticalConnectionTilemap;
     private readonly Tilemap horizontalConnectionTilemap;
+    private readonly Tilemap uiTilemap;
+    private readonly UITile[] uiTiles;
+
     public TilemapHelper(
         TilesHolder tilesHolder,
         Tilemap terrainTilemap,
         Tilemap verticalConnectionTilemap,
-        Tilemap horizontalConnectionTilemap)
+        Tilemap horizontalConnectionTilemap,
+        Tilemap uiTilemap)
     {
         this.tilesHolder = tilesHolder;
         this.terrainTilemap = terrainTilemap;
         this.verticalConnectionTilemap = verticalConnectionTilemap;
         this.horizontalConnectionTilemap = horizontalConnectionTilemap;
+        this.uiTilemap = uiTilemap;
+        uiTiles = uiTilemap.GetComponentsInChildren<UITile>()
+            .OrderBy(t => -t.transform.position.y)
+            .ThenBy(t => t.transform.position.x)
+            .ToArray();
+    }
+
+    public UITile GetUITile(MapPosition pos)
+    {
+        return uiTiles[TilemapData.Width * pos.y + pos.x];
     }
 
     public Sprite GetCountryImage(Country country)

@@ -56,6 +56,7 @@ public class MartialActionPhase : PhaseBase
                         await MartialActions.Attack.Do(chara);
                     }
                 }
+                GameCore.Instance.Tilemap.SetExhausted(country, true);
             }
             // 配下の場合
             else
@@ -72,6 +73,11 @@ public class MartialActionPhase : PhaseBase
                 {
                 }
             }
+        }
+
+        foreach (var country in Countries)
+        {
+            GameCore.Instance.Tilemap.SetExhausted(country, false);
         }
         Debug.Log("[軍事フェイズ] 終了");
     }

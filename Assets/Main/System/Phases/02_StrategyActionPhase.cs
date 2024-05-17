@@ -69,6 +69,8 @@ public class StrategyActionPhase : PhaseBase
                         Debug.Log($"[戦略フェイズ] 給料配分を調整しました。");
                     }
                 }
+
+                GameCore.Instance.Tilemap.SetExhausted(country, true);
             }
             // 配下の場合
             else
@@ -84,6 +86,11 @@ public class StrategyActionPhase : PhaseBase
                     // 忠誠度が一定以下なら、一定確率で反乱を起こす。
                 }
             }
+        }
+
+        foreach (var country in Countries)
+        {
+            GameCore.Instance.Tilemap.SetExhausted(country, false);
         }
         Debug.Log("[戦略フェイズ] 終了");
     }

@@ -171,6 +171,7 @@ MonoBehaviour:
   terrainTilemap: {fileID: 1314475715}
   verticalConnectionTilemap: {fileID: 725259006}
   horizontalConnectionTilemap: {fileID: 1706717992}
+  uiTilemap: {fileID: 1034299569}
 --- !u!1 &243768369
 GameObject:
   m_ObjectHideFlags: 0
