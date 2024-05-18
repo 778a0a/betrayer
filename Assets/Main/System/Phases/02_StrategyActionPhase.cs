@@ -26,7 +26,7 @@ public class StrategyActionPhase : PhaseBase
         {
             var chara = charas[i];
             var country = World.CountryOf(chara);
-            GameCore.Instance.Tilemap.SetActiveCountry(country);
+            Core.Tilemap.SetActiveCountry(country);
 
             // 君主の場合
             if (IsRuler(chara))
@@ -72,7 +72,7 @@ public class StrategyActionPhase : PhaseBase
                     }
                 }
 
-                GameCore.Instance.Tilemap.SetExhausted(country, true);
+                Core.Tilemap.SetExhausted(country, true);
             }
             // 配下の場合
             else
@@ -90,8 +90,8 @@ public class StrategyActionPhase : PhaseBase
             }
         }
 
-        GameCore.Instance.Tilemap.ResetExhausted();
-        GameCore.Instance.Tilemap.ResetActiveCountry();
+        Core.Tilemap.ResetExhausted();
+        Core.Tilemap.ResetActiveCountry();
         Debug.Log("[戦略フェイズ] 終了");
     }
 }

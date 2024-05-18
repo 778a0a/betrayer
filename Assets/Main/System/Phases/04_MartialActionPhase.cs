@@ -25,7 +25,7 @@ public class MartialActionPhase : PhaseBase
         {
             var chara = charas[i];
             var country = World.CountryOf(chara);
-            GameCore.Instance.Tilemap.SetActiveCountry(country);
+            Core.Tilemap.SetActiveCountry(country);
 
             // 君主の場合
             if (IsRuler(chara))
@@ -56,7 +56,7 @@ public class MartialActionPhase : PhaseBase
                         await MartialActions.Attack.Do(chara);
                     }
                 }
-                GameCore.Instance.Tilemap.SetExhausted(country, true);
+                Core.Tilemap.SetExhausted(country, true);
             }
             // 配下の場合
             else
@@ -75,8 +75,8 @@ public class MartialActionPhase : PhaseBase
             }
         }
 
-        GameCore.Instance.Tilemap.ResetActiveCountry();
-        GameCore.Instance.Tilemap.ResetExhausted();
+        Core.Tilemap.ResetActiveCountry();
+        Core.Tilemap.ResetExhausted();
         Debug.Log("[軍事フェイズ] 終了");
     }
 }
