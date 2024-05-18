@@ -303,37 +303,45 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     private async Awaitable DoMainLoop()
     {
-        while (true)
+        try
         {
-            await HoldIfNeeded();
-            await phases.Start.Phase();
-            
-            await HoldIfNeeded();
-            await phases.Income.Phase();
-
-            await HoldIfNeeded();
-            await phases.StrategyAction.Phase();
-
-            await HoldIfNeeded();
-            await phases.PersonalAction.Phase();
-
-            await HoldIfNeeded();
-            await phases.MartialAction.Phase();
-
-            tilemap.DrawCountryTile();
-            if (world.Countries.Count == 1)
+            while (true)
             {
-                Debug.Log($"ゲーム終了 勝者: {world.Countries[0]}");
-                return;
-            }
-            
-            await Awaitable.WaitForSecondsAsync(wait);
-            
-            if (holdOnTurnEnd)
-            {
-                hold = true;
                 await HoldIfNeeded();
+                await phases.Start.Phase();
+
+                await HoldIfNeeded();
+                await phases.Income.Phase();
+
+                await HoldIfNeeded();
+                await phases.StrategyAction.Phase();
+
+                await HoldIfNeeded();
+                await phases.PersonalAction.Phase();
+
+                await HoldIfNeeded();
+                await phases.MartialAction.Phase();
+
+                tilemap.DrawCountryTile();
+                if (world.Countries.Count == 1)
+                {
+                    Debug.Log($"ゲーム終了 勝者: {world.Countries[0]}");
+                    return;
+                }
+
+                await Awaitable.WaitForSecondsAsync(wait);
+
+                if (holdOnTurnEnd)
+                {
+                    hold = true;
+                    await HoldIfNeeded();
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("メインループでエラー");
+            Debug.LogException(ex);
         }
     }
 }
