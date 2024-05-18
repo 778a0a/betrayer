@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.LightTransport;
 using UnityEngine.Tilemaps;
+using static UnityEditor.PlayerSettings;
 
 public class TilemapManager : MonoBehaviour
 {
@@ -29,17 +30,36 @@ public class TilemapManager : MonoBehaviour
             uiTilemap);
     }
 
+    private MapPosition currentMousePosition = MapPosition.Of(0, 0);
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.GetRayIntersection(ray);
+        if (hit.collider != null)
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var hit = Physics2D.GetRayIntersection(ray);
-            if (hit.collider != null)
+            var posGrid = grid.WorldToCell(hit.point);
+            var pos = MapPosition.FromGrid(posGrid);
+
+            if (currentMousePosition != pos)
             {
-                var posGrid = grid.WorldToCell(hit.point);
-                var pos = MapPosition.FromGrid(posGrid);
+                var prevPos = currentMousePosition;
+                currentMousePosition = pos;
+                if (prevPos.IsValid) Helper.GetUITile(prevPos).SetCellBorder(false);
+                Helper.GetUITile(pos).SetCellBorder(true);
+
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
                 TileClick?.Invoke(this, pos);
+            }
+        }
+        else
+        {
+            if (currentMousePosition.IsValid)
+            {
+                Helper.GetUITile(currentMousePosition).SetCellBorder(false);
+                currentMousePosition = MapPosition.Invalid;
             }
         }
     }

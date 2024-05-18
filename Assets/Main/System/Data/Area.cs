@@ -55,6 +55,9 @@ public struct MapPosition : IEquatable<MapPosition>
     public static bool operator !=(MapPosition left, MapPosition right) => !(left == right);
     public override readonly bool Equals(object obj) => obj is MapPosition other && Equals(other);
     public override readonly int GetHashCode() => HashCode.Combine(x, y);
+
+    public static readonly MapPosition Invalid = new() { x = -1, y = -1 };
+    public readonly bool IsValid => this != Invalid;
 }
 
 /// <summary>
