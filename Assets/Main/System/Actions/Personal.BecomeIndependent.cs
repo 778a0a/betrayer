@@ -54,6 +54,8 @@ partial class PersonalActions
             };
             oldCountry.Vassals.Remove(chara);
             World.Countries.Add(newCountry);
+
+            Core.Tilemap.DrawCountryTile();
         }
     }
 }

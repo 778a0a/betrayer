@@ -43,6 +43,8 @@ partial class PersonalActions
                 country.Vassals.Remove(chara);
                 country.RecalculateSalary();
             }
+
+            Core.Tilemap.DrawCountryTile();
         }
     }
 }

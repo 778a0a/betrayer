@@ -43,6 +43,8 @@ partial class PersonalActions
                 var country = countries.RandomPick();
                 country.AddVassal(chara);
             }
+
+            Core.Tilemap.DrawCountryTile();
         }
     }
 }

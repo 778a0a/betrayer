@@ -53,6 +53,8 @@ partial class MartialActions
                 BattleManager.Recover(chara, false);
                 BattleManager.Recover(target, true);
             }
+
+            Core.Tilemap.DrawCountryTile();
         }
     }
 }

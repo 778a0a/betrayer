@@ -53,6 +53,7 @@ partial class StrategyActions
                 country.RecalculateSalary();
             }
 
+            Core.Tilemap.DrawCountryTile();
         }
     }
 }

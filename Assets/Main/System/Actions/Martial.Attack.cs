@@ -99,7 +99,7 @@ partial class MartialActions
 
                 country.Areas.Add(targetArea);
                 targetCountry.Areas.Remove(targetArea);
-                Tilemap.DrawCountryTile(World);
+                Tilemap.DrawCountryTile();
                 // 領土がなくなったら国を削除する。
                 if (targetCountry.Areas.Count == 0)
                 {
@@ -122,7 +122,7 @@ partial class MartialActions
             {
                 UI.ShowMartialUI();
                 UI.MartialPhase.SetData(chara, World);
-                Tilemap.DrawCountryTile(World);
+                Tilemap.DrawCountryTile();
             }
         }
 

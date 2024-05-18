@@ -78,6 +78,8 @@ partial class StrategyActions
 
                 country.AddVassal(newVassal);
             }
+
+            Core.Tilemap.DrawCountryTile();
         }
     }
 }

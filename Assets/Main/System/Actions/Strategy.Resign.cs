@@ -35,6 +35,8 @@ partial class StrategyActions
             country.Ruler = successor;
             country.RecalculateSalary();
             Debug.Log($"{chara.Name} が勢力を捨てて、{successor.Name} が新たな君主となりました。");
+
+            Core.Tilemap.DrawCountryTile();
         }
     }
 }

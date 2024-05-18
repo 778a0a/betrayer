@@ -85,7 +85,7 @@ partial class MartialActions
                         if (c.Ally == country) c.Ally = null;
                     }
                 }
-                Tilemap.DrawCountryTile(World);
+                Tilemap.DrawCountryTile();
             }
             else
             {

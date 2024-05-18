@@ -96,10 +96,10 @@ public class TilemapManager : MonoBehaviour
     }
 
 
-    public void DrawCountryTile(WorldData world)
+    public void DrawCountryTile()
     {
         var index2Tile = tilesHolder.countries;
-        foreach (var country in world.Countries)
+        foreach (var country in World.Countries)
         {
             var colorIndex = country.ColorIndex;
             var isPlayer = country.IsPlayerCountry;

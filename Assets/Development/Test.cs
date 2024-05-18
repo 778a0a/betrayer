@@ -47,7 +47,7 @@ public class Test : MonoBehaviour
         FaceImageManager.Instance.ClearCache();
 
         GameCore.Instance = core = new GameCore(MainUI, tilemap, this);
-        tilemap.DrawCountryTile(core.World);
+        tilemap.DrawCountryTile();
 
         MainUI.MainUIButtonClick += MainUI_MainUIButtonClick;
         MainUI.StrategyPhase.ActionButtonClicked += StrategyPhaseScreen_ActionButtonClicked;
@@ -320,7 +320,7 @@ public class Test : MonoBehaviour
             await HoldIfNeeded();
             await phases.MartialAction.Phase();
 
-            tilemap.DrawCountryTile(world);
+            tilemap.DrawCountryTile();
             if (world.Countries.Count == 1)
             {
                 Debug.Log($"ゲーム終了 勝者: {world.Countries[0]}");
