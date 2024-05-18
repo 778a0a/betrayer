@@ -178,7 +178,7 @@ public class TilemapManager : MonoBehaviour
     {
         foreach (var country in World.Countries)
         {
-            var canSelect = shouldEnable(country);
+            var canSelect = shouldEnable?.Invoke(country) ?? null;
             foreach (var area in country.Areas)
             {
                 var pos = area.Position;
@@ -190,7 +190,7 @@ public class TilemapManager : MonoBehaviour
 
     public void ResetDisableIcon()
     {
-        SetDisableIcon(_ => false);
+        SetDisableIcon(null);
     }
 }
 

@@ -63,14 +63,14 @@ public partial class SelectCharacterScreen : IScreen
     }
 
 
-    public Awaitable<Character> ShowForProvoke(
+    public async Awaitable<Character> ShowForProvoke(
         string description,
         WorldData world,
         Func<Area, (bool, string)> canSelectArea)
     {
         tcs = new AwaitableCompletionSource<Character>();
         this.world = world;
-        this.predCanSelect = null;
+        predCanSelect = null;
         characterInfoTarget = null;
 
         labelDescription.text = description;
@@ -97,18 +97,19 @@ public partial class SelectCharacterScreen : IScreen
 
         }
 
-        var sub = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
-        tcs.Awaitable.GetAwaiter().OnCompleted(() =>
-        {
-            sub.Dispose();
-        });
+        using var _ = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
+        GameCore.Instance.Tilemap.SetDisableIconForAreas(a => !canSelectArea(a).Item1);
 
         // 人物情報テーブル
         CharacterTable.SetData(null, world);
         // 人物詳細
         CharacterInfo.SetData(null, world);
 
-        return tcs.Awaitable;
+        var selection = await tcs.Awaitable;
+
+        GameCore.Instance.Tilemap.ResetDisableIcon();
+
+        return selection;
     }
 
 }

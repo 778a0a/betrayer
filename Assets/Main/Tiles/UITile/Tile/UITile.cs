@@ -25,10 +25,18 @@ public class UITile : MonoBehaviour
         iconCellBorder.SetActive(value);
     }
 
-    public void SetDisableSelection(bool value)
+    public void SetDisableSelection(bool? disable)
     {
-        iconEnablelection.SetActive(!value);
-        iconDisableSelection.SetActive(value);
+        if (disable == null)
+        {
+            iconDisableSelection.SetActive(false);
+            iconEnablelection.SetActive(false);
+        }
+        else
+        {
+            iconEnablelection.SetActive(!disable.Value);
+            iconDisableSelection.SetActive(disable.Value);
+        }
     }
 
     public void SetExhausted(bool value)
