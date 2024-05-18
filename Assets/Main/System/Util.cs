@@ -65,4 +65,16 @@ public static class Util
         var b = val & 0xFF;
         return new Color(r / 255f, g / 255f, b / 255f);
     }
+
+    public static IDisposable Defer(Action act)
+    {
+        return new Defer(act);
+    }
+}
+
+public class Defer : IDisposable
+{
+    private readonly Action act;
+    public Defer(Action act) => this.act = act;
+    public void Dispose() => act();
 }

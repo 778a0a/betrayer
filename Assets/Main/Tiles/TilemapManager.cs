@@ -7,7 +7,8 @@ using static UnityEditor.PlayerSettings;
 
 public class TilemapManager : MonoBehaviour
 {
-    public event EventHandler<MapPosition> TileClick;
+    private static MainUI MainUI => GameCore.Instance.MainUI;
+    private static WorldData World => GameCore.Instance.World;
 
     [SerializeField] private Grid grid;
     [SerializeField] private TilesHolder tilesHolder;
@@ -51,7 +52,7 @@ public class TilemapManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                TileClick?.Invoke(this, pos);
+                InvokeCellClickHandler(pos);
             }
         }
         else
@@ -63,6 +64,37 @@ public class TilemapManager : MonoBehaviour
             }
         }
     }
+
+    private long currentClickHandlerId = 0;
+    private EventHandler<MapPosition> cellClickHandler;
+    private void DefaultCellClickHandler(object sender, MapPosition pos)
+    {
+        Debug.Log($"Clicked {pos}");
+        MainUI.CountryInfo.ShowCellInformation(World, pos);
+        MainUI.ShowCountryInfoScreen();
+    }
+
+    private void InvokeCellClickHandler(MapPosition pos)
+    {
+        if (cellClickHandler == null)
+        {
+            DefaultCellClickHandler(this, pos);
+            return;
+        }
+        cellClickHandler?.Invoke(this, pos);
+    }
+
+    public IDisposable SetCellClickHandler(EventHandler<MapPosition> handler)
+    {
+        var id = currentClickHandlerId++;
+        cellClickHandler = handler;
+        return Util.Defer(() =>
+        {
+            if (currentClickHandlerId != id) return;
+            cellClickHandler = null;
+        });
+    }
+
 
     public void DrawCountryTile(WorldData world)
     {

@@ -29,6 +29,8 @@ public partial class MainUI : MonoBehaviour
     public RespondCountryActionScreen RespondCountryAction { get; private set; }
     public OrganizeScreen Organize { get; private set; }
 
+    private IScreen currentScreen;
+
     private void InitializeScreens()
     {
         var screenProps = GetType()
@@ -83,24 +85,42 @@ public partial class MainUI : MonoBehaviour
         HideAllUI();
         StrategyPhase.Root.style.display = DisplayStyle.Flex;
         StrategyPhase.Refresh();
+        currentScreen = StrategyPhase;
     }
 
     public void ShowIndividualUI()
     {
         HideAllUI();
         IndividualPhase.Root.style.display = DisplayStyle.Flex;
+        currentScreen = IndividualPhase;
     }
 
     public void ShowMartialUI()
     {
         HideAllUI();
         MartialPhase.Root.style.display = DisplayStyle.Flex;
+        currentScreen = MartialPhase;
     }
 
+
+    private IScreen prevScreenForCountryScreen;
     public void ShowCountryInfoScreen()
     {
+        if (currentScreen == CountryInfo) return;
+
+        prevScreenForCountryScreen = currentScreen;
         HideAllUI();
         CountryInfo.Root.style.display = DisplayStyle.Flex;
+        currentScreen = CountryInfo;
+
+        CountryInfo.CloseButtonClicked += OnCloseButtonClicked;
+        void OnCloseButtonClicked(object sender, EventArgs e)
+        {
+            CountryInfo.CloseButtonClicked -= OnCloseButtonClicked;
+            CountryInfo.Root.style.display = DisplayStyle.None;
+            prevScreenForCountryScreen.Root.style.display = DisplayStyle.Flex;
+            currentScreen = prevScreenForCountryScreen;
+        }
     }
 
     public Awaitable<Character> ShowSearchResult(Character[] charas, WorldData world)

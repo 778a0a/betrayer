@@ -32,8 +32,6 @@ public class Test : MonoBehaviour
     private PersonalActions PersonalActions => core.PersonalActions;
     private MartialActions MartialActions => core.MartialActions;
 
-    private object prevUI = null;
-
     private void Awake()
     {
         Instance = this;
@@ -50,30 +48,11 @@ public class Test : MonoBehaviour
 
         GameCore.Instance = core = new GameCore(MainUI, tilemap, this);
         tilemap.DrawCountryTile(core.World);
-        tilemap.TileClick += (sender, pos) =>
-        {
-            MainUI.CountryInfo.ShowCellInformation(world, pos);
-        };
 
         MainUI.MainUIButtonClick += MainUI_MainUIButtonClick;
         MainUI.StrategyPhase.ActionButtonClicked += StrategyPhaseScreen_ActionButtonClicked;
         MainUI.IndividualPhase.ActionButtonClicked += IndividualPhaseScreen_ActionButtonClicked;
         MainUI.MartialPhase.ActionButtonClicked += MartialPhaseScreen_ActionButtonClicked;
-        MainUI.CountryInfo.CloseButtonClicked += (sender, e) =>
-        {
-            if (prevUI == MainUI.IndividualPhase)
-            { 
-                MainUI.ShowIndividualUI();
-            }
-            else if (prevUI == MainUI.StrategyPhase)
-            {
-                MainUI.ShowStrategyUI();
-            }
-            else if (prevUI == MainUI.MartialPhase)
-            {
-                MainUI.ShowMartialUI();
-            }
-        };
 
         hold = false;
         holdOnTurnEnd = false;
@@ -89,7 +68,6 @@ public class Test : MonoBehaviour
         {
             case MartialPhaseScreen.ActionButton.ShowInfo:
                 MainUI.ShowCountryInfoScreen();
-                prevUI = mui;
                 break;
             case MartialPhaseScreen.ActionButton.Attack:
                 if (MartialActions.Attack.CanDo(chara))
@@ -142,7 +120,6 @@ public class Test : MonoBehaviour
         {
             case StrategyPhaseScreen.ActionButton.ShowInfo:
                 MainUI.ShowCountryInfoScreen();
-                prevUI = straUI;
                 break;
             case StrategyPhaseScreen.ActionButton.Organize:
                 if (StrategyActions.Organize.CanDo(chara))
@@ -195,7 +172,6 @@ public class Test : MonoBehaviour
         {
             case IndividualPhaseScreen.ActionButton.ShowInfo:
                 MainUI.ShowCountryInfoScreen();
-                prevUI = indivUI;
                 break;
             case IndividualPhaseScreen.ActionButton.HireSoldier:
                 if (PersonalActions.HireSoldier.CanDo(chara))

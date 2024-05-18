@@ -70,10 +70,10 @@ public partial class SelectCountryScreen : IScreen
 
         labelDescription.text = description;
 
-        GameCore.Instance.Tilemap.TileClick += OnTileClick;
+        var sub = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
         tcs.Awaitable.GetAwaiter().OnCompleted(() =>
         {
-            GameCore.Instance.Tilemap.TileClick -= OnTileClick;
+            sub.Dispose();
         });
 
         // 勢力情報

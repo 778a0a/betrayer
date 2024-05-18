@@ -97,10 +97,10 @@ public partial class SelectCharacterScreen : IScreen
 
         }
 
-        GameCore.Instance.Tilemap.TileClick += OnTileClick;
+        var sub = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
         tcs.Awaitable.GetAwaiter().OnCompleted(() =>
         {
-            GameCore.Instance.Tilemap.TileClick -= OnTileClick;
+            sub.Dispose();
         });
 
         // 人物情報テーブル
