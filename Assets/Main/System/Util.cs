@@ -70,6 +70,14 @@ public static class Util
     {
         return new Defer(act);
     }
+
+    /// <summary>
+    /// awaitしないAwaitable呼び出しの警告を抑制するためのメソッド。
+    /// </summary>
+    public static void Foreget(this Awaitable _)
+    {
+        // 何もしない。
+    }
 }
 
 public class Defer : IDisposable

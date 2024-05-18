@@ -53,6 +53,8 @@ public class Country
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 
+    public bool IsPlayerCountry => Members.Any(m => m.IsPlayer);
+
     public int TotalIncome => 10 + Areas.Select(IncomeOf).Sum();
     private static int IncomeOf(Area a) => a.Terrain switch
     {

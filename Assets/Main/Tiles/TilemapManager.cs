@@ -102,10 +102,12 @@ public class TilemapManager : MonoBehaviour
         foreach (var country in world.Countries)
         {
             var colorIndex = country.ColorIndex;
+            var isPlayer = country.IsPlayerCountry;
             foreach (var area in country.Areas)
             {
                 var pos = area.Position;
                 countryTilemap.SetTile(pos.Vector3Int, index2Tile[country.ColorIndex]);
+                Helper.GetUITile(pos).SetPlayerCountry(isPlayer);
             }
         }
     }
@@ -117,6 +119,38 @@ public class TilemapManager : MonoBehaviour
             var pos = area.Position;
             var tile = Helper.GetUITile(pos); 
             tile.SetExhausted(exhausted);
+        }
+    }
+
+    private Country currentActiveCountry;
+    public void SetActiveCountry(Country country)
+    {
+        if (currentActiveCountry == country) return;
+        var prevCountry = currentActiveCountry;
+        currentActiveCountry = country;
+
+        if (prevCountry != null)
+        {
+            foreach (var area in prevCountry.Areas)
+            {
+                var pos = area.Position;
+                var tile = Helper.GetUITile(pos);
+                tile.SetActiveCountry(false);
+            }
+        }
+
+        if (country != null)
+        {
+            // プレーヤー国の場合はすでにハイライトがあるのでスキップする。
+            if (!country.IsPlayerCountry)
+            {
+                foreach (var area in country.Areas)
+                {
+                    var pos = area.Position;
+                    var tile = Helper.GetUITile(pos);
+                    tile.SetActiveCountry(true);
+                }
+            }
         }
     }
 }

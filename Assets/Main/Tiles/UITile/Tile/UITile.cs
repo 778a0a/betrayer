@@ -5,6 +5,8 @@ public class UITile : MonoBehaviour
     [SerializeField] private GameObject iconCellBorder;
     [SerializeField] private GameObject iconDisableSelection;
     [SerializeField] private GameObject iconExhausted;
+    [SerializeField] private GameObject highlightActiveCountry;
+    [SerializeField] private GameObject highlightPlayerCountry;
 
 
     private void Awake()
@@ -12,6 +14,8 @@ public class UITile : MonoBehaviour
         iconCellBorder.SetActive(false);
         iconDisableSelection.SetActive(false);
         iconExhausted.SetActive(false);
+        highlightActiveCountry.SetActive(false);
+        highlightPlayerCountry.SetActive(false);
     }
 
     public void SetCellBorder(bool value)
@@ -27,5 +31,15 @@ public class UITile : MonoBehaviour
     public void SetExhausted(bool value)
     {
         iconExhausted.SetActive(value);
+    }
+
+    public void SetActiveCountry(bool value)
+    {
+        highlightActiveCountry.SetActive(value);
+    }
+
+    public void SetPlayerCountry(bool value)
+    {
+        highlightPlayerCountry.SetActive(value);
     }
 }

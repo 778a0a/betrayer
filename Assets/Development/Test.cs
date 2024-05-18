@@ -57,7 +57,8 @@ public class Test : MonoBehaviour
         hold = false;
         holdOnTurnEnd = false;
         setHoldOnHoldEnd = false;
-        StartCoroutine(DoMainLoop());
+        
+        DoMainLoop().Foreget();
     }
 
     private async void MartialPhaseScreen_ActionButtonClicked(object sender, MartialPhaseScreen.ActionButton e)

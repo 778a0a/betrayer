@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.LightTransport;
+using UnityEngine.Rendering;
 using UnityEngine.TextCore.Text;
 using Random = UnityEngine.Random;
 
@@ -25,6 +26,7 @@ public class StrategyActionPhase : PhaseBase
         {
             var chara = charas[i];
             var country = World.CountryOf(chara);
+            GameCore.Instance.Tilemap.SetActiveCountry(country);
 
             // 君主の場合
             if (IsRuler(chara))
