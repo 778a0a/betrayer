@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.LightTransport;
 using UnityEngine.Tilemaps;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using static UnityEditor.PlayerSettings;
 
 public class TilemapManager : MonoBehaviour
@@ -163,11 +164,21 @@ public class TilemapManager : MonoBehaviour
 
     public void ResetActiveCountry() => SetActiveCountry(null);
 
-    public void SetDisableIcon(Func<Country, bool> value)
+    public void SetDisableIconForAreas(Func<Area, bool> shouldEnable)
+    {
+        foreach (var area in World.Map.Areas)
+        {
+            var canSelect = shouldEnable(area);
+            var pos = area.Position;
+            var tile = Helper.GetUITile(pos);
+            tile.SetDisableSelection(canSelect);
+        }
+    }
+    public void SetDisableIcon(Func<Country, bool> shouldEnable)
     {
         foreach (var country in World.Countries)
         {
-            var canSelect = value(country);
+            var canSelect = shouldEnable(country);
             foreach (var area in country.Areas)
             {
                 var pos = area.Position;

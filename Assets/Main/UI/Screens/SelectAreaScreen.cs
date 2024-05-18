@@ -57,7 +57,7 @@ public partial class SelectAreaScreen : IScreen
     private Area currentSelectedArea;
     private Func<Area, (bool, string)> canSelectArea;
 
-    public Awaitable<Area> Show(
+    public async Awaitable<Area> Show(
         string description,
         WorldData world,
         Func<Area, (bool, string)> canSelectArea)
@@ -70,11 +70,8 @@ public partial class SelectAreaScreen : IScreen
 
         labelDescription.text = description;
 
-        var sub = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
-        tcs.Awaitable.GetAwaiter().OnCompleted(() =>
-        {
-            sub.Dispose();
-        });
+        GameCore.Instance.Tilemap.SetDisableIconForAreas(a => !canSelectArea(a).Item1);
+        using var _ = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
 
         // 勢力情報
         CountryRulerInfo.SetData(null, world);
@@ -83,6 +80,10 @@ public partial class SelectAreaScreen : IScreen
         // 人物詳細
         CharacterInfo.SetData(null, world);
 
-        return tcs.Awaitable;
+        var selection = await tcs.Awaitable;
+
+        GameCore.Instance.Tilemap.ResetDisableIcon();
+
+        return selection;
     }
 }
