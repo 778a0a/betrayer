@@ -21,7 +21,9 @@ public class IncomePhase : PhaseBase
         {
             // 支配領域数に応じて収入を得る。
             var totalIncome = country.TotalIncome;
-            Debug.Log($"[収入フェイズ] {country.Id} 総収入: {totalIncome}");
+
+            var sb = new StringBuilder();
+            sb.Append($"[収入フェイズ] {country.Id} 総収入:{totalIncome}|");
             var remainingIncome = totalIncome;
             // 各キャラに給料を支払う。
             foreach (var chara in country.Vassals)
@@ -29,21 +31,24 @@ public class IncomePhase : PhaseBase
                 var salary = totalIncome * chara.SalaryRatio / 100;
                 chara.Gold += salary;
                 remainingIncome -= salary;
-                Debug.Log($"[収入フェイズ] {country.Id} {chara.Name} {chara.Gold} (+{salary})");
+                sb.Append($"{chara.Name}:{chara.Gold}(+{salary})|");
             }
             country.Ruler.Gold += remainingIncome;
-            Debug.Log($"[収入フェイズ] {country.Id} {country.Ruler.Name} {country.Ruler.Gold} (+{remainingIncome})");
+            sb.Append($"{country.Ruler.Name}:{country.Ruler.Gold}(+{remainingIncome})");
+            Debug.Log(sb.ToString());
         }
 
         // 未所属の処理を行う。
-        Debug.Log($"[収入フェイズ] 未所属の処理を行います。");
+        var sb2 = new StringBuilder();
+        sb2.Append("[収入フェイズ] 未所属|");
         var freeCharas = Characters.Where(IsFree).ToArray();
         foreach (var chara in freeCharas)
         {
             var income = Random.Range(0, 5);
             chara.Gold += income;
-            Debug.Log($"[収入フェイズ] {chara.Name} {chara.Gold} (+{income})");
+            sb2.Append($"{chara.Name}:{chara.Gold}(+{income})|");
         }
+        Debug.Log(sb2.ToString());
         Debug.Log("[収入フェイズ] 終了");
     }
 }
