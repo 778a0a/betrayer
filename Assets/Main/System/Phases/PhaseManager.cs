@@ -31,7 +31,7 @@ public class PhaseBase
     public GameCore Core { get; set; }
     public WorldData World => Core.World;
     public Character[] Characters => World.Characters;
-    public List<Country> Countries => World.Countries;
+    public IList<Country> Countries => World.Countries;
     public MapGrid Map => World.Map;
     public bool IsRuler(Character chara) => World.IsRuler(chara);
     public bool IsVassal(Character chara) => World.IsVassal(chara);

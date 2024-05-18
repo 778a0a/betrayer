@@ -11,7 +11,8 @@ using Random = UnityEngine.Random;
 public class WorldData
 {
     public Character[] Characters { get; set; }
-    public List<Country> Countries { get; set; }
+    // なぜかList<T>だと、HotReload後にforeachしたときにエラーが起きるのでIList<T>を使います。
+    public IList<Country> Countries { get; set; }
     public MapGrid Map { get; set; }
 
     public bool IsRuler(Character chara) => Countries.Any(c => c.Ruler == chara);
