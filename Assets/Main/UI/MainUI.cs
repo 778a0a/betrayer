@@ -224,16 +224,11 @@ public partial class MainUI : MonoBehaviour
         return SelectCountry.Show(
             "同盟を結ぶ国を選択してください。",
             world,
-            country =>
+            target =>
             {
-                if (country.Ally != null)
-                {
-                    return (false, "すでに別の国と同盟を結んでいます。");
-                }
-                else
-                {
-                    return (true, "この国と同盟を結びますか？");
-                }
+                if (target == country) return (false, "自国です。");
+                if (target.Ally != null) return (false, "すでに別の国と同盟を結んでいます。");
+                else return (true, "この国と同盟を結びますか？");
             });
     }
 

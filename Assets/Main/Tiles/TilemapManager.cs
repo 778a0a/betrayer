@@ -153,6 +153,25 @@ public class TilemapManager : MonoBehaviour
             }
         }
     }
+
+    public void SetDisableIcon(Func<Country, bool> value)
+    {
+        foreach (var country in World.Countries)
+        {
+            var canSelect = value(country);
+            foreach (var area in country.Areas)
+            {
+                var pos = area.Position;
+                var tile = Helper.GetUITile(pos);
+                tile.SetDisableSelection(canSelect);
+            }
+        }
+    }
+
+    public void ResetDisableIcon()
+    {
+        SetDisableIcon(_ => false);
+    }
 }
 
 public class TilemapHelper

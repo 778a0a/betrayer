@@ -57,7 +57,7 @@ public partial class SelectCountryScreen : IScreen
     private Country currentSelectedCountry;
     private Func<Country, (bool, string)> canSelectCountry;
 
-    public Awaitable<Country> Show(
+    public async Awaitable<Country> Show(
         string description,
         WorldData world,
         Func<Country, (bool, string)> canSelectCountry)
@@ -70,11 +70,8 @@ public partial class SelectCountryScreen : IScreen
 
         labelDescription.text = description;
 
-        var sub = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
-        tcs.Awaitable.GetAwaiter().OnCompleted(() =>
-        {
-            sub.Dispose();
-        });
+        GameCore.Instance.Tilemap.SetDisableIcon(c => !canSelectCountry(c).Item1);
+        using var _ = GameCore.Instance.Tilemap.SetCellClickHandler(OnTileClick);
 
         // 勢力情報
         CountryRulerInfo.SetData(null, world);
@@ -83,6 +80,10 @@ public partial class SelectCountryScreen : IScreen
         // 人物詳細
         CharacterInfo.SetData(null, world);
 
-        return tcs.Awaitable;
+        var selection = await tcs.Awaitable;
+
+        GameCore.Instance.Tilemap.ResetDisableIcon();
+
+        return selection;
     }
 }
