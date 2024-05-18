@@ -121,6 +121,13 @@ public class TilemapManager : MonoBehaviour
             tile.SetExhausted(exhausted);
         }
     }
+    public void ResetExhausted()
+    {
+        foreach (var country in World.Countries)
+        {
+            SetExhausted(country, false);
+        }
+    }
 
     private Country currentActiveCountry;
     public void SetActiveCountry(Country country)
@@ -153,6 +160,8 @@ public class TilemapManager : MonoBehaviour
             }
         }
     }
+
+    public void ResetActiveCountry() => SetActiveCountry(null);
 
     public void SetDisableIcon(Func<Country, bool> value)
     {

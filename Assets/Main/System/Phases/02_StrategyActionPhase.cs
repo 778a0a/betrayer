@@ -90,10 +90,8 @@ public class StrategyActionPhase : PhaseBase
             }
         }
 
-        foreach (var country in Countries)
-        {
-            GameCore.Instance.Tilemap.SetExhausted(country, false);
-        }
+        GameCore.Instance.Tilemap.ResetExhausted();
+        GameCore.Instance.Tilemap.ResetActiveCountry();
         Debug.Log("[戦略フェイズ] 終了");
     }
 }

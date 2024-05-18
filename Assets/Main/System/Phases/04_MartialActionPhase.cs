@@ -24,8 +24,8 @@ public class MartialActionPhase : PhaseBase
         for (int i = 0; i < charas.Length; i++)
         {
             var chara = charas[i];
-
             var country = World.CountryOf(chara);
+            GameCore.Instance.Tilemap.SetActiveCountry(country);
 
             // 君主の場合
             if (IsRuler(chara))
@@ -75,10 +75,8 @@ public class MartialActionPhase : PhaseBase
             }
         }
 
-        foreach (var country in Countries)
-        {
-            GameCore.Instance.Tilemap.SetExhausted(country, false);
-        }
+        GameCore.Instance.Tilemap.ResetActiveCountry();
+        GameCore.Instance.Tilemap.ResetExhausted();
         Debug.Log("[軍事フェイズ] 終了");
     }
 }
