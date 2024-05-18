@@ -82,24 +82,18 @@ public partial class MainUI : MonoBehaviour
 
     public void ShowStrategyUI()
     {
-        HideAllUI();
-        StrategyPhase.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(StrategyPhase);
         StrategyPhase.Refresh();
-        currentScreen = StrategyPhase;
     }
 
     public void ShowIndividualUI()
     {
-        HideAllUI();
-        IndividualPhase.Root.style.display = DisplayStyle.Flex;
-        currentScreen = IndividualPhase;
+        ShowScreen(IndividualPhase);
     }
 
     public void ShowMartialUI()
     {
-        HideAllUI();
-        MartialPhase.Root.style.display = DisplayStyle.Flex;
-        currentScreen = MartialPhase;
+        ShowScreen(MartialPhase);
     }
 
 
@@ -109,9 +103,7 @@ public partial class MainUI : MonoBehaviour
         if (currentScreen == CountryInfo) return;
 
         prevScreenForCountryScreen = currentScreen;
-        HideAllUI();
-        CountryInfo.Root.style.display = DisplayStyle.Flex;
-        currentScreen = CountryInfo;
+        ShowScreen(CountryInfo);
 
         CountryInfo.CloseButtonClicked += OnCloseButtonClicked;
         void OnCloseButtonClicked(object sender, EventArgs e)
@@ -125,8 +117,7 @@ public partial class MainUI : MonoBehaviour
 
     public Awaitable<Character> ShowSearchResult(Character[] charas, WorldData world)
     {
-        HideAllUI();
-        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCharacter);
         
         return SelectCharacter.Show(
             "採用する人物をクリックしてください。",
@@ -137,8 +128,7 @@ public partial class MainUI : MonoBehaviour
 
     public Awaitable<Character> ShowFireVassalUI(Country country, WorldData world)
     {
-        HideAllUI();
-        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCharacter);
 
         return SelectCharacter.Show(
             "追放する人物をクリックしてください。",
@@ -152,8 +142,7 @@ public partial class MainUI : MonoBehaviour
     /// </summary>
     public Awaitable<Character> ShowSelectAttackerScreen(Country country, WorldData world)
     {
-        HideAllUI();
-        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCharacter);
 
         return SelectCharacter.Show(
             "侵攻を行う人物をクリックしてください。",
@@ -168,8 +157,7 @@ public partial class MainUI : MonoBehaviour
     /// </summary>
     public Awaitable<Character> ShowSubdueScreen(Country country, WorldData world)
     {
-        HideAllUI();
-        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCharacter);
 
         return SelectCharacter.Show(
             "討伐する人物をクリックしてください。",
@@ -186,8 +174,8 @@ public partial class MainUI : MonoBehaviour
         Country defenderCountry,
         WorldData world)
     {
-        HideAllUI();
-        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCharacter);
+        
         // TODO
         return SelectCharacter.Show(
             "防衛する人物をクリックしてください。",
@@ -200,8 +188,7 @@ public partial class MainUI : MonoBehaviour
 
     public Awaitable<bool> ShowOrganizeScreen(Country country, WorldData world)
     {
-        HideAllUI();
-        Organize.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(Organize);
 
         return Organize.Show(
             country,
@@ -212,8 +199,7 @@ public partial class MainUI : MonoBehaviour
         Country[] candidateCountries,
         WorldData world)
     {
-        HideAllUI();
-        SelectCharacter.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCharacter);
 
         return SelectCharacter.ShowForProvoke(
             "挑発する国を選択してください。",
@@ -233,8 +219,7 @@ public partial class MainUI : MonoBehaviour
 
     public Awaitable<Country> ShowSelectAllyScreen(Country country, WorldData world)
     {
-        HideAllUI();
-        SelectCountry.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCountry);
         
         return SelectCountry.Show(
             "同盟を結ぶ国を選択してください。",
@@ -254,8 +239,7 @@ public partial class MainUI : MonoBehaviour
 
     public Awaitable<Country> ShowGetJobScreen(WorldData world)
     {
-        HideAllUI();
-        SelectCountry.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectCountry);
 
         return SelectCountry.Show(
             "仕官する国を選択してください。",
@@ -275,8 +259,7 @@ public partial class MainUI : MonoBehaviour
 
     public Awaitable<Area> ShowSelectAreaScreen(List<Area> targetAreas, WorldData world)
     {
-        HideAllUI();
-        SelectArea.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(SelectArea);
 
         return SelectArea.Show(
             "侵攻する地域を選択してください。",
@@ -299,8 +282,7 @@ public partial class MainUI : MonoBehaviour
         Country reqester,
         WorldData world)
     {
-        HideAllUI();
-        RespondCountryAction.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(RespondCountryAction);
 
         return RespondCountryAction.Show(
             "以下の勢力から同盟の申し込みがありました。",
@@ -314,8 +296,7 @@ public partial class MainUI : MonoBehaviour
         Country reqester,
         WorldData world)
     {
-        HideAllUI();
-        RespondCountryAction.Root.style.display = DisplayStyle.Flex;
+        ShowScreen(RespondCountryAction);
 
         return RespondCountryAction.Show(
             "以下の勢力から仕官の誘いがありました。",
@@ -331,6 +312,13 @@ public partial class MainUI : MonoBehaviour
         {
             item.style.display = DisplayStyle.None;
         }
+    }
+
+    private void ShowScreen(IScreen screen)
+    {
+        HideAllUI();
+        screen.Root.style.display = DisplayStyle.Flex;
+        currentScreen = screen;
     }
 }
 
