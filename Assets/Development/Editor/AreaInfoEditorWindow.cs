@@ -17,7 +17,7 @@ public class AreaInfoEditorWindow : EditorWindow
 
     private bool isLocked = false;
 
-    [MenuItem("Window/タイル情報")]
+    [MenuItem("開発/タイル情報")]
     public static void ShowWindow()
     {
         GetWindow<AreaInfoEditorWindow>("タイル情報");

@@ -15,7 +15,7 @@ public class TilemapEditorWindow : EditorWindow
     private string filename;
     private string saveDirectory = "Assets/Development/SavedMaps";
 
-    [MenuItem("Window/Tilemap State Manager")]
+    [MenuItem("開発/Tilemap State Manager")]
     public static void ShowWindow()
     {
         var window = GetWindow<TilemapEditorWindow>();
