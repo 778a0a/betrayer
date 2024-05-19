@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public partial class SelectCountryScreen : IScreen
 {
-    private AwaitableCompletionSource<Country> tcs;
+    private ValueTaskCompletionSource<Country> tcs;
 
     public void Initialize()
     {
@@ -57,12 +58,12 @@ public partial class SelectCountryScreen : IScreen
     private Country currentSelectedCountry;
     private Func<Country, (bool, string)> canSelectCountry;
 
-    public async Awaitable<Country> Show(
+    public async ValueTask<Country> Show(
         string description,
         WorldData world,
         Func<Country, (bool, string)> canSelectCountry)
     {
-        tcs = new AwaitableCompletionSource<Country>();
+        tcs = new ValueTaskCompletionSource<Country>();
         this.world = world;
         this.canSelectCountry = canSelectCountry;
         characterInfoTarget = null;
@@ -80,7 +81,7 @@ public partial class SelectCountryScreen : IScreen
         // 人物詳細
         CharacterInfo.SetData(null, world);
 
-        var selection = await tcs.Awaitable;
+        var selection = await tcs.Task;
 
         GameCore.Instance.Tilemap.ResetDisableIcon();
 

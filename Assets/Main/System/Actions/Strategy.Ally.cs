@@ -25,7 +25,7 @@ partial class StrategyActions
                 World.Countries.Except(new[] { country }).Any(c => c.Ally == null);
         }
 
-        public override async Awaitable Do(Character chara)
+        public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara); // TODO

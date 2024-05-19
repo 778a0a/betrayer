@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public partial class SelectAreaScreen : IScreen
 {
-    private AwaitableCompletionSource<Area> tcs;
+    private ValueTaskCompletionSource<Area> tcs;
 
     public void Initialize()
     {
@@ -57,12 +58,12 @@ public partial class SelectAreaScreen : IScreen
     private Area currentSelectedArea;
     private Func<Area, (bool, string)> canSelectArea;
 
-    public async Awaitable<Area> Show(
+    public async ValueTask<Area> Show(
         string description,
         WorldData world,
         Func<Area, (bool, string)> canSelectArea)
     {
-        tcs = new AwaitableCompletionSource<Area>();
+        tcs = new ValueTaskCompletionSource<Area>();
         this.world = world;
         this.canSelectArea = canSelectArea;
         characterInfoTarget = null;
@@ -80,7 +81,7 @@ public partial class SelectAreaScreen : IScreen
         // 人物詳細
         CharacterInfo.SetData(null, world);
 
-        var selection = await tcs.Awaitable;
+        var selection = await tcs.Task;
 
         GameCore.Instance.Tilemap.ResetDisableIcon();
 

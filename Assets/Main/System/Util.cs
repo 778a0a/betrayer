@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Sources;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TextCore.Text;
@@ -72,12 +73,13 @@ public static class Util
     }
 
     /// <summary>
-    /// awaitしないAwaitable呼び出しの警告を抑制するためのメソッド。
+    /// awaitしない非同期メソッド呼び出しの警告を抑制するためのメソッド。
     /// </summary>
-    public static void Foreget(this Awaitable _)
-    {
-        // 何もしない。
-    }
+    public static void Foreget(this Awaitable _) { }
+    /// <summary>
+    /// awaitしない非同期メソッド呼び出しの警告を抑制するためのメソッド。
+    /// </summary>
+    public static void Foreget(this ValueTask _) { }
 }
 
 public class Defer : IDisposable
@@ -85,4 +87,46 @@ public class Defer : IDisposable
     private readonly Action act;
     public Defer(Action act) => this.act = act;
     public void Dispose() => act();
+}
+
+public class ValueTaskCompletionSource<TResult> : IValueTaskSource<TResult>
+{
+    private ManualResetValueTaskSourceCore<TResult> _core = new();
+    private short _token;
+
+    public ValueTaskCompletionSource() => _token = _core.Version;
+    public ValueTask<TResult> Task => new(this, _token);
+    public void SetResult(TResult result) => _core.SetResult(result);
+    public void SetException(Exception exception) => _core.SetException(exception);
+    public void Reset()
+    {
+        _token = (short)(_core.Version + 1);
+        _core.Reset();
+    }
+
+    TResult IValueTaskSource<TResult>.GetResult(short token) => _core.GetResult(token);
+    ValueTaskSourceStatus IValueTaskSource<TResult>.GetStatus(short token) => _core.GetStatus(token);
+    void IValueTaskSource<TResult>.OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags)
+        => _core.OnCompleted(continuation, state, token, flags);
+}
+
+public class ValueTaskCompletionSource : IValueTaskSource
+{
+    private ManualResetValueTaskSourceCore<int> _core = new();
+    private short _token;
+
+    public ValueTaskCompletionSource() => _token = _core.Version;
+    public ValueTask Task => new(this, _token);
+    public void SetResult() => _core.SetResult(default);
+    public void SetException(Exception exception) => _core.SetException(exception);
+    public void Reset()
+    {
+        _token = (short)(_core.Version + 1);
+        _core.Reset();
+    }
+
+    void IValueTaskSource.GetResult(short token) => _core.GetResult(token);
+    ValueTaskSourceStatus IValueTaskSource.GetStatus(short token) => _core.GetStatus(token);
+    void IValueTaskSource.OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags)
+        => _core.OnCompleted(continuation, state, token, flags);
 }

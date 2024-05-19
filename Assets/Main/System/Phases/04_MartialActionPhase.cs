@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class MartialActionPhase : PhaseBase
 {
-    public override async Awaitable Phase()
+    public override async ValueTask Phase()
     {
         Test.OnEnterMartialPhase();
 

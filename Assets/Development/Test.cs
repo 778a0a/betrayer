@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework.Constraints;
@@ -284,7 +285,7 @@ public class Test : MonoBehaviour
     private bool holdOnTurnEnd = false;
     private bool setHoldOnHoldEnd = false;
     public bool hold = false;
-    public async Awaitable HoldIfNeeded()
+    public async ValueTask HoldIfNeeded()
     {
         while (hold)
         {
@@ -293,7 +294,7 @@ public class Test : MonoBehaviour
         hold = setHoldOnHoldEnd;
     }
 
-    public async Awaitable WaitUserInteraction()
+    public async ValueTask WaitUserInteraction()
     {
         hold = true;
         await HoldIfNeeded();
@@ -301,7 +302,7 @@ public class Test : MonoBehaviour
 
 
     // Update is called once per frame
-    private async Awaitable DoMainLoop()
+    private async ValueTask DoMainLoop()
     {
         try
         {

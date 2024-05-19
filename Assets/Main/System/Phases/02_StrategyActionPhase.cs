@@ -15,7 +15,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class StrategyActionPhase : PhaseBase
 {
-    public override async Awaitable Phase()
+    public override async ValueTask Phase()
     {
         Test.OnEnterStrategyPhase();
 

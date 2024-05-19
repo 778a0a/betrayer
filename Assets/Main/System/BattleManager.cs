@@ -17,7 +17,7 @@ public class BattleManager
     /// <summary>
     /// 戦闘を行います。
     /// </summary>
-    public static async Awaitable<BattleResult> Battle(
+    public static async ValueTask<BattleResult> Battle(
         MapGrid map,
         Area sourceArea,
         Area targetArea,

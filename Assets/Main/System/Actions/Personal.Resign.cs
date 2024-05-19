@@ -21,7 +21,7 @@ partial class PersonalActions
         protected override bool CanDoCore(Character chara) =>
             World.CountryOf(chara).Vassals.Count > 0;
 
-        public override async Awaitable Do(Character chara)
+        public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);

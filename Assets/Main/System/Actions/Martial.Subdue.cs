@@ -23,7 +23,7 @@ partial class MartialActions
             !chara.IsAttacked &&
             World.CountryOf(chara).Vassals.Count > 0;
 
-        public override async Awaitable Do(Character chara)
+        public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara); // TODO

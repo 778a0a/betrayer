@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public partial class SelectCharacterScreen : IScreen
 {
-    private AwaitableCompletionSource<Character> tcs;
+    private ValueTaskCompletionSource<Character> tcs;
 
     public void Initialize()
     {
@@ -39,14 +39,14 @@ public partial class SelectCharacterScreen : IScreen
     private WorldData world;
     private Predicate<Character> predCanSelect;
 
-    public Awaitable<Character> Show(
+    public async ValueTask<Character> Show(
         string description,
         string cancelText,
         IList<Character> charas,
         WorldData world, 
         Predicate<Character> predCanSelect = null)
     {
-        tcs = new AwaitableCompletionSource<Character>();
+        tcs = new ValueTaskCompletionSource<Character>();
         this.world = world;
         this.predCanSelect = predCanSelect;
 
@@ -59,16 +59,16 @@ public partial class SelectCharacterScreen : IScreen
         // 人物詳細
         CharacterInfo.SetData(charas[0], world);
 
-        return tcs.Awaitable;
+        return await tcs.Task;
     }
 
 
-    public async Awaitable<Character> ShowForProvoke(
+    public async ValueTask<Character> ShowForProvoke(
         string description,
         WorldData world,
         Func<Area, (bool, string)> canSelectArea)
     {
-        tcs = new AwaitableCompletionSource<Character>();
+        tcs = new ValueTaskCompletionSource<Character>();
         this.world = world;
         predCanSelect = null;
         characterInfoTarget = null;
@@ -105,7 +105,7 @@ public partial class SelectCharacterScreen : IScreen
         // 人物詳細
         CharacterInfo.SetData(null, world);
 
-        var selection = await tcs.Awaitable;
+        var selection = await tcs.Task;
 
         GameCore.Instance.Tilemap.ResetDisableIcon();
 

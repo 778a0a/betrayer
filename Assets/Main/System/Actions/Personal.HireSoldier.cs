@@ -19,7 +19,7 @@ partial class PersonalActions
         public override int Cost(Character chara) => 5;
         protected override bool CanDoCore(Character chara) => chara.Force.HasEmptySlot;
 
-        public override async Awaitable Do(Character chara)
+        public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
             chara.Gold -= Cost(chara);

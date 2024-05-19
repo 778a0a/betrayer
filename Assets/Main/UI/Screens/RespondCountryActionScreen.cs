@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.LightTransport;
@@ -6,7 +7,7 @@ using UnityEngine.UIElements;
 
 public partial class RespondCountryActionScreen : IScreen
 {
-    private AwaitableCompletionSource<bool> tcs;
+    private ValueTaskCompletionSource<bool> tcs;
 
     public void Initialize()
     {
@@ -33,14 +34,14 @@ public partial class RespondCountryActionScreen : IScreen
     private Character characterInfoTarget;
     private WorldData world;
 
-    public Awaitable<bool> Show(
+    public ValueTask<bool> Show(
         string description,
         string yesText,
         string noText,
         Country country,
         WorldData world)
     {
-        tcs = new AwaitableCompletionSource<bool>();
+        tcs = new ValueTaskCompletionSource<bool>();
         this.world = world;
 
         var ruler = country.Ruler;
@@ -57,6 +58,6 @@ public partial class RespondCountryActionScreen : IScreen
         // 人物詳細
         CharacterInfo.SetData(ruler, country);
 
-        return tcs.Awaitable;
+        return tcs.Task;
     }
 }

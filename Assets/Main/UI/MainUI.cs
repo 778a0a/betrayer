@@ -115,7 +115,7 @@ public partial class MainUI : MonoBehaviour
         }
     }
 
-    public Awaitable<Character> ShowSearchResult(Character[] charas, WorldData world)
+    public ValueTask<Character> ShowSearchResult(Character[] charas, WorldData world)
     {
         ShowScreen(SelectCharacter);
         
@@ -126,7 +126,7 @@ public partial class MainUI : MonoBehaviour
             world);
     }
 
-    public Awaitable<Character> ShowFireVassalUI(Country country, WorldData world)
+    public ValueTask<Character> ShowFireVassalUI(Country country, WorldData world)
     {
         ShowScreen(SelectCharacter);
 
@@ -140,7 +140,7 @@ public partial class MainUI : MonoBehaviour
     /// <summary>
     /// 侵攻画面 攻撃側選択UIを表示します。
     /// </summary>
-    public Awaitable<Character> ShowSelectAttackerScreen(Country country, WorldData world)
+    public ValueTask<Character> ShowSelectAttackerScreen(Country country, WorldData world)
     {
         ShowScreen(SelectCharacter);
 
@@ -155,7 +155,7 @@ public partial class MainUI : MonoBehaviour
     /// <summary>
     /// 討伐画面を表示します。
     /// </summary>
-    public Awaitable<Character> ShowSubdueScreen(Country country, WorldData world)
+    public ValueTask<Character> ShowSubdueScreen(Country country, WorldData world)
     {
         ShowScreen(SelectCharacter);
 
@@ -166,7 +166,7 @@ public partial class MainUI : MonoBehaviour
             world);
     }
 
-    public Awaitable<Character> ShowSelectDefenderScreen(
+    public ValueTask<Character> ShowSelectDefenderScreen(
         Area attackerArea,
         Country attackerCountry,
         Character attacker,
@@ -186,7 +186,7 @@ public partial class MainUI : MonoBehaviour
     }
 
 
-    public Awaitable<bool> ShowOrganizeScreen(Country country, WorldData world)
+    public ValueTask<bool> ShowOrganizeScreen(Country country, WorldData world)
     {
         ShowScreen(Organize);
 
@@ -195,7 +195,7 @@ public partial class MainUI : MonoBehaviour
             world);
     }
 
-    public Awaitable<Character> ShowSelectProvokingTargetScreen(
+    public ValueTask<Character> ShowSelectProvokingTargetScreen(
         Country[] candidateCountries,
         WorldData world)
     {
@@ -217,7 +217,7 @@ public partial class MainUI : MonoBehaviour
             });
     }
 
-    public Awaitable<Country> ShowSelectAllyScreen(Country country, WorldData world)
+    public ValueTask<Country> ShowSelectAllyScreen(Country country, WorldData world)
     {
         ShowScreen(SelectCountry);
         
@@ -232,7 +232,7 @@ public partial class MainUI : MonoBehaviour
             });
     }
 
-    public Awaitable<Country> ShowGetJobScreen(WorldData world)
+    public ValueTask<Country> ShowGetJobScreen(WorldData world)
     {
         ShowScreen(SelectCountry);
 
@@ -252,7 +252,7 @@ public partial class MainUI : MonoBehaviour
             });
     }
 
-    public Awaitable<Area> ShowSelectAreaScreen(List<Area> targetAreas, WorldData world)
+    public ValueTask<Area> ShowSelectAreaScreen(List<Area> targetAreas, WorldData world)
     {
         ShowScreen(SelectArea);
 
@@ -273,7 +273,7 @@ public partial class MainUI : MonoBehaviour
             });
     }
 
-    public Awaitable<bool> ShowRespondAllyRequestScreen(
+    public ValueTask<bool> ShowRespondAllyRequestScreen(
         Country reqester,
         WorldData world)
     {
@@ -287,7 +287,7 @@ public partial class MainUI : MonoBehaviour
             world);
     }
 
-    public Awaitable<bool> ShowRespondJobOfferScreen(
+    public ValueTask<bool> ShowRespondJobOfferScreen(
         Country reqester,
         WorldData world)
     {

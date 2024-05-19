@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public partial class OrganizeScreen : IScreen
 {
-    private AwaitableCompletionSource<bool> tcs;
+    private ValueTaskCompletionSource<bool> tcs;
 
     public void Initialize()
     {
@@ -87,18 +88,18 @@ public partial class OrganizeScreen : IScreen
     private WorldData world;
     private Country country;
 
-    public Awaitable<bool> Show(
+    public ValueTask<bool> Show(
         Country country,
         WorldData world)
     {
-        tcs = new AwaitableCompletionSource<bool>();
+        tcs = new ValueTaskCompletionSource<bool>();
         this.world = world;
         this.country = country;
         characterTarget = null;
 
         Refresh();
 
-        return tcs.Awaitable;
+        return tcs.Task;
     }
 
     private void Refresh()

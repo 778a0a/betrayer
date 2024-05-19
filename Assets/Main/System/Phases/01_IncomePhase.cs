@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class IncomePhase : PhaseBase
 {
-    public override async Awaitable Phase()
+    public override async ValueTask Phase()
     {
         Debug.Log("[収入フェイズ] 開始");
         // 国毎の処理を行う。

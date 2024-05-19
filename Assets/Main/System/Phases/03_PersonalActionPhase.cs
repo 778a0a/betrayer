@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class PersonalActionPhase : PhaseBase
 {
-    public override async Awaitable Phase()
+    public override async ValueTask Phase()
     {
         Test.OnEnterIndividualPhase();
 

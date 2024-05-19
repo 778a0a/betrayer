@@ -21,7 +21,7 @@ partial class PersonalActions
         protected override bool CanDoCore(Character chara) =>
             World.Countries.Where(c => c.VassalCountMax > c.Vassals.Count).Any();
 
-        public override async Awaitable Do(Character chara)
+        public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanSelect(chara));
             Assert.IsTrue(CanDo(chara));

@@ -42,5 +42,5 @@ public class PhaseBase
     public PersonalActions PersonalActions => Core.PersonalActions;
     public MartialActions MartialActions => Core.MartialActions;
 
-    public virtual async Awaitable Phase() { }
+    public virtual ValueTask Phase() => new();
 }

@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -52,9 +53,9 @@ public partial class BattleDialog : IDialog
         labelDefenderTerrain.text = defenderTerrain.ToString();
     }
 
-    public Awaitable<bool> WaitPlayerClick()
+    public ValueTask<bool> WaitPlayerClick()
     {
-        var tcs = new AwaitableCompletionSource<bool>();
+        var tcs = new ValueTaskCompletionSource<bool>();
 
         buttonAttack.clicked += buttonAttackClicked;
         void buttonAttackClicked()
@@ -72,6 +73,6 @@ public partial class BattleDialog : IDialog
             buttonRetreat.clicked -= buttonRetreatClicked;
         }
 
-        return tcs.Awaitable;
+        return tcs.Task;
     }
 }

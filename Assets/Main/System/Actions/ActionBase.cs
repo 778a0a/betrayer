@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ActionsBase<TActionBase> where TActionBase : ActionBase
@@ -50,7 +51,7 @@ public class ActionBase
     /// <summary>
     /// アクションを実行します。
     /// </summary>
-    public virtual async Awaitable Do(Character chara) { }
+    public virtual ValueTask Do(Character chara) => new();
 }
 
 
