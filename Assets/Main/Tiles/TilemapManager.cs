@@ -86,7 +86,7 @@ public class TilemapManager : MonoBehaviour
 
     public IDisposable SetCellClickHandler(EventHandler<MapPosition> handler)
     {
-        var id = currentClickHandlerId++;
+        var id = ++currentClickHandlerId;
         cellClickHandler = handler;
         return Util.Defer(() =>
         {
