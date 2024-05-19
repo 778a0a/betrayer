@@ -1,10 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.LightTransport;
 using UnityEngine.Tilemaps;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static UnityEditor.PlayerSettings;
 
 public class TilemapManager : MonoBehaviour
 {
@@ -19,11 +16,13 @@ public class TilemapManager : MonoBehaviour
     [SerializeField] private Tilemap verticalConnectionTilemap;
     [SerializeField] private Tilemap horizontalConnectionTilemap;
     [SerializeField] private Tilemap uiTilemap;
+    [SerializeField] private SpriteRenderer arrowAttackDirection;
 
     public TilemapHelper Helper { get; private set; }
 
     private void Awake()
     {
+        arrowAttackDirection.gameObject.SetActive(false);
         Helper = new TilemapHelper(
             tilesHolder,
             terrainTilemap,
@@ -191,6 +190,34 @@ public class TilemapManager : MonoBehaviour
     public void ResetDisableIcon()
     {
         SetDisableIcon(null);
+    }
+
+    public void ShowAttackDirectionArrow(MapPosition sourcePosition, Direction dir)
+    {
+        var targetPosition = sourcePosition.To(dir);
+
+        var offset =
+            (grid.CellToWorld(new Vector3Int(1, 1, 0)) -
+            grid.CellToWorld(Vector3Int.zero)) / 2;
+        var source = grid.CellToWorld(sourcePosition.Vector3Int);
+        var target = grid.CellToWorld(targetPosition.Vector3Int);
+        var posWorld = (source + target) / 2;
+
+        arrowAttackDirection.transform.position = posWorld + offset;
+        arrowAttackDirection.gameObject.SetActive(true);
+        var angle = dir switch {
+            Direction.Up => 0,
+            Direction.Down => 180,
+            Direction.Left => 90,
+            Direction.Right => -90,
+            _ => 0
+        };
+        arrowAttackDirection.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public void HideAttackDirectionArrow()
+    {
+        arrowAttackDirection.gameObject.SetActive(false);
     }
 }
 

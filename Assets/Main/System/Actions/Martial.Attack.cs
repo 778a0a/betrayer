@@ -57,6 +57,11 @@ partial class MartialActions
             // 一番有利なエリアから攻撃する。
             var sourceArea = GetAttackSourceArea(World.Map, targetArea, country);
 
+            var sourcePosition = sourceArea.Position;
+            var targetDirection = sourcePosition.GetDirectionTo(targetArea.Position);
+            Core.Tilemap.ShowAttackDirectionArrow(sourceArea.Position, targetDirection);
+            using var _ = Util.Defer(() => Core.Tilemap.HideAttackDirectionArrow());
+
             // 攻撃側キャラを選択する。
             var attacker = country.Members.Where(c => !c.IsAttacked).RandomPick();
             // プレーヤーの場合は攻撃者を選択させる。

@@ -46,6 +46,24 @@ public struct MapPosition : IEquatable<MapPosition>
     public readonly MapPosition Left => Of(x - 1, y);
     public readonly MapPosition Right => Of(x + 1, y);
 
+    public readonly MapPosition To(Direction direction) => direction switch
+    {
+        Direction.Up => Up,
+        Direction.Down => Down,
+        Direction.Left => Left,
+        Direction.Right => Right,
+        _ => throw new ArgumentOutOfRangeException(nameof(direction)),
+    };
+
+    public readonly Direction GetDirectionTo(MapPosition pos)
+    {
+        if (pos.x < x) return Direction.Left;
+        if (pos.x > x) return Direction.Right;
+        if (pos.y < y) return Direction.Up;
+        if (pos.y > y) return Direction.Down;
+        throw new InvalidOperationException();
+    }
+
     public readonly Vector3Int Vector3Int => new(x, -y, 0);
 
     public override readonly string ToString() => $"({x}, {y})";

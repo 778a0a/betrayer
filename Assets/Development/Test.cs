@@ -140,14 +140,14 @@ public class Test : MonoBehaviour
             case StrategyPhaseScreen.ActionButton.FireVassal:
                 if (StrategyActions.FireVassal.CanDo(chara))
                 {
-                    StrategyActions.FireVassal.Do(chara);
+                    await StrategyActions.FireVassal.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.Ally:
                 if (StrategyActions.Ally.CanDo(chara))
                 {
-                    StrategyActions.Ally.Do(chara);
+                    await StrategyActions.Ally.Do(chara);
                     straUI.SetData(chara, world);
                 }
                 break;
