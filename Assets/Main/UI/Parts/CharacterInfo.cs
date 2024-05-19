@@ -46,16 +46,15 @@ public partial class CharacterInfo
         labelCharaAttack.text = chara.Attack.ToString();
         labelCharaDefense.text = chara.Defense.ToString();
         labelCharaIntelligence.text = chara.Intelligence.ToString();
+        labelCharaStatus.text = chara.GetTitle(GameCore.Instance.World);
         if (country == null)
         {
-            labelCharaStatus.text = "無";
             labelCharaLoyalty.text = "--";
             labelCharaContribution.text = "--";
             labelCharaSalaryRatio.text = "--";
         }
         else
         {
-            labelCharaStatus.text = chara == country.Ruler ? "主" : "士";
             labelCharaLoyalty.text = chara.Loyalty.ToString();
             labelCharaContribution.text = chara.Contribution.ToString();
             labelCharaSalaryRatio.text = chara.SalaryRatio.ToString();

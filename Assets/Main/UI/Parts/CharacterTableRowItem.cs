@@ -40,16 +40,15 @@ public partial class CharacterTableRowItem
         labelAttack.text = chara.Attack.ToString();
         labelDefense.text = chara.Defense.ToString();
         labelIntelligence.text = chara.Intelligence.ToString();
+        labelStatus.text = chara.GetTitle(world);
         if (country == null)
         {
-            labelStatus.text = "無";
             labelLoyalty.text = "--";
             labelContribution.text = "--";
             labelSalaryRatio.text = "--";
         }
         else
         {
-            labelStatus.text = chara == country.Ruler ? "主" : "士";
             labelLoyalty.text = chara.Loyalty.ToString();
             labelContribution.text = chara.Contribution.ToString();
             labelSalaryRatio.text = chara.SalaryRatio.ToString();

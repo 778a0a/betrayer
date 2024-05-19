@@ -93,6 +93,44 @@ public class Character
     /// </summary>
     public int Urami { get; set; } = 0;
 
+    /// <summary>
+    /// 地位
+    /// </summary>
+    public string GetTitle(WorldData world)
+    {
+        if (world.IsRuler(this))
+        {
+            var country = world.CountryOf(this);
+            return country.CountryRank switch
+            {
+                CountryRank.Empire => "皇帝",
+                CountryRank.Kingdom => "王",
+                CountryRank.Duchy => "大公",
+                _ => "君主",
+            };
+        }
+        else if (world.IsVassal(this))
+        {
+            var country = world.CountryOf(this);
+            var order = country.VassalCountMax - country.Vassals.IndexOf(this) - 1;
+            return new[]
+            {
+                "従士",
+                "従士",
+                "士長",
+                "将軍",
+                "元帥",
+                "宰相",
+                "総督",
+                "副王",
+            }[order];
+        }
+        else
+        {
+            return "浪士";
+        }
+    }
+
     public override string ToString() => $"{Name} G:{Gold} P:{Power} (A:{Attack} D:{Defense} I:{Intelligence})";
 }
 

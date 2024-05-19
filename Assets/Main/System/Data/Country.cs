@@ -109,4 +109,20 @@ public class Country
                 0, 100);
         }
     }
+
+    public CountryRank CountryRank => Areas.Count switch
+    {
+        >= 28 => CountryRank.Empire,
+        >= 16 => CountryRank.Kingdom,
+        >= 9 => CountryRank.Duchy,
+        _ => CountryRank.Chiefdom,
+    };
+}
+
+public enum CountryRank
+{
+    Empire,
+    Kingdom,
+    Duchy,
+    Chiefdom,
 }
