@@ -100,3 +100,18 @@ Label {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
+.CharacterTableRowItem {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+.CharacterTableRowItem:hover {
+    background-color: rgba(0, 156, 143, 0.5);
+    border-left-color: rgba(204, 204, 204, 0.7);
+    border-right-color: rgba(204, 204, 204, 0.7);
+    border-top-color: rgba(204, 204, 204, 0.7);
+    border-bottom-color: rgba(204, 204, 204, 0.7);
+}
