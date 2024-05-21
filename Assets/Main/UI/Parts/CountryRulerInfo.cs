@@ -18,7 +18,6 @@ public partial class CountryRulerInfo
 
         imageRuler.image = FaceImageManager.Instance.GetImage(country.Ruler);
         imageCountryColor.sprite = world.Map.Helper.GetCountryImage(country);
-        imageCountryColor.style.backgroundColor = new StyleColor(Color.white);
         labelRulerName.text = country.Ruler.Name;
         labelAreaCount.text = country.Areas.Count.ToString();
         labelTotalIncome.text = country.TotalIncome.ToString();
@@ -30,12 +29,13 @@ public partial class CountryRulerInfo
         {
             labelAlly.text = country.Ally.Ruler.Name;
             imageAllyCountryColor.sprite = world.Map.Helper.GetCountryImage(country.Ally);
+            imageAllyCountryColor.style.display = DisplayStyle.Flex;
         }
         else
         {
             labelAlly.text = "なし";
             imageAllyCountryColor.sprite = null;
-            imageAllyCountryColor.style.visibility = Visibility.Hidden;
+            imageAllyCountryColor.style.display = DisplayStyle.None;
         }
     }
 }
