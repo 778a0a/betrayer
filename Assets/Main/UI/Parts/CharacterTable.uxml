@@ -4,6 +4,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <engine:VisualElement name="Header" style="flex-grow: 0; flex-direction: row;">
         <engine:Label text="名前" class="MemberInfo-Cell MemberInfo-Header-Cell MemberInfo-Col-Name" />
+        <engine:Label text="" class="MemberInfo-Cell MemberInfo-Header-Cell MemberInfo-Col-IsAttack" />
         <engine:Label text="攻撃" class="MemberInfo-Cell MemberInfo-Header-Cell MemberInfo-Col-Attack" />
         <engine:Label text="防衛" class="MemberInfo-Cell MemberInfo-Header-Cell MemberInfo-Col-Defense" />
         <engine:Label text="智謀" class="MemberInfo-Cell MemberInfo-Header-Cell MemberInfo-Col-Intelligence" />

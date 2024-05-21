@@ -47,18 +47,20 @@ public partial class CharacterTable
         _ => throw new ArgumentOutOfRangeException(),
     };
 
-    public void SetData(IEnumerable<Character> charas, WorldData world)
+    public void SetData(IEnumerable<Character> charas, WorldData world, bool clickable)
+        => SetData(charas, world, _ => clickable);
+    public void SetData(IEnumerable<Character> charas, WorldData world, Predicate<Character> clickable = null)
     {
         var en = charas?.GetEnumerator();
         for (int i = 0; i < RowCount; i++)
         {
             if (en?.MoveNext() ?? false)
             {
-                RowOf(i).SetData(en.Current, world);
+                RowOf(i).SetData(en.Current, world, clickable?.Invoke(en.Current) ?? false);
             }
             else
             {
-                RowOf(i).SetData(null, world);
+                RowOf(i).SetData(null, world, false);
             }
         }
     }

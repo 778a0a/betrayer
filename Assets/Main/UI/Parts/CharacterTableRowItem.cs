@@ -13,7 +13,7 @@ public partial class CharacterTableRowItem
     public void Initialize()
     {
         Root.RegisterCallback<MouseMoveEvent>(OnMouseMove);
-        Root.RegisterCallback<MouseDownEvent>(OnMouseDown);
+        CharacterTableRowItemRoot.RegisterCallback<ClickEvent>(OnMouseDown);
     }
 
     private void OnMouseMove(MouseMoveEvent evt)
@@ -21,12 +21,12 @@ public partial class CharacterTableRowItem
         MouseMove?.Invoke(this, Character);
     }
 
-    private void OnMouseDown(MouseDownEvent evt)
+    private void OnMouseDown(ClickEvent evt)
     {
         MouseDown?.Invoke(this, Character);
     }
 
-    public void SetData(Character chara, WorldData world)
+    public void SetData(Character chara, WorldData world, bool isClickable)
     {
         Character = chara;
         var country = world.CountryOf(chara);
@@ -36,6 +36,12 @@ public partial class CharacterTableRowItem
             return;
         }
         Root.style.visibility = Visibility.Visible;
+
+        CharacterTableRowItemRoot.EnableInClassList("clickable", isClickable);
+        CharacterTableRowItemRoot.EnableInClassList("isAttacked", chara.IsAttacked);
+        
+        labelIsAttacked.style.visibility = chara.IsAttacked ? Visibility.Visible : Visibility.Hidden;
+
         labelName.text = chara.Name;
         labelAttack.text = chara.Attack.ToString();
         labelDefense.text = chara.Defense.ToString();

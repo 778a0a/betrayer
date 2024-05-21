@@ -44,7 +44,7 @@ public partial class SelectCharacterScreen : IScreen
         string cancelText,
         IList<Character> charas,
         WorldData world, 
-        Predicate<Character> predCanSelect = null)
+        Predicate<Character> predCanSelect)
     {
         tcs = new ValueTaskCompletionSource<Character>();
         this.world = world;
@@ -54,7 +54,7 @@ public partial class SelectCharacterScreen : IScreen
         buttonClose.text = cancelText;
 
         // 人物情報テーブル
-        CharacterTable.SetData(charas, world);
+        CharacterTable.SetData(charas, world, predCanSelect);
         
         // 人物詳細
         CharacterInfo.SetData(charas[0], world);
@@ -86,7 +86,7 @@ public partial class SelectCharacterScreen : IScreen
 
             if (canSelect)
             {
-                CharacterTable.SetData(country.Members, world);
+                CharacterTable.SetData(country.Members, world, true);
                 CharacterInfo.SetData(null, world);
             }
             else

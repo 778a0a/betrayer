@@ -105,7 +105,7 @@ public partial class OrganizeScreen : IScreen
     private void Refresh()
     {
         // 人物情報テーブル
-        CharacterTable.SetData(country.Members, world);
+        CharacterTable.SetData(country.Members, world, true);
 
         // 人物詳細
         CharacterInfo.SetData(characterTarget, world);

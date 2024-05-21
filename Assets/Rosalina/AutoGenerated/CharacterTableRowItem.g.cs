@@ -16,6 +16,8 @@ public partial class CharacterTableRowItem
 {
     public Label labelName { get; private set; }
 
+    public Label labelIsAttacked { get; private set; }
+
     public Label labelAttack { get; private set; }
 
     public Label labelDefense { get; private set; }
@@ -32,7 +34,7 @@ public partial class CharacterTableRowItem
 
     public Label labelSalaryRatio { get; private set; }
 
-    public VisualElement conatner { get; private set; }
+    public Button CharacterTableRowItemRoot { get; private set; }
 
     public VisualElement Root { get; }
 
@@ -40,6 +42,7 @@ public partial class CharacterTableRowItem
     {
         Root = root;
         labelName = Root?.Q<Label>("labelName");
+        labelIsAttacked = Root?.Q<Label>("labelIsAttacked");
         labelAttack = Root?.Q<Label>("labelAttack");
         labelDefense = Root?.Q<Label>("labelDefense");
         labelIntelligence = Root?.Q<Label>("labelIntelligence");
@@ -48,6 +51,6 @@ public partial class CharacterTableRowItem
         labelPrestige = Root?.Q<Label>("labelPrestige");
         labelContribution = Root?.Q<Label>("labelContribution");
         labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
-        conatner = Root?.Q<VisualElement>("conatner");
+        CharacterTableRowItemRoot = Root?.Q<Button>("CharacterTableRowItemRoot");
     }
 }

@@ -123,7 +123,8 @@ public partial class MainUI : MonoBehaviour
             "採用する人物をクリックしてください。",
             "採用しない",
             charas,
-            world);
+            world,
+            _ => true);
     }
 
     public ValueTask<Character> ShowFireVassalUI(Country country, WorldData world)
@@ -134,7 +135,8 @@ public partial class MainUI : MonoBehaviour
             "追放する人物をクリックしてください。",
             "キャンセル",
             country.Vassals,
-            world);
+            world,
+            _ => true);
     }
 
     /// <summary>
@@ -163,7 +165,8 @@ public partial class MainUI : MonoBehaviour
             "討伐する人物をクリックしてください。",
             "キャンセル",
             country.Vassals,
-            world);
+            world,
+            _ => true);
     }
 
     public ValueTask<Character> ShowSelectDefenderScreen(
