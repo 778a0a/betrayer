@@ -60,21 +60,38 @@ public class BattleManager
                 }
             }
 
-            static bool DecideContinue(Character c)
+            static bool ShouldRetreat(Character c, Character op, WorldData world)
             {
                 // プレーヤーの場合はUIで判断しているので処理不要。
                 if (c.IsPlayer) return true;
 
-                // HPが10未満の兵士が2体以上いるなら撤退する。
-                return c.Force.Soldiers.Count(s => s.Hp < 10) >= 2;
+                // まだ損耗が多くないなら撤退しない。
+                var manyLoss = c.Force.Soldiers.Count(s => s.Hp < 10) >= 3;
+                if (!manyLoss) return false;
+
+                // 敵よりも兵力が多いなら撤退しない。
+                var myPower = c.Force.Power;
+                var opPower = op.Force.Power;
+                if (myPower > opPower) return false;
+
+                // 敵に残り数の少ない兵士がいるなら撤退しない。
+                var opAboutToDie = op.Force.Soldiers.Any(s => s.Hp <= 3);
+                if (opAboutToDie) return false;
+
+                // 自国の最後の領土なら撤退しない。
+                var lastArea = world.CountryOf(c).Areas.Count == 1;
+                if (lastArea) return false;
+
+                // 撤退する。
+                return true;
             }
 
-            if (!attacker.IsPlayer && DecideContinue(attacker))
+            if (!attacker.IsPlayer && ShouldRetreat(attacker, defender, GameCore.Instance.World))
             {
                 result = BattleResult.DefenderWin;
                 break;
             }
-            if (!defender.IsPlayer && DecideContinue(defender))
+            if (!defender.IsPlayer && ShouldRetreat(defender, attacker, GameCore.Instance.World))
             {
                 result = BattleResult.AttackerWin;
                 break;
