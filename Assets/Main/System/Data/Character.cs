@@ -112,7 +112,7 @@ public class Character
         else if (world.IsVassal(this))
         {
             var country = world.CountryOf(this);
-            var order = country.VassalCountMax - country.Vassals.IndexOf(this) - 1;
+            var order = Mathf.Max(country.Vassals.Count, country.VassalCountMax) - country.Vassals.IndexOf(this) - 1;
             return new[]
             {
                 "従士",

@@ -33,6 +33,7 @@ public partial class CharacterTableRowItem
         if (chara == null)
         {
             Root.style.visibility = Visibility.Hidden;
+            labelIsAttacked.style.visibility = Visibility.Hidden;
             return;
         }
         Root.style.visibility = Visibility.Visible;
