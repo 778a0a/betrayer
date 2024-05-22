@@ -130,3 +130,12 @@ public class ValueTaskCompletionSource : IValueTaskSource
     void IValueTaskSource.OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags)
         => _core.OnCompleted(continuation, state, token, flags);
 }
+
+// record型用
+namespace System.Runtime.CompilerServices
+{
+    //[EditorBrowsable(EditorBrowsableState.Never)]
+    public static class IsExternalInit
+    {
+    }
+}

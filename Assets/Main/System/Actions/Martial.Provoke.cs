@@ -119,7 +119,7 @@ partial class MartialActions
                     //var attackerTerrain = map.Helper.GetAttackerTerrain(a.Position, dir);
                     //var adj = BattleManager.TerrainDamageAdjustment(attackerTerrain);
                     var terrain = map.Helper.GetTerrain(a.Position);
-                    return BattleManager.TerrainDamageAdjustment(terrain);
+                    return Battle.TerrainDamageAdjustment(terrain);
                 })
                 .First();
         }

@@ -22,12 +22,13 @@ public partial class BattleDialog : IDialog
         };
     }
 
-    public void SetData(
-        Character attacker,
-        Terrain attackerTerrain,
-        Character defender,
-        Terrain defenderTerrain)
+    public void SetData(Battle battle)
     {
+        var attacker = battle.Attacker.Character;
+        var defender = battle.Defender.Character;
+        var attackerTerrain = battle.Attacker.Terrain;
+        var defenderTerrain = battle.Defender.Terrain;
+
         AttackerName.text = attacker.Name;
         DefenderName.text = defender.Name;
 

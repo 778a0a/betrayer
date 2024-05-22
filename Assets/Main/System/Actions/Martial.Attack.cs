@@ -147,7 +147,7 @@ partial class MartialActions
                 {
                     var dir = a.GetDirectionTo(target);
                     var attackerTerrain = map.Helper.GetAttackerTerrain(a.Position, dir);
-                    var adj = BattleManager.TerrainDamageAdjustment(attackerTerrain);
+                    var adj = Battle.TerrainDamageAdjustment(attackerTerrain);
                     return adj;
                 })
                 .First();

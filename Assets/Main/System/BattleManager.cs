@@ -4,11 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework.Constraints;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -35,84 +31,157 @@ public class BattleManager
             return BattleResult.AttackerWin;
         }
 
-        var ui = GameCore.Instance.MainUI.BattleDialog;
-        var needUI = attacker.IsPlayer || defender.IsPlayer;
-        if (needUI)
+        var world = GameCore.Instance.World;
+        var atk = new CharacterInBattle(attacker, attackerTerrain, world.CountryOf(attacker), true);
+        var def = new CharacterInBattle(defender, defenderTerrain, world.CountryOf(defender), false);
+        atk.Opponent = def;
+        def.Opponent = atk;
+
+        var battle = new Battle(atk, def, world);
+        var result = await battle.Do();
+        return result;
+    }
+
+    /// <summary>
+    /// 戦闘後の回復処理
+    /// </summary>
+    public static void Recover(Character c, bool win)
+    {
+        foreach (var s in c.Force.Soldiers)
         {
-            ui.Root.style.display = DisplayStyle.Flex;
-            ui.SetData(attacker, attackerTerrain, defender, defenderTerrain);
+            if (!s.IsAlive) continue;
+
+            var baseAmount = s.MaxHp * (win ? 0.1f : 0.05f);
+            var adj = Mathf.Max(0, (c.Intelligence - 80) / 100f / 2);
+            var amount = (int)(baseAmount * (1 + adj));
+            s.Hp = Mathf.Min(s.MaxHp, s.Hp + amount);
+        }
+    }
+}
+
+
+public record CharacterInBattle(
+    Character Character,
+    Terrain Terrain,
+    Country Country,
+    bool IsAttacker)
+{
+    public CharacterInBattle Opponent { get; set; }
+    public bool IsDefender => !IsAttacker;
+
+    /// <summary>
+    /// 戦闘の強さ
+    /// 攻撃側ならAttack、防御側ならDefense
+    /// </summary>
+    public int Strength => IsAttacker ? Character.Attack : Character.Defense;
+
+    public Force Force => Character.Force;
+    public bool IsPlayer => Character.IsPlayer;
+    public bool AllSoldiersDead => Character.Force.Soldiers.All(s => !s.IsAlive);
+
+    public static implicit operator Character(CharacterInBattle c) => c.Character;
+
+    public bool ShouldRetreat()
+    {
+        // プレーヤーの場合はUIで判断しているので処理不要。
+        if (IsPlayer) return false;
+
+        // まだ損耗が多くないなら撤退しない。
+        var manyLoss = Character.Force.Soldiers.Count(s => s.Hp < 10) >= 3;
+        if (!manyLoss) return false;
+
+        // 敵よりも兵力が多いなら撤退しない。
+        var myPower = Force.Power;
+        var opPower = Opponent.Force.Power;
+        if (myPower > opPower) return false;
+
+        // 敵に残り数の少ない兵士がいるなら撤退しない。
+        var opAboutToDie = Opponent.Force.Soldiers.Any(s => s.Hp <= 3);
+        if (opAboutToDie) return false;
+
+        // 自国の最後の領土なら撤退しない。
+        var lastArea = Country.Areas.Count == 1;
+        if (lastArea) return false;
+
+        // 撤退する。
+        return true;
+    }
+}
+
+
+public class Battle
+{
+    public CharacterInBattle Attacker { get; set; }
+    public CharacterInBattle Defender { get; set; }
+    private int TickCount { get; set; }
+    
+    private WorldData World { get; set; }
+    private BattleDialog UI => GameCore.Instance.MainUI.BattleDialog;
+    private bool NeedUI => Attacker.IsPlayer || Defender.IsPlayer;
+
+    public Battle(CharacterInBattle atk, CharacterInBattle def, WorldData world)
+    {
+        this.Attacker = atk;
+        this.Defender = def;
+        World = world;
+    }
+
+    public async ValueTask<BattleResult> Do()
+    {
+        if (NeedUI)
+        {
+            UI.Root.style.display = DisplayStyle.Flex;
+            UI.SetData(this);
         }
 
         var result = default(BattleResult);
-        var tickCount = 0;
-        while (
-            attacker.Force.Soldiers.Any(s => s.IsAlive) &&
-            defender.Force.Soldiers.Any(s => s.IsAlive))
+        while (!Attacker.AllSoldiersDead && !Defender.AllSoldiersDead)
         {
-            if (needUI)
+            // 撤退判断を行う。
+            if (NeedUI)
             {
-                ui.SetData(attacker, attackerTerrain, defender, defenderTerrain);
-                var shouldContinue = await ui.WaitPlayerClick();
+                UI.SetData(this);
+                var shouldContinue = await UI.WaitPlayerClick();
                 if (!shouldContinue)
                 {
-                    result = attacker.IsPlayer ? BattleResult.DefenderWin : BattleResult.AttackerWin;
+                    result = Attacker.IsPlayer ?
+                        BattleResult.DefenderWin :
+                        BattleResult.AttackerWin;
                     break;
                 }
             }
-
-            static bool ShouldRetreat(Character c, Character op, WorldData world)
-            {
-                // プレーヤーの場合はUIで判断しているので処理不要。
-                if (c.IsPlayer) return true;
-
-                // まだ損耗が多くないなら撤退しない。
-                var manyLoss = c.Force.Soldiers.Count(s => s.Hp < 10) >= 3;
-                if (!manyLoss) return false;
-
-                // 敵よりも兵力が多いなら撤退しない。
-                var myPower = c.Force.Power;
-                var opPower = op.Force.Power;
-                if (myPower > opPower) return false;
-
-                // 敵に残り数の少ない兵士がいるなら撤退しない。
-                var opAboutToDie = op.Force.Soldiers.Any(s => s.Hp <= 3);
-                if (opAboutToDie) return false;
-
-                // 自国の最後の領土なら撤退しない。
-                var lastArea = world.CountryOf(c).Areas.Count == 1;
-                if (lastArea) return false;
-
-                // 撤退する。
-                return true;
-            }
-
-            if (!attacker.IsPlayer && ShouldRetreat(attacker, defender, GameCore.Instance.World))
+            if (Attacker.ShouldRetreat())
             {
                 result = BattleResult.DefenderWin;
                 break;
             }
-            if (!defender.IsPlayer && ShouldRetreat(defender, attacker, GameCore.Instance.World))
+            if (Defender.ShouldRetreat())
             {
                 result = BattleResult.AttackerWin;
                 break;
             }
 
-            Tick(attackerTerrain, defenderTerrain, attacker, defender, tickCount++);
+            Tick();
         }
 
         if (result == BattleResult.None)
         {
-            result = attacker.Force.Soldiers.Any(s => s.IsAlive) ? BattleResult.AttackerWin : BattleResult.DefenderWin;
+            result = Attacker.AllSoldiersDead ?
+                BattleResult.DefenderWin :
+                BattleResult.AttackerWin;
         }
         Debug.Log($"[戦闘処理] 結果: {result}");
-        if (needUI)
+        
+        // 画面を更新する。
+        if (NeedUI)
         {
-            ui.SetData(attacker, attackerTerrain, defender, defenderTerrain);
-            await ui.WaitPlayerClick();
-            ui.Root.style.display = DisplayStyle.None;
+            UI.SetData(this);
+            await UI.WaitPlayerClick();
+            UI.Root.style.display = DisplayStyle.None;
         }
 
-        foreach (var sol in attacker.Force.Soldiers.Concat(defender.Force.Soldiers))
+        // 死んだ兵士のスロットを空にする。
+        foreach (var sol in Attacker.Force.Soldiers.Concat(Defender.Force.Soldiers))
         {
             if (sol.Hp == 0)
             {
@@ -123,7 +192,6 @@ public class BattleManager
         return result;
     }
 
-    
     public static float TerrainDamageAdjustment(Terrain t) => t switch
     {
         Terrain.LargeRiver => 0.40f,
@@ -136,41 +204,38 @@ public class BattleManager
         _ => 0f,
     };
 
-    private static void Tick(
-        Terrain attackerTerrain,
-        Terrain defenderTerrain,
-        Character attacker,
-        Character defender,
-        int tickCount)
+    private void Tick()
     {
         // 両方の兵士をランダムな順番の配列にいれる。
-        var all = attacker.Force.Soldiers.Select(s => (soldier: s, owner: attacker, opponent: defender))
-            .Concat(defender.Force.Soldiers.Select(s => (soldier: s, owner: defender, opponent: attacker)))
+        var all = Attacker.Force.Soldiers.Select(s => (soldier: s, owner: Attacker))
+            .Concat(Defender.Force.Soldiers.Select(s => (soldier: s, owner: Defender)))
             .Where(x => x.soldier.IsAlive)
             .ToArray()
             .ShuffleInPlace();
 
         var baseAdjustment = new Dictionary<Character, float>
         {
-            {attacker, BaseAdjustment(attacker.Attack, defender.Defense, attacker.Intelligence, defender.Intelligence, defenderTerrain, tickCount)},
-            {defender, BaseAdjustment(defender.Defense, attacker.Attack, defender.Intelligence, attacker.Intelligence, attackerTerrain, tickCount)},
+            {Attacker, BaseAdjustment(Attacker, TickCount)},
+            {Defender , BaseAdjustment(Defender, TickCount)},
         };
-        static float BaseAdjustment(int atk, int def, int atkInt, int defInt, Terrain terrain, int tickCount)
+        static float BaseAdjustment(CharacterInBattle chara, int tickCount)
         {
+            var op = chara.Opponent;
             var adj = 1f;
-            adj += (atk - 50) / 100f;
-            adj -= (def - 50) / 100f;
-            adj += (atkInt - 50) / 100f * Mathf.Min(1, tickCount / 10f);
-            adj -= (defInt - 50) / 100f * Mathf.Min(1, tickCount / 10f);
-            adj += TerrainDamageAdjustment(terrain);
+            adj += (chara.Strength - 50) / 100f;
+            adj -= (op.Strength - 50) / 100f;
+            adj += (chara.Character.Intelligence - 50) / 100f * Mathf.Min(1, tickCount / 10f);
+            adj -= (op.Character.Intelligence - 50) / 100f * Mathf.Min(1, tickCount / 10f);
+            adj += TerrainDamageAdjustment(op.Terrain);
             return adj;
         }
-        Debug.Log($"[戦闘処理] 基本調整値: atk:{baseAdjustment[attacker]:0.00} def:{baseAdjustment[defender]:0.00}");
+        Debug.Log($"[戦闘処理] 基本調整値: atk:{baseAdjustment[Attacker]:0.00} def:{baseAdjustment[Defender]:0.00}");
 
         var attackerTotalDamage = 0f;
         var defenderTotalDamage = 0f;
-        foreach (var (soldier, owner, opponent) in all)
+        foreach (var (soldier, owner) in all)
         {
+            var opponent = owner.Opponent;
             if (!soldier.IsAlive) continue;
             var target = opponent.Force.Soldiers.Where(s => s.IsAlive).RandomPickDefault();
             if (target == null) continue;
@@ -190,7 +255,7 @@ public class BattleManager
                 soldier.Experience = 0;
             }
 
-            if (owner == attacker)
+            if (owner.IsAttacker)
             {
                 attackerTotalDamage += damage;
             }
@@ -200,26 +265,11 @@ public class BattleManager
             }
         }
 
-        if (attacker.IsPlayer || defender.IsPlayer)
+        if (Attacker.IsPlayer || Defender.IsPlayer)
         {
-            Debug.Log($"[戦闘処理] {attacker.Name}の総ダメージ: {attackerTotalDamage} {defender.Name}の総ダメージ: {defenderTotalDamage}");
+            Debug.Log($"[戦闘処理] " +
+                $"{Attacker.Character.Name}の総ダメージ: {attackerTotalDamage} " +
+                $"{Defender.Character.Name}の総ダメージ: {defenderTotalDamage}");
         }
     }
-
-    /// <summary>
-    /// 戦闘後の回復処理
-    /// </summary>
-    public static void Recover(Character c, bool win)
-    {
-        foreach (var s in c.Force.Soldiers)
-        {
-            if (!s.IsAlive) continue;
-
-            var baseAmount = s.MaxHp * (win ? 0.1f : 0.05f);
-            var adj = Mathf.Max(0, (c.Intelligence - 80) / 100f / 2);
-            var amount = (int)(baseAmount * (1 + adj));
-            s.Hp = Mathf.Min(s.MaxHp, s.Hp + amount);
-        }
-    }
-
 }
