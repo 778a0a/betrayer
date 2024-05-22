@@ -34,7 +34,7 @@ partial class StrategyActions
             else
             {
                 // 貢献順に並び替える。
-                country.Vassals = country.Vassals.OrderBy(c => c.Contribution).ToList();
+                country.Vassals = country.Vassals.OrderByDescending(c => c.Contribution).ToList();
 
                 // 給料配分を調整する。
                 var salaryTable = table[country.Vassals.Count];
