@@ -60,6 +60,26 @@ public class BattleManager
                 }
             }
 
+            static bool DecideContinue(Character c)
+            {
+                // プレーヤーの場合はUIで判断しているので処理不要。
+                if (c.IsPlayer) return true;
+
+                // HPが10未満の兵士が2体以上いるなら撤退する。
+                return c.Force.Soldiers.Count(s => s.Hp < 10) >= 2;
+            }
+
+            if (!attacker.IsPlayer && DecideContinue(attacker))
+            {
+                result = BattleResult.DefenderWin;
+                break;
+            }
+            if (!defender.IsPlayer && DecideContinue(defender))
+            {
+                result = BattleResult.AttackerWin;
+                break;
+            }
+
             Tick(attackerTerrain, defenderTerrain, attacker, defender, tickCount++);
         }
 
