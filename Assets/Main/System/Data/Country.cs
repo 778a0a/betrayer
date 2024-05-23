@@ -117,6 +117,8 @@ public class Country
         >= 9 => CountryRank.Duchy,
         _ => CountryRank.Chiefdom,
     };
+
+    public bool IsExhausted { get; set; }
 }
 
 public enum CountryRank

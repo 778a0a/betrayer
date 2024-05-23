@@ -45,17 +45,24 @@ public class MartialActionPhase : PhaseBase
                     // 侵攻する。
                     while (MartialActions.Attack.CanDo(chara))
                     {
-                        // 防衛可能なメンバーが少ないなら侵攻しない。
                         var freeMembers = country.Members.Where(c => !c.IsAttacked).Count();
-                        if (freeMembers <= 1)
+                        
+                        // 1+未行動の周辺国数分の防衛メンバーを残す。
+                        var neighbors = World.Neighbors(country);
+                        var waitingCountryCount = neighbors
+                            .Where(n => !n.IsExhausted)
+                            .Count();
+                        if (freeMembers <= waitingCountryCount + 1)
                         {
                             break;
                         }
 
                         Debug.Log($"[軍事フェイズ] 侵攻します。");
                         await MartialActions.Attack.Do(chara);
+                        Core.Tilemap.SetActiveCountry(country);
                     }
                 }
+                country.IsExhausted = true;
                 Core.Tilemap.SetExhausted(country, true);
             }
             // 配下の場合
@@ -75,6 +82,7 @@ public class MartialActionPhase : PhaseBase
             }
         }
 
+        foreach (var c in World.Countries) c.IsExhausted = false;
         Core.Tilemap.ResetActiveCountry();
         Core.Tilemap.ResetExhausted();
         Debug.Log("[軍事フェイズ] 終了");

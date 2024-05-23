@@ -28,6 +28,7 @@ public class StartPhase : PhaseBase
         // タイル状態更新
         foreach (var country in Countries)
         {
+            country.IsExhausted = false;
             Core.Tilemap.SetExhausted(country, false);
         }
 

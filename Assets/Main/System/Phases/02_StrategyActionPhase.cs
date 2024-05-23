@@ -44,7 +44,7 @@ public class StrategyActionPhase : PhaseBase
                     Debug.Log($"[戦略フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
 
                     // 配下が足りていないなら配下を雇う。
-                    while (StrategyActions.HireVassal.CanDo(chara) && 0.5.Chance())
+                    while (StrategyActions.HireVassal.CanDo(chara) && 0.9.Chance())
                     {
                         await StrategyActions.HireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を雇いました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
@@ -72,6 +72,7 @@ public class StrategyActionPhase : PhaseBase
                     }
                 }
 
+                country.IsExhausted = true;
                 Core.Tilemap.SetExhausted(country, true);
             }
             // 配下の場合
@@ -90,6 +91,7 @@ public class StrategyActionPhase : PhaseBase
             }
         }
 
+        foreach (var c in World.Countries) c.IsExhausted = false;
         Core.Tilemap.ResetExhausted();
         Core.Tilemap.ResetActiveCountry();
         Debug.Log("[戦略フェイズ] 終了");
