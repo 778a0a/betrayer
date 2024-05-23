@@ -35,6 +35,7 @@ partial class PersonalActions
                 {
                     soldier.Level += 1;
                     soldier.Experience = 0;
+                    chara.Contribution += 1;
                     //soldier.Hp = soldier.MaxHp;
                 }
             }

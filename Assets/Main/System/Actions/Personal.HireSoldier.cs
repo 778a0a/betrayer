@@ -29,6 +29,7 @@ partial class PersonalActions
             targetSlot.Level = 1;
             targetSlot.Experience = 0;
             targetSlot.Hp = targetSlot.MaxHp;
+            chara.Contribution += 1;
         }
     }
 }
