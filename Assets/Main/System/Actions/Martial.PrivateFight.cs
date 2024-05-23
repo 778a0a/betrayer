@@ -41,17 +41,14 @@ partial class MartialActions
                 .RandomPickDefault();
 
             // 攻撃する。
-            var result = await BattleManager.Battle(World.Map, attack, defend, chara, target);
+            var battle = BattleManager.Prepare(attack, defend, chara, target);
+            var result = await battle.Do();
             chara.IsAttacked = true;
+
+            // 勝ったら対象の貢献を半減させる。
             if (result == BattleResult.AttackerWin)
             {
-                BattleManager.Recover(chara, true);
-                BattleManager.Recover(target, false);
-            }
-            else
-            {
-                BattleManager.Recover(chara, false);
-                BattleManager.Recover(target, true);
+                target.Contribution /= 2;
             }
 
             Core.Tilemap.DrawCountryTile();

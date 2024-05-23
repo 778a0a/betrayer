@@ -13,19 +13,28 @@ public class Battle
     public CharacterInBattle Defender { get; set; }
     private int TickCount { get; set; }
 
-    private WorldData World { get; set; }
+    private CharacterInBattle Atk => Attacker;
+    private CharacterInBattle Def => Defender;
+
     private BattleDialog UI => GameCore.Instance.MainUI.BattleDialog;
     private bool NeedUI => Attacker.IsPlayer || Defender.IsPlayer;
 
-    public Battle(CharacterInBattle atk, CharacterInBattle def, WorldData world)
+    public Battle(CharacterInBattle atk, CharacterInBattle def)
     {
-        this.Attacker = atk;
-        this.Defender = def;
-        World = world;
+        Attacker = atk;
+        Defender = def;
     }
 
     public async ValueTask<BattleResult> Do()
     {
+        Debug.Log($"[戦闘処理] {Atk}) -> {Def} at {Atk.Area.Position} -> {Def.Area.Position}");
+        Debug.Log($"[戦闘処理] 攻撃側地形: {Atk.Terrain} 防御側地形: {Def.Terrain}");
+        if (Def.Character == null)
+        {
+            Debug.Log($"[戦闘処理] 防御側がいないので侵攻側の勝利です。");
+            return BattleResult.AttackerWin;
+        }
+
         if (NeedUI)
         {
             UI.Root.style.display = DisplayStyle.Flex;
@@ -33,7 +42,7 @@ public class Battle
         }
 
         var result = default(BattleResult);
-        while (!Attacker.AllSoldiersDead && !Defender.AllSoldiersDead)
+        while (!Atk.AllSoldiersDead && !Def.AllSoldiersDead)
         {
             // 撤退判断を行う。
             if (NeedUI)
@@ -42,18 +51,18 @@ public class Battle
                 var shouldContinue = await UI.WaitPlayerClick();
                 if (!shouldContinue)
                 {
-                    result = Attacker.IsPlayer ?
+                    result = Atk.IsPlayer ?
                         BattleResult.DefenderWin :
                         BattleResult.AttackerWin;
                     break;
                 }
             }
-            if (Attacker.ShouldRetreat())
+            if (Atk.ShouldRetreat())
             {
                 result = BattleResult.DefenderWin;
                 break;
             }
-            if (Defender.ShouldRetreat())
+            if (Def.ShouldRetreat())
             {
                 result = BattleResult.AttackerWin;
                 break;
@@ -64,7 +73,7 @@ public class Battle
 
         if (result == BattleResult.None)
         {
-            result = Attacker.AllSoldiersDead ?
+            result = Atk.AllSoldiersDead ?
                 BattleResult.DefenderWin :
                 BattleResult.AttackerWin;
         }
@@ -79,13 +88,17 @@ public class Battle
         }
 
         // 死んだ兵士のスロットを空にする。
-        foreach (var sol in Attacker.Force.Soldiers.Concat(Defender.Force.Soldiers))
+        foreach (var sol in Atk.Force.Soldiers.Concat(Def.Force.Soldiers))
         {
             if (sol.Hp == 0)
             {
                 sol.IsEmptySlot = true;
             }
         }
+
+        // 兵士の回復処理を行う。
+        Atk.Recover(result == BattleResult.AttackerWin);
+        Def.Recover(result == BattleResult.DefenderWin);
 
         return result;
     }
@@ -105,8 +118,8 @@ public class Battle
     private void Tick()
     {
         // 両方の兵士をランダムな順番の配列にいれる。
-        var all = Attacker.Force.Soldiers.Select(s => (soldier: s, owner: Attacker))
-            .Concat(Defender.Force.Soldiers.Select(s => (soldier: s, owner: Defender)))
+        var all = Atk.Force.Soldiers.Select(s => (soldier: s, owner: Attacker))
+            .Concat(Def.Force.Soldiers.Select(s => (soldier: s, owner: Defender)))
             .Where(x => x.soldier.IsAlive)
             .ToArray()
             .ShuffleInPlace();
@@ -163,11 +176,11 @@ public class Battle
             }
         }
 
-        if (Attacker.IsPlayer || Defender.IsPlayer)
+        if (Atk.IsPlayer || Def.IsPlayer)
         {
             Debug.Log($"[戦闘処理] " +
-                $"{Attacker.Character.Name}の総ダメージ: {attackerTotalDamage} " +
-                $"{Defender.Character.Name}の総ダメージ: {defenderTotalDamage}");
+                $"{Atk}の総ダメージ: {attackerTotalDamage} " +
+                $"{Def}の総ダメージ: {defenderTotalDamage}");
         }
     }
 }

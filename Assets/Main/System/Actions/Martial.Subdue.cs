@@ -38,51 +38,37 @@ partial class MartialActions
                 .DefaultIfEmpty((country.Areas[0], country.Areas[0]))
                 .RandomPickDefault();
 
+            var target = default(Character);
             if (chara.IsPlayer)
             {
-                var target = await UI.ShowSubdueScreen(country, World);
+                target = await UI.ShowSubdueScreen(country, World);
                 if (target == null)
                 {
                     UI.ShowMartialUI();
                     return;
                 }
-
-                // 攻撃する。
-                var result = await BattleManager.Battle(World.Map, attack, defend, chara, target);
-                chara.IsAttacked = true;
-                if (result == BattleResult.AttackerWin)
-                {
-                    BattleManager.Recover(chara, true);
-                    BattleManager.Recover(target, false);
-                    country.Vassals.Remove(target);
-                }
-                else
-                {
-                    BattleManager.Recover(chara, false);
-                    BattleManager.Recover(target, true);
-                }
-                UI.ShowMartialUI();
-                UI.MartialPhase.SetData(chara, World);
             }
             else
             {
                 // 一番忠誠の低い配下を選ぶ。
-                var target = country.Vassals.OrderBy(c => c.Loyalty).First();
+                target = country.Vassals.OrderBy(c => c.Loyalty).First();
+            }
 
-                // 攻撃する。
-                var result = await BattleManager.Battle(World.Map, attack, defend, chara, target);
-                chara.IsAttacked = true;
-                if (result == BattleResult.AttackerWin)
-                {
-                    BattleManager.Recover(chara, true);
-                    BattleManager.Recover(target, false);
-                    country.Vassals.Remove(target);
-                }
-                else
-                {
-                    BattleManager.Recover(chara, false);
-                    BattleManager.Recover(target, true);
-                }
+            // 攻撃する。
+            var battle = BattleManager.Prepare(attack, defend, chara, target);
+            var result = await battle.Do();
+            chara.IsAttacked = true;
+            
+            // 勝ったら配下を追放する。
+            if (result == BattleResult.AttackerWin)
+            {
+                country.Vassals.Remove(target);
+            }
+
+            if (chara.IsPlayer)
+            {
+                UI.ShowMartialUI();
+                UI.MartialPhase.SetData(chara, World);
             }
 
             Core.Tilemap.DrawCountryTile();

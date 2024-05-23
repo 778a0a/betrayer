@@ -30,7 +30,11 @@ partial class PersonalActions
 
             var target = country.Areas.RandomPick();
             var source = World.Map.GetNeighbors(target).RandomPick();
-            var result = await BattleManager.Battle(World.Map, source, target, chara, ruler);
+            
+            var battle = BattleManager.Prepare(source, target, chara, ruler);
+            var result = await battle.Do();
+
+            // 勝ったら君主に成り上がる。
             if (result == BattleResult.AttackerWin)
             {
                 var oldRuler = country.Ruler;
@@ -38,6 +42,7 @@ partial class PersonalActions
                 country.Vassals.Remove(chara);
                 country.RecalculateSalary();
             }
+            // 負けたら未所属になる。
             else
             {
                 country.Vassals.Remove(chara);

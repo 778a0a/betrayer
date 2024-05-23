@@ -90,38 +90,9 @@ partial class MartialActions
             }
 
             // 侵攻する。
-            var result = await BattleManager.Battle(World.Map, sourceArea, targetArea, attacker, defender);
-            attacker.IsAttacked = true;
-            if (result == BattleResult.AttackerWin)
-            {
-                attacker.Contribution += 2;
-                BattleManager.Recover(attacker, true);
-                if (defender != null)
-                {
-                    defender.Contribution += 1;
-                    BattleManager.Recover(defender, false);
-                }
-
-                country.Areas.Add(targetArea);
-                targetCountry.Areas.Remove(targetArea);
-                Tilemap.DrawCountryTile();
-                // 領土がなくなったら国を削除する。
-                if (targetCountry.Areas.Count == 0)
-                {
-                    World.Countries.Remove(targetCountry);
-                    foreach (var c in World.Countries)
-                    {
-                        if (c.Ally == targetCountry) c.Ally = null;
-                    }
-                }
-            }
-            else
-            {
-                attacker.Contribution += 1;
-                BattleManager.Recover(attacker, false);
-                defender.Contribution += 2;
-                BattleManager.Recover(defender, true);
-            }
+            var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender);
+            var result = await battle.Do();
+            OnAfterAttack(battle, result, World);
 
             if (chara.IsPlayer || targetCountry.Ruler.IsPlayer)
             {
@@ -151,6 +122,46 @@ partial class MartialActions
                     return adj;
                 })
                 .First();
+        }
+
+        /// <summary>
+        /// 通常の侵攻戦闘後の処理
+        /// </summary>
+        public static void OnAfterAttack(Battle battle, BattleResult result, WorldData world)
+        {
+            var atk = battle.Attacker;
+            var def = battle.Defender;
+
+            // 攻撃側の勝ち
+            if (result == BattleResult.AttackerWin)
+            {
+                atk.Character.Contribution += 10;
+                if (def.Character != null)
+                {
+                    def.Character.Contribution += 5;
+                }
+
+                // 領土を更新する。
+                atk.Country.Areas.Add(def.Area);
+                def.Country.Areas.Remove(def.Area);
+                GameCore.Instance.Tilemap.DrawCountryTile();
+
+                // 領土がなくなったら国を削除する。
+                if (def.Country.Areas.Count == 0)
+                {
+                    world.Countries.Remove(def.Country);
+                    foreach (var c in world.Countries)
+                    {
+                        if (c.Ally == def.Country) c.Ally = null;
+                    }
+                }
+            }
+            // 防衛側の勝ち
+            else
+            {
+                atk.Character.Contribution += 1;
+                def.Character.Contribution += 10;
+            }
         }
     }
 }

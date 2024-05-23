@@ -62,38 +62,9 @@ partial class MartialActions
             var defender = chara;
 
             // 侵攻する。
-            var result = await BattleManager.Battle(World.Map, sourceArea, targetArea, attacker, defender);
-            attacker.IsAttacked = true;
-            if (result == BattleResult.AttackerWin)
-            {
-                attacker.Contribution += 2;
-                BattleManager.Recover(attacker, true);
-                if (defender != null)
-                {
-                    defender.Contribution += 1;
-                    BattleManager.Recover(defender, false);
-                }
-
-                sourceCountry.Areas.Add(targetArea);
-                country.Areas.Remove(targetArea);
-                // 領土がなくなったら国を削除する。
-                if (country.Areas.Count == 0)
-                {
-                    World.Countries.Remove(country);
-                    foreach (var c in World.Countries)
-                    {
-                        if (c.Ally == country) c.Ally = null;
-                    }
-                }
-                Tilemap.DrawCountryTile();
-            }
-            else
-            {
-                attacker.Contribution += 1;
-                BattleManager.Recover(attacker, false);
-                defender.Contribution += 2;
-                BattleManager.Recover(defender, true);
-            }
+            var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender);
+            var result = await battle.Do();
+            AttackAction.OnAfterAttack(battle, result, World);
 
             if (chara.IsPlayer)
             {

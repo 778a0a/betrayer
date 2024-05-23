@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public record CharacterInBattle(
     Character Character,
     Terrain Terrain,
-    Country Country,
+    Area Area,
     bool IsAttacker)
 {
     public CharacterInBattle Opponent { get; set; }
+    public Country Country = GameCore.Instance.World.CountryOf(Area);
     public bool IsDefender => !IsAttacker;
 
     /// <summary>
@@ -51,4 +53,24 @@ public record CharacterInBattle(
         // 撤退する。
         return true;
     }
+
+    /// <summary>
+    /// 戦闘後の回復処理
+    /// </summary>
+    public void Recover(bool win)
+    {
+        if (Character == null) return;
+
+        foreach (var s in Character.Force.Soldiers)
+        {
+            if (!s.IsAlive) continue;
+
+            var baseAmount = s.MaxHp * (win ? 0.1f : 0.05f);
+            var adj = Mathf.Max(0, (Character.Intelligence - 80) / 100f / 2);
+            var amount = (int)(baseAmount * (1 + adj));
+            s.Hp = Mathf.Min(s.MaxHp, s.Hp + amount);
+        }
+    }
+
+    public override string ToString() => $"{Character?.Name}({Character.Power})";
 }
