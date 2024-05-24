@@ -63,7 +63,10 @@ partial class MartialActions
             using var _ = Util.Defer(() => Core.Tilemap.HideAttackDirectionArrow());
 
             // 攻撃側キャラを選択する。
-            var attacker = country.Members.Where(c => !c.IsAttacked).RandomPick();
+            var attacker = country.Members
+                .Where(c => !c.IsAttacked)
+                .Where(c => c.Power > 500)
+                .RandomPick();
             // プレーヤーの場合は攻撃者を選択させる。
             if (chara.IsPlayer)
             {

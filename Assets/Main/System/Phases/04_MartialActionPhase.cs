@@ -45,7 +45,11 @@ public class MartialActionPhase : PhaseBase
                     // 侵攻する。
                     while (MartialActions.Attack.CanDo(chara))
                     {
-                        var freeMembers = country.Members.Where(c => !c.IsAttacked).Count();
+                        // 侵攻・防衛可能なメンバーの数を数える。
+                        var freeMembers = country.Members
+                            .Where(c => !c.IsAttacked)
+                            .Where(c => c.Power > 500)
+                            .Count();
                         
                         // 1+未行動の周辺国数分の防衛メンバーを残す。
                         var neighbors = World.Neighbors(country);
