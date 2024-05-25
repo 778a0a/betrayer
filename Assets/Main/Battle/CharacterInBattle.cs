@@ -72,5 +72,5 @@ public record CharacterInBattle(
         }
     }
 
-    public override string ToString() => $"{Character?.Name}({Character.Power})";
+    public override string ToString() => $"{Character?.Name}({Character?.Power})";
 }
