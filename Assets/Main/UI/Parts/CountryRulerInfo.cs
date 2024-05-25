@@ -18,6 +18,7 @@ public partial class CountryRulerInfo
 
         imageRuler.image = FaceImageManager.Instance.GetImage(country.Ruler);
         imageCountryColor.sprite = world.Map.Helper.GetCountryImage(country);
+        labelRulerTitle.text = country.Ruler.GetTitle(world);
         labelRulerName.text = country.Ruler.Name;
         labelAreaCount.text = country.Areas.Count.ToString();
         labelTotalIncome.text = country.TotalIncome.ToString();

@@ -16,6 +16,8 @@ public partial class CountryRulerInfo
 {
     public Image imageCountryColor { get; private set; }
 
+    public Label labelRulerTitle { get; private set; }
+
     public Label labelRulerName { get; private set; }
 
     public Label labelAreaCount { get; private set; }
@@ -44,6 +46,7 @@ public partial class CountryRulerInfo
     {
         Root = root;
         imageCountryColor = Root?.Q<Image>("imageCountryColor");
+        labelRulerTitle = Root?.Q<Label>("labelRulerTitle");
         labelRulerName = Root?.Q<Label>("labelRulerName");
         labelAreaCount = Root?.Q<Label>("labelAreaCount");
         labelTotalIncome = Root?.Q<Label>("labelTotalIncome");
