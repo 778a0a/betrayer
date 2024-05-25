@@ -54,6 +54,7 @@ public class MartialActionPhase : PhaseBase
                         // 1+未行動の周辺国数分の防衛メンバーを残す。
                         var neighbors = World.Neighbors(country);
                         var waitingCountryCount = neighbors
+                            .Where(n => n != country.Ally)
                             .Where(n => !n.IsExhausted)
                             .Count();
                         if (freeMembers <= waitingCountryCount + 1)
