@@ -54,6 +54,10 @@ public class StrategyActionPhase : PhaseBase
                     {
                         var isOver = country.Vassals.Count > country.VassalCountMax;
                         if (!isOver) break;
+
+                        // 弱い配下がいないなら何もしない。
+                        if (country.Vassals.Min(c => c.Power) >= 500) break;
+
                         await StrategyActions.FireVassal.Do(chara);
                         Debug.Log($"[戦略フェイズ] 配下を解雇しました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
                     }
