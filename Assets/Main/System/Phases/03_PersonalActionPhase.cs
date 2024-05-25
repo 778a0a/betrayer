@@ -45,11 +45,15 @@ public class PersonalActionPhase : PhaseBase
                 //    }
                 //}
 
+                var prevGold = chara.Gold;
+                var prevPower = chara.Power;
+                var hireCount = 0;
+                var trainedCount = 0;
                 // 兵が雇えるなら雇う。
                 while (PersonalActions.HireSoldier.CanDo(chara))
                 {
                     await PersonalActions.HireSoldier.Do(chara);
-                    Debug.Log($"[個人フェイズ] 兵を雇いました。(残りG:{chara.Gold})");
+                    hireCount++;
                 }
                 // 訓練できるなら訓練する。
                 while (PersonalActions.TrainSoldiers.CanDo(chara))
@@ -61,7 +65,15 @@ public class PersonalActionPhase : PhaseBase
                     }
 
                     await PersonalActions.TrainSoldiers.Do(chara);
-                    Debug.Log($"[個人フェイズ] 兵を訓練しました。(残りG:{chara.Gold})");
+                    trainedCount++;
+                }
+                if (hireCount > 0 || trainedCount > 0)
+                {
+                    Debug.Log($"[個人フェイズ] " +
+                        (hireCount > 0 ? $"雇兵: {hireCount} " : "") +
+                        $"訓練: {trainedCount} " +
+                        $"Power: {prevPower}->{chara.Power} " +
+                        $"Gold:{prevGold}->{chara.Gold}");
                 }
             }
         }
