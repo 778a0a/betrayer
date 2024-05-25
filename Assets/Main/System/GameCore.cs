@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using static UnityEditor.ShaderData;
 using UnityEngine.Tilemaps;
+using System.Threading.Tasks;
 
 public class GameCore
 {
@@ -30,5 +31,48 @@ public class GameCore
         PersonalActions = new(this);
         StrategyActions = new(this);
         MartialActions = new(this);
+    }
+
+    public async ValueTask DoMainLoop(Test test)
+    {
+        try
+        {
+            while (true)
+            {
+                await test.HoldIfNeeded();
+                await Phases.Start.Phase();
+
+                await test.HoldIfNeeded();
+                await Phases.Income.Phase();
+
+                await test.HoldIfNeeded();
+                await Phases.StrategyAction.Phase();
+
+                await test.HoldIfNeeded();
+                await Phases.PersonalAction.Phase();
+
+                await test.HoldIfNeeded();
+                await Phases.MartialAction.Phase();
+
+                Tilemap.DrawCountryTile();
+                if (World.Countries.Count == 1)
+                {
+                    Debug.Log($"ゲーム終了 勝者: {World.Countries[0]}");
+                    return;
+                }
+
+                await Awaitable.WaitForSecondsAsync(test.wait);
+
+                if (test.holdOnTurnEnd)
+                {
+                    await test.WaitUserInteraction();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("メインループでエラー");
+            Debug.LogException(ex);
+        }
     }
 }

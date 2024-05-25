@@ -20,7 +20,7 @@ public class Test : MonoBehaviour
 
     [SerializeField] private TilemapData initialTilemapData;
 
-    [SerializeField] private float wait = 1;
+    [SerializeField] public float wait = 1;
 
     [SerializeField] private MainUI MainUI;
 
@@ -59,7 +59,7 @@ public class Test : MonoBehaviour
         holdOnTurnEnd = false;
         setHoldOnHoldEnd = false;
         
-        DoMainLoop().Foreget();
+        core.DoMainLoop(this).Foreget();
     }
 
     private async void MartialPhaseScreen_ActionButtonClicked(object sender, MartialPhaseScreen.ActionButton e)
@@ -282,7 +282,7 @@ public class Test : MonoBehaviour
         MainUI.MartialPhase.SetData(chara, world);
     }
 
-    private bool holdOnTurnEnd = false;
+    public bool holdOnTurnEnd = false;
     private bool setHoldOnHoldEnd = false;
     public bool hold = false;
     public async ValueTask HoldIfNeeded()
@@ -298,51 +298,5 @@ public class Test : MonoBehaviour
     {
         hold = true;
         await HoldIfNeeded();
-    }
-
-
-    // Update is called once per frame
-    private async ValueTask DoMainLoop()
-    {
-        try
-        {
-            while (true)
-            {
-                await HoldIfNeeded();
-                await phases.Start.Phase();
-
-                await HoldIfNeeded();
-                await phases.Income.Phase();
-
-                await HoldIfNeeded();
-                await phases.StrategyAction.Phase();
-
-                await HoldIfNeeded();
-                await phases.PersonalAction.Phase();
-
-                await HoldIfNeeded();
-                await phases.MartialAction.Phase();
-
-                tilemap.DrawCountryTile();
-                if (world.Countries.Count == 1)
-                {
-                    Debug.Log($"ゲーム終了 勝者: {world.Countries[0]}");
-                    return;
-                }
-
-                await Awaitable.WaitForSecondsAsync(wait);
-
-                if (holdOnTurnEnd)
-                {
-                    hold = true;
-                    await HoldIfNeeded();
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("メインループでエラー");
-            Debug.LogException(ex);
-        }
     }
 }
