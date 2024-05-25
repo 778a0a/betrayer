@@ -28,10 +28,13 @@ public record CharacterInBattle(
 
     public static implicit operator Character(CharacterInBattle c) => c.Character;
 
-    public bool ShouldRetreat()
+    public bool ShouldRetreat(int tickCount)
     {
         // プレーヤーの場合はUIで判断しているので処理不要。
         if (IsPlayer) return false;
+
+        // 戦闘開始直後は撤退しない。
+        if (tickCount < 3) return false;
 
         // まだ損耗が多くないなら撤退しない。
         var manyLoss = Character.Force.Soldiers.Count(s => s.Hp < 10) >= 3;

@@ -58,12 +58,12 @@ public class Battle
                     break;
                 }
             }
-            if (Atk.ShouldRetreat())
+            if (Atk.ShouldRetreat(TickCount))
             {
                 result = BattleResult.DefenderWin;
                 break;
             }
-            if (Def.ShouldRetreat())
+            if (Def.ShouldRetreat(TickCount))
             {
                 result = BattleResult.AttackerWin;
                 break;
