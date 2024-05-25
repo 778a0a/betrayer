@@ -117,6 +117,8 @@ public class Battle
 
     private void Tick()
     {
+        TickCount += 1;
+
         // 両方の兵士をランダムな順番の配列にいれる。
         var all = Atk.Force.Soldiers.Select(s => (soldier: s, owner: Attacker))
             .Concat(Def.Force.Soldiers.Select(s => (soldier: s, owner: Defender)))
