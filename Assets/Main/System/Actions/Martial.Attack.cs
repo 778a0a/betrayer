@@ -111,7 +111,7 @@ partial class MartialActions
             OnAfterAttack(battle, result, World);
 
             // 攻撃済みフラグを立てる。
-            chara.IsAttacked = true;
+            attacker.IsAttacked = true;
 
             if (chara.IsPlayer || targetCountry.Ruler.IsPlayer)
             {
