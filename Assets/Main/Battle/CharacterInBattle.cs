@@ -46,9 +46,9 @@ public record CharacterInBattle(
         var opAboutToDie = Opponent.Force.Soldiers.Any(s => s.Hp <= 3);
         if (opAboutToDie) return false;
 
-        // 自国の最後の領土なら撤退しない。
-        var lastArea = Country.Areas.Count == 1;
-        if (lastArea) return false;
+        // 自国の最後の領土の防衛なら撤退しない。
+        var lastArea =  Country.Areas.Count == 1;
+        if (lastArea) return IsDefender && false;
 
         // 撤退する。
         return true;
