@@ -43,6 +43,15 @@ public class StrategyActionPhase : PhaseBase
                 {
                     Debug.Log($"[戦略フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
 
+                    // 配下の数が一杯で、一番下っ端が弱すぎるなら解雇する。
+                    if (country.Vassals.Count == country.VassalCountMax &&
+                        country.Vassals[^1].Power < 500)
+                    {
+                        // TODO 解雇する配下を指定したい。
+                        await StrategyActions.FireVassal.Do(chara);
+                        Debug.Log($"[戦略フェイズ] 弱すぎる配下を解雇しました。(配下数: {country.Vassals.Count}) (残りG:{chara.Gold})");
+                    }
+
                     // 配下が足りていないなら配下を雇う。
                     while (StrategyActions.HireVassal.CanDo(chara) && 0.9.Chance())
                     {
