@@ -32,6 +32,7 @@ public class Battle
         if (Def.Character == null)
         {
             Debug.Log($"[戦闘処理] 防御側がいないので侵攻側の勝利です。");
+            Atk.Character.Prestige += 1;
             return BattleResult.AttackerWin;
         }
 
@@ -96,9 +97,18 @@ public class Battle
             }
         }
 
+        var winner = result == BattleResult.AttackerWin ? Atk : Def;
+        var loser = result == BattleResult.AttackerWin ? Def : Atk;
+
         // 兵士の回復処理を行う。
-        Atk.Recover(result == BattleResult.AttackerWin);
-        Def.Recover(result == BattleResult.DefenderWin);
+        winner.Recover(true);
+        loser.Recover(false);
+
+        // 名声の処理を行う。
+        var loserPrestigeLoss = loser.Character.Prestige / 3;
+        loser.Character.Prestige -= loserPrestigeLoss;
+        winner.Character.Prestige += loserPrestigeLoss;
+        winner.Character.Prestige += 1;
 
         return result;
     }
