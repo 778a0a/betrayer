@@ -79,7 +79,20 @@ partial class MartialActions
             }
 
             // 防衛側キャラを選択する。
-            var defender = targetCountry.Members.Where(c => !c.IsAttacked).RandomPickDefault();
+            var defender = targetCountry.Members
+                .Where(c => !c.IsAttacked)
+                .RandomPickWeighted(c => c.Power);
+
+            // 最後のエリアの場合は、君主は行動済みでも防衛可能にする。
+            // 固定で一番強いキャラを選ぶ。
+            if (targetCountry.Areas.Count == 1)
+            {
+                defender = targetCountry.Members
+                    .Where(c => !c.IsAttacked || c == targetCountry.Ruler)
+                    .OrderByDescending(c => c.Power)
+                    .First();
+            }
+
             // 防衛側の君主がプレーヤーの場合は防衛者を選択させる。
             if (targetCountry.Ruler.IsPlayer)
             {

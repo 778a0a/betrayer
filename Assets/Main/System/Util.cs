@@ -23,6 +23,22 @@ public static class Util
     public static T RandomPick<T>(this IEnumerable<T> list) => list.ElementAt(Random.Range(0, list.Count()));
     public static T RandomPickDefault<T>(this IList<T> list) => list.Count == 0 ? default : RandomPick(list);
     public static T RandomPickDefault<T>(this IEnumerable<T> list) => list.Count() == 0 ? default : RandomPick(list);
+    public static T RandomPickWeighted<T>(this IEnumerable<T> l, Func<T, float> weightFunc)
+    {
+        var list = l.ToList();
+        if (list.Count == 0) return default;
+        var totalWeight = list.Sum(weightFunc);
+        var value = Random.Range(0f, totalWeight);
+        foreach (var item in list)
+        {
+            var weight = weightFunc(item);
+            if (value < weight) return item;
+            value -= weight;
+        }
+        return list[^1];
+    }
+
+
     public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) => source.OrderBy(_ => Random.value);
     public static T[] ShuffleInPlace<T>(this T[] source) => (T[])ShuffleInPlace((IList<T>)source);
     public static IList<T> ShuffleInPlace<T>(this IList<T> source)
