@@ -66,6 +66,8 @@ partial class MartialActions
             var result = await battle.Do();
             AttackAction.OnAfterAttack(battle, result, World);
 
+            // 攻撃済みフラグはつけない。
+
             if (chara.IsPlayer)
             {
                 UI.ShowMartialUI();

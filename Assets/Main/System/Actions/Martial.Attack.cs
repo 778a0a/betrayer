@@ -97,6 +97,9 @@ partial class MartialActions
             var result = await battle.Do();
             OnAfterAttack(battle, result, World);
 
+            // 攻撃済みフラグを立てる。
+            chara.IsAttacked = true;
+
             if (chara.IsPlayer || targetCountry.Ruler.IsPlayer)
             {
                 UI.ShowMartialUI();
@@ -134,9 +137,6 @@ partial class MartialActions
         {
             var atk = battle.Attacker;
             var def = battle.Defender;
-
-            // 攻撃済みフラグを立てる。
-            atk.Character.IsAttacked = true;
 
             // 攻撃側の勝ち
             if (result == BattleResult.AttackerWin)
