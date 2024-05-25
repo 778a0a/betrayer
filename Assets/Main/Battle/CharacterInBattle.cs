@@ -43,7 +43,7 @@ public record CharacterInBattle(
         if (myPower > opPower) return false;
 
         // 敵に残り数の少ない兵士がいるなら撤退しない。
-        var opAboutToDie = Opponent.Force.Soldiers.Any(s => s.Hp <= 3);
+        var opAboutToDie = Opponent.Force.Soldiers.Any(s => s.IsAlive && s.Hp <= 3);
         if (opAboutToDie) return false;
 
         // 自国の最後の領土の防衛なら撤退しない。
