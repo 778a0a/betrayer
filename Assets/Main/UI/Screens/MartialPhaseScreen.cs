@@ -64,7 +64,7 @@ public partial class MartialPhaseScreen : IScreen
         debugCurrentChara = chara;
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
-        labelTitle.text = "将軍";
+        labelTitle.text = chara.GetTitle(world);
         labelYearsOfService.text = "88";
         labelSalaryRatio.text = chara.SalaryRatio.ToString();
 
