@@ -51,10 +51,17 @@ partial class StrategyActions
             }
 
             var neighbors = World.Neighbors(country);
-
-            // 隣接国が1つしかない場合は、その国以外と同盟を結ぶ。
             var target = default(Country);
-            if (neighbors.Length == 1)
+
+            // 隣接国が複数ある場合は、その中からランダムに選ぶ。
+            if (neighbors.Length > 1)
+            {
+                target = neighbors
+                    .Where(c => c.Ally == null)
+                    .RandomPickDefault();
+            }
+            // 隣接国が1つしかないか隣接国が同盟済みの場合は、他の国から選ぶ。
+            if (target == null)
             {
                 var cands = World.Countries
                     .Except(new[] { country })
@@ -67,11 +74,6 @@ partial class StrategyActions
                     Debug.Log($"{country} は同盟を結ぶ国がありませんでした。");
                     return;
                 }
-            }
-            // 隣接国が複数ある場合は、その中からランダムに選ぶ。
-            else
-            {
-                target = neighbors.RandomPick();
             }
 
             var ok = false;
