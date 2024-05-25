@@ -31,7 +31,7 @@ public class ActionBase
     /// <summary>
     /// 選択肢として表示可能ならtrue
     /// </summary>
-    public virtual bool CanSelect(Character chara) => World.IsRuler(chara);
+    public virtual bool CanSelect(Character chara) => true;
     /// <summary>
     /// アクションの実行に必要なGold
     /// </summary>
@@ -85,4 +85,5 @@ public partial class StrategyActions : ActionsBase<StrategyActionBase>
 }
 public class StrategyActionBase : ActionBase
 {
+    public override bool CanSelect(Character chara) => World.IsRuler(chara);
 }
