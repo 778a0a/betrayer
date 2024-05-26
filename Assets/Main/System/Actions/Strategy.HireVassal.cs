@@ -46,38 +46,37 @@ partial class StrategyActions
                 frees.Remove(cand);
             }
 
+            // 対象を選ぶ。
+            var target = default(Character);
             if (chara.IsPlayer)
             {
                 // どのキャラを配下にするか選択する。
-                var selected = await UI.ShowSearchResult(candidates.ToArray(), World);
-                if (selected == null)
+                target = await UI.ShowSearchResult(candidates.ToArray(), World);
+                if (target == null)
                 {
                     Debug.Log("キャンセルされました。");
                     return;
                 }
-                var country = World.CountryOf(chara);
-                country.AddVassal(selected);
             }
             else
             {
-                // 配下にする。
-                var country = World.CountryOf(chara);
-                var newVassal = candidates.OrderByDescending(c => c.Power).First();
-
-                // プレイヤーの場合は選択肢を表示する。
-                if (newVassal.IsPlayer)
-                {
-                    var ok = await UI.ShowRespondJobOfferScreen(country, World);
-                    //UI.HideAllUI();
-                    Util.Todo();
-                    if (!ok)
-                    {
-                        return;
-                    }
-                }
-
-                country.AddVassal(newVassal);
+                // 一番強いキャラを選ぶ。
+                target = candidates.OrderByDescending(c => c.Power).First();
             }
+
+            // 対象がプレイヤーの場合は選択肢を表示する。
+            var country = World.CountryOf(chara);
+            if (target.IsPlayer)
+            {
+                var ok = await UI.ShowRespondJobOfferScreen(country, World);
+                //UI.HideAllUI();
+                Util.Todo();
+                if (!ok)
+                {
+                    return;
+                }
+            }
+            country.AddVassal(target);
 
             Core.Tilemap.DrawCountryTile();
         }
