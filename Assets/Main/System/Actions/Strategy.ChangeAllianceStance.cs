@@ -18,6 +18,9 @@ partial class StrategyActions
     {
         public static int MaxTurnCountToDisableAlliance = 5;
 
+        public override bool CanSelect(Character chara) =>
+            base.CanSelect(chara) &&
+            World.CountryOf(chara).Ally != null;
         public override int Cost(Character chara) => 0;
         protected override bool CanDoCore(Character chara)
         {

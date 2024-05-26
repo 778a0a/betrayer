@@ -14,6 +14,7 @@ public partial class StrategyPhaseScreen : IScreen
         HireVassal,
         FireVassal,
         Ally,
+        ChangeAllianceStance,
         Resign,
         ShowSystemMenu,
         EndTurn,
@@ -28,6 +29,7 @@ public partial class StrategyPhaseScreen : IScreen
             buttonHireVassal,
             buttonFireVassal,
             buttonAlly,
+            buttonChangeAllianceStance,
             buttonResign,
             buttonShowSystemMenu,
             buttonEndTurn,
@@ -66,11 +68,26 @@ public partial class StrategyPhaseScreen : IScreen
         this.world = world;
         debugCurrentChara = chara;
         if (chara == null && world == null) return;
+        var country = world.CountryOf(chara);
+
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
         labelTitle.text = chara.GetTitle(world);
         labelYearsOfService.text = "88";
         labelSalaryRatio.text = chara.SalaryRatio.ToString();
+
+        if (world.IsRuler(chara) && country.Ally != null)
+        {
+            containerAllianceStance.style.display = DisplayStyle.Flex;
+            var yes = country.WantsToContinueAlliance;
+            var text = yes ? "継続" : "解消";
+            var turns = country.TurnCountToDisableAlliance;
+            labelAllianceStance.text = text + (yes ? "" : $"({turns})");
+        }
+        else
+        {
+            containerAllianceStance.style.display = DisplayStyle.None;
+        }
 
         labelCharaAttack.text = chara.Attack.ToString();
         labelCharaDefense.text = chara.Defense.ToString();
@@ -98,7 +115,6 @@ public partial class StrategyPhaseScreen : IScreen
         labelCost.text = "TODO";
         labelGold.text = chara.Gold.ToString();
 
-        var country = world.CountryOf(chara);
         if (country != null)
         {
             CountryRulerInfo.Root.style.display = DisplayStyle.Flex;
@@ -109,10 +125,12 @@ public partial class StrategyPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
-        buttonOrganize.SetEnabled(GameCore.Instance.StrategyActions.Organize.CanDo(chara));
-        buttonHireVassal.SetEnabled(GameCore.Instance.StrategyActions.HireVassal.CanDo(chara));
-        buttonFireVassal.SetEnabled(GameCore.Instance.StrategyActions.FireVassal.CanDo(chara));
-        buttonAlly.SetEnabled(GameCore.Instance.StrategyActions.Ally.CanDo(chara));
-        buttonResign.SetEnabled(GameCore.Instance.StrategyActions.Resign.CanDo(chara));
+        var actions = GameCore.Instance.StrategyActions;
+        IScreen.SetActionButton(buttonOrganize, actions.Organize, chara);
+        IScreen.SetActionButton(buttonHireVassal, actions.HireVassal, chara);
+        IScreen.SetActionButton(buttonFireVassal, actions.FireVassal, chara);
+        IScreen.SetActionButton(buttonAlly, actions.Ally, chara);
+        IScreen.SetActionButton(buttonChangeAllianceStance, actions.ChangeAllianceStance, chara);
+        IScreen.SetActionButton(buttonResign, actions.Resign, chara);
     }
 }

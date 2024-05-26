@@ -7,6 +7,7 @@ using System.Threading.Tasks.Sources;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public static class Util
@@ -81,6 +82,11 @@ public static class Util
         var g = (val >> 8) & 0xFF;
         var b = val & 0xFF;
         return new Color(r / 255f, g / 255f, b / 255f);
+    }
+
+    public static DisplayStyle Display(bool on)
+    {
+        return on ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
     public static IDisposable Defer(Action act)

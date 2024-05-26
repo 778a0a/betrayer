@@ -16,6 +16,9 @@ partial class StrategyActions
     public AllyAction Ally { get; } = new();
     public class AllyAction : StrategyActionBase
     {
+        public override bool CanSelect(Character chara) =>
+            base.CanSelect(chara) &&
+            World.CountryOf(chara).Ally == null;
         public override int Cost(Character chara) => 5;
         protected override bool CanDoCore(Character chara)
         {

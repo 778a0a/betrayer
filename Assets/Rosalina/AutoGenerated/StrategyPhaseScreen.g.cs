@@ -24,6 +24,8 @@ public partial class StrategyPhaseScreen
 
     public Button buttonAlly { get; private set; }
 
+    public Button buttonChangeAllianceStance { get; private set; }
+
     public Button buttonResign { get; private set; }
 
     public Button buttonShowSystemMenu { get; private set; }
@@ -42,11 +44,15 @@ public partial class StrategyPhaseScreen
 
     public Label labelTitle { get; private set; }
 
+    public Label labelName { get; private set; }
+
     public Label labelYearsOfService { get; private set; }
 
     public Label labelSalaryRatio { get; private set; }
 
-    public Label labelName { get; private set; }
+    public Label labelAllianceStance { get; private set; }
+
+    public VisualElement containerAllianceStance { get; private set; }
 
     public Label labelCharaAttack { get; private set; }
 
@@ -110,6 +116,7 @@ public partial class StrategyPhaseScreen
         buttonHireVassal = Root?.Q<Button>("buttonHireVassal");
         buttonFireVassal = Root?.Q<Button>("buttonFireVassal");
         buttonAlly = Root?.Q<Button>("buttonAlly");
+        buttonChangeAllianceStance = Root?.Q<Button>("buttonChangeAllianceStance");
         buttonResign = Root?.Q<Button>("buttonResign");
         buttonShowSystemMenu = Root?.Q<Button>("buttonShowSystemMenu");
         buttonEndTurn = Root?.Q<Button>("buttonEndTurn");
@@ -119,9 +126,11 @@ public partial class StrategyPhaseScreen
         GoldPanel = Root?.Q<VisualElement>("GoldPanel");
         imageChara = Root?.Q<Image>("imageChara");
         labelTitle = Root?.Q<Label>("labelTitle");
+        labelName = Root?.Q<Label>("labelName");
         labelYearsOfService = Root?.Q<Label>("labelYearsOfService");
         labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
-        labelName = Root?.Q<Label>("labelName");
+        labelAllianceStance = Root?.Q<Label>("labelAllianceStance");
+        containerAllianceStance = Root?.Q<VisualElement>("containerAllianceStance");
         labelCharaAttack = Root?.Q<Label>("labelCharaAttack");
         labelCharaDefense = Root?.Q<Label>("labelCharaDefense");
         labelCharaIntelligence = Root?.Q<Label>("labelCharaIntelligence");

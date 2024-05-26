@@ -151,6 +151,13 @@ public class Test : MonoBehaviour
                     straUI.SetData(chara, world);
                 }
                 break;
+            case StrategyPhaseScreen.ActionButton.ChangeAllianceStance:
+                if (StrategyActions.ChangeAllianceStance.CanDo(chara))
+                {
+                    await StrategyActions.ChangeAllianceStance.Do(chara);
+                    straUI.SetData(chara, world);
+                }
+                break;
             case StrategyPhaseScreen.ActionButton.Resign:
                 if (StrategyActions.Resign.CanDo(chara))
                 {
