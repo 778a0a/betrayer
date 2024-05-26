@@ -28,14 +28,22 @@ partial class PersonalActions
             Assert.IsTrue(CanDo(chara));
 
             var oldCountry = World.CountryOf(chara);
-            var areas = new List<Area>
+
+            var areas = new List<Area>();
+            var firstArea = oldCountry.Areas.RandomPick();
+            areas.Add(firstArea);
+            oldCountry.Areas.Remove(firstArea);
+
+            var neighbors = World.Map.GetNeighbors(firstArea);
+            var candAreas = neighbors
+                .Concat(neighbors.SelectMany(a => World.Map.GetNeighbors(a)))
+                .Distinct();
+
+            while (0.6.Chance() && oldCountry.Areas.Count > 1)
             {
-                oldCountry.Areas.RandomPick(),
-            };
-            while (0.4.Chance())
-            {
-                var neighbor = World.Map.GetNeighbors(areas.RandomPick())
-                    .Where(a => World.CountryOf(a) == oldCountry && !areas.Contains(a))
+                var neighbor = candAreas
+                    .Where(a => World.CountryOf(a) == oldCountry)
+                    .Where(a => !areas.Contains(a))
                     .RandomPickDefault();
                 if (neighbor != null)
                 {
