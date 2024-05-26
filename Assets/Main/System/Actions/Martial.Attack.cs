@@ -69,7 +69,7 @@ partial class MartialActions
             var attacker = country.Members
                 .Where(c => !c.IsAttacked)
                 .Where(c => c.Power > 500)
-                .RandomPick();
+                .RandomPickWeighted(c => c.Power * Mathf.Sqrt(c.Attack));
             if (chara.IsPlayer)
             {
                 // プレーヤーで君主の場合は攻撃者を選択させる。
