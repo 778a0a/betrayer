@@ -186,9 +186,11 @@ partial class MartialActions
                 }
 
                 // 領土を更新する。
-                atk.Country.Areas.Add(def.Area);
-                def.Country.Areas.Remove(def.Area);
+                var area = def.Area;
+                atk.Country.Areas.Add(area);
+                def.Country.Areas.Remove(area);
                 GameCore.Instance.Tilemap.DrawCountryTile();
+                GameCore.Instance.Tilemap.SetExhausted(area, atk.Country.IsExhausted);
 
                 // 領土がなくなったら国を削除する。
                 if (def.Country.Areas.Count == 0)

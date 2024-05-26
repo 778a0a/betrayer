@@ -116,10 +116,14 @@ public class TilemapManager : MonoBehaviour
     {
         foreach (var area in country.Areas)
         {
-            var pos = area.Position;
-            var tile = Helper.GetUITile(pos); 
-            tile.SetExhausted(exhausted);
+            SetExhausted(area, exhausted);
         }
+    }
+    public void SetExhausted(Area area, bool exhausted)
+    {
+        var pos = area.Position;
+        var tile = Helper.GetUITile(pos);
+        tile.SetExhausted(exhausted);
     }
     public void ResetExhausted()
     {
