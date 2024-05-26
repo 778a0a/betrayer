@@ -13,7 +13,7 @@ public record CharacterInBattle(
     bool IsAttacker)
 {
     public CharacterInBattle Opponent { get; set; }
-    public Country Country = GameCore.Instance.World.CountryOf(Area);
+    public Country Country = GameCore.Instance.World.CountryOf(Character);
     public bool IsDefender => !IsAttacker;
 
     /// <summary>

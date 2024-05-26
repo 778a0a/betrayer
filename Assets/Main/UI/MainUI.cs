@@ -255,12 +255,15 @@ public partial class MainUI : MonoBehaviour
             });
     }
 
-    public ValueTask<Area> ShowSelectAreaScreen(List<Area> targetAreas, WorldData world)
+    public ValueTask<Area> ShowSelectAreaScreen(
+        IList<Area> targetAreas,
+        WorldData world,
+        string text = "侵攻する地域を選択してください。")
     {
         ShowScreen(SelectArea);
 
         return SelectArea.Show(
-            "侵攻する地域を選択してください。",
+            text,
             world,
             a =>
             {

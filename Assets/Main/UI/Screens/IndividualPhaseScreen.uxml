@@ -14,6 +14,7 @@
                 <engine:Button text="放浪" name="buttonResign" class="Action-Button" />
                 <engine:Button text="反乱" name="buttonRebel" class="Action-Button" />
                 <engine:Button text="独立" name="buttonBecomeIndependent" class="Action-Button" />
+                <engine:Button text="奪取" name="buttonSeize" class="Action-Button" />
                 <engine:Button text="機能" name="buttonShowSystemMenu" class="Action-Button" />
                 <engine:Button text="完了" name="buttonEndTurn" class="Action-Button" />
             </engine:VisualElement>

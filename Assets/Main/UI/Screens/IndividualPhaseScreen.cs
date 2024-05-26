@@ -17,6 +17,7 @@ public partial class IndividualPhaseScreen : IScreen
         Resign,
         Rebel,
         BecomeIndependent,
+        Seize,
         ShowSystemMenu,
         EndTurn,
     }
@@ -32,6 +33,7 @@ public partial class IndividualPhaseScreen : IScreen
             buttonResign,
             buttonRebel,
             buttonBecomeIndependent,
+            buttonSeize,
             buttonShowSystemMenu,
             buttonEndTurn,
         };
@@ -115,5 +117,6 @@ public partial class IndividualPhaseScreen : IScreen
         IScreen.SetActionButton(buttonResign, actions.Resign, chara);
         IScreen.SetActionButton(buttonRebel, actions.Rebel, chara);
         IScreen.SetActionButton(buttonBecomeIndependent, actions.BecomeIndependent, chara);
+        IScreen.SetActionButton(buttonSeize, actions.Seize, chara);
     }
 }

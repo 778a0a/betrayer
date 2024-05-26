@@ -28,6 +28,8 @@ public partial class IndividualPhaseScreen
 
     public Button buttonBecomeIndependent { get; private set; }
 
+    public Button buttonSeize { get; private set; }
+
     public Button buttonShowSystemMenu { get; private set; }
 
     public Button buttonEndTurn { get; private set; }
@@ -114,6 +116,7 @@ public partial class IndividualPhaseScreen
         buttonResign = Root?.Q<Button>("buttonResign");
         buttonRebel = Root?.Q<Button>("buttonRebel");
         buttonBecomeIndependent = Root?.Q<Button>("buttonBecomeIndependent");
+        buttonSeize = Root?.Q<Button>("buttonSeize");
         buttonShowSystemMenu = Root?.Q<Button>("buttonShowSystemMenu");
         buttonEndTurn = Root?.Q<Button>("buttonEndTurn");
         labelCost = Root?.Q<Label>("labelCost");

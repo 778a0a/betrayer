@@ -240,6 +240,13 @@ public class Test : MonoBehaviour
                     OnActionEnd();
                 }
                 break;
+            case IndividualPhaseScreen.ActionButton.Seize:
+                if (PersonalActions.Seize.CanDo(chara))
+                {
+                    await PersonalActions.Seize.Do(chara);
+                    OnActionEnd();
+                }
+                break;
             case IndividualPhaseScreen.ActionButton.ShowSystemMenu:
                 break;
             case IndividualPhaseScreen.ActionButton.EndTurn:

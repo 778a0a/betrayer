@@ -77,32 +77,12 @@ partial class MartialActions
             }
 
             // 防衛側キャラを選択する。
-            var defender = targetCountry.Members
-                .Where(c => !c.IsAttacked)
-                //.RandomPickWeighted(c => c.Power);
-                .RandomPickWeighted(c => Mathf.Pow(c.Force.Soldiers.Min(s => s.Hp), 2));
-
-            // 最後のエリアの場合は、君主は行動済みでも防衛可能にする。
-            // 固定で一番強いキャラを選ぶ。
-            if (targetCountry.Areas.Count == 1)
-            {
-                defender = targetCountry.Members
-                    .Where(c => !c.IsAttacked || c == targetCountry.Ruler)
-                    .OrderByDescending(c => c.Power)
-                    .First();
-            }
-
-            // 防衛側の君主がプレーヤーの場合は防衛者を選択させる。
-            if (targetCountry.Ruler.IsPlayer)
-            {
-                defender = await UI.ShowSelectDefenderScreen(
-                    sourceArea,
-                    country,
-                    attacker,
-                    targetArea,
-                    targetCountry,
-                    World);
-            }
+            var defender = await SelectDefender(
+                attacker,
+                sourceArea,
+                country,
+                targetArea,
+                targetCountry);
 
             // 侵攻する。
             var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender);
@@ -111,11 +91,6 @@ partial class MartialActions
 
             // 攻撃済みフラグを立てる。
             attacker.IsAttacked = true;
-
-            if (result == BattleResult.AttackerWin)
-            {
-                Tilemap.DrawCountryTile();
-            }
 
             if (targetCountry.Ruler.IsPlayer)
             {
@@ -145,6 +120,44 @@ partial class MartialActions
                     return adj;
                 })
                 .First();
+        }
+
+        public async ValueTask<Character> SelectDefender(
+            Character attacker,
+            Area sourceArea,
+            Country country,
+            Area targetArea,
+            Country targetCountry)
+        {
+            // 防衛側キャラを選択する。
+            var defender = targetCountry.Members
+                .Where(c => !c.IsAttacked)
+                //.RandomPickWeighted(c => c.Power);
+                .RandomPickWeighted(c => Mathf.Pow(c.Force.Soldiers.Min(s => s.Hp), 2));
+
+            // 最後のエリアの場合は、君主は行動済みでも防衛可能にする。
+            // 固定で一番強いキャラを選ぶ。
+            if (targetCountry.Areas.Count == 1)
+            {
+                defender = targetCountry.Members
+                    .Where(c => !c.IsAttacked || c == targetCountry.Ruler)
+                    .OrderByDescending(c => c.Power)
+                    .First();
+            }
+
+            // 防衛側の君主がプレーヤーの場合は防衛者を選択させる。
+            if (targetCountry.Ruler.IsPlayer)
+            {
+                defender = await UI.ShowSelectDefenderScreen(
+                    sourceArea,
+                    country,
+                    attacker,
+                    targetArea,
+                    targetCountry,
+                    World);
+            }
+
+            return defender;
         }
 
         /// <summary>
