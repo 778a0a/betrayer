@@ -44,7 +44,6 @@ partial class MartialActions
                 target = await UI.ShowSubdueScreen(country, World);
                 if (target == null)
                 {
-                    UI.ShowMartialUI();
                     return;
                 }
             }
@@ -63,12 +62,6 @@ partial class MartialActions
             if (result == BattleResult.AttackerWin)
             {
                 country.Vassals.Remove(target);
-            }
-
-            if (chara.IsPlayer)
-            {
-                UI.ShowMartialUI();
-                UI.MartialPhase.SetData(chara, World);
             }
 
             Core.Tilemap.DrawCountryTile();

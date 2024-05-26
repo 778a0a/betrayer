@@ -37,13 +37,10 @@ partial class StrategyActions
                 if (selected == null)
                 {
                     Debug.Log("解雇するキャラが選択されませんでした。");
-                    UI.ShowStrategyUI();
                     return;
                 }
                 country.Vassals.Remove(selected);
                 country.RecalculateSalary();
-                UI.ShowStrategyUI();
-
             }
             else
             {

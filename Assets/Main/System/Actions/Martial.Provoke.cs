@@ -43,7 +43,6 @@ partial class MartialActions
                     World);
                 if (attacker == null)
                 {
-                    UI.ShowMartialUI();
                     return;
                 }
             }
@@ -67,11 +66,6 @@ partial class MartialActions
             AttackAction.OnAfterAttack(battle, result, World);
 
             // 攻撃済みフラグはつけない。
-
-            if (chara.IsPlayer)
-            {
-                UI.ShowMartialUI();
-            }
         }
 
         /// <summary>

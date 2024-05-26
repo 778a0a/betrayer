@@ -65,6 +65,12 @@ public class Test : MonoBehaviour
     private async void MartialPhaseScreen_ActionButtonClicked(object sender, MartialPhaseScreen.ActionButton e)
     {
         var chara = MainUI.MartialPhase.debugCurrentChara;
+        void OnActionEnd()
+        {
+            MainUI.MartialPhase.SetData(chara, world);
+            MainUI.ShowMartialUI();
+        }
+
         var mui = MainUI.MartialPhase;
         switch (e)
         {
@@ -75,35 +81,35 @@ public class Test : MonoBehaviour
                 if (MartialActions.Attack.CanDo(chara))
                 {
                     await MartialActions.Attack.Do(chara);
-                    mui.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case MartialPhaseScreen.ActionButton.DecisiveBattle:
                 //if (MartialActions.DecisiveBattle.CanDo(chara))
                 //{
                 //    MartialActions.DecisiveBattle.Do(chara);
-                //    mui.SetData(chara, world);
+                //    OnActionEnd();
                 //}
                 break;
             case MartialPhaseScreen.ActionButton.Provoke:
                 if (MartialActions.Provoke.CanDo(chara))
                 {
                     await MartialActions.Provoke.Do(chara);
-                    mui.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case MartialPhaseScreen.ActionButton.Subdue:
                 if (MartialActions.Subdue.CanDo(chara))
                 {
                     await MartialActions.Subdue.Do(chara);
-                    mui.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case MartialPhaseScreen.ActionButton.PrivateFight:
                 if (MartialActions.PrivateFight.CanDo(chara))
                 {
                     await MartialActions.PrivateFight.Do(chara);
-                    mui.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case MartialPhaseScreen.ActionButton.ShowSystemMenu:
@@ -117,7 +123,12 @@ public class Test : MonoBehaviour
     private async void StrategyPhaseScreen_ActionButtonClicked(object sender, StrategyPhaseScreen.ActionButton e)
     {
         var chara = MainUI.StrategyPhase.debugCurrentChara;
-        var straUI = MainUI.StrategyPhase;
+        void OnActionEnd()
+        {
+            MainUI.StrategyPhase.SetData(chara, world);
+            MainUI.ShowStrategyUI();
+        }
+        
         switch (e)
         {
             case StrategyPhaseScreen.ActionButton.ShowInfo:
@@ -127,42 +138,42 @@ public class Test : MonoBehaviour
                 if (StrategyActions.Organize.CanDo(chara))
                 {
                     await StrategyActions.Organize.Do(chara);
-                    straUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.HireVassal:
                 if (StrategyActions.HireVassal.CanDo(chara))
                 {
                     await StrategyActions.HireVassal.Do(chara);
-                    straUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.FireVassal:
                 if (StrategyActions.FireVassal.CanDo(chara))
                 {
                     await StrategyActions.FireVassal.Do(chara);
-                    straUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.Ally:
                 if (StrategyActions.Ally.CanDo(chara))
                 {
                     await StrategyActions.Ally.Do(chara);
-                    straUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.ChangeAllianceStance:
                 if (StrategyActions.ChangeAllianceStance.CanDo(chara))
                 {
                     await StrategyActions.ChangeAllianceStance.Do(chara);
-                    straUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.Resign:
                 if (StrategyActions.Resign.CanDo(chara))
                 {
                     await StrategyActions.Resign.Do(chara);
-                    straUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case StrategyPhaseScreen.ActionButton.ShowSystemMenu:
@@ -176,7 +187,12 @@ public class Test : MonoBehaviour
     private async void IndividualPhaseScreen_ActionButtonClicked(object sender, IndividualPhaseScreen.ActionButton e)
     {
         var chara = MainUI.IndividualPhase.debugCurrentChara;
-        var indivUI = MainUI.IndividualPhase;
+        void OnActionEnd()
+        {
+            MainUI.IndividualPhase.SetData(chara, world);
+            MainUI.ShowIndividualUI();
+        }
+
         switch (e)
         {
             case IndividualPhaseScreen.ActionButton.ShowInfo:
@@ -186,42 +202,42 @@ public class Test : MonoBehaviour
                 if (PersonalActions.HireSoldier.CanDo(chara))
                 {
                     await PersonalActions.HireSoldier.Do(chara);
-                    indivUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.TrainSoldiers:
                 if (PersonalActions.TrainSoldiers.CanDo(chara))
                 {
                     await PersonalActions.TrainSoldiers.Do(chara);
-                    indivUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.GetJob:
                 if (PersonalActions.GetJob.CanDo(chara))
                 {
                     await PersonalActions.GetJob.Do(chara);
-                    indivUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.Resign:
                 if (PersonalActions.Resign.CanDo(chara))
                 {
                     await PersonalActions.Resign.Do(chara);
-                    indivUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.Rebel:
                 if (PersonalActions.Rebel.CanDo(chara))
                 {
                     await PersonalActions.Rebel.Do(chara);
-                    indivUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.BecomeIndependent:
                 if (PersonalActions.BecomeIndependent.CanDo(chara))
                 {
                     await PersonalActions.BecomeIndependent.Do(chara);
-                    indivUI.SetData(chara, world);
+                    OnActionEnd();
                 }
                 break;
             case IndividualPhaseScreen.ActionButton.ShowSystemMenu:

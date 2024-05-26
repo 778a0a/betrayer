@@ -42,7 +42,6 @@ partial class StrategyActions
                 if (target == null)
                 {
                     Debug.Log("同盟を結ぶ国が選択されませんでした。");
-                    UI.ShowStrategyUI();
                     return;
                 }
             }
@@ -91,7 +90,8 @@ partial class StrategyActions
             {
                 Debug.Log($"{country} が {target} に同盟を申し込みました。");
                 ok = await UI.ShowRespondAllyRequestScreen(country, World);
-                UI.ShowStrategyUI();
+                //UI.ShowStrategyUI();
+                Util.Todo();
             }
             else
             {
@@ -109,11 +109,6 @@ partial class StrategyActions
             else
             {
                 Debug.Log($"{country} が {target} に同盟を申し込みましたが、拒否されました。");
-            }
-
-            if (chara.IsPlayer)
-            {
-                UI.ShowStrategyUI();
             }
         }
     }

@@ -29,7 +29,6 @@ partial class StrategyActions
             if (chara.IsPlayer)
             {
                 await UI.ShowOrganizeScreen(country, World);
-                UI.ShowStrategyUI();
             }
             else
             {

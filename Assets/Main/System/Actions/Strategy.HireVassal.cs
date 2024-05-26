@@ -52,12 +52,10 @@ partial class StrategyActions
                 if (selected == null)
                 {
                     Debug.Log("配下にするキャラが選択されませんでした。");
-                    UI.ShowStrategyUI();
                     return;
                 }
                 var country = World.CountryOf(chara);
                 country.AddVassal(selected);
-                UI.ShowStrategyUI();
             }
             else
             {
@@ -70,6 +68,7 @@ partial class StrategyActions
                 {
                     var ok = await UI.ShowRespondJobOfferScreen(country, World);
                     //UI.HideAllUI();
+                    Util.Todo();
                     if (!ok)
                     {
                         return;

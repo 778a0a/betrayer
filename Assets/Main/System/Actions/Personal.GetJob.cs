@@ -34,8 +34,6 @@ partial class PersonalActions
                 {
                     country.AddVassal(chara);
                 }
-                UI.ShowIndividualUI();
-                UI.IndividualPhase.SetData(chara, World);
             }
             else
             {

@@ -102,6 +102,11 @@ public static class Util
     /// awaitしない非同期メソッド呼び出しの警告を抑制するためのメソッド。
     /// </summary>
     public static void Foreget(this ValueTask _) { }
+
+    [Obsolete("TODO", false)]
+    public static void Todo()
+    {
+    }
 }
 
 public class Defer : IDisposable

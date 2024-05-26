@@ -49,7 +49,6 @@ partial class MartialActions
                 targetArea = await UI.ShowSelectAreaScreen(neighborAreas, World);
                 if (targetArea == null)
                 {
-                    UI.ShowMartialUI();
                     return;
                 }
                 targetCountry = World.CountryOf(targetArea);
@@ -73,7 +72,6 @@ partial class MartialActions
                 attacker = await UI.ShowSelectAttackerScreen(country, World);
                 if (attacker == null)
                 {
-                    UI.ShowMartialUI();
                     return;
                 }
             }
@@ -114,11 +112,16 @@ partial class MartialActions
             // 攻撃済みフラグを立てる。
             attacker.IsAttacked = true;
 
-            if (chara.IsPlayer || targetCountry.Ruler.IsPlayer)
+            if (result == BattleResult.AttackerWin)
             {
-                UI.ShowMartialUI();
-                UI.MartialPhase.SetData(chara, World);
                 Tilemap.DrawCountryTile();
+            }
+
+            if (targetCountry.Ruler.IsPlayer)
+            {
+                UI.MartialPhase.SetData(chara, World);
+                UI.ShowMartialUI();
+                Util.Todo();
             }
         }
 
