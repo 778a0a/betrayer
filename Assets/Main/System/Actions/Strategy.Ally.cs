@@ -56,11 +56,24 @@ partial class StrategyActions
                 // 隣接国が1つしかないか隣接国が同盟済みの場合は、他の国から選ぶ。
                 if (target == null)
                 {
-                    var cands = World.Countries
-                        .Except(new[] { country })
+                    // まず隣接国の隣接国から選ぶ。
+                    var cands = neighbors
+                        .SelectMany(World.Neighbors)
                         .Except(neighbors)
+                        .Where(c => c != country)
                         .Where(c => c.Ally == null)
-                        .ToList();
+                        .ToArray();
+
+                    // 隣接国の隣接国がいない場合は、他の国から選ぶ。
+                    if (cands.Length == 0)
+                    {
+                        cands = World.Countries
+                            .Except(neighbors)
+                            .Where(c => c != country)
+                            .Where(c => c.Ally == null)
+                            .ToArray();
+                    }
+
                     target = cands.RandomPickDefault();
                     if (target == null)
                     {
