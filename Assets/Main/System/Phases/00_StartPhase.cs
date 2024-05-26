@@ -70,6 +70,10 @@ public class StartPhase : PhaseBase
                 ally.Ally = null;
                 Debug.Log($"[開始フェイズ] {country.Name} と {ally.Name} の同盟が解消されました。({country.Name}からの破棄)");
             }
+            else
+            {
+                Debug.Log($"[開始フェイズ] {country.Name} 同盟解消まで残り{country.TurnCountToDisableAlliance}ターン");
+            }
         }
 
         Debug.Log("[開始フェイズ] 終了");

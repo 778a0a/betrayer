@@ -77,11 +77,18 @@ public class StrategyActionPhase : PhaseBase
                         Debug.Log($"[戦略フェイズ] 同盟しました。相手: {country.Ally}");
                     }
 
+                    // 同盟方針を調整する。
+                    if (StrategyActions.ChangeAllianceStance.CanDo(chara))
+                    {
+                        await StrategyActions.ChangeAllianceStance.Do(chara);
+                        //Debug.Log($"[戦略フェイズ] 同盟方針を調整しました。");
+                    }
+
                     // 給料配分を調整する。
                     if (StrategyActions.Organize.CanDo(chara))
                     {
                         await StrategyActions.Organize.Do(chara);
-                        Debug.Log($"[戦略フェイズ] 給料配分を調整しました。");
+                        //Debug.Log($"[戦略フェイズ] 給料配分を調整しました。");
                     }
                 }
 
