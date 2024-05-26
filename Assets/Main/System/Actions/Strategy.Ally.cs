@@ -85,7 +85,9 @@ partial class StrategyActions
             if (ok)
             {
                 country.Ally = target;
+                country.WantsToContinueAlliance = true;
                 target.Ally = country;
+                target.WantsToContinueAlliance = true;
                 Debug.Log($"{country} と {target} が同盟を結びました。");
             }
             else

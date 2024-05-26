@@ -27,10 +27,19 @@ public class Country
     /// 領地
     /// </summary>
     public List<Area> Areas { get; set; }
+    
     /// <summary>
     /// 同盟国
     /// </summary>
     public Country Ally { get; set; }
+    /// <summary>
+    /// trueなら同盟継続希望
+    /// </summary>
+    public bool WantsToContinueAlliance { get; set; }
+    /// <summary>
+    /// 同盟解消までのターン数
+    /// </summary>
+    public int TurnCountToDisableAlliance { get; set; }
 
     /// <summary>
     /// マップの国の色のインデックス
@@ -119,6 +128,8 @@ public class Country
     };
 
     public bool IsExhausted { get; set; }
+
+    public string Name => Ruler.Name;
 }
 
 public enum CountryRank

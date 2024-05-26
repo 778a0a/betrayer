@@ -21,6 +21,8 @@ public class GameCore
     public PersonalActions PersonalActions { get; private set; }
     public MartialActions MartialActions { get; private set; }
 
+    public int TurnCount { get; private set; }
+
     public GameCore(MainUI mainUI, TilemapManager tilemap, Test test)
     {
         World = SaveData.LoadWorldData(tilemap.Helper);
@@ -37,6 +39,7 @@ public class GameCore
     {
         try
         {
+            TurnCount = 0;
             while (true)
             {
                 await test.HoldIfNeeded();
@@ -57,7 +60,7 @@ public class GameCore
                 Tilemap.DrawCountryTile();
                 if (World.Countries.Count == 1)
                 {
-                    Debug.Log($"ゲーム終了 勝者: {World.Countries[0]}");
+                    Debug.Log($"ゲーム終了 勝者: {World.Countries[0]} ターン数: {TurnCount}");
                     return;
                 }
 
@@ -67,6 +70,8 @@ public class GameCore
                 {
                     await test.WaitUserInteraction();
                 }
+
+                TurnCount++;
             }
         }
         catch (Exception ex)
