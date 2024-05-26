@@ -11,6 +11,7 @@ public class Battle
 {
     public CharacterInBattle Attacker { get; set; }
     public CharacterInBattle Defender { get; set; }
+    public ActionBase Type { get; set; }
     private int TickCount { get; set; }
 
     private CharacterInBattle Atk => Attacker;
@@ -19,10 +20,11 @@ public class Battle
     private BattleDialog UI => GameCore.Instance.MainUI.BattleDialog;
     private bool NeedUI => Attacker.IsPlayer || Defender.IsPlayer;
 
-    public Battle(CharacterInBattle atk, CharacterInBattle def)
+    public Battle(CharacterInBattle atk, CharacterInBattle def, ActionBase type)
     {
         Attacker = atk;
         Defender = def;
+        Type = type;
     }
 
     public async ValueTask<BattleResult> Do()
@@ -58,12 +60,12 @@ public class Battle
                     break;
                 }
             }
-            if (Atk.ShouldRetreat(TickCount))
+            if (Atk.ShouldRetreat(TickCount, this))
             {
                 result = BattleResult.DefenderWin;
                 break;
             }
-            if (Def.ShouldRetreat(TickCount))
+            if (Def.ShouldRetreat(TickCount, this))
             {
                 result = BattleResult.AttackerWin;
                 break;

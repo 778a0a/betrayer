@@ -93,7 +93,7 @@ partial class MartialActions
                 targetCountry);
 
             // 侵攻する。
-            var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender);
+            var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender, this);
             var result = await battle.Do();
             OnAfterAttack(battle, result, World);
 

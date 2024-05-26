@@ -31,7 +31,7 @@ partial class PersonalActions
             var target = country.Areas.RandomPick();
             var source = World.Map.GetNeighbors(target).RandomPick();
             
-            var battle = BattleManager.Prepare(source, target, chara, ruler);
+            var battle = BattleManager.Prepare(source, target, chara, ruler, this);
             var result = await battle.Do();
 
             // 勝ったら君主に成り上がる。

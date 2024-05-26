@@ -61,7 +61,7 @@ partial class MartialActions
             var defender = chara;
 
             // 侵攻する。
-            var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender);
+            var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender, this);
             var result = await battle.Do();
             AttackAction.OnAfterAttack(battle, result, World);
 

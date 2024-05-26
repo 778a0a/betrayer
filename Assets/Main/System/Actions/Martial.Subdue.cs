@@ -54,7 +54,7 @@ partial class MartialActions
             }
 
             // 攻撃する。
-            var battle = BattleManager.Prepare(attack, defend, chara, target);
+            var battle = BattleManager.Prepare(attack, defend, chara, target, this);
             var result = await battle.Do();
             chara.IsAttacked = true;
             

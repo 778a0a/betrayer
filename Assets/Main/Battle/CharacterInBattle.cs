@@ -28,10 +28,13 @@ public record CharacterInBattle(
 
     public static implicit operator Character(CharacterInBattle c) => c.Character;
 
-    public bool ShouldRetreat(int tickCount)
+    public bool ShouldRetreat(int tickCount, Battle battle)
     {
         // プレーヤーの場合はUIで判断しているので処理不要。
         if (IsPlayer) return false;
+
+        // 私闘の場合は撤退しない。
+        if (battle.Type is MartialActions.PrivateFightAction) return false;
 
         // 戦闘開始直後は撤退しない。
         if (tickCount < 3) return false;

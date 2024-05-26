@@ -14,7 +14,8 @@ public class BattleManager
         Area sourceArea,
         Area targetArea,
         Character attacker,
-        Character defender)
+        Character defender,
+        ActionBase actionType)
     {
         var world = GameCore.Instance.World;
         var map = world.Map;
@@ -28,7 +29,7 @@ public class BattleManager
         atk.Opponent = def;
         def.Opponent = atk;
 
-        var battle = new Battle(atk, def);
+        var battle = new Battle(atk, def, actionType);
         return battle;
     }
 }
