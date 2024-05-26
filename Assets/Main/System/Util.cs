@@ -104,7 +104,7 @@ public static class Util
     public static void Foreget(this ValueTask _) { }
 
     [Obsolete("TODO", false)]
-    public static void Todo()
+    public static void Todo(string memo = "")
     {
     }
 }

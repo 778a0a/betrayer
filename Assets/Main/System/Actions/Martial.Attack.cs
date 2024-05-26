@@ -66,13 +66,21 @@ partial class MartialActions
                 .Where(c => !c.IsAttacked)
                 .Where(c => c.Power > 500)
                 .RandomPick();
-            // プレーヤーの場合は攻撃者を選択させる。
             if (chara.IsPlayer)
             {
-                attacker = await UI.ShowSelectAttackerScreen(country, World);
-                if (attacker == null)
+                // プレーヤーで君主の場合は攻撃者を選択させる。
+                if (country.Ruler == chara)
                 {
-                    return;
+                    attacker = await UI.ShowSelectAttackerScreen(country, World);
+                    if (attacker == null)
+                    {
+                        return;
+                    }
+                }
+                // 配下の場合は本当に侵攻するか確認する。
+                else
+                {
+                    Util.Todo();
                 }
             }
 
