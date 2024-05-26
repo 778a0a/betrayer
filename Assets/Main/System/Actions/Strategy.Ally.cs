@@ -31,48 +31,42 @@ partial class StrategyActions
             chara.Gold -= Cost(chara); // TODO
 
             var country = World.CountryOf(chara);
+            var target = default(Country);
 
             if (chara.IsPlayer)
             {
-                var ally = await UI.ShowSelectAllyScreen(country, World);
-                if (ally == null)
-                {
-                    Debug.Log("同盟を結ぶ国が選択されませんでした。");
-
-                }
-                else
-                {
-                    country.Ally = ally;
-                    ally.Ally = country;
-                    Debug.Log($"{country} と {ally} が同盟を結びました。");
-                }
-                UI.ShowStrategyUI();
-                return;
-            }
-
-            var neighbors = World.Neighbors(country);
-            var target = default(Country);
-
-            // 隣接国が複数ある場合は、その中からランダムに選ぶ。
-            if (neighbors.Length > 1)
-            {
-                target = neighbors
-                    .Where(c => c.Ally == null)
-                    .RandomPickDefault();
-            }
-            // 隣接国が1つしかないか隣接国が同盟済みの場合は、他の国から選ぶ。
-            if (target == null)
-            {
-                var cands = World.Countries
-                    .Except(new[] { country })
-                    .Except(neighbors)
-                    .Where(c => c.Ally == null)
-                    .ToList();
-                target = cands.RandomPickDefault();
+                target = await UI.ShowSelectAllyScreen(country, World);
                 if (target == null)
                 {
-                    Debug.Log($"{country} は同盟を結ぶ国がありませんでした。");
+                    Debug.Log("同盟を結ぶ国が選択されませんでした。");
+                    UI.ShowStrategyUI();
                     return;
+                }
+            }
+            else
+            {
+                // 隣接国が複数ある場合は、その中からランダムに選ぶ。
+                var neighbors = World.Neighbors(country);
+                if (neighbors.Length > 1)
+                {
+                    target = neighbors
+                        .Where(c => c.Ally == null)
+                        .RandomPickDefault();
+                }
+                // 隣接国が1つしかないか隣接国が同盟済みの場合は、他の国から選ぶ。
+                if (target == null)
+                {
+                    var cands = World.Countries
+                        .Except(new[] { country })
+                        .Except(neighbors)
+                        .Where(c => c.Ally == null)
+                        .ToList();
+                    target = cands.RandomPickDefault();
+                    if (target == null)
+                    {
+                        Debug.Log($"{country} は同盟を結ぶ国がありませんでした。");
+                        return;
+                    }
                 }
             }
 
@@ -97,6 +91,11 @@ partial class StrategyActions
             else
             {
                 Debug.Log($"{country} が {target} に同盟を申し込みましたが、拒否されました。");
+            }
+
+            if (chara.IsPlayer)
+            {
+                UI.ShowStrategyUI();
             }
         }
     }
