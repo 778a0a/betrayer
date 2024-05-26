@@ -22,6 +22,10 @@ partial class MartialActions
         protected override bool CanDoCore(Character chara)
         {
             var country = World.CountryOf(chara);
+
+            // 自身が配下で侵攻済みの場合はNG。
+            if (World.IsVassal(chara) && chara.IsAttacked) return false;
+
             // 全員行動済みならNG。
             if (country.Members.All(c => c.IsAttacked)) return false;
 
@@ -81,6 +85,7 @@ partial class MartialActions
                 else
                 {
                     Util.Todo();
+                    attacker = chara;
                 }
             }
 
