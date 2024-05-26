@@ -179,7 +179,8 @@ public class Force
 
     public bool HasEmptySlot => Soldiers.Any(s => s.IsEmptySlot);
 
-    public int Power => Soldiers.Sum(s => s.IsEmptySlot ? 0 : s.Level);
+    //public int Power => Soldiers.Sum(s => s.IsEmptySlot ? 0 : s.Level);
+    public int Power => (int)Soldiers.Sum(s => s.IsEmptySlot ? 0 : s.Hp / 35f * (1 + 0.2f * (s.Level - 1)));
 
     public override string ToString() => $"Power:{Power} ({string.Join(",", Soldiers.Select(s => s.ToShortString()))})";
 }
