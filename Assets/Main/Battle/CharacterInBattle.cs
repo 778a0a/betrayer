@@ -54,7 +54,7 @@ public record CharacterInBattle(
 
         // 自国の最後の領土の防衛なら撤退しない。
         var lastArea =  Country.Areas.Count == 1;
-        if (lastArea) return IsDefender && false;
+        if (lastArea && IsDefender) return false;
 
         // 撤退する。
         return true;
