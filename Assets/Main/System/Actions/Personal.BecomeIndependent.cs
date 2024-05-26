@@ -34,21 +34,19 @@ partial class PersonalActions
             areas.Add(firstArea);
             oldCountry.Areas.Remove(firstArea);
 
-            var neighbors = World.Map.GetNeighbors(firstArea);
-            var candAreas = neighbors
-                .Concat(neighbors.SelectMany(a => World.Map.GetNeighbors(a)))
-                .Distinct();
-
-            while (0.6.Chance() && oldCountry.Areas.Count > 1)
+            var chance = chara.Intelligence / 100f;
+            while (chance.Chance() && oldCountry.Areas.Count > 1)
             {
-                var neighbor = candAreas
+                chance *= 0.8f;
+
+                var cand = areas.SelectMany(World.Map.GetNeighbors)
                     .Where(a => World.CountryOf(a) == oldCountry)
                     .Where(a => !areas.Contains(a))
                     .RandomPickDefault();
-                if (neighbor != null)
+                if (cand != null)
                 {
-                    areas.Add(neighbor);
-                    oldCountry.Areas.Remove(neighbor);
+                    areas.Add(cand);
+                    oldCountry.Areas.Remove(cand);
                 }
             }
             var newCountry = new Country
