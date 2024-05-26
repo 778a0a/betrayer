@@ -22,7 +22,6 @@ partial class PersonalActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var targetSlot = chara.Force.Soldiers.First(s => s.IsEmptySlot);
             targetSlot.IsEmptySlot = false;
@@ -30,6 +29,8 @@ partial class PersonalActions
             targetSlot.Experience = 0;
             targetSlot.Hp = targetSlot.MaxHp;
             chara.Contribution += 1;
+
+            PayCost(chara);
         }
     }
 }

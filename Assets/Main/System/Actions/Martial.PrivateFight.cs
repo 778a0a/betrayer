@@ -26,7 +26,6 @@ partial class MartialActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var country = World.CountryOf(chara);
 
@@ -37,6 +36,7 @@ partial class MartialActions
                 target = await UI.ShowPrivateFightScreen(cands, World);
                 if (target == null)
                 {
+                    Debug.Log("キャンセルされました。");
                     return;
                 }
             }
@@ -68,6 +68,7 @@ partial class MartialActions
             }
 
             Core.Tilemap.DrawCountryTile();
+            PayCost(chara);
         }
     }
 }

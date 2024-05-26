@@ -31,7 +31,8 @@ partial class StrategyActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
+            // 探索は成否に拘らずコストを消費する。
+            PayCost(chara);
 
             // ランダムに所属なしのキャラを選ぶ。
             var frees = World.Characters.Where(World.IsFree).ToList();
@@ -51,7 +52,7 @@ partial class StrategyActions
                 var selected = await UI.ShowSearchResult(candidates.ToArray(), World);
                 if (selected == null)
                 {
-                    Debug.Log("配下にするキャラが選択されませんでした。");
+                    Debug.Log("キャンセルされました。");
                     return;
                 }
                 var country = World.CountryOf(chara);

@@ -24,7 +24,6 @@ partial class PersonalActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var country = World.CountryOf(chara);
             if (country.Ruler == chara)
@@ -41,6 +40,7 @@ partial class PersonalActions
             }
 
             Core.Tilemap.DrawCountryTile();
+            PayCost(chara);
         }
     }
 

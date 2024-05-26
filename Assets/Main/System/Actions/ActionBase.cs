@@ -52,6 +52,11 @@ public class ActionBase
     /// アクションを実行します。
     /// </summary>
     public virtual ValueTask Do(Character chara) => new();
+
+    protected void PayCost(Character chara)
+    {
+        chara.Gold -= Cost(chara);
+    }
 }
 
 

@@ -26,7 +26,6 @@ partial class PersonalActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var oldCountry = World.CountryOf(chara);
             var areas = new List<Area>
@@ -56,6 +55,7 @@ partial class PersonalActions
             World.Countries.Add(newCountry);
 
             Core.Tilemap.DrawCountryTile();
+            PayCost(chara);
         }
     }
 }

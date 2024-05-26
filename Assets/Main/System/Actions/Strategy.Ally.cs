@@ -31,7 +31,6 @@ partial class StrategyActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara); // TODO
 
             var country = World.CountryOf(chara);
             var target = default(Country);
@@ -41,7 +40,7 @@ partial class StrategyActions
                 target = await UI.ShowSelectAllyScreen(country, World);
                 if (target == null)
                 {
-                    Debug.Log("同盟を結ぶ国が選択されませんでした。");
+                    Debug.Log("キャンセルされました。");
                     return;
                 }
             }
@@ -110,6 +109,8 @@ partial class StrategyActions
             {
                 Debug.Log($"{country} が {target} に同盟を申し込みましたが、拒否されました。");
             }
+
+            PayCost(chara);
         }
     }
 }

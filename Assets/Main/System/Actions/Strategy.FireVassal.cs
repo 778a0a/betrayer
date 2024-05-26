@@ -26,7 +26,6 @@ partial class StrategyActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var country = World.CountryOf(chara);
 
@@ -36,7 +35,7 @@ partial class StrategyActions
                 var selected = await UI.ShowFireVassalUI(country, World);
                 if (selected == null)
                 {
-                    Debug.Log("解雇するキャラが選択されませんでした。");
+                    Debug.Log("キャンセルされました。");
                     return;
                 }
                 country.Vassals.Remove(selected);
@@ -51,6 +50,7 @@ partial class StrategyActions
             }
 
             Core.Tilemap.DrawCountryTile();
+            PayCost(chara);
         }
     }
 }

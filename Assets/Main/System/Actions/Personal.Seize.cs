@@ -23,7 +23,6 @@ partial class PersonalActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var targetArea = default(Area);
             var targetCountry = default(Country);
@@ -36,6 +35,7 @@ partial class PersonalActions
                     "奪取する地域を選択してください。");
                 if (targetArea == null)
                 {
+                    Debug.Log("キャンセルされました。");
                     return;
                 }
                 targetCountry = World.CountryOf(targetArea);
@@ -96,6 +96,8 @@ partial class PersonalActions
                 UI.ShowMartialUI();
                 Util.Todo();
             }
+
+            PayCost(chara);
         }
     }
 }

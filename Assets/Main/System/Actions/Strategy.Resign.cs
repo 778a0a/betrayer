@@ -26,7 +26,6 @@ partial class StrategyActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var country = World.CountryOf(chara);
             var successor = country.Vassals[0];
@@ -37,6 +36,8 @@ partial class StrategyActions
             Debug.Log($"{chara.Name} が勢力を捨てて、{successor.Name} が新たな君主となりました。");
 
             Core.Tilemap.DrawCountryTile();
+
+            PayCost(chara);
         }
     }
 }

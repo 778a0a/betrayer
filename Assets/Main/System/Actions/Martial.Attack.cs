@@ -39,7 +39,6 @@ partial class MartialActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara); // TODO
 
             var country = World.CountryOf(chara);
 
@@ -53,6 +52,7 @@ partial class MartialActions
                 targetArea = await UI.ShowSelectAreaScreen(neighborAreas, World);
                 if (targetArea == null)
                 {
+                    Debug.Log("キャンセルされました。");
                     return;
                 }
                 targetCountry = World.CountryOf(targetArea);
@@ -78,6 +78,7 @@ partial class MartialActions
                     attacker = await UI.ShowSelectAttackerScreen(country, World);
                     if (attacker == null)
                     {
+                        Debug.Log("キャンセルされました。");
                         return;
                     }
                 }
@@ -111,6 +112,8 @@ partial class MartialActions
                 UI.ShowMartialUI();
                 Util.Todo();
             }
+
+            PayCost(chara);
         }
 
         /// <summary>

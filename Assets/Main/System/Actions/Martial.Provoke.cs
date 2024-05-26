@@ -29,7 +29,6 @@ partial class MartialActions
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara);
 
             var country = World.CountryOf(chara);
             var neighborAreas = World.GetAttackableAreas(country);
@@ -43,6 +42,7 @@ partial class MartialActions
                     World);
                 if (attacker == null)
                 {
+                    Debug.Log("キャンセルされました。");
                     return;
                 }
             }
@@ -64,8 +64,9 @@ partial class MartialActions
             var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender, this);
             var result = await battle.Do();
             AttackAction.OnAfterAttack(battle, result, World);
-
             // 攻撃済みフラグはつけない。
+
+            PayCost(chara);
         }
 
         /// <summary>

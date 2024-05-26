@@ -25,17 +25,18 @@ partial class PersonalActions
 
         public override async ValueTask Do(Character chara)
         {
-            Assert.IsTrue(CanSelect(chara));
             Assert.IsTrue(CanDo(chara));
-            chara.Gold -= Cost(chara); // TODO
 
             if (chara.IsPlayer)
             {
                 var country = await UI.ShowGetJobScreen(World);
-                if (country != null)
+                if (country == null)
                 {
-                    country.AddVassal(chara);
+                    Debug.Log("キャンセルされました。");
+                    return;
                 }
+
+                country.AddVassal(chara);
             }
             else
             {
@@ -45,6 +46,7 @@ partial class PersonalActions
             }
 
             Core.Tilemap.DrawCountryTile();
+            PayCost(chara);
         }
     }
 }
