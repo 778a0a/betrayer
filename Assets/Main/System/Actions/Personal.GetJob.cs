@@ -18,7 +18,9 @@ partial class PersonalActions
     {
         public override bool CanSelect(Character chara) => World.IsFree(chara);
         public override int Cost(Character chara) => 10;
-        protected override bool CanDoCore(Character chara) =>
+        protected override bool CanDoCore(Character chara) => chara.IsPlayer ? 
+            // プレーヤーなら最大配下数を超えて仕官できるようにする。(ただし上限は超えないようにする)
+            World.Countries.Where(c => Country.VassalCountMaxLimit > c.Vassals.Count).Any() :
             World.Countries.Where(c => c.VassalCountMax > c.Vassals.Count).Any();
 
         public override async ValueTask Do(Character chara)

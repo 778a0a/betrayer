@@ -57,8 +57,9 @@ public class Country
         <= 13 => 5,
         <= 18 => 6,
         <= 24 => 7,
-        _ => 8,
+        _ => VassalCountMaxLimit,
     };
+    public const int VassalCountMaxLimit = 8;
 
     public IEnumerable<Character> Members => new[] { Ruler }.Concat(Vassals.ToArray());
 

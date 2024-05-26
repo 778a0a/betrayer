@@ -259,7 +259,8 @@ public partial class MainUI : MonoBehaviour
             world,
             country =>
             {
-                if (country.Vassals.Count >= country.VassalCountMax)
+                //if (country.Vassals.Count >= country.VassalCountMax)
+                if (country.Vassals.Count >= Country.VassalCountMaxLimit)
                 {
                     return (false, "この国はこれ以上配下を雇えません。");
                 }
