@@ -178,6 +178,7 @@ public class Battle
             {
                 soldier.Level += 1;
                 soldier.Experience = 0;
+                owner.Character.Contribution += 1;
             }
 
             if (owner.IsAttacker)
