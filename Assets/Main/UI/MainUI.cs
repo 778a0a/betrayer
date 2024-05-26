@@ -169,6 +169,21 @@ public partial class MainUI : MonoBehaviour
             _ => true);
     }
 
+    /// <summary>
+    /// 私闘画面を表示します。
+    /// </summary>
+    public ValueTask<Character> ShowPrivateFightScreen(IList<Character> targets, WorldData world)
+    {
+        ShowScreen(SelectCharacter);
+
+        return SelectCharacter.Show(
+            "攻撃する人物をクリックしてください。",
+            "キャンセル",
+            targets,
+            world,
+            _ => true);
+    }
+
     public ValueTask<Character> ShowSelectDefenderScreen(
         Area attackerArea,
         Country attackerCountry,

@@ -30,7 +30,16 @@ partial class MartialActions
 
             var country = World.CountryOf(chara);
 
-            var target = country.Vassals.Where(v => v != chara).RandomPick();
+            var cands = country.Vassals.Where(v => v != chara).ToList();
+            var target = cands.RandomPickDefault();
+            if (chara.IsPlayer)
+            {
+                target = await UI.ShowPrivateFightScreen(cands, World);
+                if (target == null)
+                {
+                    return;
+                }
+            }
 
             // 戦う場所を決める。
             var (attack, defend) = country.Areas
@@ -45,10 +54,17 @@ partial class MartialActions
             var result = await battle.Do();
             chara.IsAttacked = true;
 
-            // 勝ったら対象の貢献を半減させる。
+            // 勝ったら対象を国から排除する。
             if (result == BattleResult.AttackerWin)
             {
                 target.Contribution /= 2;
+                country.Vassals.Remove(target);
+                country.RecalculateSalary();
+            }
+            // 負けたら自分の貢献を減らす。
+            else if (result == BattleResult.DefenderWin)
+            {
+                chara.Contribution /= 10;
             }
 
             Core.Tilemap.DrawCountryTile();
