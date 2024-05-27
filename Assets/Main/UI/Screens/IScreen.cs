@@ -26,6 +26,7 @@ public class ActionButtonHelper
 
     public Button Element { get; private set; }
     public ActionBase Action => _Action ??= actionGetter();
+    public bool IsMouseOver { get; private set; }
 
     private Func<ActionBase> actionGetter;
     private ActionBase _Action;
@@ -55,6 +56,7 @@ public class ActionButtonHelper
 
     private void OnActionButtonPointerEnter(PointerEnterEvent evt)
     {
+        IsMouseOver = true;
         if (Action is CommonActionBase)
         {
             labelCost.text = "---";
@@ -67,6 +69,7 @@ public class ActionButtonHelper
 
     private void OnActionButtonPointerLeave(PointerLeaveEvent evt)
     {
+        IsMouseOver = false;
         labelCost.text = "---";
     }
 
@@ -79,5 +82,9 @@ public class ActionButtonHelper
     {
         Element.style.display = Util.Display(Action.CanSelect(chara));
         Element.SetEnabled(Action.CanDo(chara));
+        if (IsMouseOver)
+        {
+            OnActionButtonPointerEnter(null);
+        }
     }
 }

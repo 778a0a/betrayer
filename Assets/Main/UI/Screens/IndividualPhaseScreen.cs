@@ -68,7 +68,6 @@ public partial class IndividualPhaseScreen : IScreen
             soldiers[i].SetData(chara.Force.Soldiers[i]);
         }
 
-        //labelCost.text = "";
         labelGold.text = chara.Gold.ToString();
 
         var country = world.CountryOf(chara);
@@ -82,6 +81,7 @@ public partial class IndividualPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
+        labelCost.text = "---";
         foreach (var button in buttons)
         {
             button.SetData(chara);

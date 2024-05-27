@@ -85,7 +85,6 @@ public partial class StrategyPhaseScreen : IScreen
             soldiers[i].SetData(chara.Force.Soldiers[i]);
         }
 
-        //labelCost.text = "";
         labelGold.text = chara.Gold.ToString();
 
         if (country != null)
@@ -98,6 +97,7 @@ public partial class StrategyPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
+        labelCost.text = "---";
         foreach (var button in buttons)
         {
             button.SetData(chara);
