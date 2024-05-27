@@ -5,59 +5,32 @@ using UnityEngine.UIElements;
 
 public partial class StrategyPhaseScreen : IScreen
 {
-    public event EventHandler<ActionButton> ActionButtonClicked;
+    public event EventHandler<ActionButtonHelper> ActionButtonClicked;
 
-    public enum ActionButton
-    {
-        ShowInfo,
-        Organize,
-        HireVassal,
-        FireVassal,
-        Ally,
-        ChangeAllianceStance,
-        Resign,
-        ShowSystemMenu,
-        EndTurn,
-    }
+    private ActionButtonHelper[] buttons;
 
     public void Initialize()
     {
-        var buttons = new[]
+        buttons = new[]
         {
-            buttonShowInfo,
-            buttonOrganize,
-            buttonHireVassal,
-            buttonFireVassal,
-            buttonAlly,
-            buttonChangeAllianceStance,
-            buttonResign,
-            buttonShowSystemMenu,
-            buttonEndTurn,
+            ActionButtonHelper.Common(buttonShowInfo, a => a.ShowInfo),
+            ActionButtonHelper.Strategy(buttonOrganize, a => a.Organize),
+            ActionButtonHelper.Strategy(buttonHireVassal, a => a.HireVassal),
+            ActionButtonHelper.Strategy(buttonFireVassal, a => a.FireVassal),
+            ActionButtonHelper.Strategy(buttonAlly, a => a.Ally),
+            ActionButtonHelper.Strategy(buttonChangeAllianceStance, a => a.ChangeAllianceStance),
+            ActionButtonHelper.Strategy(buttonResign, a => a.Resign),
+            ActionButtonHelper.Common(buttonShowSystemMenu, a => a.ShowSystemMenu),
+            ActionButtonHelper.Common(buttonEndTurn, a => a.EndPhase),
         };
         foreach (var button in buttons)
         {
-            button.RegisterCallback<ClickEvent>(OnActionButtonClicked);
-            button.RegisterCallback<PointerEnterEvent>(OnActionButtonPointerEnter);
-            button.RegisterCallback<PointerLeaveEvent>(OnActionButtonPointerLeave);
+            button.SetEventHandlers(labelCost,
+                () => debugCurrentChara,
+                b =>ActionButtonClicked?.Invoke(this, b));
         }
     }
 
-
-    private void OnActionButtonPointerEnter(PointerEnterEvent evt)
-    {
-    }
-
-    private void OnActionButtonPointerLeave(PointerLeaveEvent evt)
-    {
-    }
-
-    private void OnActionButtonClicked(ClickEvent ev)
-    {
-        var button = (Button)ev.target;
-        var actionName = button.name.Substring("button".Length);
-        var action = Enum.Parse<ActionButton>(actionName);
-        ActionButtonClicked?.Invoke(this, action);
-    }
 
     private SoldierInfoLarge[] soldiers;
     private WorldData world;
@@ -112,7 +85,7 @@ public partial class StrategyPhaseScreen : IScreen
             soldiers[i].SetData(chara.Force.Soldiers[i]);
         }
 
-        labelCost.text = "TODO";
+        //labelCost.text = "";
         labelGold.text = chara.Gold.ToString();
 
         if (country != null)
@@ -125,12 +98,9 @@ public partial class StrategyPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
-        var actions = GameCore.Instance.StrategyActions;
-        IScreen.SetActionButton(buttonOrganize, actions.Organize, chara);
-        IScreen.SetActionButton(buttonHireVassal, actions.HireVassal, chara);
-        IScreen.SetActionButton(buttonFireVassal, actions.FireVassal, chara);
-        IScreen.SetActionButton(buttonAlly, actions.Ally, chara);
-        IScreen.SetActionButton(buttonChangeAllianceStance, actions.ChangeAllianceStance, chara);
-        IScreen.SetActionButton(buttonResign, actions.Resign, chara);
+        foreach (var button in buttons)
+        {
+            button.SetData(chara);
+        }
     }
 }

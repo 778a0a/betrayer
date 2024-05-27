@@ -20,7 +20,7 @@
             <engine:VisualElement>
                 <engine:VisualElement name="ActionCostPanel" style="flex-grow: 1; flex-direction: row;">
                     <engine:Label text="消費金" style="width: 150px;" />
-                    <engine:Label name="labelCost" text="88" style="width: 90px;" />
+                    <engine:Label name="labelCost" text="---" style="width: 90px;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="GoldPanel" style="flex-grow: 1; flex-direction: row;">
                     <engine:Label text="資金" style="width: 150px;" />

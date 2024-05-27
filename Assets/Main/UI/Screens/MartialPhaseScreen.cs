@@ -5,58 +5,32 @@ using UnityEngine.UIElements;
 
 public partial class MartialPhaseScreen : IScreen
 {
-    public event EventHandler<ActionButton> ActionButtonClicked;
+    public event EventHandler<ActionButtonHelper> ActionButtonClicked;
 
-    public enum ActionButton
-    {
-        ShowInfo,
-        Attack,
-        DecisiveBattle,
-        Provoke,
-        Subdue,
-        PrivateFight,
-        ShowSystemMenu,
-        EndTurn,
-    }
+    private ActionButtonHelper[] buttons;
 
     public void Initialize()
     {
-        var buttons = new[]
+        buttons = new[]
         {
-            buttonShowInfo,
-            buttonAttack,
-            buttonDecisiveBattle,
-            buttonProvoke,
-            buttonSubdue,
-            buttonPrivateFight,
-            buttonShowSystemMenu,
-            buttonEndTurn,
+            ActionButtonHelper.Common(buttonShowInfo, a => a.ShowInfo),
+            ActionButtonHelper.Martial(buttonAttack, a => a.Attack),
+            ActionButtonHelper.Martial(buttonDecisiveBattle, a => a.DecisiveBattle),
+            ActionButtonHelper.Martial(buttonProvoke, a => a.Provoke),
+            ActionButtonHelper.Martial(buttonSubdue, a => a.Subdue),
+            ActionButtonHelper.Martial(buttonPrivateFight, a => a.PrivateFight),
+            ActionButtonHelper.Common(buttonShowSystemMenu, a => a.ShowSystemMenu),
+            ActionButtonHelper.Common(buttonEndTurn, a => a.EndPhase),
         };
         foreach (var button in buttons)
         {
-            button.RegisterCallback<ClickEvent>(OnActionButtonClicked);
-            button.RegisterCallback<PointerEnterEvent>(OnActionButtonPointerEnter);
-            button.RegisterCallback<PointerLeaveEvent>(OnActionButtonPointerLeave);
+            button.SetEventHandlers(labelCost,
+                () => debugCurrentChara,
+                b =>ActionButtonClicked?.Invoke(this, b));
         }
     }
 
-
-    private void OnActionButtonPointerEnter(PointerEnterEvent evt)
-    {
-    }
-
-    private void OnActionButtonPointerLeave(PointerLeaveEvent evt)
-    {
-    }
-
-    private void OnActionButtonClicked(ClickEvent ev)
-    {
-        var button = (Button)ev.target;
-        var actionName = button.name.Substring("button".Length);
-        var action = Enum.Parse<ActionButton>(actionName);
-        ActionButtonClicked?.Invoke(this, action);
-    }
-
+    
     private SoldierInfoLarge[] soldiers;
     public Character debugCurrentChara;
     public void SetData(Character chara, WorldData world)
@@ -91,7 +65,7 @@ public partial class MartialPhaseScreen : IScreen
             soldiers[i].SetData(chara.Force.Soldiers[i]);
         }
 
-        labelCost.text = "TODO";
+        //labelCost.text = "";
         labelGold.text = chara.Gold.ToString();
 
         var country = world.CountryOf(chara);
@@ -105,11 +79,9 @@ public partial class MartialPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
-        var actions = GameCore.Instance.MartialActions;
-        IScreen.SetActionButton(buttonAttack, actions.Attack, chara);
-        //IScreen.SetActionButton(buttonDecisiveBattle, actions.DecisiveBattle, chara);
-        IScreen.SetActionButton(buttonProvoke, actions.Provoke, chara);
-        IScreen.SetActionButton(buttonSubdue, actions.Subdue, chara);
-        IScreen.SetActionButton(buttonPrivateFight, actions.PrivateFight, chara);
+        foreach (var button in buttons)
+        {
+            button.SetData(chara);
+        }
     }
 }

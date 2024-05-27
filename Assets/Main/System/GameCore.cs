@@ -20,6 +20,7 @@ public class GameCore
     public StrategyActions StrategyActions { get; private set; }
     public PersonalActions PersonalActions { get; private set; }
     public MartialActions MartialActions { get; private set; }
+    public CommonActions CommonActions { get; private set; }
 
     public int TurnCount { get; private set; }
 
@@ -33,6 +34,7 @@ public class GameCore
         PersonalActions = new(this);
         StrategyActions = new(this);
         MartialActions = new(this);
+        CommonActions = new(this);
     }
 
     public async ValueTask DoMainLoop(Test test)

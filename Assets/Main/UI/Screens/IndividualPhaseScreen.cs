@@ -6,61 +6,33 @@ using UnityEngine.UIElements;
 
 public partial class IndividualPhaseScreen : IScreen
 {
-    public event EventHandler<ActionButton> ActionButtonClicked;
+    public event EventHandler<ActionButtonHelper> ActionButtonClicked;
 
-    public enum ActionButton
-    {
-        ShowInfo,
-        HireSoldier,
-        TrainSoldiers,
-        GetJob,
-        Resign,
-        Rebel,
-        BecomeIndependent,
-        Seize,
-        ShowSystemMenu,
-        EndTurn,
-    }
+    private ActionButtonHelper[] buttons;
 
     public void Initialize()
     {
-        var buttons = new[]
+        buttons = new[]
         {
-            buttonShowInfo,
-            buttonHireSoldier,
-            buttonTrainSoldiers,
-            buttonGetJob,
-            buttonResign,
-            buttonRebel,
-            buttonBecomeIndependent,
-            buttonSeize,
-            buttonShowSystemMenu,
-            buttonEndTurn,
+            ActionButtonHelper.Common(buttonShowInfo, a => a.ShowInfo),
+            ActionButtonHelper.Personal(buttonHireSoldier, a => a.HireSoldier),
+            ActionButtonHelper.Personal(buttonTrainSoldiers, a => a.TrainSoldiers),
+            ActionButtonHelper.Personal(buttonGetJob, a => a.GetJob),
+            ActionButtonHelper.Personal(buttonResign, a => a.Resign),
+            ActionButtonHelper.Personal(buttonRebel, a => a.Rebel),
+            ActionButtonHelper.Personal(buttonBecomeIndependent, a => a.BecomeIndependent),
+            ActionButtonHelper.Personal(buttonSeize, a => a.Seize),
+            ActionButtonHelper.Common(buttonShowSystemMenu, a => a.ShowSystemMenu),
+            ActionButtonHelper.Common(buttonEndTurn, a => a.EndPhase),
         };
         foreach (var button in buttons)
         {
-            button.RegisterCallback<ClickEvent>(OnActionButtonClicked);
-            button.RegisterCallback<PointerEnterEvent>(OnActionButtonPointerEnter);
-            button.RegisterCallback<PointerLeaveEvent>(OnActionButtonPointerLeave);
+            button.SetEventHandlers(labelCost,
+                () => debugCurrentChara,
+                b =>ActionButtonClicked?.Invoke(this, b));
         }
     }
 
-
-    private void OnActionButtonPointerEnter(PointerEnterEvent evt)
-    {
-    }
-
-    private void OnActionButtonPointerLeave(PointerLeaveEvent evt)
-    {
-    }
-
-    private void OnActionButtonClicked(ClickEvent ev)
-    {
-        var button = (Button)ev.target;
-        var actionName = button.name.Substring("button".Length);
-        var action = Enum.Parse<ActionButton>(actionName);
-        ActionButtonClicked?.Invoke(this, action);
-    }
 
     private SoldierInfoLarge[] soldiers;
     public Character debugCurrentChara;
@@ -96,7 +68,7 @@ public partial class IndividualPhaseScreen : IScreen
             soldiers[i].SetData(chara.Force.Soldiers[i]);
         }
 
-        labelCost.text = "TODO";
+        //labelCost.text = "";
         labelGold.text = chara.Gold.ToString();
 
         var country = world.CountryOf(chara);
@@ -110,13 +82,9 @@ public partial class IndividualPhaseScreen : IScreen
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
         }
 
-        var actions = GameCore.Instance.PersonalActions;
-        IScreen.SetActionButton(buttonHireSoldier, actions.HireSoldier, chara);
-        IScreen.SetActionButton(buttonTrainSoldiers, actions.TrainSoldiers, chara);
-        IScreen.SetActionButton(buttonGetJob, actions.GetJob, chara);
-        IScreen.SetActionButton(buttonResign, actions.Resign, chara);
-        IScreen.SetActionButton(buttonRebel, actions.Rebel, chara);
-        IScreen.SetActionButton(buttonBecomeIndependent, actions.BecomeIndependent, chara);
-        IScreen.SetActionButton(buttonSeize, actions.Seize, chara);
+        foreach (var button in buttons)
+        {
+            button.SetData(chara);
+        }
     }
 }

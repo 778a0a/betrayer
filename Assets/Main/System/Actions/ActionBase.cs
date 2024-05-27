@@ -92,3 +92,15 @@ public class StrategyActionBase : ActionBase
 {
     public override bool CanSelect(Character chara) => World.IsRuler(chara);
 }
+
+
+public partial class CommonActions : ActionsBase<CommonActionBase>
+{
+    public CommonActions(GameCore core) : base(core)
+    {
+    }
+}
+public class CommonActionBase : ActionBase
+{
+    public override bool CanSelect(Character chara) => true;
+}
