@@ -66,19 +66,7 @@ partial class MartialActions
             using var _ = Util.Defer(() => Core.Tilemap.HideAttackDirectionArrow());
 
             // 攻撃側キャラを選択する。
-            var attackerCands = country.Members
-                .Where(c => !c.IsAttacked)
-                .Where(c => c.Power > 500);
-            var attacker = attackerCands.RandomPick();
-            if (0.5.Chance())
-            {
-                attacker = attackerCands
-                    // 強いキャラが防衛に回りにくくなるので却下。
-                    //.RandomPickWeighted(c => c.Power * Mathf.Sqrt(c.Attack));
-                    // 攻撃が得意なキャラが選ばれやすくしてみる。
-                    .RandomPickWeighted(c => (float)c.Attack / c.Defense);
-            }
-
+            var attacker = default(Character);
             if (chara.IsPlayer)
             {
                 // プレーヤーで君主の場合は攻撃者を選択させる。
@@ -97,6 +85,22 @@ partial class MartialActions
                     Util.Todo();
                     attacker = chara;
                 }
+            }
+            else
+            {
+                var attackerCands = country.Members
+                    .Where(c => !c.IsAttacked)
+                    .Where(c => c.Power > 500);
+                attacker = attackerCands.RandomPickDefault();
+                if (0.5.Chance())
+                {
+                    attacker = attackerCands
+                        // 強いキャラが防衛に回りにくくなるので却下。
+                        //.RandomPickWeighted(c => c.Power * Mathf.Sqrt(c.Attack));
+                        // 攻撃が得意なキャラが選ばれやすくしてみる。
+                        .RandomPickWeighted(c => (float)c.Attack / c.Defense);
+                }
+
             }
 
             // 防衛側キャラを選択する。
