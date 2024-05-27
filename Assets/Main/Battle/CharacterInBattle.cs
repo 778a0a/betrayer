@@ -13,7 +13,11 @@ public record CharacterInBattle(
     bool IsAttacker)
 {
     public CharacterInBattle Opponent { get; set; }
-    public Country Country = GameCore.Instance.World.CountryOf(Character);
+    // NOTE Characterは、防衛側不在の場合にnullになることがある。
+    // NOTE Areaは、奪取の場合は他国からの出撃になる。(まだ領土がないので)
+    public Country Country =
+        GameCore.Instance.World.CountryOf(Character) ??
+        GameCore.Instance.World.CountryOf(Area);
     public bool IsDefender => !IsAttacker;
 
     /// <summary>
