@@ -89,7 +89,7 @@ partial class StrategyActions
             {
                 Debug.Log($"{country} が {target} に同盟を申し込みました。");
                 ok = await UI.ShowRespondAllyRequestScreen(country, World);
-                //UI.ShowStrategyUI();
+                UI.ShowStrategyUI();
                 Util.Todo();
             }
             else
