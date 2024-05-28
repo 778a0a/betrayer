@@ -42,10 +42,6 @@
                                 <engine:Label text="将軍" name="labelTitle" />
                             </engine:VisualElement>
                             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="勤続" />
-                                <engine:Label text="888" name="labelYearsOfService" />
-                            </engine:VisualElement>
-                            <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
                                 <engine:Label text="給料配分%" />
                                 <engine:Label text="888" name="labelSalaryRatio" />
                             </engine:VisualElement>

@@ -46,7 +46,6 @@ public partial class StrategyPhaseScreen : IScreen
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
         labelTitle.text = chara.GetTitle(world);
-        labelYearsOfService.text = "88";
         labelSalaryRatio.text = chara.SalaryRatio.ToString();
 
         if (world.IsRuler(chara) && country.Ally != null)

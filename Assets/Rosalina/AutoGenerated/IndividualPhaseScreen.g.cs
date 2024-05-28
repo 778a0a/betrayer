@@ -46,8 +46,6 @@ public partial class IndividualPhaseScreen
 
     public Label labelTitle { get; private set; }
 
-    public Label labelYearsOfService { get; private set; }
-
     public Label labelSalaryRatio { get; private set; }
 
     public Label labelName { get; private set; }
@@ -125,7 +123,6 @@ public partial class IndividualPhaseScreen
         GoldPanel = Root?.Q<VisualElement>("GoldPanel");
         imageChara = Root?.Q<Image>("imageChara");
         labelTitle = Root?.Q<Label>("labelTitle");
-        labelYearsOfService = Root?.Q<Label>("labelYearsOfService");
         labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
         labelName = Root?.Q<Label>("labelName");
         labelCharaAttack = Root?.Q<Label>("labelCharaAttack");

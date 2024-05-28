@@ -42,7 +42,6 @@ public partial class IndividualPhaseScreen : IScreen
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
         labelTitle.text = chara.GetTitle(world);
-        labelYearsOfService.text = "88";
         labelSalaryRatio.text = chara.SalaryRatio.ToString();
 
         labelCharaAttack.text = chara.Attack.ToString();

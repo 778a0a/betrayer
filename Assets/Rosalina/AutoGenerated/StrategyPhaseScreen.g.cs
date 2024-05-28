@@ -46,8 +46,6 @@ public partial class StrategyPhaseScreen
 
     public Label labelName { get; private set; }
 
-    public Label labelYearsOfService { get; private set; }
-
     public Label labelSalaryRatio { get; private set; }
 
     public Label labelAllianceStance { get; private set; }
@@ -127,7 +125,6 @@ public partial class StrategyPhaseScreen
         imageChara = Root?.Q<Image>("imageChara");
         labelTitle = Root?.Q<Label>("labelTitle");
         labelName = Root?.Q<Label>("labelName");
-        labelYearsOfService = Root?.Q<Label>("labelYearsOfService");
         labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
         labelAllianceStance = Root?.Q<Label>("labelAllianceStance");
         containerAllianceStance = Root?.Q<VisualElement>("containerAllianceStance");
