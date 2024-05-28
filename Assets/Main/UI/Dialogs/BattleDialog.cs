@@ -22,12 +22,40 @@ public partial class BattleDialog : IDialog
         };
     }
 
-    public void SetData(Battle battle)
+    public void SetData(Battle battle, BattleResult? result = null)
     {
         var attacker = battle.Attacker.Character;
         var defender = battle.Defender.Character;
         var attackerTerrain = battle.Attacker.Terrain;
         var defenderTerrain = battle.Defender.Terrain;
+
+        if (result != null)
+        {
+            buttonAttack.style.display = DisplayStyle.None;
+            buttonRetreat.style.display = DisplayStyle.None;
+            buttonResult.style.display = DisplayStyle.Flex;
+            buttonResult.text = result == BattleResult.AttackerWin ? "攻撃側の勝利" : "防衛側の勝利";
+            if (result == BattleResult.AttackerWin)
+            {
+                Root.AddToClassList("attacker-win");
+                Root.AddToClassList("defender-lose");
+            }
+            else
+            {
+                Root.AddToClassList("attacker-lose");
+                Root.AddToClassList("defender-win");
+            }
+        }
+        else
+        {
+            buttonAttack.style.display = DisplayStyle.Flex;
+            buttonRetreat.style.display = DisplayStyle.Flex;
+            buttonResult.style.display = DisplayStyle.None;
+            Root.RemoveFromClassList("attacker-win");
+            Root.RemoveFromClassList("attacker-lose");
+            Root.RemoveFromClassList("defender-win");
+            Root.RemoveFromClassList("defender-lose");
+        }
 
         AttackerName.text = attacker.Name;
         DefenderName.text = defender.Name;
@@ -64,6 +92,7 @@ public partial class BattleDialog : IDialog
             tcs.SetResult(true);
             buttonAttack.clicked -= buttonAttackClicked;
             buttonRetreat.clicked -= buttonRetreatClicked;
+            buttonResult.clicked -= buttonResultClicked;
         }
 
         buttonRetreat.clicked += buttonRetreatClicked;
@@ -72,6 +101,16 @@ public partial class BattleDialog : IDialog
             tcs.SetResult(false);
             buttonAttack.clicked -= buttonAttackClicked;
             buttonRetreat.clicked -= buttonRetreatClicked;
+            buttonResult.clicked -= buttonResultClicked;
+        }
+
+        buttonResult.clicked += buttonResultClicked;
+        void buttonResultClicked()
+        {
+            tcs.SetResult(true);
+            buttonAttack.clicked -= buttonAttackClicked;
+            buttonRetreat.clicked -= buttonRetreatClicked;
+            buttonResult.clicked -= buttonResultClicked;
         }
 
         return tcs.Task;

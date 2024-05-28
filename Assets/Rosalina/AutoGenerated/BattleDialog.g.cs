@@ -98,13 +98,11 @@ public partial class BattleDialog
 
     public Label labelDefenderTerrain { get; private set; }
 
-    public VisualElement AttackerInfo { get; private set; }
-
-    public VisualElement DefenderInfo { get; private set; }
-
     public Button buttonAttack { get; private set; }
 
     public Button buttonRetreat { get; private set; }
+
+    public Button buttonResult { get; private set; }
 
     public VisualElement VisualElement { get; private set; }
 
@@ -155,10 +153,9 @@ public partial class BattleDialog
         labelDefenderIntelligense = Root?.Q<Label>("labelDefenderIntelligense");
         imageDefender = Root?.Q<VisualElement>("imageDefender");
         labelDefenderTerrain = Root?.Q<Label>("labelDefenderTerrain");
-        AttackerInfo = Root?.Q<VisualElement>("AttackerInfo");
-        DefenderInfo = Root?.Q<VisualElement>("DefenderInfo");
         buttonAttack = Root?.Q<Button>("buttonAttack");
         buttonRetreat = Root?.Q<Button>("buttonRetreat");
+        buttonResult = Root?.Q<Button>("buttonResult");
         VisualElement = Root?.Q<VisualElement>("VisualElement");
     }
 }

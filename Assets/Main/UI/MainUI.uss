@@ -135,3 +135,20 @@ Label {
 #CharacterTableRowItemRoot.isAttacked .MemberInfo-Col-IsAttack {
     color: #d99;
 }
+
+.attacker-lose .attacker-info,
+.defender-lose .defender-info,
+.attacker-lose #AttackerSoldiers,
+.defender-lose #DefenderSoldiers {
+	opacity: 0.4;
+}
+
+#imageAttacker,
+#imageDefender {
+    background-color: rgba(28, 255, 229, 0.33);
+}
+
+.attacker-lose #imageAttacker,
+.defender-lose #imageDefender {
+    background-color: default;
+}

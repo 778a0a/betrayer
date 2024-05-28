@@ -18,7 +18,8 @@ public class Battle
     private CharacterInBattle Def => Defender;
 
     private BattleDialog UI => GameCore.Instance.MainUI.BattleDialog;
-    private bool NeedUI => Attacker.IsPlayer || Defender.IsPlayer;
+    private bool NeedInteraction => Attacker.IsPlayer || Defender.IsPlayer;
+    private bool NeedWatchBattle => Test.Instance.showOthersBattle;
 
     public Battle(CharacterInBattle atk, CharacterInBattle def, ActionBase type)
     {
@@ -38,7 +39,7 @@ public class Battle
             return BattleResult.AttackerWin;
         }
 
-        if (NeedUI)
+        if (NeedWatchBattle || NeedInteraction)
         {
             UI.Root.style.display = DisplayStyle.Flex;
             UI.SetData(this);
@@ -48,9 +49,12 @@ public class Battle
         while (!Atk.AllSoldiersDead && !Def.AllSoldiersDead)
         {
             // 撤退判断を行う。
-            if (NeedUI)
+            if (NeedWatchBattle || NeedInteraction)
             {
                 UI.SetData(this);
+            }
+            if (NeedInteraction)
+            {
                 var shouldContinue = await UI.WaitPlayerClick();
                 if (!shouldContinue)
                 {
@@ -60,6 +64,11 @@ public class Battle
                     break;
                 }
             }
+            else if (NeedWatchBattle)
+            {
+                await Awaitable.WaitForSecondsAsync(0.05f);
+            }
+
             if (Atk.ShouldRetreat(TickCount, this))
             {
                 result = BattleResult.DefenderWin;
@@ -83,10 +92,18 @@ public class Battle
         Debug.Log($"[戦闘処理] 結果: {result}");
 
         // 画面を更新する。
-        if (NeedUI)
+        if (NeedWatchBattle || NeedInteraction)
         {
-            UI.SetData(this);
-            await UI.WaitPlayerClick();
+            UI.SetData(this, result);
+
+            if (NeedInteraction)
+            {
+                await UI.WaitPlayerClick();
+            }
+            else
+            {
+                await Awaitable.WaitForSecondsAsync(0.5f);
+            }
             UI.Root.style.display = DisplayStyle.None;
         }
 

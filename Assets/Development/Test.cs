@@ -26,6 +26,8 @@ public class Test : MonoBehaviour
 
     [SerializeField] private TilemapManager tilemap;
 
+    public bool showOthersBattle = true;
+
     private GameCore core;
     private WorldData world => core.World;
     private PhaseManager phases => core.Phases;
