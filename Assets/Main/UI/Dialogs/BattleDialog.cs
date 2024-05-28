@@ -48,8 +48,8 @@ public partial class BattleDialog : IDialog
         }
         else
         {
-            buttonAttack.style.display = DisplayStyle.Flex;
-            buttonRetreat.style.display = DisplayStyle.Flex;
+            buttonAttack.style.display = Util.Display(battle.NeedInteraction);
+            buttonRetreat.style.display = Util.Display(battle.NeedInteraction);
             buttonResult.style.display = DisplayStyle.None;
             Root.RemoveFromClassList("attacker-win");
             Root.RemoveFromClassList("attacker-lose");

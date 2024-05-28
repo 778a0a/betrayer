@@ -18,7 +18,7 @@ public class Battle
     private CharacterInBattle Def => Defender;
 
     private BattleDialog UI => GameCore.Instance.MainUI.BattleDialog;
-    private bool NeedInteraction => Attacker.IsPlayer || Defender.IsPlayer;
+    public bool NeedInteraction => Attacker.IsPlayer || Defender.IsPlayer;
     private bool NeedWatchBattle => Test.Instance.showOthersBattle;
 
     public Battle(CharacterInBattle atk, CharacterInBattle def, ActionBase type)
@@ -97,6 +97,11 @@ public class Battle
             UI.SetData(this, result);
 
             if (NeedInteraction)
+            {
+                await UI.WaitPlayerClick();
+            }
+            // 自分が君主で配下の戦闘の場合もボタンクリックを待つ。
+            else if (Atk.Country.Ruler.IsPlayer || Def.Country.Ruler.IsPlayer)
             {
                 await UI.WaitPlayerClick();
             }
