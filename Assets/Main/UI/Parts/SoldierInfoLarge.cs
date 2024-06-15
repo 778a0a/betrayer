@@ -8,12 +8,12 @@ public partial class SoldierInfoLarge
     {
         if (s.IsEmptySlot)
         {
-            //imageSoldier.style.backgroundColor = Util.Color("#888");
+            imageSoldier.image = null;
             labelHp.text = "--";
             return;
         }
 
-        //imageSoldier.style.backgroundColor = CharacterInfoSoldierIcon.levelToColor[s.Level];
+        imageSoldier.image = SoldierImageManager.Instance.GetTexture(s.Level);
         imageSoldier.tooltip = s.ToString();
         labelLevel.text = s.Level.ToString();
         labelHp.text = s.Hp.ToString();

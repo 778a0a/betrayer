@@ -13,7 +13,7 @@ public partial class BattleSoldierIcon
         }
         Root.style.visibility = Visibility.Visible;
 
-        //SoldierImage.style.backgroundColor = CharacterInfoSoldierIcon.levelToColor[soldier.Level];
+        SoldierImage.image = SoldierImageManager.Instance.GetTexture(soldier.Level);
         labelHP.text = soldier.Hp.ToString();
         
         var hpBarLength = new Length(soldier.Hp / (float)soldier.MaxHp * 100, LengthUnit.Percent);

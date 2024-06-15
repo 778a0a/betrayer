@@ -19,12 +19,10 @@ public class Test : MonoBehaviour
     public static Test Instance { get; private set; }
 
     [SerializeField] private TilemapData initialTilemapData;
-
     [SerializeField] public float wait = 1;
-
     [SerializeField] private MainUI MainUI;
-
     [SerializeField] private TilemapManager tilemap;
+    [SerializeField] private Texture2D soldierTexture;
 
     public bool showOthersBattle = true;
 
@@ -48,6 +46,7 @@ public class Test : MonoBehaviour
         //return;
 
         FaceImageManager.Instance.ClearCache();
+        SoldierImageManager.Instance.Initialize(soldierTexture);
 
         GameCore.Instance = core = new GameCore(MainUI, tilemap, this);
         tilemap.DrawCountryTile();

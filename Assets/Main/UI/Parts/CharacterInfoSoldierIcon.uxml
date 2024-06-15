@@ -3,11 +3,11 @@
     <Style src="project://database/Assets/_Misc/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <engine:VisualElement>
         <engine:VisualElement style="width: 40px; height: 40px;">
-            <engine:VisualElement name="panelContainer" class="CharaInfo-Soldier-Item" style="position: absolute;">
+            <engine:VisualElement name="panelContainer" class="CharaInfo-Soldier-Item" style="position: absolute; display: none;">
                 <engine:Label text="88" name="labelLevel" style="font-size: 20px; -unity-text-align: lower-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; color: rgb(0, 0, 0);" />
                 <engine:Label text="99" name="labelHp" style="font-size: 20px; -unity-text-align: lower-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; color: rgb(0, 0, 0);" />
             </engine:VisualElement>
-            <engine:Image name="imageSoldier" class="SoldierInfoLarge-Image" style="--unity-image: url(&quot;project://database/Assets/Main/UI/Images/Soldier.asset?fileID=21300000&amp;guid=b0076df2f47e76e4fb86934dcb590602&amp;type=2#Soldier&quot;); --unity-image-size: stretch-to-fill; position: absolute; width: 50px; height: 50px; right: 5px; bottom: 0;" />
+            <engine:Image name="imageSoldier" class="SoldierInfoLarge-Image" style="--unity-image: url(&quot;project://database/Assets/Main/UI/Images/Soldier.asset?fileID=21300000&amp;guid=b0076df2f47e76e4fb86934dcb590602&amp;type=2#Soldier&quot;); --unity-image-size: stretch-to-fill; position: absolute; width: 50px; height: 50px; right: 7.5px; bottom: 0;" />
         </engine:VisualElement>
         <engine:VisualElement name="HPBar" style="flex-grow: 0; height: 10px; margin-top: 3px;">
             <engine:VisualElement name="HPBarBackground" style="flex-grow: 1; background-color: rgb(98, 98, 98); border-left-width: 3px; border-right-width: 3px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; border-left-color: rgb(220, 220, 220); border-right-color: rgb(220, 220, 220); border-top-color: rgb(220, 220, 220); border-bottom-color: rgb(220, 220, 220);">

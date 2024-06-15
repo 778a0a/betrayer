@@ -22,7 +22,6 @@
 }
 
 .CharaInfo-Soldier-Item {
-    background-color: rgb(124, 255, 138);
     width: 40px;
     height: 40px;
     margin-right: 11px;
