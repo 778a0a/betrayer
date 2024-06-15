@@ -22,7 +22,7 @@ public partial class BattleSoldierIcon
 
     public VisualElement HPBar { get; private set; }
 
-    public VisualElement SoldierImage { get; private set; }
+    public Image SoldierImage { get; private set; }
 
     public VisualElement Soldier { get; private set; }
 
@@ -35,7 +35,7 @@ public partial class BattleSoldierIcon
         HPBarValue = Root?.Q<VisualElement>("HPBarValue");
         HPBarBackground = Root?.Q<VisualElement>("HPBarBackground");
         HPBar = Root?.Q<VisualElement>("HPBar");
-        SoldierImage = Root?.Q<VisualElement>("SoldierImage");
+        SoldierImage = Root?.Q<Image>("SoldierImage");
         Soldier = Root?.Q<VisualElement>("Soldier");
     }
 }

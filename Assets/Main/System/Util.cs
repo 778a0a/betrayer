@@ -84,6 +84,11 @@ public static class Util
         return new Color(r / 255f, g / 255f, b / 255f);
     }
 
+    public static Color Color(int r, int g, int b, int a = 255)
+    {
+        return new Color(r / 255f, g / 255f, b / 255f, a / 255f);
+    }
+
     public static DisplayStyle Display(bool on)
     {
         return on ? DisplayStyle.Flex : DisplayStyle.None;
