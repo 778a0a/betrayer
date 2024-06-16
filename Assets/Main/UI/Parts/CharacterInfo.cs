@@ -1,8 +1,5 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public partial class CharacterInfo
 {

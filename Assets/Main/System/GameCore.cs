@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.ShaderData;
-using UnityEngine.Tilemaps;
 using System.Threading.Tasks;
 
 public class GameCore

@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.LightTransport;
-using UnityEngine.TextCore.Text;
 using Random = UnityEngine.Random;
 
 /// <summary>
