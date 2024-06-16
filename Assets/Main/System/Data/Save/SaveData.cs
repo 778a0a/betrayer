@@ -28,7 +28,7 @@ public class SaveData
         Directory.CreateDirectory(Path.GetDirectoryName(csvPath));
         File.WriteAllText(csvPath, csv);
 
-        var json = SerializeCountryData(world);
+        var json = SavedCountries.Serialize(world);
         var jsonPath = Path.Combine("Resources", DefaultJsonPath + ".json");
         Directory.CreateDirectory(Path.GetDirectoryName(jsonPath));
         File.WriteAllText(jsonPath, json);
@@ -57,7 +57,7 @@ public class SaveData
         sb.AppendLine(csv);
 
         sb.AppendLine(SaveDataSectionDivider);
-        var json = SerializeCountryData(world);
+        var json = SavedCountries.Serialize(world);
         sb.AppendLine(json);
 
         sb.AppendLine(SaveDataSectionDivider);
@@ -75,7 +75,7 @@ public class SaveData
         var map = DefaultData.CreateMapGrid(TilemapData.Width, tilemapHelper);
         var world = new WorldData();
         var charas = SavedCharacter.LoadCharacterData(csv);
-        var countries = JsonConvert.DeserializeObject<SavedCountries>(json);
+        var countries = SavedCountries.Deserialize(json);
         world.Map = map;
         world.Characters = charas.Select(c => c.Character).ToArray();
         world.Countries = new List<Country>();
@@ -97,6 +97,15 @@ public class SaveData
             };
             world.Countries.Add(country);
         }
+        for (int i = 0; i < countries.AllyPairs.Count; i++)
+        {
+            var pair = countries.AllyPairs[i];
+            var a = world.Countries.First(c => c.Id == pair.id1);
+            var b = world.Countries.First(c => c.Id == pair.id2);
+            a.Ally = b;
+            b.Ally = a;
+        }
+
         return world;
     }
 
@@ -120,20 +129,5 @@ public class SaveData
 
         var csv = SavedCharacter.CreateCsv(charas);
         return csv;
-    }
-
-    public static string SerializeCountryData(WorldData world)
-    {
-        var countries = new SavedCountries
-        {
-            Countries = world.Countries.Select(c => new SavedCountry
-            {
-                Id = c.Id,
-                ColorIndex = c.ColorIndex,
-                Areas = c.Areas.Select(a => (SavedMapPosition)a.Position).ToList(),
-            }).ToList(),
-        };
-        var json = JsonConvert.SerializeObject(countries);
-        return json;
     }
 }
