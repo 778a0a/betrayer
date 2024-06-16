@@ -1,3 +1,7 @@
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -35,5 +39,47 @@ public class OneOffTools : EditorWindow
         }
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+    }
+
+    [MenuItem("開発/利用している顔グラ画像を連番jpg化する")]
+    public static void 利用している顔グラ画像を連番jpg化する()
+    {
+        var csvPath = @"Assets\Development\SavedData\character_data.csv";
+        var outputDir = @"Assets\Resources\CharacterImages";
+
+        var charas = SavedCharacter.LoadCharacterData(csvPath);
+
+        try
+        {
+            AssetDatabase.StartAssetEditing();
+            foreach (var chara in charas)
+            {
+                var id = chara.Character.Id.ToString("0000");
+                var jpgPath = outputDir + $"/{id}.jpg";
+                Debug.Log($"processing {id} {chara.Character.Name}");
+                var pngPath = chara.Character.debugImagePath;
+                var pngBytes = File.ReadAllBytes(pngPath);
+                
+                // リサイズして保存する。
+                using var bmp = new Bitmap(new MemoryStream(pngBytes));
+                var resized = new Bitmap(512, 512);
+                using (var g = System.Drawing.Graphics.FromImage(resized))
+                {
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.DrawImage(bmp, 0, 0, 512, 512);
+                }
+                resized.Save(jpgPath, ImageFormat.Jpeg);
+
+                //var png = new Texture2D(2, 2);
+                //png.LoadImage(pngBytes);
+                //var jpg = png.EncodeToJPG(50);
+                //File.WriteAllBytes(jpgPath, jpg);
+            }
+        }
+        finally
+        {
+            AssetDatabase.StopAssetEditing();
+        }
+        Debug.Log("完了");
     }
 }

@@ -348,17 +348,13 @@ public class FaceImageManager
 
     public Texture2D GetImage(Character chara)
     {
-        var path = chara.debugImagePath;
-        if (path == null) return null;
-
+        var path = $"CharacterImages/{chara.Id:0000}";
         if (cacheImages.TryGetValue(path, out var tex))
         {
             return tex;
         }
 
-        var bytes = System.IO.File.ReadAllBytes(path);
-        tex = new Texture2D(2, 2);
-        tex.LoadImage(bytes);
+        tex = Resources.Load<Texture2D>(path);
         cacheImages[path] = tex;
         return tex;
     }
