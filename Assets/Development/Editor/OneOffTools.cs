@@ -47,7 +47,7 @@ public class OneOffTools : EditorWindow
         var outputDir = @"Assets\Resources\CharacterImages";
 
         var csv = Resources.Load<TextAsset>(SaveData.DefaultCsvPath).text;
-        var charas = SavedCharacter.LoadCharacterData(csv);
+        var charas = SavedCharacters.Deserialize(csv);
 
         try
         {

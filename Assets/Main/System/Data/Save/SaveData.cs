@@ -23,7 +23,7 @@ public class SaveData
 
     public static void SaveDefaultWorldData(WorldData world)
     {
-        var csv = SerializeCharacterData(world);
+        var csv = SavedCharacters.Serialize(world);
         var csvPath = Path.Combine("Resources", DefaultCsvPath + ".csv");
         Directory.CreateDirectory(Path.GetDirectoryName(csvPath));
         File.WriteAllText(csvPath, csv);
@@ -53,7 +53,7 @@ public class SaveData
     {
         var sb = new System.Text.StringBuilder();
         
-        var csv = SerializeCharacterData(world);
+        var csv = SavedCharacters.Serialize(world);
         sb.AppendLine(csv);
 
         sb.AppendLine(SaveDataSectionDivider);
@@ -74,7 +74,7 @@ public class SaveData
     {
         var map = DefaultData.CreateMapGrid(TilemapData.Width, tilemapHelper);
         var world = new WorldData();
-        var charas = SavedCharacter.LoadCharacterData(csv);
+        var charas = SavedCharacters.Deserialize(csv);
         var countries = SavedCountries.Deserialize(json);
         world.Map = map;
         world.Characters = charas.Select(c => c.Character).ToArray();
@@ -107,27 +107,5 @@ public class SaveData
         }
 
         return world;
-    }
-
-    public static string SerializeCharacterData(WorldData world)
-    {
-        var charas = new List<SavedCharacter>();
-        for (int i = 0; i < world.Characters.Length; i++)
-        {
-            var character = world.Characters[i];
-            var country = world.Countries.FirstOrDefault(c => c.Members.Contains(character));
-            var memberIndex = country?.Members.TakeWhile(c => c != character).Count() ?? -1;
-            var chara = new SavedCharacter
-            {
-                Character = character,
-                CountryId = country != null ? country.Id : -1,
-                MemberOrderIndex = memberIndex,
-            };
-            charas.Add(chara);
-        }
-        charas = charas.OrderBy(c => c.CountryId).ThenBy(c => c.MemberOrderIndex).ToList();
-
-        var csv = SavedCharacter.CreateCsv(charas);
-        return csv;
     }
 }
