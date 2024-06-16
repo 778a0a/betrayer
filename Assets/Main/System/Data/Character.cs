@@ -19,10 +19,6 @@ public class Character
     /// </summary>
     public int Id { get; set; }
     /// <summary>
-    /// 顔画像インデックス
-    /// </summary>
-    public int ImageIndex { get; set; }
-    /// <summary>
     /// 名前
     /// </summary>
     public string Name { get; set; }
