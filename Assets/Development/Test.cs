@@ -40,7 +40,9 @@ public class Test : MonoBehaviour
         FaceImageManager.Instance.ClearCache();
         SoldierImageManager.Instance.Initialize(soldierTexture);
 
-        GameCore.Instance = core = new GameCore(MainUI, tilemap, this);
+        var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
+        core = new GameCore(world, MainUI, tilemap, this, null);
+        GameCore.Instance = core;
         tilemap.DrawCountryTile();
 
         MainUI.MainUIButtonClick += MainUI_MainUIButtonClick;
@@ -52,7 +54,7 @@ public class Test : MonoBehaviour
         holdOnTurnEnd = false;
         setHoldOnHoldEnd = false;
         
-        core.DoMainLoop(this).Foreget();
+        core.DoMainLoop().Foreget();
     }
 
     private async void StrategyPhaseScreen_ActionButtonClicked(object sender, ActionButtonHelper button)

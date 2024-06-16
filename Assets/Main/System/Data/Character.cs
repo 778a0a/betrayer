@@ -81,6 +81,11 @@ public class Character
     public bool IsAttacked { get; set; }
 
     /// <summary>
+    /// 行動済みならtrue
+    /// </summary>
+    public bool IsExhausted { get; set; }
+
+    /// <summary>
     /// （内部データ）強さ
     /// </summary>
     public int Power => (Attack + Defense + Intelligence) / 3 * Force.Power;

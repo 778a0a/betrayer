@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using NUnit.Framework.Internal;
+using System.Linq;
 
 public class GameCore
 {
@@ -13,6 +16,7 @@ public class GameCore
     public WorldData World { get; private set; }
     public MainUI MainUI { get; private set; }
     public TilemapManager Tilemap { get; private set; }
+    private Test test;
 
     public PhaseManager Phases { get; private set; }
     public StrategyActions StrategyActions { get; private set; }
@@ -21,12 +25,27 @@ public class GameCore
     public CommonActions CommonActions { get; private set; }
 
     public int TurnCount { get; private set; }
+    public PhaseBase CurrentPhase { get; private set; }
 
-    public GameCore(MainUI mainUI, TilemapManager tilemap, Test test)
+    private bool IsResumingGame { get; set; } = false;
+    private SavedGameCoreState ResumingGameState { get; set; } = null;
+
+    public GameCore(
+        WorldData world,
+        MainUI mainUI,
+        TilemapManager tilemap,
+        Test test,
+        SavedGameCoreState state)
     {
-        World = SaveData.LoadWorldData(tilemap.Helper);
+        World = world;
         MainUI = mainUI;
         Tilemap = tilemap;
+        this.test = test;
+        if (state != null)
+        {
+            IsResumingGame = true;
+            ResumingGameState = state;
+        }
 
         Phases = new(this, test);
         PersonalActions = new(this);
@@ -35,27 +54,44 @@ public class GameCore
         CommonActions = new(this);
     }
 
-    public async ValueTask DoMainLoop(Test test)
+    private async ValueTask DoPhase(PhaseBase phase)
+    {
+        if (IsResumingGame)
+        {
+            if (!ResumingGameState.IsTargetPhase(phase))
+            {
+                Debug.LogError("[再開中]実行済みのフェイズをスキップします。");
+                return;
+            }
+            var order = ResumingGameState.RestoreActionOrder(World.Characters);
+            phase.SetCustomActionOrder(order);
+
+            IsResumingGame = false;
+            ResumingGameState = null;
+        }
+        else
+        {
+            phase.SetActionOrder();
+        }
+
+        CurrentPhase = phase;
+        await test.HoldIfNeeded();
+        await phase.Phase();
+        CurrentPhase = null;
+    }
+
+    public async ValueTask DoMainLoop()
     {
         try
         {
             TurnCount = 0;
             while (true)
             {
-                await test.HoldIfNeeded();
-                await Phases.Start.Phase();
-
-                await test.HoldIfNeeded();
-                await Phases.Income.Phase();
-
-                await test.HoldIfNeeded();
-                await Phases.StrategyAction.Phase();
-
-                await test.HoldIfNeeded();
-                await Phases.PersonalAction.Phase();
-
-                await test.HoldIfNeeded();
-                await Phases.MartialAction.Phase();
+                await DoPhase(Phases.Start);
+                await DoPhase(Phases.Income);
+                await DoPhase(Phases.StrategyAction);
+                await DoPhase(Phases.PersonalAction);
+                await DoPhase(Phases.MartialAction);
 
                 Tilemap.DrawCountryTile();
                 if (World.Countries.Count == 1)
@@ -78,6 +114,30 @@ public class GameCore
         {
             Debug.LogError("メインループでエラー");
             Debug.LogException(ex);
+        }
+    }
+
+    public class SavedGameCoreState
+    {
+        public int TurnCount { get; set; }
+        public string CurrentPhase { get; set; }
+        public int[] CurrentActionOrder { get; set; }
+
+        public bool IsTargetPhase(PhaseBase phase)
+        {
+            return phase.GetType().Name == CurrentPhase;
+        }
+
+        public Character[] RestoreActionOrder(Character[] all)
+        {
+            var order = new Character[CurrentActionOrder.Length];
+            var dict = all.ToDictionary(c => c.Id);
+            for (int i = 0; i < CurrentActionOrder.Length; i++)
+            {
+                var id = CurrentActionOrder[i];
+                order[i] = dict[id];
+            }
+            return order;
         }
     }
 }

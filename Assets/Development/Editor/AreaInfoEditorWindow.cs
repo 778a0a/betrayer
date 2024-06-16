@@ -27,7 +27,7 @@ public class AreaInfoEditorWindow : EditorWindow
     {
         var tilemap = FindFirstObjectByType<TilemapManager>();
         tilemap.GetType().GetMethod("Awake", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(tilemap, null);
-        world = SaveData.LoadWorldData(tilemap.Helper);
+        world = SaveData.LoadDefaultWorldData(tilemap.Helper);
         grid = FindFirstObjectByType<Grid>();
 
         SceneView.duringSceneGui += DuringSceneGUI;
@@ -84,7 +84,7 @@ public class AreaInfoEditorWindow : EditorWindow
 
         if (GUILayout.Button("保存"))
         {
-            SaveData.SaveWorldData(world);
+            SaveData.SaveDefaultWorldData(world);
         }
 
         if (showFree)

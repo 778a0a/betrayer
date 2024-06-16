@@ -11,19 +11,64 @@ using UnityEngine.Tilemaps;
 
 public class SaveData
 {
-    public static string CsvPath => "Scenarios/01/character_data";
-    public static string JsonPath => "Scenarios/01/country_data";
+    public static string DefaultCsvPath => "Scenarios/01/character_data";
+    public static string DefaultJsonPath => "Scenarios/01/country_data";
 
+    public static WorldData LoadDefaultWorldData(TilemapHelper tilemapHelper)
+    {
+        var csv = Resources.Load<TextAsset>(DefaultCsvPath).text;
+        var json = Resources.Load<TextAsset>(DefaultJsonPath).text;
+        return LoadWorldData(tilemapHelper, csv, json);
+    }
 
-    public static WorldData LoadWorldData(TilemapHelper tilemapHelper)
+    public static void SaveDefaultWorldData(WorldData world)
+    {
+        var csv = SerializeCharacterData(world);
+        var csvPath = Path.Combine("Resources", DefaultCsvPath + ".csv");
+        Directory.CreateDirectory(Path.GetDirectoryName(csvPath));
+        File.WriteAllText(csvPath, csv);
+
+        var json = SerializeCountryData(world);
+        var jsonPath = Path.Combine("Resources", DefaultJsonPath + ".json");
+        Directory.CreateDirectory(Path.GetDirectoryName(jsonPath));
+        File.WriteAllText(jsonPath, json);
+    }
+
+    private readonly static string SaveDataSectionDivider = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+    public static WorldData DeserializeSaveData(
+        string saveData,
+        TilemapHelper tilemapHelper)
+    {
+        var sections = saveData.Split(new[] { SaveDataSectionDivider }, StringSplitOptions.RemoveEmptyEntries);
+
+        var csv = sections[0].Trim();
+        var json = sections[1].Trim();
+        var world = LoadWorldData(tilemapHelper, csv, json);
+        return world;
+    }
+
+    public static string SerializeSaveData(WorldData world)
+    {
+        var sb = new System.Text.StringBuilder();
+        
+        var csv = SerializeCharacterData(world);
+        sb.AppendLine(csv);
+
+        sb.AppendLine(SaveDataSectionDivider);
+        var json = SerializeCountryData(world);
+        sb.AppendLine(json);
+
+        return sb.ToString();
+    }
+
+    public static WorldData LoadWorldData(
+        TilemapHelper tilemapHelper,
+        string csv,
+        string json)
     {
         var map = DefaultData.CreateMapGrid(TilemapData.Width, tilemapHelper);
-
         var world = new WorldData();
-
-        var csv = Resources.Load<TextAsset>(CsvPath).text;
         var charas = SavedCharacter.LoadCharacterData(csv);
-        var json = Resources.Load<TextAsset>(JsonPath).text;
         var countries = JsonConvert.DeserializeObject<SavedCountries>(json);
         world.Map = map;
         world.Characters = charas.Select(c => c.Character).ToArray();
@@ -49,13 +94,7 @@ public class SaveData
         return world;
     }
 
-    public static void SaveWorldData(WorldData world)
-    {
-        SaveCharacterData(world);
-        SaveCountryData(world);
-    }
-
-    public static void SaveCharacterData(WorldData world)
+    public static string SerializeCharacterData(WorldData world)
     {
         var charas = new List<SavedCharacter>();
         for (int i = 0; i < world.Characters.Length; i++)
@@ -74,12 +113,10 @@ public class SaveData
         charas = charas.OrderBy(c => c.CountryId).ThenBy(c => c.MemberOrderIndex).ToList();
 
         var csv = SavedCharacter.CreateCsv(charas);
-        var path = Path.Combine("Resources", CsvPath + ".csv");
-        Directory.CreateDirectory(Path.GetDirectoryName(path));
-        File.WriteAllText(path, csv);
+        return csv;
     }
 
-    public static void SaveCountryData(WorldData world)
+    public static string SerializeCountryData(WorldData world)
     {
         var countries = new SavedCountries
         {
@@ -91,9 +128,7 @@ public class SaveData
             }).ToList(),
         };
         var json = JsonConvert.SerializeObject(countries);
-        var path = Path.Combine("Resources", JsonPath + ".json");
-        Directory.CreateDirectory(Path.GetDirectoryName(path));
-        File.WriteAllText(path, json);
+        return json;
     }
 }
 

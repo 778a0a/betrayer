@@ -41,6 +41,7 @@ public static class Util
 
 
     public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) => source.OrderBy(_ => Random.value);
+    public static T[] ShuffleAsArray<T>(this IEnumerable<T> source) => source.ToArray().ShuffleInPlace();
     public static T[] ShuffleInPlace<T>(this T[] source) => (T[])ShuffleInPlace((IList<T>)source);
     public static IList<T> ShuffleInPlace<T>(this IList<T> source)
     {

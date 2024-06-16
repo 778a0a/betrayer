@@ -13,18 +13,24 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class PersonalActionPhase : PhaseBase
 {
+    public override void SetActionOrder()
+    {
+        ActionOrder = Characters
+            .ShuffleAsArray();
+    }
+
     public override async ValueTask Phase()
     {
         Test.OnEnterIndividualPhase();
 
         Debug.Log("[個人フェイズ] 開始");
         // ランダムな順番で行動させる。
-        var charas = Characters.ToArray().ShuffleInPlace();
-        for (int i = 0; i < charas.Length; i++)
+        for (int i = 0; i < ActionOrder.Length; i++)
         {
-            var chara = charas[i];
+            var chara = ActionOrder[i];
+            if (chara.IsExhausted) continue;
 
-            Debug.Log($"[個人フェイズ] {chara.Name} の行動を開始します。G:{chara.Gold} ({i + 1}/{charas.Length})");
+            Debug.Log($"[個人フェイズ] {chara.Name} の行動を開始します。G:{chara.Gold} ({i + 1}/{ActionOrder.Length})");
             // プレイヤーの場合
             if (chara.IsPlayer)
             {
@@ -76,7 +82,10 @@ public class PersonalActionPhase : PhaseBase
                         $"Gold:{prevGold}->{chara.Gold}");
                 }
             }
+            chara.IsExhausted = true;
         }
+
+        foreach (var c in World.Characters) c.IsExhausted = false;
         Debug.Log("[個人フェイズ] 終了");
     }
 }

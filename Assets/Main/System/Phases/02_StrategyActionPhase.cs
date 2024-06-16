@@ -12,16 +12,24 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class StrategyActionPhase : PhaseBase
 {
+    public override void SetActionOrder()
+    {
+        ActionOrder = Characters
+            .Where(c => !IsFree(c))
+            .ShuffleAsArray();
+    }
+
     public override async ValueTask Phase()
     {
         Test.OnEnterStrategyPhase();
 
         Debug.Log("[戦略フェイズ] 開始");
         // ランダムな順番で行動させる。
-        var charas = Characters.Where(c => !IsFree(c)).ToArray().ShuffleInPlace();
-        for (int i = 0; i < charas.Length; i++)
+        for (int i = 0; i < ActionOrder.Length; i++)
         {
-            var chara = charas[i];
+            var chara = ActionOrder[i];
+            if (chara.IsExhausted) continue;
+
             var country = World.CountryOf(chara);
             Core.Tilemap.SetActiveCountry(country);
 
@@ -106,9 +114,12 @@ public class StrategyActionPhase : PhaseBase
                     // 忠誠度が一定以下なら、一定確率で反乱を起こす。
                 }
             }
+
+            chara.IsExhausted = true;
         }
 
         foreach (var c in World.Countries) c.IsExhausted = false;
+        foreach (var c in World.Characters) c.IsExhausted = false;
         Core.Tilemap.ResetExhausted();
         Core.Tilemap.ResetActiveCountry();
         Debug.Log("[戦略フェイズ] 終了");

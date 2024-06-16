@@ -43,4 +43,8 @@ public class PhaseBase
     public MartialActions MartialActions => Core.MartialActions;
 
     public virtual ValueTask Phase() => new();
+
+    public Character[] ActionOrder { get; protected set; }
+    public virtual void SetActionOrder() { }
+    public void SetCustomActionOrder(Character[] order) => ActionOrder = order;
 }
