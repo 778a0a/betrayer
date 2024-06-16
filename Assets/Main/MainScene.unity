@@ -3880,6 +3880,7 @@ MonoBehaviour:
   wait: 0
   MainUI: {fileID: 1796006452}
   tilemap: {fileID: 137685706}
+  soldierTexture: {fileID: 2800000, guid: 7ba546aad8c097843aa4f069fee09673, type: 3}
   showOthersBattle: 1
   holdOnTurnEnd: 0
   hold: 0
