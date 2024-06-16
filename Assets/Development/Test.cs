@@ -36,12 +36,17 @@ public class Test : MonoBehaviour
         //world = DefaultData.InitializeDefaultData(initialTilemapData, tilemapHelper);
         //SaveData.SaveWorldData(world);
         //return;
-
+        Start_();
+    }
+    void Start_()
+    {
         FaceImageManager.Instance.ClearCache();
         SoldierImageManager.Instance.Initialize(soldierTexture);
 
-        var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
-        core = new GameCore(world, MainUI, tilemap, this, null);
+        //var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
+        var savedata = GUIUtility.systemCopyBuffer;
+        var (world, state) = SaveData.DeserializeSaveData(savedata, tilemap.Helper);
+        core = new GameCore(world, MainUI, tilemap, this, state);
         GameCore.Instance = core;
         tilemap.DrawCountryTile();
 

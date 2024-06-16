@@ -173,6 +173,7 @@ public class SavedCharacter
                             force.Soldiers[k] = s;
                         }
                     }
+                    character.Force = force;
                     continue;
                 }
             }

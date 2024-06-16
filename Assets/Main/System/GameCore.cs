@@ -61,7 +61,7 @@ public class GameCore
         {
             if (!ResumingGameState.IsTargetPhase(phase))
             {
-                Debug.LogError("[再開中]実行済みのフェイズをスキップします。");
+                Debug.Log("[再開中]実行済みのフェイズをスキップします。" + phase.GetType().Name);
                 return;
             }
             var order = ResumingGameState.RestoreActionOrder(World.Characters);
