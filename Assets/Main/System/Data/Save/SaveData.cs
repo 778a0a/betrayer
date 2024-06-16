@@ -45,7 +45,7 @@ public class SaveData
         var json = sections[1].Trim();
         var stateJson = sections[2].Trim();
         var world = LoadWorldData(tilemapHelper, csv, json);
-        var state = JsonConvert.DeserializeObject<SavedGameCoreState>(stateJson);
+        var state = SavedGameCoreState.Deserialize(stateJson);
         return (world, state);
     }
 
@@ -61,7 +61,7 @@ public class SaveData
         sb.AppendLine(json);
 
         sb.AppendLine(SaveDataSectionDivider);
-        var stateJson = JsonConvert.SerializeObject(state);
+        var stateJson = SavedGameCoreState.Serialize(state);
         sb.AppendLine(stateJson);
 
         return sb.ToString();

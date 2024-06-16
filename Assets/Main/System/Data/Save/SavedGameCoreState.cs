@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 public class SavedGameCoreState
 {
@@ -36,5 +37,15 @@ public class SavedGameCoreState
             CurrentPhase = phase.GetType().Name,
             CurrentActionOrder = phase.ActionOrder.Select(c => c.Id).ToArray(),
         };
+    }
+
+    public static SavedGameCoreState Deserialize(string json)
+    {
+        return JsonConvert.DeserializeObject<SavedGameCoreState>(json);
+    }
+
+    public static string Serialize(SavedGameCoreState state)
+    {
+        return JsonConvert.SerializeObject(state);
     }
 }
