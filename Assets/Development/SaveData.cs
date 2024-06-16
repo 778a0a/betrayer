@@ -11,13 +11,20 @@ using UnityEngine.Tilemaps;
 
 public class SaveData
 {
+    public static string CsvPath => "Scenarios/01/character_data";
+    public static string JsonPath => "Scenarios/01/country_data";
+
+
     public static WorldData LoadWorldData(TilemapHelper tilemapHelper)
     {
         var map = DefaultData.CreateMapGrid(TilemapData.Width, tilemapHelper);
 
         var world = new WorldData();
-        var charas = SavedCharacter.LoadCharacterData(Application.dataPath + "/Development/SavedData/character_data.csv");
-        var countries = JsonConvert.DeserializeObject<SavedCountries>(File.ReadAllText(Application.dataPath + "/Development/SavedData/country_data.json"));
+
+        var csv = Resources.Load<TextAsset>(CsvPath).text;
+        var charas = SavedCharacter.LoadCharacterData(csv);
+        var json = Resources.Load<TextAsset>(JsonPath).text;
+        var countries = JsonConvert.DeserializeObject<SavedCountries>(json);
         world.Map = map;
         world.Characters = charas.Select(c => c.Character).ToArray();
         world.Countries = new List<Country>();
@@ -67,7 +74,7 @@ public class SaveData
         charas = charas.OrderBy(c => c.CountryId).ThenBy(c => c.MemberOrderIndex).ToList();
 
         var csv = SavedCharacter.CreateCsv(charas);
-        var path = Application.dataPath + "/Development/SavedData/character_data.csv";
+        var path = Path.Combine("Resources", CsvPath + ".csv");
         Directory.CreateDirectory(Path.GetDirectoryName(path));
         File.WriteAllText(path, csv);
     }
@@ -84,7 +91,7 @@ public class SaveData
             }).ToList(),
         };
         var json = JsonConvert.SerializeObject(countries);
-        var path = Application.dataPath + "/Development/SavedData/country_data.json";
+        var path = Path.Combine("Resources", JsonPath + ".json");
         Directory.CreateDirectory(Path.GetDirectoryName(path));
         File.WriteAllText(path, json);
     }
@@ -148,9 +155,9 @@ public class SavedCharacter
         return sb.ToString();
     }
 
-    public static List<SavedCharacter> LoadCharacterData(string path)
+    public static List<SavedCharacter> LoadCharacterData(string csv)
     {
-        var csv = File.ReadAllText(path);
+        //var csv = File.ReadAllText(path);
         var lines = csv.Trim().Split('\n');
         var header = lines[0].Trim().Split('\t');
         var charas = new List<SavedCharacter>();

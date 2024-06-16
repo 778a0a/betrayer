@@ -44,10 +44,10 @@ public class OneOffTools : EditorWindow
     [MenuItem("開発/利用している顔グラ画像を連番jpg化する")]
     public static void 利用している顔グラ画像を連番jpg化する()
     {
-        var csvPath = @"Assets\Development\SavedData\character_data.csv";
         var outputDir = @"Assets\Resources\CharacterImages";
 
-        var charas = SavedCharacter.LoadCharacterData(csvPath);
+        var csv = Resources.Load<TextAsset>(SaveData.CsvPath).text;
+        var charas = SavedCharacter.LoadCharacterData(csv);
 
         try
         {
