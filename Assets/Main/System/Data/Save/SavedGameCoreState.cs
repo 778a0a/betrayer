@@ -26,4 +26,15 @@ public class SavedGameCoreState
         }
         return order;
     }
+
+    public static SavedGameCoreState Create(GameCore core)
+    {
+        var phase = core.CurrentPhase;
+        return new SavedGameCoreState
+        {
+            TurnCount = core.TurnCount,
+            CurrentPhase = phase.GetType().Name,
+            CurrentActionOrder = phase.ActionOrder.Select(c => c.Id).ToArray(),
+        };
+    }
 }

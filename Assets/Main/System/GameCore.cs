@@ -24,7 +24,7 @@ public class GameCore
     public MartialActions MartialActions { get; private set; }
     public CommonActions CommonActions { get; private set; }
 
-    public int TurnCount { get; private set; }
+    public int TurnCount { get; private set; } = 0;
     public PhaseBase CurrentPhase { get; private set; }
 
     private bool IsResumingGame { get; set; } = false;
@@ -35,7 +35,7 @@ public class GameCore
         MainUI mainUI,
         TilemapManager tilemap,
         Test test,
-        SavedGameCoreState state)
+        SavedGameCoreState state = null)
     {
         World = world;
         MainUI = mainUI;
@@ -45,6 +45,7 @@ public class GameCore
         {
             IsResumingGame = true;
             ResumingGameState = state;
+            TurnCount = state.TurnCount;
         }
 
         Phases = new(this, test);
@@ -84,7 +85,6 @@ public class GameCore
     {
         try
         {
-            TurnCount = 0;
             while (true)
             {
                 await DoPhase(Phases.Start);

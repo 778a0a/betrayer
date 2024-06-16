@@ -18,6 +18,13 @@ partial class CommonActions
     {
         public override async ValueTask Do(Character chara)
         {
+            var state = SavedGameCoreState.Create(Core);
+            var saveData = SaveData.SerializeSaveData(World, state);
+
+            // クリップボードにコピー
+            GUIUtility.systemCopyBuffer = saveData;
+            Debug.Log("セーブしました！");
+            Debug.Log(saveData);
         }
     }
 }

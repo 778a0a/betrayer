@@ -35,7 +35,7 @@ public class SaveData
     }
 
     private readonly static string SaveDataSectionDivider = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-    public static WorldData DeserializeSaveData(
+    public static (WorldData, SavedGameCoreState) DeserializeSaveData(
         string saveData,
         TilemapHelper tilemapHelper)
     {
@@ -43,11 +43,13 @@ public class SaveData
 
         var csv = sections[0].Trim();
         var json = sections[1].Trim();
+        var stateJson = sections[2].Trim();
         var world = LoadWorldData(tilemapHelper, csv, json);
-        return world;
+        var state = JsonConvert.DeserializeObject<SavedGameCoreState>(stateJson);
+        return (world, state);
     }
 
-    public static string SerializeSaveData(WorldData world)
+    public static string SerializeSaveData(WorldData world, SavedGameCoreState state)
     {
         var sb = new System.Text.StringBuilder();
         
@@ -57,6 +59,10 @@ public class SaveData
         sb.AppendLine(SaveDataSectionDivider);
         var json = SerializeCountryData(world);
         sb.AppendLine(json);
+
+        sb.AppendLine(SaveDataSectionDivider);
+        var stateJson = JsonConvert.SerializeObject(state);
+        sb.AppendLine(stateJson);
 
         return sb.ToString();
     }
