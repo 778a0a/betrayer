@@ -87,6 +87,9 @@ public class SaveData
             {
                 Id = c.Id,
                 ColorIndex = c.ColorIndex,
+                IsExhausted = c.IsExhausted,
+                TurnCountToDisableAlliance = c.TurnCountToDisableAlliance,
+                WantsToContinueAlliance = c.WantsToContinueAlliance,
                 Areas = c.Areas.Select(a => map.GetArea(a)).ToList(),
                 Ruler = charas.First(ch => ch.CountryId == c.Id && ch.IsRuler).Character,
                 Vassals = charas

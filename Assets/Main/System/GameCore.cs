@@ -69,6 +69,10 @@ public class GameCore
 
             IsResumingGame = false;
             ResumingGameState = null;
+            foreach (var c in World.Countries)
+            {
+                Tilemap.SetExhausted(c, c.IsExhausted);
+            }
         }
         else
         {

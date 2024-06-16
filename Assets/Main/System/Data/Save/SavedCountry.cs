@@ -9,7 +9,9 @@ public class SavedCountries
 {
     public List<SavedCountry> Countries { get; set; }
     [JsonIgnore]
-    public List<(int id1, int id2)> AllyPairs { get; set; } = new();
+    public List<(int id1, int id2)> AllyPairs { get; set; }
+    
+    [JsonProperty]
     public List<string> AllyPairsText
     {
         get => AllyPairs?.Select(p => $"{p.id1},{p.id2}").ToList();
@@ -34,6 +36,9 @@ public class SavedCountries
             {
                 Id = c.Id,
                 ColorIndex = c.ColorIndex,
+                IsExhausted = c.IsExhausted,
+                TurnCountToDisableAlliance = c.TurnCountToDisableAlliance,
+                WantsToContinueAlliance = c.WantsToContinueAlliance,
                 Areas = c.Areas.Select(a => (SavedMapPosition)a.Position).ToList(),
             }).ToList(),
             AllyPairs = world.Countries
@@ -52,6 +57,9 @@ public class SavedCountry
 {
     public int Id { get; set; }
     public int ColorIndex { get; set; }
+    public bool IsExhausted { get; set; }
+    public int TurnCountToDisableAlliance { get; set; }
+    public bool WantsToContinueAlliance { get; set; }
 
     [JsonIgnore]
     public List<SavedMapPosition> Areas { get; set; }

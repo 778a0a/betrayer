@@ -44,6 +44,7 @@ public class Test : MonoBehaviour
         SoldierImageManager.Instance.Initialize(soldierTexture);
 
         //var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
+        //core = new GameCore(world, MainUI, tilemap, this, null);
         var savedata = GUIUtility.systemCopyBuffer;
         var (world, state) = SaveData.DeserializeSaveData(savedata, tilemap.Helper);
         core = new GameCore(world, MainUI, tilemap, this, state);
