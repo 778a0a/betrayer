@@ -1,38 +1,48 @@
 using System;
+using System.IO.Compression;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public partial class TitleSceneUI : MonoBehaviour
 {
-    [SerializeField] private SaveDataListWindow saves;
-    [SerializeField] private SelectScenarioWindow selectScenario;
-
     private void OnEnable()
     {
         InitializeDocument();
-        saves.Hide();
-        selectScenario.Hide();
 
-        StartGame.clicked += StartGame_clicked;
-        OpenSeting.clicked += OpenSeting_clicked;
-        OpenManual.clicked += OpenManual_clicked;
-        FinishApplication.clicked += FinishApplication_clicked;
-    }
+        var hasSaveData = SaveData.HasSaveData();
+        buttonResumeFromLocalData.SetEnabled(hasSaveData);
 
-    private void StartGame_clicked()
-    {
-        saves.Show();
-    }
+        buttonNewGame.clicked += () =>
+        {
+            MainSceneManager.LoadScene(new MainSceneStartArguments()
+            {
+                Mode = MainSceneStartMode.NewGame,
+            });
+        };
 
-    private void OpenSeting_clicked()
-    {
-    }
+        buttonResumeFromLocalData.clicked += () =>
+        {
+            MainSceneManager.LoadScene(new MainSceneStartArguments()
+            {
+                Mode = MainSceneStartMode.ResumeFromLocalData,
+            });
+        };
+        
+        buttonResumeFromTextData.clicked += () =>
+        {
+            MainSceneManager.LoadScene(new MainSceneStartArguments()
+            {
+                Mode = MainSceneStartMode.ResumeFromTextData,
+            });
+        };
 
-    private void OpenManual_clicked()
-    {
-    }
-
-    private void FinishApplication_clicked()
-    {
-        Application.Quit();
+        buttonCloseApplication.clicked += () =>
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_EDITOR             
+            Application.Quit();
+#endif
+        };
     }
 }

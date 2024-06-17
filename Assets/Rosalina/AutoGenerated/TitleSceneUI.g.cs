@@ -15,20 +15,20 @@ public partial class TitleSceneUI
 {
     [SerializeField]
     private UIDocument _document;
-    public Button StartGame { get; private set; }
+    public Button buttonNewGame { get; private set; }
 
-    public Button OpenSeting { get; private set; }
+    public Button buttonResumeFromLocalData { get; private set; }
 
-    public Button OpenManual { get; private set; }
+    public Button buttonResumeFromTextData { get; private set; }
 
-    public Button FinishApplication { get; private set; }
+    public Button buttonCloseApplication { get; private set; }
 
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
     {
-        StartGame = Root?.Q<Button>("StartGame");
-        OpenSeting = Root?.Q<Button>("OpenSeting");
-        OpenManual = Root?.Q<Button>("OpenManual");
-        FinishApplication = Root?.Q<Button>("FinishApplication");
+        buttonNewGame = Root?.Q<Button>("buttonNewGame");
+        buttonResumeFromLocalData = Root?.Q<Button>("buttonResumeFromLocalData");
+        buttonResumeFromTextData = Root?.Q<Button>("buttonResumeFromTextData");
+        buttonCloseApplication = Root?.Q<Button>("buttonCloseApplication");
     }
 }

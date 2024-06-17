@@ -21,6 +21,9 @@ partial class CommonActions
             var state = SavedGameCoreState.Create(Core);
             var saveData = SaveData.SerializeSaveData(World, state);
 
+            // PlayerPrefsにセーブ
+            SaveData.SaveToPlayerPref(saveData);
+
             // クリップボードにコピー
             GUIUtility.systemCopyBuffer = saveData;
             Debug.Log("セーブしました！");

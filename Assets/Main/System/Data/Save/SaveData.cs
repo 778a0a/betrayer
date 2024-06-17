@@ -111,4 +111,19 @@ public class SaveData
 
         return world;
     }
+
+    public static void SaveToPlayerPref(string saveData)
+    {
+        PlayerPrefs.SetString("SaveData", saveData);
+    }
+
+    public static bool HasSaveData()
+    {
+        return PlayerPrefs.HasKey("SaveData");
+    }
+
+    public static string LoadSaveData()
+    {
+        return PlayerPrefs.GetString("SaveData");
+    }
 }

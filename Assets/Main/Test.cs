@@ -19,34 +19,38 @@ public class Test : MonoBehaviour
     public bool showOthersBattle = true;
 
     private GameCore core;
-    private WorldData world => core.World;
-    private PhaseManager phases => core.Phases;
-    private StrategyActions StrategyActions => core.StrategyActions;
-    private PersonalActions PersonalActions => core.PersonalActions;
-    private MartialActions MartialActions => core.MartialActions;
 
     private void Awake()
     {
         Instance = this;
+
+        //FaceImageManager.Instance.ClearCache();
+        SoldierImageManager.Instance.Initialize(soldierTexture);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void CreateWorldOld()
     {
         //world = DefaultData.InitializeDefaultData(initialTilemapData, tilemapHelper);
         //SaveData.SaveWorldData(world);
         //return;
-        Start_();
     }
-    void Start_()
-    {
-        FaceImageManager.Instance.ClearCache();
-        SoldierImageManager.Instance.Initialize(soldierTexture);
 
-        //var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
-        //core = new GameCore(world, MainUI, tilemap, this, null);
-        var savedata = GUIUtility.systemCopyBuffer;
-        var (world, state) = SaveData.DeserializeSaveData(savedata, tilemap.Helper);
+    public void StartNewGame()
+    {
+        // TODO キャラ選択
+
+        var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
+        StartGame(world, null);
+    }
+
+    public void ResumeGame(string saveData)
+    {
+        var (world, state) = SaveData.DeserializeSaveData(saveData, tilemap.Helper);
+        StartGame(world, state);
+    }
+
+    private void StartGame(WorldData world, SavedGameCoreState state)
+    {
         core = new GameCore(world, MainUI, tilemap, this, state);
         GameCore.Instance = core;
         tilemap.DrawCountryTile();
@@ -85,7 +89,7 @@ public class Test : MonoBehaviour
 
         void OnActionEnd()
         {
-            MainUI.StrategyPhase.SetData(chara, world);
+            MainUI.StrategyPhase.SetData(chara, core.World);
             MainUI.ShowStrategyUI();
         }
     }
@@ -112,7 +116,7 @@ public class Test : MonoBehaviour
 
         void OnActionEnd()
         {
-            MainUI.IndividualPhase.SetData(chara, world);
+            MainUI.IndividualPhase.SetData(chara, core.World);
             MainUI.ShowIndividualUI();
         }
     }
@@ -139,7 +143,7 @@ public class Test : MonoBehaviour
 
         void OnActionEnd()
         {
-            MainUI.MartialPhase.SetData(chara, world);
+            MainUI.MartialPhase.SetData(chara, core.World);
             MainUI.ShowMartialUI();
         }
     }
@@ -177,7 +181,7 @@ public class Test : MonoBehaviour
 
     public void OnTickStrategyPhase(Character chara)
     {
-        MainUI.StrategyPhase.SetData(chara, world);
+        MainUI.StrategyPhase.SetData(chara, core.World);
     }
 
     public void OnEnterIndividualPhase()
@@ -187,7 +191,7 @@ public class Test : MonoBehaviour
 
     public void OnTickIndividualPhase(Character chara)
     {
-        MainUI.IndividualPhase.SetData(chara, world);
+        MainUI.IndividualPhase.SetData(chara, core.World);
         //yield return new WaitForSeconds(0.05f);
     }
 
@@ -198,7 +202,7 @@ public class Test : MonoBehaviour
 
     public void OnTickMartialPhase(Character chara)
     {
-        MainUI.MartialPhase.SetData(chara, world);
+        MainUI.MartialPhase.SetData(chara, core.World);
     }
 
     public bool holdOnTurnEnd = false;
