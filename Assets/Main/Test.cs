@@ -13,7 +13,7 @@ public class Test : MonoBehaviour
     [SerializeField] private TilemapData initialTilemapData;
     [SerializeField] public float wait = 1;
     [SerializeField] private MainUI MainUI;
-    [SerializeField] private TilemapManager tilemap;
+    [SerializeField] public TilemapManager tilemap;
     [SerializeField] private Texture2D soldierTexture;
 
     public bool showOthersBattle = true;
@@ -38,15 +38,13 @@ public class Test : MonoBehaviour
     public void StartNewGame()
     {
         // TODO キャラ選択
-
         var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
         StartGame(world, null);
     }
 
-    public void ResumeGame(string saveData)
+    public void ResumeGame(WorldAndState ws)
     {
-        var (world, state) = SaveData.DeserializeSaveData(saveData, tilemap.Helper);
-        StartGame(world, state);
+        StartGame(ws.World, ws.State);
     }
 
     private void StartGame(WorldData world, SavedGameCoreState state)

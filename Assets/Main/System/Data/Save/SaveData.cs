@@ -35,7 +35,7 @@ public class SaveData
     }
 
     private readonly static string SaveDataSectionDivider = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-    public static (WorldData, SavedGameCoreState) DeserializeSaveData(
+    public static WorldAndState DeserializeSaveData(
         string saveData,
         TilemapHelper tilemapHelper)
     {
@@ -46,7 +46,7 @@ public class SaveData
         var stateJson = sections[2].Trim();
         var world = LoadWorldData(tilemapHelper, csv, json);
         var state = SavedGameCoreState.Deserialize(stateJson);
-        return (world, state);
+        return new WorldAndState(world, state);
     }
 
     public static string SerializeSaveData(WorldData world, SavedGameCoreState state)
@@ -110,20 +110,5 @@ public class SaveData
         }
 
         return world;
-    }
-
-    public static void SaveToPlayerPref(string saveData)
-    {
-        PlayerPrefs.SetString("SaveData", saveData);
-    }
-
-    public static bool HasSaveData()
-    {
-        return PlayerPrefs.HasKey("SaveData");
-    }
-
-    public static string LoadSaveData()
-    {
-        return PlayerPrefs.GetString("SaveData");
     }
 }

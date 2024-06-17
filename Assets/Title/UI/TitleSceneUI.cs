@@ -9,7 +9,7 @@ public partial class TitleSceneUI : MonoBehaviour
     {
         InitializeDocument();
 
-        var hasSaveData = SaveData.HasSaveData();
+        var hasSaveData = SaveDataManager.Instance.HasSaveData();
         buttonResumeFromLocalData.SetEnabled(hasSaveData);
 
         buttonNewGame.clicked += () =>

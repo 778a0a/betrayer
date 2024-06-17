@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Compression;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,6 +114,33 @@ public static class Util
     [Obsolete("TODO", false)]
     public static void Todo(string memo = "")
     {
+    }
+
+    /// <summary>
+    /// GZIP圧縮してBase64エンコードした文字列を返します。
+    /// </summary>
+    public static string CompressGzipBase64(string text)
+    {
+        var raw = Encoding.UTF8.GetBytes(text);
+        using var ms = new MemoryStream();
+        using (var gzip = new GZipStream(ms, CompressionMode.Compress, true))
+        {
+            gzip.Write(raw, 0, raw.Length);
+        }
+        return Convert.ToBase64String(ms.ToArray());
+    }
+
+    /// <summary>
+    /// Base64エンコードされたGZIP圧縮データを展開して文字列を返します。
+    /// </summary>
+    public static string DecompressGzipBase64(string encodedText)
+    {
+        var base64 = Convert.FromBase64String(encodedText);
+        using var ms = new MemoryStream(base64);
+        using var raw = new GZipStream(ms, CompressionMode.Decompress);
+        using var rawMs = new MemoryStream();
+        raw.CopyTo(rawMs);
+        return Encoding.UTF8.GetString(rawMs.ToArray());
     }
 }
 

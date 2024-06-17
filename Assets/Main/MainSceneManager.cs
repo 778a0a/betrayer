@@ -25,13 +25,13 @@ public class MainSceneManager : MonoBehaviour
                 break;
             case MainSceneStartMode.ResumeFromLocalData:
                 {
-                    var saveData = SaveData.LoadSaveData();
+                    var saveData = SaveDataManager.Instance.LoadFromPlayerPref(test.tilemap.Helper);
                     test.ResumeGame(saveData);
                     break;
                 }
             case MainSceneStartMode.ResumeFromTextData:
                 {
-                    var saveData = GUIUtility.systemCopyBuffer;
+                    var saveData = SaveDataManager.Instance.LoadFromClipboard(test.tilemap.Helper);
                     test.ResumeGame(saveData);
                     break;
                 }
