@@ -109,8 +109,8 @@ public class SavedCharacter
                         else
                         {
                             sbsub.Append($"|{s.Level},");
-                            sbsub.Append($"{(s.Experience == 0? "" : s.Experience)},");
-                            sbsub.Append($"{(s.HpFloat == s.MaxHp ? "" : s.HpFloat)}");
+                            sbsub.Append($"{(s.Experience == 0 ? "" : s.Experience)},");
+                            sbsub.Append($"{(s.HpFloat == s.MaxHp ? "" : s.HpFloat.ToString("0.#"))}");
                         }
                     }
                     sb.Append(sbsub.ToString()).Append(delimiter);
@@ -168,7 +168,7 @@ public class SavedCharacter
                             var values2 = soldier.Split(',');
                             var s = new Soldier();
                             s.Level = int.Parse(values2[0]);
-                            s.Experience = values2[1] != "" ? float.Parse(values2[1]) : 0;
+                            s.Experience = values2[1] != "" ? int.Parse(values2[1]) : 0;
                             s.HpFloat = values2[2] != "" ? float.Parse(values2[2]) : s.MaxHp;
                             force.Soldiers[k] = s;
                         }

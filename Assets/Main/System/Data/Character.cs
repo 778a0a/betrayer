@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -84,6 +85,7 @@ public class Character
     /// <summary>
     /// （内部データ）強さ
     /// </summary>
+    [JsonIgnore]
     public int Power => (Attack + Defense + Intelligence) / 3 * Force.Power;
 
     public string debugImagePath { get; set; }
@@ -147,7 +149,7 @@ public class Soldier
     /// <summary>
     /// 経験値
     /// </summary>
-    public float Experience { get; set; }
+    public int Experience { get; set; }
     /// <summary>
     /// HP
     /// </summary>
@@ -163,6 +165,20 @@ public class Soldier
 
     public bool IsEmptySlot { get; set; }
     public bool IsAlive => !IsEmptySlot && HpFloat > 0;
+
+    public void AddExperience(Character owner)
+    {
+        if (IsEmptySlot) return;
+        
+        Experience += 10 + Random.Range(0, 4);
+        // 十分経験値が貯まればレベルアップする。
+        if (Experience >= Level * 100 && Level < 13)
+        {
+            Level += 1;
+            Experience = 0;
+            owner.Contribution += 1;
+        }
+    }
 
     public override string ToString() => IsEmptySlot ? "Empty" : $"Lv{Level} HP{Hp}/{MaxHp} Exp:{Experience}";
     public string ToShortString() => IsEmptySlot ? "E" : $"{Level}";

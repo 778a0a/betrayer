@@ -28,14 +28,7 @@ partial class PersonalActions
             foreach (var soldier in chara.Force.Soldiers)
             {
                 if (soldier.IsEmptySlot) continue;
-                soldier.Experience += 1 + Random.Range(0, 0.3f);
-                // 十分経験値が貯まればレベルアップする。
-                if (soldier.Experience >= soldier.Level * 10 && soldier.Level < 13)
-                {
-                    soldier.Level += 1;
-                    soldier.Experience = 0;
-                    chara.Contribution += 1;
-                }
+                soldier.AddExperience(chara);
             }
 
             PayCost(chara);
