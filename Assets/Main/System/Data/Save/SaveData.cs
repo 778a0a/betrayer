@@ -49,20 +49,36 @@ public class SaveData
         return new WorldAndState(world, state);
     }
 
+    public static SaveDataSummary DeserializeSaveDataSummary(string saveData)
+    {
+        var sections = saveData.Split(new[] { SaveDataSectionDivider }, StringSplitOptions.RemoveEmptyEntries);
+        var json = sections[3].Trim();
+        return SaveDataSummary.Deserialize(json);
+    }
+
     public static string SerializeSaveData(WorldData world, SavedGameCoreState state)
     {
         var sb = new System.Text.StringBuilder();
         
+        // キャラデータ
         var csv = SavedCharacters.Serialize(world);
         sb.AppendLine(csv);
 
+        // 国データ
         sb.AppendLine(SaveDataSectionDivider);
         var json = SavedCountries.Serialize(world);
         sb.AppendLine(json);
 
+        // ゲーム状態
         sb.AppendLine(SaveDataSectionDivider);
         var stateJson = SavedGameCoreState.Serialize(state);
         sb.AppendLine(stateJson);
+
+        // セーブ画面用情報
+        sb.AppendLine(SaveDataSectionDivider);
+        var summary = SaveDataSummary.Create(world, state);
+        var summaryJson = SaveDataSummary.Serialize(summary);
+        sb.AppendLine(summaryJson);
 
         return sb.ToString();
     }

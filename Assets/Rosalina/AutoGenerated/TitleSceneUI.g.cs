@@ -15,20 +15,17 @@ public partial class TitleSceneUI
 {
     [SerializeField]
     private UIDocument _document;
-    public Button buttonNewGame { get; private set; }
-
-    public Button buttonResumeFromLocalData { get; private set; }
-
-    public Button buttonResumeFromTextData { get; private set; }
-
     public Button buttonCloseApplication { get; private set; }
+
+    public SaveDataListWindow SaveDataList { get; private set; }
+
+    public VisualElement Windows { get; private set; }
 
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
     {
-        buttonNewGame = Root?.Q<Button>("buttonNewGame");
-        buttonResumeFromLocalData = Root?.Q<Button>("buttonResumeFromLocalData");
-        buttonResumeFromTextData = Root?.Q<Button>("buttonResumeFromTextData");
         buttonCloseApplication = Root?.Q<Button>("buttonCloseApplication");
+        SaveDataList = new SaveDataListWindow(Root?.Q<VisualElement>("SaveDataList"));
+        Windows = Root?.Q<VisualElement>("Windows");
     }
 }

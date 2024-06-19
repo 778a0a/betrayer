@@ -346,9 +346,10 @@ public class FaceImageManager
     private Dictionary<string, Texture2D> cacheImages = new();
     public void ClearCache() => cacheImages.Clear();
 
-    public Texture2D GetImage(Character chara)
+    public Texture2D GetImage(Character chara) => GetImage(chara.Id);
+    public Texture2D GetImage(int charaId)
     {
-        var path = $"CharacterImages/{chara.Id:0000}";
+        var path = $"CharacterImages/{charaId:0000}";
         if (cacheImages.TryGetValue(path, out var tex))
         {
             return tex;

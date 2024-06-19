@@ -26,6 +26,7 @@ public class GameCore
 
     public int TurnCount { get; private set; } = 0;
     public PhaseBase CurrentPhase { get; private set; }
+    public int SaveDataSlotNo { get; set; }
 
     private bool IsResumingGame { get; set; } = false;
     private SavedGameCoreState ResumingGameState { get; set; } = null;
@@ -35,17 +36,20 @@ public class GameCore
         MainUI mainUI,
         TilemapManager tilemap,
         Test test,
-        SavedGameCoreState state = null)
+        SavedGameCoreState state = null,
+        int? saveDataSlotNo = null)
     {
         World = world;
         MainUI = mainUI;
         Tilemap = tilemap;
+        if (saveDataSlotNo.HasValue) SaveDataSlotNo = saveDataSlotNo.Value;
         this.test = test;
         if (state != null)
         {
             IsResumingGame = true;
             ResumingGameState = state;
             TurnCount = state.TurnCount;
+            SaveDataSlotNo = state.SaveDataSlotNo;
         }
 
         Phases = new(this, test);

@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="SaveDataListWindow" src="project://database/Assets/Title/UI/Windows/SaveDataListWindow.uxml?fileID=9197481963319205126&amp;guid=440ba38060752d94b9cd3bb1c8d4eaca&amp;type=3#SaveDataListWindow" />
     <Style src="project://database/Assets/Title/UI/TitleSceneUI.uss?fileID=7433441132597879392&amp;guid=49e3533c4e04ed74f8bdff72d252b684&amp;type=3#TitleSceneUI" />
     <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
-        <ui:Button text="はじめから" name="buttonNewGame" class="title--menu-button" />
-        <ui:Button text="続きから（ローカルデータ）" name="buttonResumeFromLocalData" class="title--menu-button" />
-        <ui:Button text="続きから（テキストデータ）" name="buttonResumeFromTextData" class="title--menu-button" />
         <ui:Button text="終了" name="buttonCloseApplication" class="title--menu-button" />
     </ui:VisualElement>
-    <ui:VisualElement name="Windows" style="flex-grow: 1; position: absolute;" />
+    <ui:VisualElement name="Windows" style="flex-grow: 1; position: absolute; align-self: center;">
+        <ui:Instance template="SaveDataListWindow" name="SaveDataList" />
+    </ui:VisualElement>
 </ui:UXML>

@@ -18,32 +18,28 @@ public class MainSceneManager : MonoBehaviour
     {
         TryGetComponent(out test);
 
-        switch (s_args.Mode)
+        var args = s_args ?? new MainSceneStartArguments()
         {
-            case MainSceneStartMode.NewGame:
-                test.StartNewGame();
-                break;
-            case MainSceneStartMode.ResumeFromLocalData:
-                {
-                    var saveData = SaveDataManager.Instance.LoadFromPlayerPref(test.tilemap.Helper);
-                    test.ResumeGame(saveData);
-                    break;
-                }
-            case MainSceneStartMode.ResumeFromTextData:
-                {
-                    var saveData = SaveDataManager.Instance.LoadFromClipboard(test.tilemap.Helper);
-                    test.ResumeGame(saveData);
-                    break;
-                }
-            default:
-                throw new ArgumentOutOfRangeException();
+            IsNewGame = true,
+            SaveDataSlotNo = 0,
+        };
+
+        if (args.IsNewGame)
+        {
+            test.StartNewGame(args.SaveDataSlotNo);
+            return;
         }
+
+        var saveData = SaveDataManager.Instance.Load(args.SaveDataSlotNo, test.tilemap.Helper);
+        test.ResumeGame(saveData);
     }
 }
 
 public class MainSceneStartArguments
 {
-    public MainSceneStartMode Mode { get; set; }
+    public bool IsNewGame { get; set; }
+    public int SaveDataSlotNo { get; set; }
+    public SaveDataSummary Summary { get; set; }
 }
 
 public enum MainSceneStartMode

@@ -16,7 +16,7 @@ MonoBehaviour:
   _files:
   - _type: 0
     _path: Assets/Title/UI/TitleSceneUI.uxml
-  - _type: 0
+  - _type: 1
     _path: Assets/Title/UI/Windows/SaveDataListWindow.uxml
   - _type: 1
     _path: Assets/Title/UI/Windows/SaveDataListWindowListItem.uxml

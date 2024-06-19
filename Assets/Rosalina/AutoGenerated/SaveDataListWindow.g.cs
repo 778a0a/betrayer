@@ -13,8 +13,6 @@ using UnityEngine.UIElements;
 
 public partial class SaveDataListWindow
 {
-    [SerializeField]
-    private UIDocument _document;
     public Button CloseButton { get; private set; }
 
     public SaveDataListWindowListItem SaveSlot1 { get; private set; }
@@ -23,21 +21,20 @@ public partial class SaveDataListWindow
 
     public SaveDataListWindowListItem SaveSlot3 { get; private set; }
 
-    public SaveDataListWindowListItem SaveSlot4 { get; private set; }
-
-    public SaveDataListWindowListItem SaveSlot5 { get; private set; }
+    public SaveDataListWindowListItem SaveSlotAuto { get; private set; }
 
     public VisualElement Border { get; private set; }
 
-    public VisualElement Root => _document?.rootVisualElement;
-    public void InitializeDocument()
+    public VisualElement Root { get; }
+
+    public SaveDataListWindow(VisualElement root)
     {
+        Root = root;
         CloseButton = Root?.Q<Button>("CloseButton");
         SaveSlot1 = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlot1"));
         SaveSlot2 = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlot2"));
         SaveSlot3 = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlot3"));
-        SaveSlot4 = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlot4"));
-        SaveSlot5 = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlot5"));
+        SaveSlotAuto = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlotAuto"));
         Border = Root?.Q<VisualElement>("Border");
     }
 }

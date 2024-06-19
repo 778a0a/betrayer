@@ -12,19 +12,36 @@ public class SaveDataManager
 {
     public static SaveDataManager Instance { get; private set; } = new();
 
-    private const string SaveDataKey = "SaveData";
+    private const string SaveDataKeyPrefix = "SaveData";
+    private string SaveDataKey(int slotNo) => $"{SaveDataKeyPrefix}{slotNo}";
+    public int AutoSaveDataSlotNo => -1;
 
-    public bool HasSaveData()
+    public bool HasSaveData(int slotNo)
     {
-        return PlayerPrefs.HasKey(SaveDataKey);
+        return PlayerPrefs.HasKey(SaveDataKey(slotNo));
     }
 
-    public void SaveToPlayerPref(GameCore core)
+    public SaveDataSummary LoadSummary(int slotNo)
+    {
+        var compressed = PlayerPrefs.GetString(SaveDataKey(slotNo));
+        var saveData = Util.DecompressGzipBase64(compressed);
+        var summary = SaveData.DeserializeSaveDataSummary(saveData);
+        return summary;
+    }
+
+    public string LoadSaveDataText(int slotNo)
+    {
+        var compressed = PlayerPrefs.GetString(SaveDataKey(slotNo));
+        var saveData = Util.DecompressGzipBase64(compressed);
+        return saveData;
+    }
+
+    public void SaveToPlayerPref(int slotNo, GameCore core)
     {
         var saveData = CreateSaveDataText(core);
         var compressed = Util.CompressGzipBase64(saveData);
         Debug.Log($"セーブデータ圧縮: {saveData.Length} -> {compressed.Length} ({compressed.Length / (float)saveData.Length * 100}%)");
-        PlayerPrefs.SetString(SaveDataKey, compressed);
+        PlayerPrefs.SetString(SaveDataKey(slotNo), compressed);
         Debug.Log(saveData);
     }
 
@@ -43,10 +60,9 @@ public class SaveDataManager
         return saveData;
     }
 
-
-    public WorldAndState LoadFromPlayerPref(TilemapHelper tilemapHelper)
+    public WorldAndState Load(int slotNo, TilemapHelper tilemapHelper)
     {
-        var compressed = PlayerPrefs.GetString(SaveDataKey);
+        var compressed = PlayerPrefs.GetString(SaveDataKey(slotNo));
         var saveData = Util.DecompressGzipBase64(compressed);
         var ws = SaveData.DeserializeSaveData(saveData, tilemapHelper);
         return ws;
@@ -57,6 +73,11 @@ public class SaveDataManager
         var saveData = GUIUtility.systemCopyBuffer;
         var ws = SaveData.DeserializeSaveData(saveData, tilemapHelper);
         return ws;
+    }
+
+    internal void Delete(int slotNo)
+    {
+        throw new NotImplementedException();
     }
 }
 

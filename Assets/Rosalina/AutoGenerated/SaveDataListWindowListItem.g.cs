@@ -14,25 +14,43 @@ using UnityEngine.UIElements;
 
 public partial class SaveDataListWindowListItem
 {
-    public Label Soldiers { get; private set; }
+    public Label labelSoldiers { get; private set; }
 
-    public Label Years { get; private set; }
+    public Label labelTurnCount { get; private set; }
 
-    public Label PlayerName { get; private set; }
+    public Label labelTitle { get; private set; }
 
-    public Label SavedTime { get; private set; }
+    public Label labelName { get; private set; }
 
-    public VisualElement CharacterImage { get; private set; }
+    public Label labelSavedTime { get; private set; }
+
+    public Image imageCharacter { get; private set; }
+
+    public Button buttonMain { get; private set; }
+
+    public Button buttonDownload { get; private set; }
+
+    public Button buttonDelete { get; private set; }
+
+    public VisualElement SaveDataLisItemRoot { get; private set; }
+
+    public Button buttonNoData { get; private set; }
 
     public VisualElement Root { get; }
 
     public SaveDataListWindowListItem(VisualElement root)
     {
         Root = root;
-        Soldiers = Root?.Q<Label>("Soldiers");
-        Years = Root?.Q<Label>("Years");
-        PlayerName = Root?.Q<Label>("PlayerName");
-        SavedTime = Root?.Q<Label>("SavedTime");
-        CharacterImage = Root?.Q<VisualElement>("CharacterImage");
+        labelSoldiers = Root?.Q<Label>("labelSoldiers");
+        labelTurnCount = Root?.Q<Label>("labelTurnCount");
+        labelTitle = Root?.Q<Label>("labelTitle");
+        labelName = Root?.Q<Label>("labelName");
+        labelSavedTime = Root?.Q<Label>("labelSavedTime");
+        imageCharacter = Root?.Q<Image>("imageCharacter");
+        buttonMain = Root?.Q<Button>("buttonMain");
+        buttonDownload = Root?.Q<Button>("buttonDownload");
+        buttonDelete = Root?.Q<Button>("buttonDelete");
+        SaveDataLisItemRoot = Root?.Q<VisualElement>("SaveDataLisItemRoot");
+        buttonNoData = Root?.Q<Button>("buttonNoData");
     }
 }

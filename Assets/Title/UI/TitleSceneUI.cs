@@ -9,32 +9,7 @@ public partial class TitleSceneUI : MonoBehaviour
     {
         InitializeDocument();
 
-        var hasSaveData = SaveDataManager.Instance.HasSaveData();
-        buttonResumeFromLocalData.SetEnabled(hasSaveData);
-
-        buttonNewGame.clicked += () =>
-        {
-            MainSceneManager.LoadScene(new MainSceneStartArguments()
-            {
-                Mode = MainSceneStartMode.NewGame,
-            });
-        };
-
-        buttonResumeFromLocalData.clicked += () =>
-        {
-            MainSceneManager.LoadScene(new MainSceneStartArguments()
-            {
-                Mode = MainSceneStartMode.ResumeFromLocalData,
-            });
-        };
-        
-        buttonResumeFromTextData.clicked += () =>
-        {
-            MainSceneManager.LoadScene(new MainSceneStartArguments()
-            {
-                Mode = MainSceneStartMode.ResumeFromTextData,
-            });
-        };
+        SaveDataList.Initialize();
 
         buttonCloseApplication.clicked += () =>
         {
@@ -44,5 +19,7 @@ public partial class TitleSceneUI : MonoBehaviour
             Application.Quit();
 #endif
         };
+
+        SaveDataList.SetData(SaveDataManager.Instance);
     }
 }

@@ -35,21 +35,21 @@ public class Test : MonoBehaviour
         //return;
     }
 
-    public void StartNewGame()
+    public void StartNewGame(int saveDataSlotNo)
     {
         // TODO キャラ選択
         var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
-        StartGame(world, null);
+        StartGame(world, null, saveDataSlotNo);
     }
 
     public void ResumeGame(WorldAndState ws)
     {
-        StartGame(ws.World, ws.State);
+        StartGame(ws.World, ws.State, null);
     }
 
-    private void StartGame(WorldData world, SavedGameCoreState state)
+    private void StartGame(WorldData world, SavedGameCoreState state, int? saveDataSlotNo)
     {
-        core = new GameCore(world, MainUI, tilemap, this, state);
+        core = new GameCore(world, MainUI, tilemap, this, state, saveDataSlotNo);
         GameCore.Instance = core;
         tilemap.DrawCountryTile();
 

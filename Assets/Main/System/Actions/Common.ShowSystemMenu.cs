@@ -20,7 +20,7 @@ partial class CommonActions
         {
             if (true)
             {
-                SaveDataManager.Instance.SaveToPlayerPref(Core);
+                SaveDataManager.Instance.SaveToPlayerPref(Core.SaveDataSlotNo, Core);
             }
             else
             {
