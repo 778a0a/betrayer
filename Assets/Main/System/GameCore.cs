@@ -24,7 +24,7 @@ public class GameCore
     public MartialActions MartialActions { get; private set; }
     public CommonActions CommonActions { get; private set; }
 
-    public int TurnCount { get; private set; } = 0;
+    public int TurnCount { get; private set; } = 1;
     public PhaseBase CurrentPhase { get; private set; }
     public int SaveDataSlotNo { get; set; }
 

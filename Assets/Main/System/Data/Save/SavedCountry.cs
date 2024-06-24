@@ -28,7 +28,13 @@ public class SavedCountries
         return JsonConvert.DeserializeObject<SavedCountries>(json);
     }
 
-    public static string Serialize(WorldData world)
+    public static string Serialize(SavedCountries countries)
+    {
+        var json = JsonConvert.SerializeObject(countries);
+        return json;
+    }
+
+    public static SavedCountries Extract(WorldData world)
     {
         var countries = new SavedCountries
         {
@@ -48,8 +54,7 @@ public class SavedCountries
                 .Distinct()
                 .ToList(),
         };
-        var json = JsonConvert.SerializeObject(countries);
-        return json;
+        return countries;
     }
 }
 

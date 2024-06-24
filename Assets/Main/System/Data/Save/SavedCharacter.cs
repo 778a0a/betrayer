@@ -9,7 +9,7 @@ using UnityEngine;
 
 public static class SavedCharacters
 {
-    public static string Serialize(WorldData world)
+    public static List<SavedCharacter> Extract(WorldData world)
     {
         var charas = new List<SavedCharacter>();
         for (int i = 0; i < world.Characters.Length; i++)
@@ -26,9 +26,7 @@ public static class SavedCharacters
             charas.Add(chara);
         }
         charas = charas.OrderBy(c => c.CountryId).ThenBy(c => c.MemberOrderIndex).ToList();
-
-        var csv = SavedCharacter.CreateCsv(charas);
-        return csv;
+        return charas;
     }
 
     public static List<SavedCharacter> Deserialize(string csv)

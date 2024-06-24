@@ -13,6 +13,7 @@ public partial class TitleSceneUI : MonoBehaviour
         InitializeDocument();
         NewGameMenu.style.display = DisplayStyle.None;
 
+        InitializeNewGameWindow();
         SaveDataList.Initialize(this);
 
         buttonCloseApplication.clicked += () =>
@@ -42,7 +43,7 @@ public partial class TitleSceneUI : MonoBehaviour
             MainSceneManager.LoadScene(new MainSceneStartArguments()
             {
                 IsNewGame = true,
-                SaveDataSlotNo = currentSelectedSlotNo,
+                NewGameSaveDataSlotNo = currentSelectedSlotNo,
             });
         };
 
@@ -50,7 +51,10 @@ public partial class TitleSceneUI : MonoBehaviour
         buttonLoadTextData.clicked += () =>
         {
             NewGameMenu.style.display = DisplayStyle.None;
-            SaveDataManager.Instance.LoadTextData(currentSelectedSlotNo);
+            var saveDataText = SaveDataManager.Instance.LoadFromClipboard();
+            SaveDataManager.Instance.Save(currentSelectedSlotNo, saveDataText);
+            SaveDataList.SetData(SaveDataManager.Instance);
+            Util.Todo("ペースト用のウィンドウ表示");
         };
 
         // スロットからコピー
@@ -60,16 +64,18 @@ public partial class TitleSceneUI : MonoBehaviour
             var button = CopySlotButtons[i];
             button.clicked += () =>
             {
-                NewGameMenu.style.display = DisplayStyle.None;
                 SaveDataManager.Instance.Copy(slotNo, currentSelectedSlotNo);
+                SaveDataList.SetData(SaveDataManager.Instance);
+                NewGameMenu.style.display = DisplayStyle.None;
             };
         }
 
         // オートセーブスロットからコピー
         buttonCopyFromSlotAuto.clicked += () =>
         {
-            NewGameMenu.style.display = DisplayStyle.None;
             SaveDataManager.Instance.Copy(SaveDataManager.AutoSaveDataSlotNo, currentSelectedSlotNo);
+            SaveDataList.SetData(SaveDataManager.Instance);
+            NewGameMenu.style.display = DisplayStyle.None;
         };
     }
 

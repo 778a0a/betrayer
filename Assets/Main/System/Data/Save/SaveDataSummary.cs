@@ -13,7 +13,6 @@ public class SaveDataSummary
     public int SoldierCount { get; set; }
     public int TurnCount { get; set; }
     public DateTime SavedTime { get; set; }
-    public int SaveDataSlotNo { get; set; }
 
     public static SaveDataSummary Deserialize(string json)
     {

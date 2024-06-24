@@ -13,64 +13,54 @@ public class SaveDataManager
     public static SaveDataManager Instance { get; private set; } = new();
 
     private const string SaveDataKeyPrefix = "SaveData";
-    private string SaveDataKey(int slotNo) => $"{SaveDataKeyPrefix}{slotNo}";
+    private static string SaveDataKey(int slotNo) => $"{SaveDataKeyPrefix}{slotNo}";
     public const int AutoSaveDataSlotNo = -1;
 
-    public bool HasSaveData(int slotNo)
-    {
-        return PlayerPrefs.HasKey(SaveDataKey(slotNo));
-    }
+    public bool HasSaveData(int slotNo) => PlayerPrefs.HasKey(SaveDataKey(slotNo));
+    public bool HasAutoSaveData() => PlayerPrefs.HasKey(SaveDataKey(AutoSaveDataSlotNo));
 
-    public SaveDataSummary LoadSummary(int slotNo)
+    public void Save(int slotNo, GameCore core) => Save(slotNo, CreateSaveDataText(core));
+    public void Save(int slotNo, SaveDataText saveDataText)
     {
-        var saveData = LoadSaveDataText(slotNo);
-        var summary = SaveData.DeserializeSaveDataSummary(saveData);
-        return summary;
-    }
-
-    public string LoadSaveDataText(int slotNo)
-    {
-        var compressed = PlayerPrefs.GetString(SaveDataKey(slotNo));
-        var saveData = Util.DecompressGzipBase64(compressed);
-        return saveData;
-    }
-
-    public void SaveToPlayerPref(int slotNo, GameCore core)
-    {
-        var saveData = CreateSaveDataText(core);
-        var compressed = Util.CompressGzipBase64(saveData);
-        Debug.Log($"セーブデータ圧縮: {saveData.Length} -> {compressed.Length} ({compressed.Length / (float)saveData.Length * 100}%)");
+        var compressed = saveDataText.Compress();
+        Debug.Log($"セーブデータ圧縮: {saveDataText.Length} -> {compressed.Length} ({compressed.Length / (float)saveDataText.Length * 100}%)");
         PlayerPrefs.SetString(SaveDataKey(slotNo), compressed);
-        Debug.Log(saveData);
+        Debug.Log(saveDataText);
     }
 
     public void SaveToClipboard(GameCore core)
     {
         var saveData = CreateSaveDataText(core);
-        GUIUtility.systemCopyBuffer = saveData;
+        GUIUtility.systemCopyBuffer = saveData.PlainText();
         Debug.Log(saveData);
     }
 
-    private string CreateSaveDataText(GameCore core)
+    private SaveDataText CreateSaveDataText(GameCore core)
     {
         var world = core.World;
         var state = SavedGameCoreState.Create(core);
-        var saveData = SaveData.SerializeSaveData(world, state);
+        var saveData = SaveDataText.Serialize(world, state);
         return saveData;
     }
 
-    public WorldAndState Load(int slotNo, TilemapHelper tilemapHelper)
+    public SaveData Load(int slotNo)
     {
-        var saveData = LoadSaveDataText(slotNo);
-        var ws = SaveData.DeserializeSaveData(saveData, tilemapHelper);
-        return ws;
+        var text = LoadSaveDataText(slotNo);
+        var saveData = text.Deserialize();
+        return saveData;
     }
 
-    public WorldAndState LoadFromClipboard(TilemapHelper tilemapHelper)
+    public SaveDataSummary LoadSummary(int slotNo)
     {
-        var saveData = GUIUtility.systemCopyBuffer;
-        var ws = SaveData.DeserializeSaveData(saveData, tilemapHelper);
-        return ws;
+        var text = LoadSaveDataText(slotNo);
+        var summary = text.DeserializeSummary();
+        return summary;
+    }
+
+    public SaveDataText LoadFromClipboard()
+    {
+        var text = SaveDataText.FromPlainText(GUIUtility.systemCopyBuffer);
+        return text;
     }
 
     public void Delete(int slotNo)
@@ -80,10 +70,22 @@ public class SaveDataManager
 
     public void Copy(int srcSlotNo, int dstSlotNo)
     {
-        var saveData = LoadSaveDataText(srcSlotNo);
-        var worldAndState = SaveData.DeserializeSaveData(saveData, null);
-        var summary = SaveData.DeserializeSaveDataSummary(saveData);
+        var textOriginal = LoadSaveDataText(srcSlotNo);
+        var saveData = textOriginal.Deserialize();
+        
+        // スロット番号を書き換える。
+        saveData.State.SaveDataSlotNo = dstSlotNo;
+
+        var text = SaveDataText.Serialize(saveData);
+        var compressed = text.Compress();
         PlayerPrefs.SetString(SaveDataKey(dstSlotNo), compressed);
+    }
+
+    public SaveDataText LoadSaveDataText(int slotNo)
+    {
+        var compressed = PlayerPrefs.GetString(SaveDataKey(slotNo));
+        var saveData = SaveDataText.FromCompressed(compressed);
+        return saveData;
     }
 }
 

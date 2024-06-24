@@ -32,11 +32,11 @@ public partial class SaveDataListWindow
                     var res = CommonUI.Show("このゲームを再開しますか？", MessageBoxButton.YesNo);
                     if (res != MessageBoxResult.Yes) return;
 
+                    var saveData = saves.Load(slot.SlotNo);
                     MainSceneManager.LoadScene(new MainSceneStartArguments()
                     {
                         IsNewGame = false,
-                        SaveDataSlotNo = slot.Summary.SaveDataSlotNo,
-                        Summary = slot.Summary,
+                        SaveData = saveData,
                     });
                 }
                 break;
@@ -44,7 +44,8 @@ public partial class SaveDataListWindow
                 try
                 {
                     var saveDataText = saves.LoadSaveDataText(slot.SlotNo);
-                    Application.OpenURL($"data:text/plain;charset=utf-8,{saveDataText}");
+                    var percentencoded = Uri.EscapeDataString(saveDataText.PlainText());
+                    Application.OpenURL($"data:text/plain;charset=utf-8,{percentencoded}");
                 }
                 catch (Exception ex)
                 {
@@ -91,13 +92,13 @@ public partial class SaveDataListWindow
             slot.SetData(summary);
         }
 
-        if (!saves.HasSaveData(saves.AutoSaveDataSlotNo))
+        if (!saves.HasAutoSaveData())
         {
             SaveSlotAuto.SetData(null);
         }
         else
         {
-            var autoSummary = saves.LoadSummary(saves.AutoSaveDataSlotNo);
+            var autoSummary = saves.LoadSummary(SaveDataManager.AutoSaveDataSlotNo);
             SaveSlotAuto.SetData(autoSummary);
         }
     }

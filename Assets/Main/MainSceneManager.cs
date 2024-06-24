@@ -21,25 +21,27 @@ public class MainSceneManager : MonoBehaviour
         var args = s_args ?? new MainSceneStartArguments()
         {
             IsNewGame = true,
-            SaveDataSlotNo = 0,
+            NewGameSaveDataSlotNo = 0,
         };
 
         if (args.IsNewGame)
         {
-            test.StartNewGame(args.SaveDataSlotNo);
+            test.StartNewGame(args.NewGameSaveDataSlotNo);
             return;
         }
 
-        var saveData = SaveDataManager.Instance.Load(args.SaveDataSlotNo, test.tilemap.Helper);
-        test.ResumeGame(saveData);
+        var saveData = args.SaveData;
+        var worldData = saveData.RestoreWorldData(test.tilemap.Helper);
+        var ws = new WorldAndState(worldData, saveData.State);
+        test.ResumeGame(ws);
     }
 }
 
 public class MainSceneStartArguments
 {
     public bool IsNewGame { get; set; }
-    public int SaveDataSlotNo { get; set; }
-    public SaveDataSummary Summary { get; set; }
+    public int NewGameSaveDataSlotNo { get; set; }
+    public SaveData SaveData { get; set; }
 }
 
 public enum MainSceneStartMode
