@@ -14,7 +14,7 @@ public class SaveDataManager
 
     private const string SaveDataKeyPrefix = "SaveData";
     private string SaveDataKey(int slotNo) => $"{SaveDataKeyPrefix}{slotNo}";
-    public int AutoSaveDataSlotNo => -1;
+    public const int AutoSaveDataSlotNo = -1;
 
     public bool HasSaveData(int slotNo)
     {
@@ -23,8 +23,7 @@ public class SaveDataManager
 
     public SaveDataSummary LoadSummary(int slotNo)
     {
-        var compressed = PlayerPrefs.GetString(SaveDataKey(slotNo));
-        var saveData = Util.DecompressGzipBase64(compressed);
+        var saveData = LoadSaveDataText(slotNo);
         var summary = SaveData.DeserializeSaveDataSummary(saveData);
         return summary;
     }
@@ -62,8 +61,7 @@ public class SaveDataManager
 
     public WorldAndState Load(int slotNo, TilemapHelper tilemapHelper)
     {
-        var compressed = PlayerPrefs.GetString(SaveDataKey(slotNo));
-        var saveData = Util.DecompressGzipBase64(compressed);
+        var saveData = LoadSaveDataText(slotNo);
         var ws = SaveData.DeserializeSaveData(saveData, tilemapHelper);
         return ws;
     }
@@ -75,9 +73,17 @@ public class SaveDataManager
         return ws;
     }
 
-    internal void Delete(int slotNo)
+    public void Delete(int slotNo)
     {
-        throw new NotImplementedException();
+        PlayerPrefs.DeleteKey(SaveDataKey(slotNo));
+    }
+
+    public void Copy(int srcSlotNo, int dstSlotNo)
+    {
+        var saveData = LoadSaveDataText(srcSlotNo);
+        var worldAndState = SaveData.DeserializeSaveData(saveData, null);
+        var summary = SaveData.DeserializeSaveDataSummary(saveData);
+        PlayerPrefs.SetString(SaveDataKey(dstSlotNo), compressed);
     }
 }
 

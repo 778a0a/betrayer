@@ -25,8 +25,9 @@ public class SaveDataSummary
         return JsonConvert.SerializeObject(summary);
     }
 
-    public static SaveDataSummary Create(WorldData world, SavedGameCoreState state)
+    public static SaveDataSummary Create(WorldData world, SavedGameCoreState state, DateTime savedTime = default)
     {
+        savedTime = savedTime == default ? DateTime.Now : savedTime;
         var chara = world.Characters.FirstOrDefault(c => c.IsPlayer) ?? world.Characters.First();
         var summary = new SaveDataSummary
         {
@@ -35,7 +36,7 @@ public class SaveDataSummary
             Name = chara.Name,
             SoldierCount = chara.Force.Soldiers.Sum(s => s.Hp),
             TurnCount = state.TurnCount,
-            SavedTime = DateTime.Now,
+            SavedTime = savedTime,
         };
         return summary;
     }

@@ -5,11 +5,13 @@ using UnityEngine.UIElements;
 
 public partial class SaveDataListWindow
 {
+    private TitleSceneUI uiTitle;
     private SaveDataManager saves;
 
 
-    public void Initialize()
+    public void Initialize(TitleSceneUI uiTitle)
     {
+        this.uiTitle = uiTitle;
         var manualSlots = new[] { SaveSlot1, SaveSlot2, SaveSlot3 };
         for (int i = 0; i < manualSlots.Length; i++)
         {
@@ -62,14 +64,7 @@ public partial class SaveDataListWindow
                 {
                     if (slot.IsAutoSaveData) return;
 
-                    var res = CommonUI.Show("新しくゲームを始めますか？", MessageBoxButton.YesNo);
-                    if (res != MessageBoxResult.Yes) return;
-
-                    MainSceneManager.LoadScene(new MainSceneStartArguments()
-                    {
-                        IsNewGame = true,
-                        SaveDataSlotNo = slot.SlotNo,
-                    });
+                    uiTitle.ShowNewGameWindow(slot.SlotNo);
                 }
                 break;
             default:

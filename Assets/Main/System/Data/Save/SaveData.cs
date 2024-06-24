@@ -18,7 +18,9 @@ public class SaveData
     {
         var csv = Resources.Load<TextAsset>(DefaultCsvPath).text;
         var json = Resources.Load<TextAsset>(DefaultJsonPath).text;
-        return LoadWorldData(tilemapHelper, csv, json);
+        var charas = SavedCharacters.Deserialize(csv);
+        var countries = SavedCountries.Deserialize(json);
+        return LoadWorldData(tilemapHelper, charas, countries);
     }
 
     public static void SaveDefaultWorldData(WorldData world)
@@ -44,7 +46,10 @@ public class SaveData
         var csv = sections[0].Trim();
         var json = sections[1].Trim();
         var stateJson = sections[2].Trim();
-        var world = LoadWorldData(tilemapHelper, csv, json);
+
+        var charas = SavedCharacters.Deserialize(csv);
+        var countries = SavedCountries.Deserialize(json);
+        var world = LoadWorldData(tilemapHelper, charas, countries);
         var state = SavedGameCoreState.Deserialize(stateJson);
         return new WorldAndState(world, state);
     }
@@ -56,7 +61,7 @@ public class SaveData
         return SaveDataSummary.Deserialize(json);
     }
 
-    public static string SerializeSaveData(WorldData world, SavedGameCoreState state)
+    public static string SerializeSaveData(WorldData world, SavedGameCoreState state, DateTime savedTime = default)
     {
         var sb = new System.Text.StringBuilder();
         
@@ -76,7 +81,7 @@ public class SaveData
 
         // セーブ画面用情報
         sb.AppendLine(SaveDataSectionDivider);
-        var summary = SaveDataSummary.Create(world, state);
+        var summary = SaveDataSummary.Create(world, state, savedTime);
         var summaryJson = SaveDataSummary.Serialize(summary);
         sb.AppendLine(summaryJson);
 
@@ -85,13 +90,11 @@ public class SaveData
 
     public static WorldData LoadWorldData(
         TilemapHelper tilemapHelper,
-        string csv,
-        string json)
+        List<SavedCharacter> charas,
+        SavedCountries countries)
     {
         var map = DefaultData.CreateMapGrid(TilemapData.Width, tilemapHelper);
         var world = new WorldData();
-        var charas = SavedCharacters.Deserialize(csv);
-        var countries = SavedCountries.Deserialize(json);
         world.Map = map;
         world.Characters = charas.Select(c => c.Character).ToArray();
         world.Countries = new List<Country>();
