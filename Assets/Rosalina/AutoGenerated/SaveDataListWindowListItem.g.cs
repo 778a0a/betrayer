@@ -16,11 +16,13 @@ public partial class SaveDataListWindowListItem
 {
     public Label labelSoldiers { get; private set; }
 
-    public Label labelTurnCount { get; private set; }
+    public Label labelGold { get; private set; }
 
     public Label labelTitle { get; private set; }
 
     public Label labelName { get; private set; }
+
+    public Label labelTurnCount { get; private set; }
 
     public Label labelSavedTime { get; private set; }
 
@@ -42,9 +44,10 @@ public partial class SaveDataListWindowListItem
     {
         Root = root;
         labelSoldiers = Root?.Q<Label>("labelSoldiers");
-        labelTurnCount = Root?.Q<Label>("labelTurnCount");
+        labelGold = Root?.Q<Label>("labelGold");
         labelTitle = Root?.Q<Label>("labelTitle");
         labelName = Root?.Q<Label>("labelName");
+        labelTurnCount = Root?.Q<Label>("labelTurnCount");
         labelSavedTime = Root?.Q<Label>("labelSavedTime");
         imageCharacter = Root?.Q<Image>("imageCharacter");
         buttonMain = Root?.Q<Button>("buttonMain");

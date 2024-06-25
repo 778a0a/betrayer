@@ -11,6 +11,7 @@ public class SaveDataSummary
     public string Title { get; set; }
     public string Name { get; set; }
     public int SoldierCount { get; set; }
+    public int Gold { get; set; }
     public int TurnCount { get; set; }
     public DateTime SavedTime { get; set; }
 
@@ -34,6 +35,7 @@ public class SaveDataSummary
             Title = chara.GetTitle(world),
             Name = chara.Name,
             SoldierCount = chara.Force.Soldiers.Sum(s => s.Hp),
+            Gold = chara.Gold,
             TurnCount = state.TurnCount,
             SavedTime = savedTime,
         };

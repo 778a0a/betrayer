@@ -14,7 +14,7 @@
                     </ui:VisualElement>
                     <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-left: 10px;">
                         <ui:Label text="所持金:" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
-                        <ui:Label text="88888" name="labelMoney" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
+                        <ui:Label text="88888" name="labelGold" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 0; flex-direction: row;">

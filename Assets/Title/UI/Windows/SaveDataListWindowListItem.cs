@@ -51,6 +51,7 @@ public partial class SaveDataListWindowListItem
         labelTitle.text = data.Title;
         labelName.text = data.Name;
         labelSoldiers.text = data.SoldierCount.ToString();
+        labelGold.text = data.Gold.ToString();
         labelTurnCount.text = data.TurnCount.ToString();
         labelSavedTime.text = data.SavedTime.ToString();
     }
