@@ -19,8 +19,6 @@ public partial class TitleSceneUI
 
     public Button buttonCloseApplication { get; private set; }
 
-    public Label Label { get; private set; }
-
     public Button buttonCloseNewGameWindow { get; private set; }
 
     public Button buttonStartNewGame { get; private set; }
@@ -35,7 +33,35 @@ public partial class TitleSceneUI
 
     public Button buttonCopyFromSlotAuto { get; private set; }
 
+    public Button buttonClearText { get; private set; }
+
+    public Button buttonPasteText { get; private set; }
+
+    public Label labelTextBoxWindowTitle { get; private set; }
+
+    public Button buttonCloseTextBoxWindow { get; private set; }
+
+    public TextField textTextBoxWindow { get; private set; }
+
+    public Button buttonCopyText { get; private set; }
+
+    public Button buttonSubmitText { get; private set; }
+
+    public Button buttonMessageOK { get; private set; }
+
+    public Button buttonMessageYes { get; private set; }
+
+    public Button buttonMessageNo { get; private set; }
+
+    public Button buttonMessageCancel { get; private set; }
+
+    public Label labelMessageText { get; private set; }
+
     public VisualElement NewGameMenu { get; private set; }
+
+    public VisualElement TextBoxWindow { get; private set; }
+
+    public VisualElement MessageWindow { get; private set; }
 
     public VisualElement Windows { get; private set; }
 
@@ -44,7 +70,6 @@ public partial class TitleSceneUI
     {
         SaveDataList = new SaveDataListWindow(Root?.Q<VisualElement>("SaveDataList"));
         buttonCloseApplication = Root?.Q<Button>("buttonCloseApplication");
-        Label = Root?.Q<Label>("Label");
         buttonCloseNewGameWindow = Root?.Q<Button>("buttonCloseNewGameWindow");
         buttonStartNewGame = Root?.Q<Button>("buttonStartNewGame");
         buttonLoadTextData = Root?.Q<Button>("buttonLoadTextData");
@@ -52,7 +77,21 @@ public partial class TitleSceneUI
         buttonCopyFromSlot2 = Root?.Q<Button>("buttonCopyFromSlot2");
         buttonCopyFromSlot3 = Root?.Q<Button>("buttonCopyFromSlot3");
         buttonCopyFromSlotAuto = Root?.Q<Button>("buttonCopyFromSlotAuto");
+        buttonClearText = Root?.Q<Button>("buttonClearText");
+        buttonPasteText = Root?.Q<Button>("buttonPasteText");
+        labelTextBoxWindowTitle = Root?.Q<Label>("labelTextBoxWindowTitle");
+        buttonCloseTextBoxWindow = Root?.Q<Button>("buttonCloseTextBoxWindow");
+        textTextBoxWindow = Root?.Q<TextField>("textTextBoxWindow");
+        buttonCopyText = Root?.Q<Button>("buttonCopyText");
+        buttonSubmitText = Root?.Q<Button>("buttonSubmitText");
+        buttonMessageOK = Root?.Q<Button>("buttonMessageOK");
+        buttonMessageYes = Root?.Q<Button>("buttonMessageYes");
+        buttonMessageNo = Root?.Q<Button>("buttonMessageNo");
+        buttonMessageCancel = Root?.Q<Button>("buttonMessageCancel");
+        labelMessageText = Root?.Q<Label>("labelMessageText");
         NewGameMenu = Root?.Q<VisualElement>("NewGameMenu");
+        TextBoxWindow = Root?.Q<VisualElement>("TextBoxWindow");
+        MessageWindow = Root?.Q<VisualElement>("MessageWindow");
         Windows = Root?.Q<VisualElement>("Windows");
     }
 }

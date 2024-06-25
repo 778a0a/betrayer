@@ -55,26 +55,3 @@ public partial class SaveDataListWindowListItem
         labelSavedTime.text = data.SavedTime.ToString();
     }
 }
-
-public class CommonUI
-{
-    public static MessageBoxResult Show(string text, MessageBoxButton button = MessageBoxButton.Ok)
-    {
-        return MessageBoxResult.Yes;
-    }
-}
-
-public enum MessageBoxButton
-{
-    Ok,
-    YesNo,
-    YesNoCancel,
-}
-
-public enum MessageBoxResult
-{
-    Ok,
-    Yes,
-    No,
-    Cancel,
-}

@@ -22,14 +22,14 @@ public partial class SaveDataListWindow
         SaveSlotAuto.Initialize(manualSlots.Length, true);
     }
 
-    private void SaveSlot_ButtonClick(object sender, SaveDataListWindowListItem.ButtonType e)
+    private async void SaveSlot_ButtonClick(object sender, SaveDataListWindowListItem.ButtonType e)
     {
         var slot = (SaveDataListWindowListItem)sender;
         switch (e)
         {
             case SaveDataListWindowListItem.ButtonType.Main:
                 {
-                    var res = CommonUI.Show("このゲームを再開しますか？", MessageBoxButton.YesNo);
+                    var res = await uiTitle.ShowMessageWindow("このゲームを再開しますか？", MessageBoxButton.YesNo);
                     if (res != MessageBoxResult.Yes) return;
 
                     var saveData = saves.Load(slot.SlotNo);
@@ -44,18 +44,19 @@ public partial class SaveDataListWindow
                 try
                 {
                     var saveDataText = saves.LoadSaveDataText(slot.SlotNo);
-                    var percentencoded = Uri.EscapeDataString(saveDataText.PlainText());
-                    Application.OpenURL($"data:text/plain;charset=utf-8,{percentencoded}");
+                    uiTitle.ShowTextBoxWindow(
+                        initialText: saveDataText.PlainText(),
+                        isCopy: true);
                 }
                 catch (Exception ex)
                 {
-                    CommonUI.Show("セーブデータのダウンロードに失敗しました。");
+                    await uiTitle.ShowMessageWindow("セーブデータのダウンロードに失敗しました。");
                     Debug.LogError($"セーブデータのダウンロードに失敗しました。 {ex}");
                 }
                 break;
             case SaveDataListWindowListItem.ButtonType.Delete:
                 {
-                    var res = CommonUI.Show("セーブデータを削除しますか？", MessageBoxButton.YesNo);
+                    var res = await uiTitle.ShowMessageWindow("セーブデータを削除しますか？", MessageBoxButton.YesNo);
                     if (res != MessageBoxResult.Yes) return;
                     SaveDataManager.Instance.Delete(slot.SlotNo);
                     slot.SetData(null);
