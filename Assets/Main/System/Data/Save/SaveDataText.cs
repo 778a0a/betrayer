@@ -7,8 +7,6 @@ using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class SaveDataText
