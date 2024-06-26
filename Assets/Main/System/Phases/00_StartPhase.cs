@@ -28,8 +28,8 @@ public class StartPhase : PhaseBase
         }
 
         // オートセーブを行う。
-        // ただしゲーム再開後の最初のターンでは行わない。（行うと、内容は同じなのに保存日時が更新されてしまうので）
-        if (!Core.IsFirstTurnAfterResume)
+        // ただしゲーム再開後の最初のターンでは行わない。（内容は同じなのに保存日時が更新されてしまうので）
+        if (!Core.IsFirstTurnAfterResumeOrStart)
         {
             SaveDataManager.Instance.Save(SaveDataManager.AutoSaveDataSlotNo, Core);
             Debug.Log("[開始フェイズ] オートセーブを行いました。");

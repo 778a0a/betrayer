@@ -38,7 +38,7 @@ public class GameCore
 
     private bool IsResumingGame { get; set; } = false;
     private SavedGameCoreState ResumingGameState { get; set; } = null;
-    public bool IsFirstTurnAfterResume { get; set; }
+    public bool IsFirstTurnAfterResumeOrStart { get; set; } = true;
 
     public GameCore(
         WorldData world,
@@ -58,7 +58,6 @@ public class GameCore
             IsResumingGame = true;
             ResumingGameState = state;
             TurnCount = state.TurnCount;
-            IsFirstTurnAfterResume = true;
         }
 
         Phases = new(this, test);
@@ -134,7 +133,7 @@ public class GameCore
                 }
 
                 TurnCount++;
-                IsFirstTurnAfterResume = false;
+                IsFirstTurnAfterResumeOrStart = false;
             }
         }
         catch (Exception ex)
