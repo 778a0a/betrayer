@@ -4,11 +4,14 @@ using UnityEngine.UIElements;
 
 public partial class SoldierInfoLarge
 {
+    public static readonly Texture2D EmptyTexture = new(0, 0);
+
     public void SetData(Soldier s)
     {
         if (s.IsEmptySlot)
         {
-            imageSoldier.image = null;
+            imageSoldier.image = EmptyTexture;
+            labelLevel.text = "--";
             labelHp.text = "--";
             return;
         }

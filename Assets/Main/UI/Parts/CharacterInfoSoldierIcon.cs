@@ -8,7 +8,7 @@ public partial class CharacterInfoSoldierIcon
     {
         if (s.IsEmptySlot)
         {
-            imageSoldier.image = null;
+            imageSoldier.image = SoldierInfoLarge.EmptyTexture;
             labelHp.text = "--";
             labelLevel.text = "--";
             HPBar.style.visibility = Visibility.Hidden;
