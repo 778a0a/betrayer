@@ -27,6 +27,10 @@ public class StartPhase : PhaseBase
             }
         }
 
+        // オートセーブを行う。
+        SaveDataManager.Instance.Save(SaveDataManager.AutoSaveDataSlotNo, Core);
+        Debug.Log("[開始フェイズ] オートセーブを行いました。");
+
         // タイル状態更新
         foreach (var country in Countries)
         {

@@ -35,8 +35,9 @@ public class SaveDataManager
     private SaveDataText CreateSaveDataText(GameCore core)
     {
         var world = core.World;
+        var saveDataSlotNo = core.SaveDataSlotNo;
         var state = SavedGameCoreState.Create(core);
-        var saveData = SaveDataText.Serialize(world, state);
+        var saveData = SaveDataText.Serialize(world, state, saveDataSlotNo);
         return saveData;
     }
 
@@ -71,7 +72,7 @@ public class SaveDataManager
         var saveData = textOriginal.Deserialize();
         
         // スロット番号を書き換える。
-        saveData.State.SaveDataSlotNo = dstSlotNo;
+        saveData.Summary.SaveDataSlotNo = dstSlotNo;
 
         var text = SaveDataText.Serialize(saveData);
         var compressed = text.Compress();

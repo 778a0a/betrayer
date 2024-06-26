@@ -37,11 +37,12 @@ public class SaveDataText
     public static SaveDataText Serialize(
         WorldData world,
         SavedGameCoreState state,
+        int saveDataSlotNo,
         DateTime savedTime = default)
     {
         var charas = SavedCharacters.Extract(world);
         var countries = SavedCountries.Extract(world);
-        var summary = SaveDataSummary.Create(world, state, savedTime);
+        var summary = SaveDataSummary.Create(world, state, saveDataSlotNo, savedTime);
         var saveData = new SaveData
         {
             Characters = charas,

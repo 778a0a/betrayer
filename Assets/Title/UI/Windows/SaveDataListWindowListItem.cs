@@ -15,12 +15,15 @@ public partial class SaveDataListWindowListItem
         NoData,
     }
 
+    private SaveDataListWindow parent;
+
     public int SlotNo { get; private set; }
     public bool IsAutoSaveData { get; private set; }
     public SaveDataSummary Summary { get; private set; }
 
-    public void Initialize(int slotNo, bool isAutoSaveData)
+    public void Initialize(SaveDataListWindow parent, int slotNo, bool isAutoSaveData)
     {
+        this.parent = parent;
         SlotNo = slotNo;
         IsAutoSaveData = isAutoSaveData;
         buttonMain.clicked += () => ButtonClick?.Invoke(this, ButtonType.Main);
@@ -41,6 +44,7 @@ public partial class SaveDataListWindowListItem
             {
                 buttonNoData.text = "NO DATA";
                 buttonNoData.enabledSelf = false;
+                parent.labelAutoSaveOriginalSlotNo.text = "";
             }
             return;
         }
@@ -54,5 +58,10 @@ public partial class SaveDataListWindowListItem
         labelGold.text = data.Gold.ToString();
         labelTurnCount.text = data.TurnCount.ToString();
         labelSavedTime.text = data.SavedTime.ToString();
+
+        if (IsAutoSaveData)
+        {
+            parent.labelAutoSaveOriginalSlotNo.text = $"（スロット{data.SaveDataSlotNo + 1}）";
+        }
     }
 }

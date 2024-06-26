@@ -44,7 +44,7 @@ public class PhaseBase
 
     public virtual ValueTask Phase() => new();
 
-    public Character[] ActionOrder { get; protected set; }
-    public virtual void SetActionOrder() { }
+    public Character[] ActionOrder { get; protected set; } = new Character[0];
+    public virtual void SetActionOrder() { ActionOrder = new Character[0]; }
     public void SetCustomActionOrder(Character[] order) => ActionOrder = order;
 }

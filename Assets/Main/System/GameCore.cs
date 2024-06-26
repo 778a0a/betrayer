@@ -36,20 +36,19 @@ public class GameCore
         MainUI mainUI,
         TilemapManager tilemap,
         Test test,
-        SavedGameCoreState state = null,
-        int? saveDataSlotNo = null)
+        SavedGameCoreState state,
+        int saveDataSlotNo)
     {
         World = world;
         MainUI = mainUI;
         Tilemap = tilemap;
-        if (saveDataSlotNo.HasValue) SaveDataSlotNo = saveDataSlotNo.Value;
+        SaveDataSlotNo = saveDataSlotNo;
         this.test = test;
         if (state != null)
         {
             IsResumingGame = true;
             ResumingGameState = state;
             TurnCount = state.TurnCount;
-            SaveDataSlotNo = state.SaveDataSlotNo;
         }
 
         Phases = new(this, test);

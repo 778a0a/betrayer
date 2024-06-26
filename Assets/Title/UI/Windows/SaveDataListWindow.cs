@@ -16,10 +16,11 @@ public partial class SaveDataListWindow
         for (int i = 0; i < manualSlots.Length; i++)
         {
             var slot = manualSlots[i];
-            slot.Initialize(i, false);
+            slot.Initialize(this, i, false);
             slot.ButtonClick += SaveSlot_ButtonClick;
         }
-        SaveSlotAuto.Initialize(manualSlots.Length, true);
+        SaveSlotAuto.Initialize(this, SaveDataManager.AutoSaveDataSlotNo, true);
+        SaveSlotAuto.ButtonClick += SaveSlot_ButtonClick;
     }
 
     private async void SaveSlot_ButtonClick(object sender, SaveDataListWindowListItem.ButtonType e)

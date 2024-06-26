@@ -62,8 +62,10 @@ public partial class TitleSceneUI : MonoBehaviour
                 {
                     var saveDataText = SaveDataText.FromPlainText(text);
                     
-                    // 正しい形式か確認する。
-                    saveDataText.Deserialize();
+                    // セーブデータのスロット番号を書き換える。
+                    var saveData = saveDataText.Deserialize();
+                    saveData.Summary.SaveDataSlotNo = currentSelectedSlotNo;
+                    saveDataText = SaveDataText.Serialize(saveData);
 
                     SaveDataManager.Instance.Save(currentSelectedSlotNo, saveDataText);
                     SaveDataList.SetData(SaveDataManager.Instance);

@@ -14,6 +14,8 @@ using UnityEngine.UIElements;
 
 public partial class SaveDataListWindow
 {
+    public Label labelAutoSaveOriginalSlotNo { get; private set; }
+
     public Button CloseButton { get; private set; }
 
     public SaveDataListWindowListItem SaveSlot1 { get; private set; }
@@ -31,6 +33,7 @@ public partial class SaveDataListWindow
     public SaveDataListWindow(VisualElement root)
     {
         Root = root;
+        labelAutoSaveOriginalSlotNo = Root?.Q<Label>("labelAutoSaveOriginalSlotNo");
         CloseButton = Root?.Q<Button>("CloseButton");
         SaveSlot1 = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlot1"));
         SaveSlot2 = new SaveDataListWindowListItem(Root?.Q<VisualElement>("SaveSlot2"));

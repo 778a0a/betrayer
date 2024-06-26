@@ -10,7 +10,6 @@ public class SavedGameCoreState
     public int TurnCount { get; set; }
     public string CurrentPhase { get; set; }
     public int[] CurrentActionOrder { get; set; }
-    public int SaveDataSlotNo { get; set; }
 
     public bool IsTargetPhase(PhaseBase phase)
     {
@@ -37,7 +36,6 @@ public class SavedGameCoreState
             TurnCount = core.TurnCount,
             CurrentPhase = phase.GetType().Name,
             CurrentActionOrder = phase.ActionOrder.Select(c => c.Id).ToArray(),
-            SaveDataSlotNo = core.SaveDataSlotNo,
         };
     }
 

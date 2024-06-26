@@ -42,12 +42,12 @@ public class Test : MonoBehaviour
         StartGame(world, null, saveDataSlotNo);
     }
 
-    public void ResumeGame(WorldAndState ws)
+    public void ResumeGame(WorldAndState ws, int saveDataSlotNo)
     {
-        StartGame(ws.World, ws.State, null);
+        StartGame(ws.World, ws.State, saveDataSlotNo);
     }
 
-    private void StartGame(WorldData world, SavedGameCoreState state, int? saveDataSlotNo)
+    private void StartGame(WorldData world, SavedGameCoreState state, int saveDataSlotNo)
     {
         core = new GameCore(world, MainUI, tilemap, this, state, saveDataSlotNo);
         GameCore.Instance = core;

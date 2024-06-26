@@ -32,6 +32,12 @@
                 <ui:Button text="確定" name="buttonSubmitText" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="ProgressWindow" class="window window-modal" style="background-color: rgba(0, 0, 0, 0.37); display: flex;">
+            <ui:VisualElement style="font-size: 40px; flex-grow: 0; justify-content: center; align-items: stretch; width: 400px; align-self: center; align-content: auto; background-color: rgb(0, 0, 0); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 255, 255); border-right-color: rgb(0, 255, 255); border-top-color: rgb(0, 255, 255); border-bottom-color: rgb(0, 255, 255); max-width: 1500px; height: 150px; max-height: 1000px;">
+                <ui:Label text="ロード中..." style="color: rgb(255, 255, 255); margin-left: 0; font-size: 30px; margin-top: 0; margin-right: 0; margin-bottom: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+                <ui:ProgressBar value="22" name="progressLoading" />
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="MessageWindow" class="window window-modal" style="background-color: rgba(0, 0, 0, 0.37); display: flex;">
             <ui:VisualElement style="font-size: 40px; flex-grow: 0; justify-content: center; align-items: stretch; width: auto; align-self: center; align-content: auto; background-color: rgb(0, 0, 0); padding-top: 0; padding-right: 0; padding-bottom: 5px; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 255, 255); border-right-color: rgb(0, 255, 255); border-top-color: rgb(0, 255, 255); border-bottom-color: rgb(0, 255, 255); max-width: 1500px; height: auto; max-height: 1000px;">
                 <ui:Label text="システムメッセージ" style="color: rgb(255, 255, 255); margin-left: 0; font-size: 30px; margin-top: 0; margin-right: 0; margin-bottom: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(107, 107, 107); border-right-color: rgb(107, 107, 107); border-top-color: rgb(107, 107, 107); border-bottom-color: rgb(107, 107, 107);" />
@@ -42,12 +48,6 @@
                     <ui:Button text="いいえ" name="buttonMessageNo" style="width: 150px;" />
                     <ui:Button text="キャンセル" name="buttonMessageCancel" />
                 </ui:VisualElement>
-            </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="ProgressWindow" class="window window-modal" style="background-color: rgba(0, 0, 0, 0.37); display: flex;">
-            <ui:VisualElement style="font-size: 40px; flex-grow: 0; justify-content: center; align-items: stretch; width: 400px; align-self: center; align-content: auto; background-color: rgb(0, 0, 0); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 255, 255); border-right-color: rgb(0, 255, 255); border-top-color: rgb(0, 255, 255); border-bottom-color: rgb(0, 255, 255); max-width: 1500px; height: 150px; max-height: 1000px;">
-                <ui:Label text="ロード中..." style="color: rgb(255, 255, 255); margin-left: 0; font-size: 30px; margin-top: 0; margin-right: 0; margin-bottom: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
-                <ui:ProgressBar value="22" name="progressLoading" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

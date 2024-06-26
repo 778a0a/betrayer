@@ -13,6 +13,7 @@ public class SaveDataSummary
     public int SoldierCount { get; set; }
     public int Gold { get; set; }
     public int TurnCount { get; set; }
+    public int SaveDataSlotNo { get; set; }
     public DateTime SavedTime { get; set; }
 
     public static SaveDataSummary Deserialize(string json)
@@ -25,7 +26,11 @@ public class SaveDataSummary
         return JsonConvert.SerializeObject(summary);
     }
 
-    public static SaveDataSummary Create(WorldData world, SavedGameCoreState state, DateTime savedTime = default)
+    public static SaveDataSummary Create(
+        WorldData world,
+        SavedGameCoreState state,
+        int saveDataSlotNo,
+        DateTime savedTime = default)
     {
         savedTime = savedTime == default ? DateTime.Now : savedTime;
         var chara = world.Characters.FirstOrDefault(c => c.IsPlayer) ?? world.Characters.First();
@@ -37,6 +42,7 @@ public class SaveDataSummary
             SoldierCount = chara.Force.Soldiers.Sum(s => s.Hp),
             Gold = chara.Gold,
             TurnCount = state.TurnCount,
+            SaveDataSlotNo = saveDataSlotNo,
             SavedTime = savedTime,
         };
         return summary;

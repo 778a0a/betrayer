@@ -32,7 +32,7 @@ public class MainSceneManager : MonoBehaviour
         var saveData = args.SaveData;
         var worldData = saveData.RestoreWorldData(test.tilemap.Helper);
         var ws = new WorldAndState(worldData, saveData.State);
-        test.ResumeGame(ws);
+        test.ResumeGame(ws, saveData.Summary.SaveDataSlotNo);
     }
 }
 
