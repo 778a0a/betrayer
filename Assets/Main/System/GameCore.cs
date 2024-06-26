@@ -13,6 +13,14 @@ public class GameCore
     /// </summary>
     public static GameCore Instance { get; set; }
 
+    // ゲームクリアしたことがあるならtrue
+    public static bool GameCleared
+    {
+        set => PlayerPrefs.SetInt("GameCleared", value ? 1 : 0);
+        get => PlayerPrefs.GetInt("GameCleared", 0) == 1;
+    }
+
+
     public WorldData World { get; private set; }
     public MainUI MainUI { get; private set; }
     public TilemapManager Tilemap { get; private set; }
@@ -105,7 +113,16 @@ public class GameCore
                 Tilemap.DrawCountryTile();
                 if (World.Countries.Count == 1)
                 {
-                    Debug.Log($"ゲーム終了 勝者: {World.Countries[0]} ターン数: {TurnCount}");
+                    var winner = World.Countries[0];
+                    Debug.Log($"ゲーム終了 勝者: {winner} ターン数: {TurnCount}");
+                    foreach (var c in winner.Members)
+                    {
+                        if (c.IsPlayer)
+                        {
+                            GameCleared = true;
+                            break;
+                        }
+                    }
                     return;
                 }
 

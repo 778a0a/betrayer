@@ -31,6 +31,8 @@ public partial class MainUI
 
     public BattleDialog BattleDialog { get; private set; }
 
+    public SystemWindow SystemWindow { get; private set; }
+
     public VisualElement DebugUIParent { get; private set; }
 
     public VisualElement DialogHost { get; private set; }
@@ -46,6 +48,7 @@ public partial class MainUI
         buttonToggleDebugUI = Root?.Q<Button>("buttonToggleDebugUI");
         DebugUI = Root?.Q<VisualElement>("DebugUI");
         BattleDialog = new BattleDialog(Root?.Q<VisualElement>("BattleDialog"));
+        SystemWindow = new SystemWindow(Root?.Q<VisualElement>("SystemWindow"));
         DebugUIParent = Root?.Q<VisualElement>("DebugUIParent");
         DialogHost = Root?.Q<VisualElement>("DialogHost");
     }

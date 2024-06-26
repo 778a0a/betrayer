@@ -18,14 +18,7 @@ partial class CommonActions
     {
         public override async ValueTask Do(Character chara)
         {
-            if (true)
-            {
-                SaveDataManager.Instance.Save(Core.SaveDataSlotNo, Core);
-            }
-            else
-            {
-                SaveDataManager.Instance.SaveToClipboard(Core);
-            }
+            UI.SystemWindow.Show();
         }
     }
 }

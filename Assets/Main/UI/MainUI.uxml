@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="BattleDialog" src="project://database/Assets/Main/UI/Dialogs/BattleDialog.uxml?fileID=9197481963319205126&amp;guid=5f295d9569aa01b4c81796cb69271c51&amp;type=3#BattleDialog" />
+    <ui:Template name="SystemWindow" src="project://database/Assets/Main/UI/Dialogs/SystemWindow.uxml?fileID=9197481963319205126&amp;guid=22f9b7cbe7258a447b65264fb45ecc3d&amp;type=3#SystemWindow" />
     <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
     <Style src="project://database/Assets/_Misc/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <ui:VisualElement class="bg" style="flex-grow: 1; align-self: flex-end; width: 840px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
@@ -18,5 +19,6 @@
     </ui:VisualElement>
     <ui:VisualElement name="DialogHost" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; right: 0; left: 0; bottom: 0; align-items: center; justify-content: center;">
         <ui:Instance template="BattleDialog" name="BattleDialog" class="window" style="display: flex;" />
+        <ui:Instance template="SystemWindow" name="SystemWindow" class="window" />
     </ui:VisualElement>
 </ui:UXML>
