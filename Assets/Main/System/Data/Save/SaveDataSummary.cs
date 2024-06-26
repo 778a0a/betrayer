@@ -39,7 +39,7 @@ public class SaveDataSummary
             FaceImageId = chara.Id,
             Title = chara.GetTitle(world),
             Name = chara.Name,
-            SoldierCount = chara.Force.Soldiers.Sum(s => s.Hp),
+            SoldierCount = chara.Force.SoldierCount,
             Gold = chara.Gold,
             TurnCount = state.TurnCount,
             SaveDataSlotNo = saveDataSlotNo,
