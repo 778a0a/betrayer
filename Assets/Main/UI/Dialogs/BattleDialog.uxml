@@ -109,8 +109,6 @@
             <engine:VisualElement style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: center;">
                 <engine:Button text="攻撃" name="buttonAttack" />
                 <engine:Button text="撤退" name="buttonRetreat" />
-            </engine:VisualElement>
-            <engine:VisualElement style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: center;">
                 <engine:Button text="攻撃側の勝利" name="buttonResult" />
             </engine:VisualElement>
         </engine:VisualElement>

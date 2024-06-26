@@ -31,7 +31,7 @@ public partial class BattleDialog : IDialog
         {
             buttonAttack.style.display = DisplayStyle.None;
             buttonRetreat.style.display = DisplayStyle.None;
-            buttonResult.style.visibility = Visibility.Visible;
+            buttonResult.style.display = DisplayStyle.Flex;
             buttonResult.text = result == BattleResult.AttackerWin ? "攻撃側の勝利" : "防衛側の勝利";
             if (result == BattleResult.AttackerWin)
             {
@@ -48,7 +48,7 @@ public partial class BattleDialog : IDialog
         {
             buttonAttack.style.display = Util.Display(battle.NeedInteraction);
             buttonRetreat.style.display = Util.Display(battle.NeedInteraction);
-            buttonResult.style.visibility = Visibility.Hidden;
+            buttonResult.style.display = DisplayStyle.None;
             Root.RemoveFromClassList("attacker-win");
             Root.RemoveFromClassList("attacker-lose");
             Root.RemoveFromClassList("defender-win");
