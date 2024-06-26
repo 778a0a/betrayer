@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class TilemapManager : MonoBehaviour
 {
@@ -34,34 +35,50 @@ public class TilemapManager : MonoBehaviour
     private MapPosition currentMousePosition = MapPosition.Of(0, 0);
     void Update()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var hit = Physics2D.GetRayIntersection(ray);
-        if (hit.collider != null)
+        var element = MainUI.Root.panel.Pick(Input.mousePosition);
+        // マウスカーソル上にUI要素（メッセージウィンドウなど）がある場合は何もしない。
+        if (element != null)
         {
-            var posGrid = grid.WorldToCell(hit.point);
-            var pos = MapPosition.FromGrid(posGrid);
-
-            if (currentMousePosition != pos)
-            {
-                var prevPos = currentMousePosition;
-                currentMousePosition = pos;
-                if (prevPos.IsValid) Helper.GetUITile(prevPos).SetCellBorder(false);
-                Helper.GetUITile(pos).SetCellBorder(true);
-
-            }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                InvokeCellClickHandler(pos);
-            }
-        }
-        else
-        {
+            // 必要ならハイライトを消す。
             if (currentMousePosition.IsValid)
             {
                 Helper.GetUITile(currentMousePosition).SetCellBorder(false);
                 currentMousePosition = MapPosition.Invalid;
             }
+            return;
+        }
+
+        // マウスカーソル上のセルを取得する。
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.GetRayIntersection(ray);
+        // マウスカーソルがマップ上にない場合は何もしない。
+        if (hit.collider == null)
+        {
+            // 必要ならハイライトを消す。
+            if (currentMousePosition.IsValid)
+            {
+                Helper.GetUITile(currentMousePosition).SetCellBorder(false);
+                currentMousePosition = MapPosition.Invalid;
+            }
+            return;
+        }
+
+        // セルの位置を取得する。
+        var posGrid = grid.WorldToCell(hit.point);
+        var pos = MapPosition.FromGrid(posGrid);
+        if (currentMousePosition != pos)
+        {
+            // ハイライトを更新する。
+            var prevPos = currentMousePosition;
+            currentMousePosition = pos;
+            if (prevPos.IsValid) Helper.GetUITile(prevPos).SetCellBorder(false);
+            Helper.GetUITile(pos).SetCellBorder(true);
+
+        }
+        // 必要ならクリックイベントを起こす。
+        if (Input.GetMouseButtonDown(0))
+        {
+            InvokeCellClickHandler(pos);
         }
     }
 
