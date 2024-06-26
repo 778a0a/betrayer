@@ -12,7 +12,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class BattleSoldierIcon
+public partial class BattleSoldierIconAttackSide
 {
     public Label labelHP { get; private set; }
 
@@ -28,7 +28,7 @@ public partial class BattleSoldierIcon
 
     public VisualElement Root { get; }
 
-    public BattleSoldierIcon(VisualElement root)
+    public BattleSoldierIconAttackSide(VisualElement root)
     {
         Root = root;
         labelHP = Root?.Q<Label>("labelHP");

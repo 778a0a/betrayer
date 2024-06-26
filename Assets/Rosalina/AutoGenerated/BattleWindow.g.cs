@@ -18,65 +18,65 @@ public partial class BattleWindow
 
     public Label DefenderName { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier10 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier10 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier11 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier11 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier12 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier12 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier13 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier13 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier14 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier14 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier05 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier05 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier06 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier06 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier07 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier07 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier08 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier08 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier09 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier09 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier00 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier00 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier01 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier01 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier02 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier02 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier03 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier03 { get; private set; }
 
-    public BattleSoldierIcon AttackerSoldier04 { get; private set; }
+    public BattleSoldierIconAttackSide AttackerSoldier04 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier00 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier00 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier01 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier01 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier02 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier02 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier03 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier03 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier04 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier04 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier05 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier05 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier06 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier06 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier07 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier07 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier08 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier08 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier09 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier09 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier10 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier10 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier11 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier11 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier12 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier12 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier13 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier13 { get; private set; }
 
-    public BattleSoldierIcon DefenderSoldier14 { get; private set; }
+    public BattleSoldierIconDefenceSide DefenderSoldier14 { get; private set; }
 
     public VisualElement AttackerSoldiers { get; private set; }
 
@@ -113,36 +113,36 @@ public partial class BattleWindow
         Root = root;
         AttackerName = Root?.Q<Label>("AttackerName");
         DefenderName = Root?.Q<Label>("DefenderName");
-        AttackerSoldier10 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier10"));
-        AttackerSoldier11 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier11"));
-        AttackerSoldier12 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier12"));
-        AttackerSoldier13 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier13"));
-        AttackerSoldier14 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier14"));
-        AttackerSoldier05 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier05"));
-        AttackerSoldier06 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier06"));
-        AttackerSoldier07 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier07"));
-        AttackerSoldier08 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier08"));
-        AttackerSoldier09 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier09"));
-        AttackerSoldier00 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier00"));
-        AttackerSoldier01 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier01"));
-        AttackerSoldier02 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier02"));
-        AttackerSoldier03 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier03"));
-        AttackerSoldier04 = new BattleSoldierIcon(Root?.Q<VisualElement>("AttackerSoldier04"));
-        DefenderSoldier00 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier00"));
-        DefenderSoldier01 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier01"));
-        DefenderSoldier02 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier02"));
-        DefenderSoldier03 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier03"));
-        DefenderSoldier04 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier04"));
-        DefenderSoldier05 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier05"));
-        DefenderSoldier06 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier06"));
-        DefenderSoldier07 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier07"));
-        DefenderSoldier08 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier08"));
-        DefenderSoldier09 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier09"));
-        DefenderSoldier10 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier10"));
-        DefenderSoldier11 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier11"));
-        DefenderSoldier12 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier12"));
-        DefenderSoldier13 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier13"));
-        DefenderSoldier14 = new BattleSoldierIcon(Root?.Q<VisualElement>("DefenderSoldier14"));
+        AttackerSoldier10 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier10"));
+        AttackerSoldier11 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier11"));
+        AttackerSoldier12 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier12"));
+        AttackerSoldier13 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier13"));
+        AttackerSoldier14 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier14"));
+        AttackerSoldier05 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier05"));
+        AttackerSoldier06 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier06"));
+        AttackerSoldier07 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier07"));
+        AttackerSoldier08 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier08"));
+        AttackerSoldier09 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier09"));
+        AttackerSoldier00 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier00"));
+        AttackerSoldier01 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier01"));
+        AttackerSoldier02 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier02"));
+        AttackerSoldier03 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier03"));
+        AttackerSoldier04 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier04"));
+        DefenderSoldier00 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier00"));
+        DefenderSoldier01 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier01"));
+        DefenderSoldier02 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier02"));
+        DefenderSoldier03 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier03"));
+        DefenderSoldier04 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier04"));
+        DefenderSoldier05 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier05"));
+        DefenderSoldier06 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier06"));
+        DefenderSoldier07 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier07"));
+        DefenderSoldier08 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier08"));
+        DefenderSoldier09 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier09"));
+        DefenderSoldier10 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier10"));
+        DefenderSoldier11 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier11"));
+        DefenderSoldier12 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier12"));
+        DefenderSoldier13 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier13"));
+        DefenderSoldier14 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier14"));
         AttackerSoldiers = Root?.Q<VisualElement>("AttackerSoldiers");
         DefenderSoldiers = Root?.Q<VisualElement>("DefenderSoldiers");
         labelAttackerAttack = Root?.Q<Label>("labelAttackerAttack");

@@ -1,5 +1,6 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:Template name="BattleSoldierIcon" src="project://database/Assets/Main/UI/Parts/BattleSoldierIcon.uxml?fileID=9197481963319205126&amp;guid=eb4167ec8e59464468104fe6ed9fc8e3&amp;type=3#BattleSoldierIcon" />
+    <engine:Template name="BattleSoldierIconAttackSide" src="project://database/Assets/Main/UI/Parts/BattleSoldierIconAttackSide.uxml?fileID=9197481963319205126&amp;guid=b978747f1d5f6e045853d16155d292fd&amp;type=3#BattleSoldierIconAttackSide" />
+    <engine:Template name="BattleSoldierIconDefenceSide" src="project://database/Assets/Main/UI/Parts/BattleSoldierIconDefenceSide.uxml?fileID=9197481963319205126&amp;guid=eb4167ec8e59464468104fe6ed9fc8e3&amp;type=3#BattleSoldierIconDefenceSide" />
     <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
     <Style src="project://database/Assets/_Misc/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <engine:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.37); position: absolute; top: 0; right: 0; left: 0; bottom: 0; justify-content: center; align-items: center;">
@@ -17,48 +18,48 @@
             <engine:VisualElement style="flex-grow: 0; flex-direction: row; margin-top: 20px;">
                 <engine:VisualElement name="AttackerSoldiers" style="flex-grow: 1; flex-direction: row;">
                     <engine:VisualElement style="flex-grow: 1;">
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier10" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier11" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier12" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier13" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier14" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier10" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier11" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier12" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier13" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier14" />
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 1;">
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier05" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier06" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier07" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier08" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier09" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier05" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier06" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier07" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier08" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier09" />
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 1;">
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier00" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier01" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier02" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier03" />
-                        <engine:Instance template="BattleSoldierIcon" name="AttackerSoldier04" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier00" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier01" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier02" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier03" />
+                        <engine:Instance template="BattleSoldierIconAttackSide" name="AttackerSoldier04" />
                     </engine:VisualElement>
                 </engine:VisualElement>
                 <engine:VisualElement name="DefenderSoldiers" style="flex-grow: 1; flex-direction: row;">
                     <engine:VisualElement style="flex-grow: 1;">
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier00" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier01" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier02" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier03" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier04" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier00" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier01" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier02" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier03" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier04" />
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 1;">
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier05" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier06" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier07" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier08" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier09" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier05" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier06" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier07" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier08" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier09" />
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 1;">
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier10" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier11" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier12" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier13" />
-                        <engine:Instance template="BattleSoldierIcon" name="DefenderSoldier14" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier10" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier11" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier12" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier13" />
+                        <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier14" />
                     </engine:VisualElement>
                 </engine:VisualElement>
             </engine:VisualElement>

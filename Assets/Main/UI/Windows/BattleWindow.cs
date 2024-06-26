@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 
 public partial class BattleWindow : IWindow
 {
-    private BattleSoldierIcon[] _attackerSoldiers;
-    private BattleSoldierIcon[] _defenderSoldiers;
+    private IBattleSoldierIcon[] _attackerSoldiers;
+    private IBattleSoldierIcon[] _defenderSoldiers;
 
     public void Initialize()
     {

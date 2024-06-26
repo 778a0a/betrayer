@@ -57,6 +57,14 @@ MonoBehaviour:
   - _type: 1
     _path: Assets/Main/UI/Parts/BattleSoldierIcon.uxml
   - _type: 1
-    _path: Assets/Main/UI/Windows/BattleWindow.uxml
+    _path: Assets/Main/UI/Dialogs/BattleDialog.uxml
   - _type: 1
     _path: Assets/Main/UI/Dialogs/SystemWindow.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Windows/BattleWindow.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Parts/BattleSoldierIconAttack.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Parts/BattleSoldierIconAttackSide.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Parts/BattleSoldierIconDefenceSide.uxml
