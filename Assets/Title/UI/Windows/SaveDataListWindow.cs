@@ -30,16 +30,24 @@ public partial class SaveDataListWindow
         {
             case SaveDataListWindowListItem.ButtonType.Main:
                 {
-                    var res = await uiTitle.ShowMessageWindow("このゲームを再開しますか？", MessageBoxButton.YesNo);
-                    if (res != MessageBoxResult.Yes) return;
-
-                    var saveData = saves.Load(slot.SlotNo);
-                    var op = MainSceneManager.LoadScene(new MainSceneStartArguments()
+                    try
                     {
-                        IsNewGame = false,
-                        SaveData = saveData,
-                    });
-                    uiTitle.OnSceneLoadingStart(op);
+                        var res = await uiTitle.ShowMessageWindow("このゲームを再開しますか？", MessageBoxButton.YesNo);
+                        if (res != MessageBoxResult.Yes) return;
+
+                        var saveData = saves.Load(slot.SlotNo);
+                        var op = MainSceneManager.LoadScene(new MainSceneStartArguments()
+                        {
+                            IsNewGame = false,
+                            SaveData = saveData,
+                        });
+                        uiTitle.OnSceneLoadingStart(op);
+                    }
+                    catch (Exception ex)
+                    {
+                        await uiTitle.ShowMessageWindow("セーブデータの読み込みに失敗しました。\n" + ex.ToString());
+                        Debug.LogError($"セーブデータの読み込みに失敗しました。 {ex}");
+                    }
                 }
                 break;
             case SaveDataListWindowListItem.ButtonType.Download:
@@ -52,16 +60,22 @@ public partial class SaveDataListWindow
                 }
                 catch (Exception ex)
                 {
-                    await uiTitle.ShowMessageWindow("セーブデータのダウンロードに失敗しました。");
+                    await uiTitle.ShowMessageWindow($"セーブデータのダウンロードに失敗しました。\n({ex.Message})");
                     Debug.LogError($"セーブデータのダウンロードに失敗しました。 {ex}");
                 }
                 break;
             case SaveDataListWindowListItem.ButtonType.Delete:
+                try
                 {
                     var res = await uiTitle.ShowMessageWindow("セーブデータを削除しますか？", MessageBoxButton.YesNo);
                     if (res != MessageBoxResult.Yes) return;
                     SaveDataManager.Instance.Delete(slot.SlotNo);
                     slot.SetData(null);
+                }
+                catch (Exception ex)
+                {
+                    await uiTitle.ShowMessageWindow("セーブデータの削除に失敗しました。\n" + ex.ToString());
+                    Debug.LogError($"セーブデータの削除に失敗しました。 {ex}");
                 }
                 break;
             case SaveDataListWindowListItem.ButtonType.NoData:
