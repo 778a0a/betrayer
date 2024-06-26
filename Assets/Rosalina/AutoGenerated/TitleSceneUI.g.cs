@@ -57,11 +57,15 @@ public partial class TitleSceneUI
 
     public Label labelMessageText { get; private set; }
 
+    public ProgressBar progressLoading { get; private set; }
+
     public VisualElement NewGameMenu { get; private set; }
 
     public VisualElement TextBoxWindow { get; private set; }
 
     public VisualElement MessageWindow { get; private set; }
+
+    public VisualElement ProgressWindow { get; private set; }
 
     public VisualElement Windows { get; private set; }
 
@@ -89,9 +93,11 @@ public partial class TitleSceneUI
         buttonMessageNo = Root?.Q<Button>("buttonMessageNo");
         buttonMessageCancel = Root?.Q<Button>("buttonMessageCancel");
         labelMessageText = Root?.Q<Label>("labelMessageText");
+        progressLoading = Root?.Q<ProgressBar>("progressLoading");
         NewGameMenu = Root?.Q<VisualElement>("NewGameMenu");
         TextBoxWindow = Root?.Q<VisualElement>("TextBoxWindow");
         MessageWindow = Root?.Q<VisualElement>("MessageWindow");
+        ProgressWindow = Root?.Q<VisualElement>("ProgressWindow");
         Windows = Root?.Q<VisualElement>("Windows");
     }
 }

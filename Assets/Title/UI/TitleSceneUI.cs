@@ -15,6 +15,7 @@ public partial class TitleSceneUI : MonoBehaviour
         InitializeDocument();
         InitializeNewGameWindow();
         InitializeTextBoxWindow();
+        InitializeProgressWindow();
         InitializeMessageWindow();
         SaveDataList.Initialize(this);
 
@@ -44,11 +45,12 @@ public partial class TitleSceneUI : MonoBehaviour
         buttonStartNewGame.clicked += () =>
         {
             NewGameMenu.style.display = DisplayStyle.None;
-            MainSceneManager.LoadScene(new MainSceneStartArguments()
+            var op = MainSceneManager.LoadScene(new MainSceneStartArguments()
             {
                 IsNewGame = true,
                 NewGameSaveDataSlotNo = currentSelectedSlotNo,
             });
+            OnSceneLoadingStart(op);
         };
 
         // テキストデータ読み込み
@@ -183,6 +185,27 @@ public partial class TitleSceneUI : MonoBehaviour
         labelTextBoxWindowTitle.text = isCopy ? 
             "以下のテキストをコピーして保存してください" :
             "セーブデータを以下にペーストしてください";
+    }
+    #endregion
+
+    #region ProgressWindow
+    private void InitializeProgressWindow()
+    {
+        ProgressWindow.style.display = DisplayStyle.None;
+    }
+
+    public async void OnSceneLoadingStart(AsyncOperation op)
+    {
+        ProgressWindow.style.display = DisplayStyle.Flex;
+        progressLoading.value = op.progress;
+        op.allowSceneActivation = false;
+        while (op.progress < 0.9f)
+        {
+            await Awaitable.NextFrameAsync();
+            progressLoading.value = op.progress * 100;
+        }
+        progressLoading.value = 90;
+        op.allowSceneActivation = true;
     }
     #endregion
 

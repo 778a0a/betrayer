@@ -18,3 +18,12 @@
 
 .window-modal {
 }
+
+
+.unity-progress-bar__progress {
+    background-color: #0ff;
+}
+
+.unity-progress-bar__background {
+	background-color: #fff;
+}

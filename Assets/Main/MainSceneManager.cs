@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class MainSceneManager : MonoBehaviour
 {
     private static MainSceneStartArguments s_args;
-    public static void LoadScene(MainSceneStartArguments args)
+    public static AsyncOperation LoadScene(MainSceneStartArguments args)
     {
         s_args = args;
-        SceneManager.LoadScene("MainScene");
+        return SceneManager.LoadSceneAsync("MainScene");
     }
 
     private Test test;

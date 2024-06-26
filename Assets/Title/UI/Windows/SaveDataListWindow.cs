@@ -33,11 +33,12 @@ public partial class SaveDataListWindow
                     if (res != MessageBoxResult.Yes) return;
 
                     var saveData = saves.Load(slot.SlotNo);
-                    MainSceneManager.LoadScene(new MainSceneStartArguments()
+                    var op = MainSceneManager.LoadScene(new MainSceneStartArguments()
                     {
                         IsNewGame = false,
                         SaveData = saveData,
                     });
+                    uiTitle.OnSceneLoadingStart(op);
                 }
                 break;
             case SaveDataListWindowListItem.ButtonType.Download:
