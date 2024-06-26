@@ -24,7 +24,7 @@ public class Test : MonoBehaviour
     {
         Instance = this;
 
-        //FaceImageManager.Instance.ClearCache();
+        FaceImageManager.Instance.ClearCache();
         SoldierImageManager.Instance.Initialize(soldierTexture);
     }
 
