@@ -66,7 +66,7 @@ public class Battle
             }
             else if (NeedWatchBattle)
             {
-                await Awaitable.WaitForSecondsAsync(0.05f);
+                await Awaitable.WaitForSecondsAsync(0.025f);
             }
 
             if (Atk.ShouldRetreat(TickCount, this))
