@@ -33,6 +33,8 @@ public partial class MainUI
 
     public SystemWindow SystemWindow { get; private set; }
 
+    public MessageWindow MessageWindow { get; private set; }
+
     public VisualElement DebugUIParent { get; private set; }
 
     public VisualElement WindowHost { get; private set; }
@@ -49,6 +51,7 @@ public partial class MainUI
         DebugUI = Root?.Q<VisualElement>("DebugUI");
         BattleWindow = new BattleWindow(Root?.Q<VisualElement>("BattleWindow"));
         SystemWindow = new SystemWindow(Root?.Q<VisualElement>("SystemWindow"));
+        MessageWindow = new MessageWindow(Root?.Q<VisualElement>("MessageWindow"));
         DebugUIParent = Root?.Q<VisualElement>("DebugUIParent");
         WindowHost = Root?.Q<VisualElement>("WindowHost");
     }

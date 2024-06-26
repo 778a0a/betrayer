@@ -10,6 +10,8 @@ public partial class BattleWindow : IWindow
 
     public void Initialize()
     {
+        Root.style.display = DisplayStyle.None;
+
         _attackerSoldiers = new[]
         {
             AttackerSoldier00, AttackerSoldier01, AttackerSoldier02, AttackerSoldier03, AttackerSoldier04, AttackerSoldier05, AttackerSoldier06, AttackerSoldier07, AttackerSoldier08, AttackerSoldier09, AttackerSoldier10, AttackerSoldier11, AttackerSoldier12, AttackerSoldier13, AttackerSoldier14,

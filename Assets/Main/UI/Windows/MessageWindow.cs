@@ -6,10 +6,13 @@ using UnityEngine.UIElements;
 
 public partial class MessageWindow : IWindow
 {
+    public static MessageWindow Instance { get; private set; }
+
     private ValueTaskCompletionSource<MessageBoxResult> tcsMessageWindow;
 
     public void Initialize()
     {
+        Instance = this;
         void OnClick(MessageBoxResult result)
         {
             tcsMessageWindow.SetResult(result);
@@ -24,27 +27,41 @@ public partial class MessageWindow : IWindow
         Root.style.display = DisplayStyle.None;
     }
 
-    public ValueTask<MessageBoxResult> Show(string message, MessageBoxButton button = MessageBoxButton.Ok)
+    public static ValueTask<MessageBoxResult> Show(
+        string message,
+        MessageBoxButton button = MessageBoxButton.Ok,
+        object _ = null) // インスタンスメソッドと同じシグネチャの宣言にしないためのダミー引数
+        => Instance.Show(message, button);
+
+    public ValueTask<MessageBoxResult> Show(
+        string message,
+        MessageBoxButton button = MessageBoxButton.Ok)
     {
         if (tcsMessageWindow != null) throw new InvalidOperationException();
         tcsMessageWindow = new();
 
         labelMessageText.text = message;
-        buttonMessageOK.style.display = Util.Display(button == MessageBoxButton.Ok);
-        buttonMessageYes.style.display = Util.Display(button == MessageBoxButton.YesNo || button == MessageBoxButton.YesNoCancel);
-        buttonMessageNo.style.display = Util.Display(button == MessageBoxButton.YesNo || button == MessageBoxButton.YesNoCancel);
-        buttonMessageCancel.style.display = Util.Display(button == MessageBoxButton.YesNoCancel);
+        buttonMessageOK.style.display = Util.Display(button.HasFlag(MessageBoxButton.Ok));
+        buttonMessageYes.style.display = Util.Display(button.HasFlag(MessageBoxButton.Yes));
+        buttonMessageNo.style.display = Util.Display(button.HasFlag(MessageBoxButton.No));
+        buttonMessageCancel.style.display = Util.Display(button.HasFlag(MessageBoxButton.Cancel));
 
         Root.style.display = DisplayStyle.Flex;
         return tcsMessageWindow.Task;
     }
 }
 
+[Flags]
 public enum MessageBoxButton
 {
-    Ok,
-    YesNo,
-    YesNoCancel,
+    Ok = 1 << 0,
+    Yes = 1 << 1,
+    No = 1 << 2,
+    Cancel = 1 << 3,
+
+    YesNo = Yes | No,
+    YesNoCancel = Yes | No | Cancel,
+    OkCancel = Ok | Cancel,
 }
 
 public enum MessageBoxResult

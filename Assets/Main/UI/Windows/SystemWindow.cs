@@ -6,6 +6,8 @@ public partial class SystemWindow : IWindow
 {
     public void Initialize()
     {
+        Root.style.display = DisplayStyle.None;
+
         var cleared = GameCore.GameCleared;
         buttonChangeCharacter.enabledSelf = cleared;
         if (!cleared)
@@ -14,7 +16,6 @@ public partial class SystemWindow : IWindow
             buttonChangeCharacter.style.fontSize = 30;
         }
 
-
         buttonSave.clicked += () =>
         {
             try
@@ -22,11 +23,11 @@ public partial class SystemWindow : IWindow
                 Debug.Log("セーブします。");
                 var core = GameCore.Instance;
                 SaveDataManager.Instance.Save(core.SaveDataSlotNo, core);
-                Util.Todo("保存完了通知");
+                MessageWindow.Show("セーブしました。");
             }
             catch (Exception ex)
             {
-                Util.Todo("エラー通知");
+                MessageWindow.Show($"セーブに失敗しました。\n({ex.Message})");
                 Debug.LogError($"セーブに失敗しました。{ex}");
             }
         };
@@ -36,9 +37,10 @@ public partial class SystemWindow : IWindow
             Util.Todo("キャラクター変更");
         };
 
-        buttonGoToTitle.clicked += () =>
+        buttonGoToTitle.clicked += async () =>
         {
-            Util.Todo("確認");
+            var res = await MessageWindow.Show("タイトルに戻ります。\nよろしいですか？", MessageBoxButton.OkCancel);
+            if (res != MessageBoxResult.Ok) return;
             TitleSceneManager.LoadScene();
         };
 

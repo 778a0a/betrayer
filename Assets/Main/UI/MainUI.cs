@@ -71,9 +71,8 @@ public partial class MainUI : MonoBehaviour
         InitializeDocument();
         InitializeScreens();
         BattleWindow.Initialize();
-        BattleWindow.Root.style.display = DisplayStyle.None;
         SystemWindow.Initialize();
-        SystemWindow.Root.style.display = DisplayStyle.None;
+        MessageWindow.Initialize();
 
         buttonToggleDebugUI.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.NextPhase);

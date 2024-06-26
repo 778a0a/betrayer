@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 public partial class SaveDataListWindow
 {
     private TitleSceneUI uiTitle;
-    private MessageWindow MessageWindow => uiTitle.MessageWindow;
     private SaveDataManager saves;
 
 
