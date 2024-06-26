@@ -32,9 +32,6 @@ public partial class SaveDataListWindow
                 {
                     try
                     {
-                        var res = await uiTitle.ShowMessageWindow("このゲームを再開しますか？", MessageBoxButton.YesNo);
-                        if (res != MessageBoxResult.Yes) return;
-
                         var saveData = saves.Load(slot.SlotNo);
                         var op = MainSceneManager.LoadScene(new MainSceneStartArguments()
                         {
