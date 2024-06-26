@@ -70,8 +70,8 @@ public partial class MainUI : MonoBehaviour
     {
         InitializeDocument();
         InitializeScreens();
-        BattleDialog.Initialize();
-        BattleDialog.Root.style.display = DisplayStyle.None;
+        BattleWindow.Initialize();
+        BattleWindow.Root.style.display = DisplayStyle.None;
         SystemWindow.Initialize();
         SystemWindow.Root.style.display = DisplayStyle.None;
 

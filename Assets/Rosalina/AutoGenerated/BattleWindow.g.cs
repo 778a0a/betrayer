@@ -12,7 +12,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class BattleDialog
+public partial class BattleWindow
 {
     public Label AttackerName { get; private set; }
 
@@ -108,7 +108,7 @@ public partial class BattleDialog
 
     public VisualElement Root { get; }
 
-    public BattleDialog(VisualElement root)
+    public BattleWindow(VisualElement root)
     {
         Root = root;
         AttackerName = Root?.Q<Label>("AttackerName");

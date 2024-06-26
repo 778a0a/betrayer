@@ -17,7 +17,7 @@ public class Battle
     private CharacterInBattle Atk => Attacker;
     private CharacterInBattle Def => Defender;
 
-    private BattleDialog UI => GameCore.Instance.MainUI.BattleDialog;
+    private BattleWindow UI => GameCore.Instance.MainUI.BattleWindow;
     public bool NeedInteraction => Attacker.IsPlayer || Defender.IsPlayer;
     private bool NeedWatchBattle => Test.Instance.showOthersBattle;
 

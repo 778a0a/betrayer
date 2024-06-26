@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class BattleDialog : IDialog
+public partial class BattleWindow : IWindow
 {
     private BattleSoldierIcon[] _attackerSoldiers;
     private BattleSoldierIcon[] _defenderSoldiers;

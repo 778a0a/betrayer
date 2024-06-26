@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class SystemWindow : IDialog
+public partial class SystemWindow : IWindow
 {
     public void Initialize()
     {

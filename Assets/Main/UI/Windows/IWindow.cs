@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface IDialog
+public interface IWindow
 {
     void Initialize();
 }
