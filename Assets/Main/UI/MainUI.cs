@@ -384,9 +384,11 @@ public class SoldierImageManager
 
     private readonly Dictionary<int, Texture2D> textures = new();
     private readonly Dictionary<int, Sprite> sprites = new();
+    private Texture2D emptyTexture;
 
     public void Initialize(Texture2D original)
     {
+        emptyTexture = new Texture2D(0, 0);
         var replaceColors = new[]
         {
             (Util.Color("#8f563b"), 0.2f, 0.7f), // 服
@@ -453,5 +455,10 @@ public class SoldierImageManager
     {
         if (level >= colors.Length) level = colors.Length - 1;
         return sprites[level];
+    }
+
+    public Texture2D GetEmptyTexture()
+    {
+        return emptyTexture;
     }
 }
