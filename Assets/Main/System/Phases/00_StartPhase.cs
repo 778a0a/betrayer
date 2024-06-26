@@ -28,8 +28,12 @@ public class StartPhase : PhaseBase
         }
 
         // オートセーブを行う。
-        SaveDataManager.Instance.Save(SaveDataManager.AutoSaveDataSlotNo, Core);
-        Debug.Log("[開始フェイズ] オートセーブを行いました。");
+        // ただしゲーム再開後の最初のターンでは行わない。（行うと、内容は同じなのに保存日時が更新されてしまうので）
+        if (!Core.IsFirstTurnAfterResume)
+        {
+            SaveDataManager.Instance.Save(SaveDataManager.AutoSaveDataSlotNo, Core);
+            Debug.Log("[開始フェイズ] オートセーブを行いました。");
+        }
 
         // タイル状態更新
         foreach (var country in Countries)
