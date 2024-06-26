@@ -16,7 +16,7 @@ public partial class TitleSceneUI : MonoBehaviour
         InitializeNewGameWindow();
         InitializeTextBoxWindow();
         InitializeProgressWindow();
-        InitializeMessageWindow();
+        MessageWindow.Initialize();
         SaveDataList.Initialize(this);
 
         buttonCloseApplication.clicked += () =>
@@ -74,7 +74,7 @@ public partial class TitleSceneUI : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    ShowMessageWindow($"セーブデータの読み込みに失敗しました。\n({ex.Message})");
+                    MessageWindow.Show($"セーブデータの読み込みに失敗しました。\n({ex.Message})");
                     Debug.LogError($"セーブデータの読み込みに失敗しました。 {ex}");
                 }
             }, isCopy: false);
@@ -143,7 +143,7 @@ public partial class TitleSceneUI : MonoBehaviour
             }
             catch (Exception ex)
             {
-                ShowMessageWindow($"クリップボードからの貼り付けに失敗しました。\n({ex.Message})");
+                MessageWindow.Show($"クリップボードからの貼り付けに失敗しました。\n({ex.Message})");
                 Debug.LogError($"クリップボードからの貼り付けに失敗しました。 {ex}");
             }
         };
@@ -155,7 +155,7 @@ public partial class TitleSceneUI : MonoBehaviour
             }
             catch (Exception ex)
             {
-                ShowMessageWindow($"クリップボードへのコピーに失敗しました。\n({ex.Message})");
+                MessageWindow.Show($"クリップボードへのコピーに失敗しました。\n({ex.Message})");
                 Debug.LogError($"クリップボードへのコピーに失敗しました。 {ex}");
             }
         };
@@ -210,53 +210,4 @@ public partial class TitleSceneUI : MonoBehaviour
         op.allowSceneActivation = true;
     }
     #endregion
-
-    #region MessageWindow
-    private ValueTaskCompletionSource<MessageBoxResult> tcsMessageWindow;
-    private void InitializeMessageWindow()
-    {
-        void OnClick(MessageBoxResult result)
-        {
-            tcsMessageWindow.SetResult(result);
-            tcsMessageWindow = null;
-            MessageWindow.style.display = DisplayStyle.None;
-        }
-
-        buttonMessageOK.clicked += () => OnClick(MessageBoxResult.Ok);
-        buttonMessageYes.clicked += () => OnClick(MessageBoxResult.Yes);
-        buttonMessageNo.clicked += () => OnClick(MessageBoxResult.No);
-        buttonMessageCancel.clicked += () => OnClick(MessageBoxResult.Cancel);
-        MessageWindow.style.display = DisplayStyle.None;
-    }
-
-    public ValueTask<MessageBoxResult> ShowMessageWindow(string message, MessageBoxButton button = MessageBoxButton.Ok)
-    {
-        if (tcsMessageWindow != null) throw new InvalidOperationException();
-        tcsMessageWindow = new();
-
-        labelMessageText.text = message;
-        buttonMessageOK.style.display = Util.Display(button == MessageBoxButton.Ok);
-        buttonMessageYes.style.display = Util.Display(button == MessageBoxButton.YesNo || button == MessageBoxButton.YesNoCancel);
-        buttonMessageNo.style.display = Util.Display(button == MessageBoxButton.YesNo || button == MessageBoxButton.YesNoCancel);
-        buttonMessageCancel.style.display = Util.Display(button == MessageBoxButton.YesNoCancel);
-
-        MessageWindow.style.display = DisplayStyle.Flex;
-        return tcsMessageWindow.Task;
-    }
-    #endregion
-}
-
-public enum MessageBoxButton
-{
-    Ok,
-    YesNo,
-    YesNoCancel,
-}
-
-public enum MessageBoxResult
-{
-    Ok,
-    Yes,
-    No,
-    Cancel,
 }

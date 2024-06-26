@@ -47,25 +47,15 @@ public partial class TitleSceneUI
 
     public Button buttonSubmitText { get; private set; }
 
-    public Button buttonMessageOK { get; private set; }
-
-    public Button buttonMessageYes { get; private set; }
-
-    public Button buttonMessageNo { get; private set; }
-
-    public Button buttonMessageCancel { get; private set; }
-
-    public Label labelMessageText { get; private set; }
-
     public ProgressBar progressLoading { get; private set; }
 
     public VisualElement NewGameMenu { get; private set; }
 
     public VisualElement TextBoxWindow { get; private set; }
 
-    public VisualElement MessageWindow { get; private set; }
-
     public VisualElement ProgressWindow { get; private set; }
+
+    public MessageWindow MessageWindow { get; private set; }
 
     public VisualElement Windows { get; private set; }
 
@@ -88,16 +78,11 @@ public partial class TitleSceneUI
         textTextBoxWindow = Root?.Q<TextField>("textTextBoxWindow");
         buttonCopyText = Root?.Q<Button>("buttonCopyText");
         buttonSubmitText = Root?.Q<Button>("buttonSubmitText");
-        buttonMessageOK = Root?.Q<Button>("buttonMessageOK");
-        buttonMessageYes = Root?.Q<Button>("buttonMessageYes");
-        buttonMessageNo = Root?.Q<Button>("buttonMessageNo");
-        buttonMessageCancel = Root?.Q<Button>("buttonMessageCancel");
-        labelMessageText = Root?.Q<Label>("labelMessageText");
         progressLoading = Root?.Q<ProgressBar>("progressLoading");
         NewGameMenu = Root?.Q<VisualElement>("NewGameMenu");
         TextBoxWindow = Root?.Q<VisualElement>("TextBoxWindow");
-        MessageWindow = Root?.Q<VisualElement>("MessageWindow");
         ProgressWindow = Root?.Q<VisualElement>("ProgressWindow");
+        MessageWindow = new MessageWindow(Root?.Q<VisualElement>("MessageWindow"));
         Windows = Root?.Q<VisualElement>("Windows");
     }
 }

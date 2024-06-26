@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public partial class SaveDataListWindow
 {
     private TitleSceneUI uiTitle;
+    private MessageWindow MessageWindow => uiTitle.MessageWindow;
     private SaveDataManager saves;
 
 
@@ -42,7 +43,7 @@ public partial class SaveDataListWindow
                     }
                     catch (Exception ex)
                     {
-                        await uiTitle.ShowMessageWindow("セーブデータの読み込みに失敗しました。\n" + ex.ToString());
+                        await MessageWindow.Show("セーブデータの読み込みに失敗しました。\n" + ex.ToString());
                         Debug.LogError($"セーブデータの読み込みに失敗しました。 {ex}");
                     }
                 }
@@ -57,21 +58,21 @@ public partial class SaveDataListWindow
                 }
                 catch (Exception ex)
                 {
-                    await uiTitle.ShowMessageWindow($"セーブデータのダウンロードに失敗しました。\n({ex.Message})");
+                    await MessageWindow.Show($"セーブデータのダウンロードに失敗しました。\n({ex.Message})");
                     Debug.LogError($"セーブデータのダウンロードに失敗しました。 {ex}");
                 }
                 break;
             case SaveDataListWindowListItem.ButtonType.Delete:
                 try
                 {
-                    var res = await uiTitle.ShowMessageWindow("セーブデータを削除しますか？", MessageBoxButton.YesNo);
+                    var res = await MessageWindow.Show("セーブデータを削除しますか？", MessageBoxButton.YesNo);
                     if (res != MessageBoxResult.Yes) return;
                     SaveDataManager.Instance.Delete(slot.SlotNo);
                     slot.SetData(null);
                 }
                 catch (Exception ex)
                 {
-                    await uiTitle.ShowMessageWindow("セーブデータの削除に失敗しました。\n" + ex.ToString());
+                    await MessageWindow.Show("セーブデータの削除に失敗しました。\n" + ex.ToString());
                     Debug.LogError($"セーブデータの削除に失敗しました。 {ex}");
                 }
                 break;

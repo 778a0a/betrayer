@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="SaveDataListWindow" src="project://database/Assets/Title/UI/Windows/SaveDataListWindow.uxml?fileID=9197481963319205126&amp;guid=440ba38060752d94b9cd3bb1c8d4eaca&amp;type=3#SaveDataListWindow" />
+    <ui:Template name="MessageWindow" src="project://database/Assets/Main/UI/Windows/MessageWindow.uxml?fileID=9197481963319205126&amp;guid=072bdb62ba8a2cc4eb42b14b3ecc97fe&amp;type=3#MessageWindow" />
     <Style src="project://database/Assets/Title/UI/TitleSceneUI.uss?fileID=7433441132597879392&amp;guid=49e3533c4e04ed74f8bdff72d252b684&amp;type=3#TitleSceneUI" />
     <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;" />
     <ui:VisualElement name="Windows" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; justify-content: center;">
@@ -38,17 +39,6 @@
                 <ui:ProgressBar value="22" name="progressLoading" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="MessageWindow" class="window window-modal" style="background-color: rgba(0, 0, 0, 0.37); display: flex;">
-            <ui:VisualElement style="font-size: 40px; flex-grow: 0; justify-content: center; align-items: stretch; width: auto; align-self: center; align-content: auto; background-color: rgb(0, 0, 0); padding-top: 0; padding-right: 0; padding-bottom: 5px; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 255, 255); border-right-color: rgb(0, 255, 255); border-top-color: rgb(0, 255, 255); border-bottom-color: rgb(0, 255, 255); max-width: 1500px; height: auto; max-height: 1000px;">
-                <ui:Label text="システムメッセージ" style="color: rgb(255, 255, 255); margin-left: 0; font-size: 30px; margin-top: 0; margin-right: 0; margin-bottom: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(107, 107, 107); border-right-color: rgb(107, 107, 107); border-top-color: rgb(107, 107, 107); border-bottom-color: rgb(107, 107, 107);" />
-                <ui:Label text="ここにメッセージが入ります。" name="labelMessageText" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 20px; padding-right: 10px; padding-bottom: 20px; padding-left: 10px; color: rgb(255, 255, 255);" />
-                <ui:VisualElement style="flex-direction: row; justify-content: flex-end;">
-                    <ui:Button text="OK" name="buttonMessageOK" style="width: 150px;" />
-                    <ui:Button text="はい" name="buttonMessageYes" style="width: 150px;" />
-                    <ui:Button text="いいえ" name="buttonMessageNo" style="width: 150px;" />
-                    <ui:Button text="キャンセル" name="buttonMessageCancel" />
-                </ui:VisualElement>
-            </ui:VisualElement>
-        </ui:VisualElement>
+        <ui:Instance template="MessageWindow" name="MessageWindow" class="window" />
     </ui:VisualElement>
 </ui:UXML>
