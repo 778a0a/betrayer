@@ -35,7 +35,10 @@ public class TilemapManager : MonoBehaviour
     private MapPosition currentMousePosition = MapPosition.Of(0, 0);
     void Update()
     {
-        var element = MainUI.Root.panel.Pick(Input.mousePosition);
+        var mousePoint = Input.mousePosition;
+        var uiScale = MainUI.Root.panel.scaledPixelsPerPoint;
+        var uiPoint = new Vector2(mousePoint.x, Screen.height - mousePoint.y) / uiScale;
+        var element = MainUI.Root.panel.Pick(uiPoint);
         // マウスカーソル上にUI要素（メッセージウィンドウなど）がある場合は何もしない。
         if (element != null)
         {
