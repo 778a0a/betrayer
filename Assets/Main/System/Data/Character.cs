@@ -88,6 +88,8 @@ public class Character
     [JsonIgnore]
     public int Power => (Attack + Defense + Intelligence) / 3 * Force.Power;
 
+    public string GetLoyaltyText(WorldData world) => world.IsRuler(this) ? "--" : Loyalty.ToString();
+
     public string debugImagePath { get; set; }
     public string debugMemo { get; set; }
 

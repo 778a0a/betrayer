@@ -56,7 +56,7 @@ public partial class CharacterTableRowItem
         }
         else
         {
-            labelLoyalty.text = chara.Loyalty.ToString();
+            labelLoyalty.text = chara.GetLoyaltyText(world);
             labelContribution.text = chara.Contribution.ToString();
             labelSalaryRatio.text = chara.SalaryRatio.ToString();
         }

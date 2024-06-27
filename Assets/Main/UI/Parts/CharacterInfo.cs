@@ -52,7 +52,7 @@ public partial class CharacterInfo
         }
         else
         {
-            labelCharaLoyalty.text = chara.Loyalty.ToString();
+            labelCharaLoyalty.text = chara.GetLoyaltyText(GameCore.Instance.World);
             labelCharaContribution.text = chara.Contribution.ToString();
             labelCharaSalaryRatio.text = chara.SalaryRatio.ToString();
         }

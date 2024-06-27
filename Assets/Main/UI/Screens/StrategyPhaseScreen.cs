@@ -64,7 +64,7 @@ public partial class StrategyPhaseScreen : IScreen
         labelCharaAttack.text = chara.Attack.ToString();
         labelCharaDefense.text = chara.Defense.ToString();
         labelCharaIntelligence.text = chara.Intelligence.ToString();
-        labelCharaLoyalty.text = chara.Loyalty.ToString();
+        labelCharaLoyalty.text = chara.GetLoyaltyText(world);
         labelCharaPrestige.text = chara.Prestige.ToString();
         labelCharaContribution.text = chara.Contribution.ToString();
 

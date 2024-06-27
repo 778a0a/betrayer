@@ -114,7 +114,7 @@ public partial class OrganizeScreen : IScreen
         labelTargetSalaryRatio.text = "--";
         if (characterTarget != null)
         {
-            labelTargetLoyalty.text = characterTarget.Loyalty.ToString();
+            labelTargetLoyalty.text = characterTarget.GetLoyaltyText(world);
             labelTargetSalaryRatio.text = characterTarget.SalaryRatio.ToString();
         }
 
