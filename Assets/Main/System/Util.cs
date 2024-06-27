@@ -30,7 +30,13 @@ public static class Util
     {
         var list = l.ToList();
         if (list.Count == 0) return default;
+
         var totalWeight = list.Sum(weightFunc);
+        //foreach (var item in list)
+        //{
+        //    Debug.Log($"{weightFunc(item) / totalWeight:0.000} {item}");
+        //}
+
         var value = Random.Range(0f, totalWeight);
         foreach (var item in list)
         {

@@ -159,10 +159,18 @@ partial class MartialActions
             Country targetCountry)
         {
             // 防衛側キャラを選択する。
-            var defender = targetCountry.Members
-                .Where(c => !c.IsAttacked)
-                //.RandomPickWeighted(c => c.Power);
-                .RandomPickWeighted(c => Mathf.Pow(c.Force.Soldiers.Min(s => s.Hp), 2));
+            var candidates = targetCountry.Members.Where(c => !c.IsAttacked);
+            var defender = Random.value switch
+            {
+                <= 0.20f => candidates.RandomPickWeighted(c => c.Power),
+                <= 0.8f => candidates.RandomPickWeighted(c =>
+                    c.Force.Soldiers.Where(s => s.IsAlive).Min(s => s.HpFloat)
+                    *
+                    (c.Defense * 2 - c.Attack)),
+                _ => candidates.RandomPickWeighted(c =>
+                    Mathf.Pow(c.Force.Soldiers.Where(s => s.IsAlive).Min(s => s.Hp), 2)),
+            };
+
 
             // 最後のエリアの場合は、君主は行動済みでも防衛可能にする。
             // 固定で一番強いキャラを選ぶ。
