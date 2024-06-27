@@ -183,11 +183,11 @@ partial class MartialActions
             {
                 <= 0.20f => candidates.RandomPickWeighted(c => c.Power),
                 <= 0.8f => candidates.RandomPickWeighted(c =>
-                    c.Force.Soldiers.Where(s => s.IsAlive).Min(s => s.HpFloat)
+                    c.Force.Soldiers.Where(s => s.IsAlive).Select(s => s.HpFloat).DefaultIfEmpty(0.001f).Min()
                     *
                     (c.Defense * 2 - c.Attack)),
                 _ => candidates.RandomPickWeighted(c =>
-                    Mathf.Pow(c.Force.Soldiers.Where(s => s.IsAlive).Min(s => s.Hp), 2)),
+                    Mathf.Pow(c.Force.Soldiers.Where(s => s.IsAlive).Select(s => s.HpFloat).DefaultIfEmpty(0.001f).Min(), 2)),
             };
 
 
