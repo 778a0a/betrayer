@@ -139,13 +139,13 @@ public class Battle
 
     public static float TerrainDamageAdjustment(Terrain t) => t switch
     {
-        Terrain.LargeRiver => 0.40f,
-        Terrain.River => 0.25f,
-        Terrain.Plain => 0.0f,
-        Terrain.Hill => -0.1f,
-        Terrain.Forest => -0.25f,
-        Terrain.Mountain => -0.40f,
-        Terrain.Fort => -0.50f,
+        Terrain.LargeRiver => 0.25f,
+        Terrain.River => 0.15f,
+        Terrain.Plain => 0.00f,
+        Terrain.Hill => -0.075f,
+        Terrain.Forest => -0.15f,
+        Terrain.Mountain => -0.20f,
+        Terrain.Fort => -0.25f,
         _ => 0f,
     };
 
@@ -173,6 +173,7 @@ public class Battle
             adj -= (op.Strength - 50) / 100f;
             adj += (chara.Character.Intelligence - 50) / 100f * Mathf.Min(1, tickCount / 10f);
             adj -= (op.Character.Intelligence - 50) / 100f * Mathf.Min(1, tickCount / 10f);
+            adj -= TerrainDamageAdjustment(chara.Terrain);
             adj += TerrainDamageAdjustment(op.Terrain);
             return adj;
         }
