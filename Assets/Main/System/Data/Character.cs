@@ -56,6 +56,7 @@ public class Character
     /// <summary>
     /// 忠誠
     /// </summary>
+    [JsonIgnore] // 計算で求めるので保存不要
     public int Loyalty { get; set; }
     /// <summary>
     /// 給料配分

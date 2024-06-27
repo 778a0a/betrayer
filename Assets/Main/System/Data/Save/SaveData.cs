@@ -72,6 +72,7 @@ public class SaveData
                     .Select(ch => ch.Character)
                     .ToList(),
             };
+            country.RecalculateLoyalty();
             world.Countries.Add(country);
         }
         for (int i = 0; i < Countries.AllyPairs.Count; i++)

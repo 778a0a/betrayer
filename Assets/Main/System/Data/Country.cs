@@ -111,12 +111,17 @@ public class Country
     public void RecalculateSalary()
     {
         Ruler.SalaryRatio = 100 - Vassals.Sum(v => v.SalaryRatio);
+    }
+
+    public void RecalculateLoyalty()
+    {
         foreach (var vassal in Vassals)
         {
-            var index = Vassals.IndexOf(vassal);
-            vassal.Loyalty = Mathf.Clamp(
-                vassal.LoyaltyBase + vassal.SalaryRatio + Vassals.Count - index - vassal.Urami,
-                0, 100);
+            var val = vassal.LoyaltyBase;
+            val += vassal.SalaryRatio;
+            val += Vassals.Count - Vassals.IndexOf(vassal);
+            val -= vassal.Urami;
+            vassal.Loyalty = Mathf.Clamp(val, 0, 100);
         }
     }
 
