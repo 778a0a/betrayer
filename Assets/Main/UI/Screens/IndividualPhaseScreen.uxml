@@ -2,7 +2,6 @@
     <engine:Template name="SoldierInfoLarge" src="project://database/Assets/Main/SoldierInfoLarge.uxml?fileID=9197481963319205126&amp;guid=9d1bddbc38fcec249a34521a838a749f&amp;type=3#SoldierInfoLarge" />
     <engine:Template name="CountryRulerInfo" src="project://database/Assets/Main/CountryRulerInfo.uxml?fileID=9197481963319205126&amp;guid=8cb724703f2c9d7498eef4979f2a94b3&amp;type=3#CountryRulerInfo" />
     <Style src="project://database/Assets/Main/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
-    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <engine:VisualElement style="flex-grow: 1; flex-direction: row;">
         <engine:VisualElement name="ActionsPanel">
             <engine:VisualElement style="flex-grow: 0;">

@@ -1,6 +1,5 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Main/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
-    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <engine:VisualElement style="flex-grow: 0; flex-direction: row; margin-top: 5px; margin-right: 0; margin-bottom: 5px; margin-left: 0;">
         <engine:Image name="imageSoldier" class="SoldierInfoLarge-Image" style="--unity-image: url('/Assets/Main/UI/Images/Soldier.asset'); --unity-image-size: stretch-to-fill; flex-grow: 0; flex-shrink: 0; align-self: center;" />
         <engine:VisualElement style="flex-grow: 1;">

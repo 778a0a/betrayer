@@ -3,7 +3,6 @@
     <engine:Template name="CharacterInfo" src="project://database/Assets/Main/CharacterInfo.uxml?fileID=9197481963319205126&amp;guid=040ff9351467d2543b73d34712de87fb&amp;type=3#CharacterInfo" />
     <engine:Template name="CountryRulerInfo" src="project://database/Assets/Main/CountryRulerInfo.uxml?fileID=9197481963319205126&amp;guid=8cb724703f2c9d7498eef4979f2a94b3&amp;type=3#CountryRulerInfo" />
     <Style src="project://database/Assets/Main/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
-    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&amp;guid=f45d8a2d7faf19a4984f253bac21af42&amp;type=3#UnityDefaultRuntimeTheme" />
     <engine:VisualElement>
         <engine:Label name="labelDescription">マップのタイルをクリックしてください。</engine:Label>
         <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" />

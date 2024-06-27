@@ -1,2 +1,11 @@
 @import url("unity-theme://default");
-VisualElement {}
+
+* {
+  -unity-font-definition: url("project://database/Assets/BIZUDGothic-Regular.ttf?fileID=12800000&amp;guid=f1a0196d14e9b084692e423f02ee767b&amp;type=3#BIZUDGothic-Regular");
+}
+
+Label
+, Button
+{
+    font-size: 40px;
+}
