@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -27,7 +28,25 @@ public partial class SelectPlayerCaharacterScreen : IScreen
 
         buttonShowFreeList.clicked += () =>
         {
+            isShowingFreeList = !isShowingFreeList;
+            ShowCellInformation(GameCore.Instance.World, null);
         };
+
+        buttonPrevPage.clicked += () =>
+        {
+            freeListPage = Mathf.Max(0, freeListPage - 1);
+            ShowCellInformation(GameCore.Instance.World, null);
+        };
+
+        buttonNextPage.clicked += () =>
+        {
+            var world = GameCore.Instance.World;
+            var frees = world.Characters.Where(c => world.IsFree(c)).ToList();
+            var pageCount = 1 + frees.Count / 10;
+            freeListPage = Mathf.Min(freeListPage + 1, pageCount - 1);
+            ShowCellInformation(GameCore.Instance.World, null);
+        };
+
 
         async void OnCharacterSelected(Character chara)
         {
@@ -52,17 +71,42 @@ public partial class SelectPlayerCaharacterScreen : IScreen
     private Area area;
     private Character characterInfoTarget;
 
+    private bool isShowingFreeList = false;
+    private int freeListPage = 0;
+
     public void ShowCellInformation(WorldData world, MapPosition? pos)
     {
-        if (pos == null)
+        if (pos == null && !isShowingFreeList)
         {
             labelDescription.text = "マップのセルをクリックしてください。";
+            FreeListController.style.display = DisplayStyle.None;
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
             CharacterTable.Root.style.display = DisplayStyle.None;
             CharacterInfo.Root.style.display = DisplayStyle.None;
             return;
         }
+        if (pos == null && isShowingFreeList)
+        {
+            labelDescription.text = "一覧表から操作するキャラをクリックしてください。";
+            FreeListController.style.display = DisplayStyle.Flex;
+            CountryRulerInfo.Root.style.display = DisplayStyle.None;
+            CharacterTable.Root.style.display = DisplayStyle.Flex;
+            CharacterInfo.Root.style.display = DisplayStyle.Flex;
+
+            var frees = world.Characters.Where(c => world.IsFree(c)).ToList();
+            var pageCount = 1 + frees.Count / 10;
+            var page = freeListPage;
+            var charas = frees.Skip(page * 10).Take(10).ToList();
+            CharacterTable.SetData(charas, world);
+            characterInfoTarget = charas.FirstOrDefault();
+            CharacterInfo.SetData(characterInfoTarget, country);
+            labelPageNo.text = $"{page + 1}/{pageCount}";
+            return;
+        }
+        isShowingFreeList = false;
+
         labelDescription.text = "一覧表から操作するキャラをクリックしてください。";
+        FreeListController.style.display = DisplayStyle.None;
         CountryRulerInfo.Root.style.display = DisplayStyle.Flex;
         CharacterTable.Root.style.display = DisplayStyle.Flex;
         CharacterInfo.Root.style.display = DisplayStyle.Flex;

@@ -10,10 +10,17 @@
             <engine:Button name="buttonRandom" text="ランダム" style="font-size: 30px;" />
         </engine:VisualElement>
     </engine:VisualElement>
-    <engine:VisualElement>
+    <engine:VisualElement style="flex-grow: 1;">
         <engine:VisualElement name="CellInformation" style="flex-grow: 0; flex-direction: row; position: absolute; right: 0;" />
         <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" />
-        <engine:Instance template="CharacterTable" name="CharacterTable" />
+    </engine:VisualElement>
+    <engine:VisualElement style="bottom: 0;">
+        <engine:VisualElement name="FreeListController" style="flex-direction: row;">
+            <engine:Button text="前へ" name="buttonPrevPage" style="font-size: 30px;" />
+            <engine:Button text="次へ" name="buttonNextPage" style="font-size: 30px;" />
+            <engine:Label text="3/4" name="labelPageNo" />
+        </engine:VisualElement>
+        <engine:Instance template="CharacterTable" name="CharacterTable" style="margin-bottom: 2px;" />
         <engine:Instance template="CharacterInfo" name="CharacterInfo" />
     </engine:VisualElement>
 </engine:UXML>
