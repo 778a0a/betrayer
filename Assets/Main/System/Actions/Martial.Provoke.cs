@@ -55,6 +55,29 @@ partial class MartialActions
                 attacker = randCountry.Members.RandomPickDefault();
             }
 
+            var chance = 0.01f * Mathf.Max(1, 10 * (chara.Intelligence - attacker.Intelligence));
+            if (chance.Chance())
+            {
+                Debug.Log("挑発に成功しました。");
+                if (chara.IsPlayer)
+                {
+                    await MessageWindow.Show("挑発に成功しました。");
+                }
+            }
+            else
+            {
+                if (chara.IsPlayer)
+                {
+                    await MessageWindow.Show("挑発は失敗しました。");
+                    PayCost(chara);
+                    return;
+                }
+            }
+            if (attacker.IsPlayer)
+            {
+                await MessageWindow.Show($"{chara.Name}に挑発されました。");
+            }
+
             var sourceCountry = World.CountryOf(attacker);
             var sourceArea = neighborAreas.Where(sourceCountry.Areas.Contains).RandomPick();
 
