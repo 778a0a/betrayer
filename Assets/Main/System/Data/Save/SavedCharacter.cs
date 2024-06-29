@@ -120,7 +120,7 @@ public class SavedCharacter
             }
             sb.AppendLine();
         }
-        return sb.ToString();
+        return sb.ToString().TrimEnd();
     }
 
     public static SavedCharacter Deserialize(string[] header, string line)
