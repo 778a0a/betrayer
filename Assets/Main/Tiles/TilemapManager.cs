@@ -156,7 +156,7 @@ public class TilemapManager : MonoBehaviour
     private Country currentActiveCountry;
     public void SetActiveCountry(Country country)
     {
-        if (currentActiveCountry == country) return;
+        //if (currentActiveCountry == country) return;
         var prevCountry = currentActiveCountry;
         currentActiveCountry = country;
 
