@@ -106,10 +106,22 @@ partial class StrategyActions
                 target.Ally = country;
                 target.WantsToContinueAlliance = true;
                 Debug.Log($"{country} と {target} が同盟を結びました。");
+                if (chara.IsPlayer)
+                {
+                    await MessageWindow.Show($"{target.Name}と同盟を結びました。");
+                }
+                if (target.Ruler.IsPlayer)
+                {
+                    await MessageWindow.Show($"{country.Name}と同盟を結びました。");
+                }
             }
             else
             {
                 Debug.Log($"{country} が {target} に同盟を申し込みましたが、拒否されました。");
+                if (chara.IsPlayer)
+                {
+                    await MessageWindow.Show($"拒否されました。");
+                }
             }
 
             PayCost(chara);
