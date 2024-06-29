@@ -66,6 +66,14 @@ partial class MartialActions
                 country.Vassals.Remove(target);
             }
 
+            if (chara.IsPlayer)
+            {
+                await MessageWindow.Show(result == BattleResult.AttackerWin ?
+                    $"討伐成功！\n{target.Name}は追放されました。" :
+                    $"討伐失敗！{target.Name}はあなたを恨んでいるようです。");
+                target.AddUrami(30);
+            }
+
             Core.Tilemap.DrawCountryTile();
             PayCost(chara);
         }
