@@ -35,12 +35,11 @@ public class TilemapManager : MonoBehaviour
     private MapPosition currentMousePosition = MapPosition.Of(0, 0);
     void Update()
     {
-        var mousePoint = Input.mousePosition;
-        var uiScale = MainUI.Root.panel.scaledPixelsPerPoint;
-        var uiPoint = new Vector2(mousePoint.x, Screen.height - mousePoint.y) / uiScale;
-        var element = MainUI.Root.panel.Pick(uiPoint);
-        // マウスカーソル上にUI要素（メッセージウィンドウなど）がある場合は何もしない。
-        if (element != null)
+        // マウスカーソル上のセルを取得する。
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.GetRayIntersection(ray);
+        // マウスカーソルがマップ上にない場合は何もしない。
+        if (hit.collider == null)
         {
             // 必要ならハイライトを消す。
             if (currentMousePosition.IsValid)
@@ -51,11 +50,12 @@ public class TilemapManager : MonoBehaviour
             return;
         }
 
-        // マウスカーソル上のセルを取得する。
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var hit = Physics2D.GetRayIntersection(ray);
-        // マウスカーソルがマップ上にない場合は何もしない。
-        if (hit.collider == null)
+        var mousePoint = Input.mousePosition;
+        var uiScale = MainUI.Root.panel.scaledPixelsPerPoint;
+        var uiPoint = new Vector2(mousePoint.x, Screen.height - mousePoint.y) / uiScale;
+        var element = MainUI.Root.panel.Pick(uiPoint);
+        // マウスカーソル上にUI要素（メッセージウィンドウなど）がある場合は何もしない。
+        if (element != null)
         {
             // 必要ならハイライトを消す。
             if (currentMousePosition.IsValid)
