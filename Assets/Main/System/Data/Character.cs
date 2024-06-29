@@ -98,6 +98,10 @@ public class Character
     /// 恨み
     /// </summary>
     public int Urami { get; set; } = 0;
+    public void AddUrami(int value)
+    {
+        Urami += value;
+    }
 
     /// <summary>
     /// 地位

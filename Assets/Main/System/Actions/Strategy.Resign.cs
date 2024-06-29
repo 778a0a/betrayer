@@ -22,12 +22,19 @@ partial class StrategyActions
         protected override bool CanDoCore(Character chara)
         {
             var country = World.CountryOf(chara);
-            return country.Vassals.Count > 0;
+            return country.Vassals.Count > 0 &&
+                country.Areas.Count > 1;
         }
 
         public override async ValueTask Do(Character chara)
         {
             Assert.IsTrue(CanDo(chara));
+
+            if (chara.IsPlayer)
+            {
+                var res = await MessageWindow.Show("勢力を捨てて放浪します。\nよろしいですか？", MessageBoxButton.OkCancel);
+                if (res != MessageBoxResult.Ok) return;
+            }
 
             var country = World.CountryOf(chara);
             var successor = country.Vassals[0];
@@ -35,7 +42,7 @@ partial class StrategyActions
             country.Vassals.RemoveAt(0);
             country.Ruler = successor;
             country.RecalculateSalary();
-            Debug.Log($"{chara.Name} が勢力を捨てて、{successor.Name} が新たな君主となりました。");
+            await MessageWindow.Show($"{chara.Name}が勢力を捨て、\n{successor.Name}が新たな君主となりました。");
 
             Core.Tilemap.DrawCountryTile();
 

@@ -27,19 +27,15 @@ partial class PersonalActions
         {
             Assert.IsTrue(CanDo(chara));
 
+            if (chara.IsPlayer)
+            {
+                var res = await MessageWindow.Show("勢力を捨てて浪士になります。\nよろしいですか？", MessageBoxButton.OkCancel);
+                if (res != MessageBoxResult.Ok) return;
+            }
             var country = World.CountryOf(chara);
-            if (country.Ruler == chara)
-            {
-                var newRuler = country.Vassals[0];
-                country.Ruler = newRuler;
-                country.Vassals.Remove(newRuler);
-                country.RecalculateSalary();
-            }
-            else
-            {
-                country.Vassals.Remove(chara);
-                country.RecalculateSalary();
-            }
+            country.Vassals.Remove(chara);
+            country.RecalculateSalary();
+            country.Ruler.AddUrami(10);
 
             Core.Tilemap.DrawCountryTile();
             PayCost(chara);
