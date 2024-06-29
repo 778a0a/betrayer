@@ -60,7 +60,7 @@
                     <engine:Instance name="soldier14" template="CharacterInfoSoldierIcon" />
                 </engine:VisualElement>
             </engine:VisualElement>
-            <engine:Image name="imageChara" style="flex-grow: 0; width: 200px; height: 200px; flex-shrink: 0; background-color: rgba(0, 229, 255, 0.35); align-self: center;" />
+            <engine:Image name="imageChara" style="flex-grow: 0; margin-left: 5px; width: 195px; height: 195px; flex-shrink: 0; background-color: rgba(0, 229, 255, 0.35); align-self: center;" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

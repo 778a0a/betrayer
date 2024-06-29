@@ -23,15 +23,6 @@
     font-size: 35px;
 }
 
-.CharaInfo-Soldier-Item {
-    width: 40px;
-    height: 40px;
-    margin-right: 11px;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-}
-
 .Action-Button {
 }
 
