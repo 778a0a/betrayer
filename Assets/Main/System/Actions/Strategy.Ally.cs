@@ -97,6 +97,10 @@ partial class StrategyActions
             else
             {
                 ok = 0.5.Chance();
+                if (chara.IsPlayer && target.Ruler.Urami > 0)
+                {
+                    ok = false;
+                }
             }
 
             if (ok)

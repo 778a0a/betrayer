@@ -99,6 +99,11 @@ partial class PersonalActions
                 Util.Todo();
             }
 
+            if (chara.IsPlayer)
+            {
+                targetCountry.Ruler.AddUrami(30);
+            }
+
             PayCost(chara);
         }
     }

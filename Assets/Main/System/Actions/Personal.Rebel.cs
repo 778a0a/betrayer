@@ -51,6 +51,7 @@ partial class PersonalActions
                 if (chara.IsPlayer)
                 {
                     await MessageWindow.Show("反乱成功！\n新しい君主になりました。");
+                    oldRuler.AddUrami(30);
                 }
             }
             // 負けたら未所属になる。
@@ -61,6 +62,7 @@ partial class PersonalActions
                 if (chara.IsPlayer)
                 {
                     await MessageWindow.Show("反乱は失敗し、勢力を追放されました。");
+                    country.Ruler.AddUrami(30);
                 }
             }
 
