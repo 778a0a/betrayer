@@ -15,12 +15,30 @@ public partial class SelectPlayerCaharacterScreen : IScreen
         CharacterTable.RowMouseDown += (sender, chara) =>
         {
             if (chara == null) return;
-            CharacterSelected?.Invoke(this, chara);
+            OnCharacterSelected(chara);
+        };
+
+        buttonRandom.clicked += () =>
+        {
+            var world = GameCore.Instance.World;
+            var chara = world.Characters.RandomPick();
+            OnCharacterSelected(chara);
         };
 
         buttonShowFreeList.clicked += () =>
         {
         };
+
+        async void OnCharacterSelected(Character chara)
+        {
+            var world = GameCore.Instance.World;
+            var res = await MessageWindow.Show(
+                $"「{chara.GetTitle(world)} {chara.Name}」でゲームを始めます。\nよろしいですか？",
+                MessageBoxButton.OkCancel);
+            if (res != MessageBoxResult.Ok) return;
+
+            CharacterSelected?.Invoke(this, chara);
+        }
     }
 
     private void CharacterTable_RowMouseMove(object sender, Character chara)
@@ -44,7 +62,7 @@ public partial class SelectPlayerCaharacterScreen : IScreen
             CharacterInfo.Root.style.display = DisplayStyle.None;
             return;
         }
-        labelDescription.text = "操作するキャラをクリックしてください。";
+        labelDescription.text = "一覧表から操作するキャラをクリックしてください。";
         CountryRulerInfo.Root.style.display = DisplayStyle.Flex;
         CharacterTable.Root.style.display = DisplayStyle.Flex;
         CharacterInfo.Root.style.display = DisplayStyle.Flex;
