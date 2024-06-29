@@ -78,7 +78,23 @@ partial class StrategyActions
                     return;
                 }
             }
+
+            // プレーヤの場合は、恨みがあれば断られる場合もある。
+            if (chara.IsPlayer && target.Urami > 0)
+            {
+                if ((target.Urami / 100f * 10).Chance())
+                {
+                    await MessageWindow.Show($"拒否されました。");
+                    target.AddUrami(-1);
+                    return;
+                }
+            }
+
             country.AddVassal(target);
+            if (chara.IsPlayer)
+            {
+                await MessageWindow.Show($"{target.Name}を配下にしました。");
+            }
 
             Core.Tilemap.DrawCountryTile();
         }
