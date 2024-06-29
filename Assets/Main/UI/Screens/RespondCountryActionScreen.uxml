@@ -10,7 +10,7 @@
         <engine:Instance template="CharacterInfo" name="CharacterInfo" />
     </engine:VisualElement>
     <engine:VisualElement style="flex-direction: row;">
-        <engine:Button name="buttonYes" text="はい" style="width: 200px;" />
-        <engine:Button name="buttonNo" text="いいえ" style="width: 200px;" />
+        <engine:Button name="buttonYes" text="はい" style="width: 250px;" />
+        <engine:Button name="buttonNo" text="いいえ" style="width: 250px;" />
     </engine:VisualElement>
 </engine:UXML>

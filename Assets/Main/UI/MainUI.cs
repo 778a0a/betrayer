@@ -48,6 +48,7 @@ public partial class MainUI : MonoBehaviour
             }
 
             var element = asset.Instantiate();
+            element.style.flexGrow = 1;
             var constructor = screenProp.PropertyType.GetConstructor(new[] { typeof(VisualElement) });
             var screen = constructor.Invoke(new[] { element }) as IScreen;
             screen.Initialize();

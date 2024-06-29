@@ -75,7 +75,7 @@ Label {
 }
 
 .MemberInfo-Cell {
-    font-size: 30px;
+    font-size: 29px;
     width: 65px;
     -unity-text-align: middle-center;
 }

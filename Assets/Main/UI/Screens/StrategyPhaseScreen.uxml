@@ -28,7 +28,7 @@
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement style="flex-grow: 1;">
-            <engine:Label text="" name="labelHint" style="font-size: 25px; height: 40px; -unity-text-align: middle-left;" />
+            <engine:Label name="labelHint" style="font-size: 25px; height: 40px; -unity-text-align: middle-left;" />
             <engine:VisualElement name="CharaPanel" style="flex-grow: 1;">
                 <engine:VisualElement style="flex-grow: 1;">
                     <engine:VisualElement style="flex-grow: 0; flex-direction: row;" />
@@ -98,5 +98,5 @@
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
-    <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" />
+    <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" style="bottom: 0;" />
 </engine:UXML>

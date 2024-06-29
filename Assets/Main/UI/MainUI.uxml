@@ -3,8 +3,8 @@
     <ui:Template name="SystemWindow" src="project://database/Assets/Main/UI/Windows/SystemWindow.uxml?fileID=9197481963319205126&amp;guid=22f9b7cbe7258a447b65264fb45ecc3d&amp;type=3#SystemWindow" />
     <ui:Template name="MessageWindow" src="project://database/Assets/Main/UI/Windows/MessageWindow.uxml?fileID=9197481963319205126&amp;guid=072bdb62ba8a2cc4eb42b14b3ecc97fe&amp;type=3#MessageWindow" />
     <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
-    <ui:VisualElement class="bg" style="flex-grow: 1; align-self: flex-end; width: 840px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
-        <ui:VisualElement name="UIContainer" style="flex-grow: 0; position: relative; flex-shrink: 0;" />
+    <ui:VisualElement class="bg" style="flex-grow: 1; align-self: flex-end; width: 840px; height: 1080px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+        <ui:VisualElement name="UIContainer" style="flex-grow: 1;" />
     </ui:VisualElement>
     <ui:VisualElement name="DebugUIParent" picking-mode="Ignore" style="flex-grow: 1; position: absolute; left: 0; right: 0; bottom: 0; top: 0;">
         <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-right: 0; margin-top: 10px; position: relative; justify-content: flex-start;">
