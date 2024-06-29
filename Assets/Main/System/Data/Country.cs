@@ -111,6 +111,7 @@ public class Country
     public void RecalculateSalary()
     {
         Ruler.SalaryRatio = 100 - Vassals.Sum(v => v.SalaryRatio);
+        RecalculateLoyalty();
     }
 
     public void RecalculateLoyalty()
