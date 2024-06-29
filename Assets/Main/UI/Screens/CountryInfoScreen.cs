@@ -35,7 +35,7 @@ public partial class CountryInfoScreen : IScreen
         characterInfoTarget = ruler;
 
         // 地形情報
-        labelTerrain.text = area.Terrain.ToString();
+        labelTerrain.text = TerrainName(area.Terrain);
         labelPosition.text = pos.ToString();
 
         // 勢力情報
@@ -44,5 +44,20 @@ public partial class CountryInfoScreen : IScreen
         CharacterTable.SetData(country.Members, world);
         // 人物詳細
         CharacterInfo.SetData(ruler, country);
+    }
+
+    public static string TerrainName(Terrain terrain)
+    {
+        return terrain switch
+        {
+            Terrain.LargeRiver => "大河",
+            Terrain.River => "河川",
+            Terrain.Plain => "平地",
+            Terrain.Hill => "丘陵",
+            Terrain.Forest => "森林",
+            Terrain.Mountain => "山岳",
+            Terrain.Fort => "城砦",
+            _ => throw new ArgumentOutOfRangeException(nameof(terrain)),
+        };
     }
 }

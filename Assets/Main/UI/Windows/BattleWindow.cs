@@ -74,12 +74,12 @@ public partial class BattleWindow : IWindow
         imageAttacker.style.backgroundImage = FaceImageManager.Instance.GetImage(attacker);
         labelAttackerAttack.text = attacker.Attack.ToString();
         labelAttackerIntelligense.text = attacker.Intelligence.ToString();
-        labelAttackerTerrain.text = attackerTerrain.ToString();
+        labelAttackerTerrain.text = CountryInfoScreen.TerrainName(attackerTerrain);
 
         imageDefender.style.backgroundImage = FaceImageManager.Instance.GetImage(defender);
         labelDefenderDefence.text = defender.Defense.ToString();
         labelDefenderIntelligense.text = defender.Intelligence.ToString();
-        labelDefenderTerrain.text = defenderTerrain.ToString();
+        labelDefenderTerrain.text = CountryInfoScreen.TerrainName(defenderTerrain);
     }
 
     public ValueTask<bool> WaitPlayerClick()
