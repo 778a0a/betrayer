@@ -26,6 +26,12 @@ partial class PersonalActions
         {
             Assert.IsTrue(CanDo(chara));
 
+            if (chara.IsPlayer)
+            {
+                var res = await MessageWindow.Show("本当に反乱を起こしますか？", MessageBoxButton.OkCancel);
+                if (res != MessageBoxResult.Ok) return;
+            }
+
             var country = World.CountryOf(chara);
             var ruler = country.Ruler;
 
@@ -42,12 +48,20 @@ partial class PersonalActions
                 country.Ruler = chara;
                 country.Vassals.Remove(chara);
                 country.RecalculateSalary();
+                if (chara.IsPlayer)
+                {
+                    await MessageWindow.Show("反乱成功！\n新しい君主になりました。");
+                }
             }
             // 負けたら未所属になる。
             else
             {
                 country.Vassals.Remove(chara);
                 country.RecalculateSalary();
+                if (chara.IsPlayer)
+                {
+                    await MessageWindow.Show("反乱は失敗し、勢力を追放されました。");
+                }
             }
 
             Core.Tilemap.DrawCountryTile();
