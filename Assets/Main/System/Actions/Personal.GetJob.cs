@@ -29,22 +29,37 @@ partial class PersonalActions
         {
             Assert.IsTrue(CanDo(chara));
 
+            var country = World.CountryOf(chara);
             if (chara.IsPlayer)
             {
-                var country = await UI.ShowGetJobScreen(World);
+                country = await UI.ShowGetJobScreen(World);
                 if (country == null)
                 {
                     Debug.Log("キャンセルされました。");
                     return;
                 }
 
-                country.AddVassal(chara);
             }
             else
             {
                 var countries = World.Countries.Where(c => c.VassalCountMax > c.Vassals.Count);
-                var country = countries.RandomPick();
-                country.AddVassal(chara);
+                country = countries.RandomPick();
+            }
+
+            if (chara.IsPlayer)
+            {
+                if (country.Ruler.Urami > 0)
+                {
+                    await MessageWindow.Show($"拒否されました。");
+                    return;
+                }
+            }
+
+            country.AddVassal(chara);
+
+            if (chara.IsPlayer)
+            {
+                await MessageWindow.Show($"{country.Name}に仕官しました。");
             }
 
             Core.Tilemap.DrawCountryTile();
