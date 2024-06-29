@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -32,9 +33,28 @@ public partial class SystemWindow : IWindow
             }
         };
 
-        buttonChangeCharacter.clicked += () =>
+        buttonChangeCharacter.clicked += async () =>
         {
-            Util.Todo("キャラクター変更");
+            var res = await MessageWindow.Show("操作キャラを変更します。\nよろしいですか？", MessageBoxButton.OkCancel);
+            if (res != MessageBoxResult.Ok) return;
+
+            var core = GameCore.Instance;
+            var world = core.World;
+            foreach (var chara in world.Characters.Where(c => c.IsPlayer))
+            {
+                chara.IsPlayer = false;
+            }
+
+            Root.style.display = DisplayStyle.None;
+
+            var currentScreen = core.MainUI.currentScreen;
+            GameCore.Instance.MainUI.ShowSelectPlayerCharacterUI(world, chara =>
+            {
+                chara.IsPlayer = true;
+                Debug.Log($"Player selected: {chara.Name}");
+                Test.Instance.hold = false;
+                core.MainUI.ShowScreen(currentScreen);
+            });
         };
 
         buttonGoToTitle.clicked += async () =>

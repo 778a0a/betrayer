@@ -30,7 +30,7 @@ public partial class MainUI : MonoBehaviour
     public RespondCountryActionScreen RespondCountryAction { get; private set; }
     public OrganizeScreen Organize { get; private set; }
 
-    private IScreen currentScreen;
+    public IScreen currentScreen;
 
     private void InitializeScreens()
     {
@@ -357,7 +357,7 @@ public partial class MainUI : MonoBehaviour
         }
     }
 
-    private void ShowScreen(IScreen screen)
+    public void ShowScreen(IScreen screen)
     {
         HideAllUI();
         screen.Root.style.display = DisplayStyle.Flex;
