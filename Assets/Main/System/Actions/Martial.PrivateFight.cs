@@ -62,11 +62,20 @@ partial class MartialActions
                 target.Contribution /= 2;
                 country.Vassals.Remove(target);
                 country.RecalculateSalary();
+                if (chara.IsPlayer)
+                {
+                    await MessageWindow.Show($"{target.Name}は勢力を去りました。");
+                    target.AddUrami(30);
+                }
             }
             // 負けたら自分の貢献を減らす。
             else if (result == BattleResult.DefenderWin)
             {
                 chara.Contribution /= 10;
+                if (chara.IsPlayer)
+                {
+                    target.AddUrami(30);
+                }
             }
 
             Core.Tilemap.DrawCountryTile();
