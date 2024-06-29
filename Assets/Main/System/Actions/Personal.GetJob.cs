@@ -51,6 +51,7 @@ partial class PersonalActions
                 if (country.Ruler.Urami > 0)
                 {
                     await MessageWindow.Show($"拒否されました。");
+                    PayCost(chara);
                     return;
                 }
             }
