@@ -50,6 +50,11 @@ public class StartPhase : PhaseBase
                 Countries[0].Ally = null;
                 Countries[1].Ally = null;
                 Debug.Log($"[開始フェイズ] 残り勢力数が2になったため、同盟が解消されました。");
+                if (Countries[0].Ruler.IsPlayer ||
+                    Countries[1].Ruler.IsPlayer)
+                {
+                    await MessageWindow.Show("残り勢力数が2になったため、\n同盟が解消されました。");
+                }
             }
         }
         // 同盟解消
@@ -67,6 +72,10 @@ public class StartPhase : PhaseBase
                 country.Ally = null;
                 ally.Ally = null;
                 Debug.Log($"[開始フェイズ] {country.Name} と {ally.Name} の同盟が解消されました。(合意による解消)");
+                if (country.Ruler.IsPlayer || ally.Ruler.IsPlayer)
+                {
+                    await MessageWindow.Show($"{country.Name}と{ally.Name}の同盟が解消されました。\n(合意による解消)");
+                }
                 continue;
             }
             
@@ -77,6 +86,10 @@ public class StartPhase : PhaseBase
                 country.Ally = null;
                 ally.Ally = null;
                 Debug.Log($"[開始フェイズ] {country.Name} と {ally.Name} の同盟が解消されました。({country.Name}からの破棄)");
+                if (country.Ruler.IsPlayer || ally.Ruler.IsPlayer)
+                {
+                    await MessageWindow.Show($"{country.Name}と{ally.Name}の同盟が解消されました。\n({country.Name}からの破棄)");
+                }
             }
             else
             {
