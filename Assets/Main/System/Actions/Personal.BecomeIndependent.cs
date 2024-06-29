@@ -29,6 +29,12 @@ partial class PersonalActions
         {
             Assert.IsTrue(CanDo(chara));
 
+            if (chara.IsPlayer)
+            {
+                var res = await MessageWindow.Show("本当に独立しますか？", MessageBoxButton.OkCancel);
+                if (res != MessageBoxResult.Ok) return;
+            }
+
             var oldCountry = World.CountryOf(chara);
 
             var areas = new List<Area>();
@@ -64,6 +70,16 @@ partial class PersonalActions
 
             Core.Tilemap.DrawCountryTile();
             PayCost(chara);
+
+            if (chara.IsPlayer)
+            {
+                await MessageWindow.Show("独立しました。");
+                oldCountry.Ruler.AddUrami(30);
+            }
+            else
+            {
+                await MessageWindow.Show($"{chara.Name}が{oldCountry.Ruler.Name}から独立しました。");
+            }
         }
     }
 }
