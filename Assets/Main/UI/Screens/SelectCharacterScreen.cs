@@ -74,6 +74,7 @@ public partial class SelectCharacterScreen : IScreen
         characterInfoTarget = null;
 
         labelDescription.text = description;
+        buttonClose.text = "キャンセル";
 
         void OnTileClick(object sender, MapPosition pos)
         {
