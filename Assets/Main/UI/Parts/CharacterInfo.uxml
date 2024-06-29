@@ -37,8 +37,12 @@
                         <engine:Label text="給料%" class="CharaInfo-Label" />
                         <engine:Label name="labelCharaSalaryRatio" text="10" class="CharaInfo-Value" />
                     </engine:VisualElement>
+                    <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                        <engine:Label text="兵数" class="CharaInfo-Label" />
+                        <engine:Label name="labelCharaSoldierCount" text="10" class="CharaInfo-Value" />
+                    </engine:VisualElement>
                 </engine:VisualElement>
-                <engine:VisualElement name="Soldiers" style="flex-grow: 1; flex-direction: row;">
+                <engine:VisualElement name="Soldiers" style="flex-grow: 1; flex-direction: row; margin-top: 10px;">
                     <engine:Instance name="soldier00" template="CharacterInfoSoldierIcon" />
                     <engine:Instance name="soldier01" template="CharacterInfoSoldierIcon" />
                     <engine:Instance name="soldier02" template="CharacterInfoSoldierIcon" />

@@ -57,6 +57,7 @@ public partial class CharacterInfo
             labelCharaSalaryRatio.text = chara.SalaryRatio.ToString();
         }
         labelCharaPrestige.text = chara.Prestige.ToString();
+        labelCharaSoldierCount.text = chara.Force.SoldierCount.ToString();
 
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
 

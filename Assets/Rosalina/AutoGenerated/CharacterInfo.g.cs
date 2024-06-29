@@ -32,6 +32,8 @@ public partial class CharacterInfo
 
     public Label labelCharaSalaryRatio { get; private set; }
 
+    public Label labelCharaSoldierCount { get; private set; }
+
     public CharacterInfoSoldierIcon soldier00 { get; private set; }
 
     public CharacterInfoSoldierIcon soldier01 { get; private set; }
@@ -82,6 +84,7 @@ public partial class CharacterInfo
         labelCharaPrestige = Root?.Q<Label>("labelCharaPrestige");
         labelCharaContribution = Root?.Q<Label>("labelCharaContribution");
         labelCharaSalaryRatio = Root?.Q<Label>("labelCharaSalaryRatio");
+        labelCharaSoldierCount = Root?.Q<Label>("labelCharaSoldierCount");
         soldier00 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier00"));
         soldier01 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier01"));
         soldier02 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier02"));
