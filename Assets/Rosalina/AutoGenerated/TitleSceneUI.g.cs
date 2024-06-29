@@ -19,6 +19,8 @@ public partial class TitleSceneUI
 
     public Button buttonCloseApplication { get; private set; }
 
+    public Button buttonShowLicense { get; private set; }
+
     public Button buttonCloseNewGameWindow { get; private set; }
 
     public Button buttonStartNewGame { get; private set; }
@@ -49,11 +51,17 @@ public partial class TitleSceneUI
 
     public ProgressBar progressLoading { get; private set; }
 
+    public Button buttonCloseLicenseWindow { get; private set; }
+
+    public TextField textLicenseWindow { get; private set; }
+
     public VisualElement NewGameMenu { get; private set; }
 
     public VisualElement TextBoxWindow { get; private set; }
 
     public VisualElement ProgressWindow { get; private set; }
+
+    public VisualElement LicenseWindow { get; private set; }
 
     public MessageWindow MessageWindow { get; private set; }
 
@@ -64,6 +72,7 @@ public partial class TitleSceneUI
     {
         SaveDataList = new SaveDataListWindow(Root?.Q<VisualElement>("SaveDataList"));
         buttonCloseApplication = Root?.Q<Button>("buttonCloseApplication");
+        buttonShowLicense = Root?.Q<Button>("buttonShowLicense");
         buttonCloseNewGameWindow = Root?.Q<Button>("buttonCloseNewGameWindow");
         buttonStartNewGame = Root?.Q<Button>("buttonStartNewGame");
         buttonLoadTextData = Root?.Q<Button>("buttonLoadTextData");
@@ -79,9 +88,12 @@ public partial class TitleSceneUI
         buttonCopyText = Root?.Q<Button>("buttonCopyText");
         buttonSubmitText = Root?.Q<Button>("buttonSubmitText");
         progressLoading = Root?.Q<ProgressBar>("progressLoading");
+        buttonCloseLicenseWindow = Root?.Q<Button>("buttonCloseLicenseWindow");
+        textLicenseWindow = Root?.Q<TextField>("textLicenseWindow");
         NewGameMenu = Root?.Q<VisualElement>("NewGameMenu");
         TextBoxWindow = Root?.Q<VisualElement>("TextBoxWindow");
         ProgressWindow = Root?.Q<VisualElement>("ProgressWindow");
+        LicenseWindow = Root?.Q<VisualElement>("LicenseWindow");
         MessageWindow = new MessageWindow(Root?.Q<VisualElement>("MessageWindow"));
         Windows = Root?.Q<VisualElement>("Windows");
     }
