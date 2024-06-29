@@ -19,6 +19,7 @@ public partial class MainUI : MonoBehaviour
 
     [SerializeField] private VisualTreeAsset[] screenVisualTreeAssets;
 
+    public SelectPlayerCaharacterScreen SelectPlayerCaharacter { get; private set; }
     public CountryInfoScreen CountryInfo { get; private set; }
     public IndividualPhaseScreen IndividualPhase { get; private set; }
     public StrategyPhaseScreen StrategyPhase { get; private set; }
@@ -80,6 +81,29 @@ public partial class MainUI : MonoBehaviour
         buttonNextTurn.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.NextTurn);
         buttonAuto.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.Auto);
         buttonHold.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.Hold);
+    }
+
+    public bool IsPlayerCharacterSelecting { get; set; } = false;
+    public void ShowSelectPlayerCharacterUI(
+        WorldData world,
+        Action<Character> onSelected)
+    {
+        var cellHandler = GameCore.Instance.Tilemap.SetCellClickHandler((sender, pos) =>
+        {
+            SelectPlayerCaharacter.ShowCellInformation(world, pos);
+        });
+
+        void OnCharacterSelected(object sender, Character chara)
+        {
+            SelectPlayerCaharacter.CharacterSelected -= OnCharacterSelected;
+            IsPlayerCharacterSelecting = false;
+            cellHandler.Dispose();
+            onSelected(chara);
+        }
+        IsPlayerCharacterSelecting = true;
+        SelectPlayerCaharacter.CharacterSelected += OnCharacterSelected;
+        SelectPlayerCaharacter.ShowCellInformation(world, null);
+        ShowScreen(SelectPlayerCaharacter);
     }
 
     public void ShowStrategyUI()

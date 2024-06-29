@@ -70,3 +70,5 @@ MonoBehaviour:
     _path: Assets/Main/UI/Parts/BattleSoldierIconDefenceSide.uxml
   - _type: 1
     _path: Assets/Main/UI/Windows/MessageWindow.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Screens/SelectPlayerCaharacterScreen.uxml

@@ -37,17 +37,16 @@ public class Test : MonoBehaviour
 
     public void StartNewGame(int saveDataSlotNo)
     {
-        // TODO キャラ選択
         var world = SaveData.LoadDefaultWorldData(tilemap.Helper);
-        StartGame(world, null, saveDataSlotNo);
+        StartGame(world, null, saveDataSlotNo, true);
     }
 
     public void ResumeGame(WorldAndState ws, int saveDataSlotNo)
     {
-        StartGame(ws.World, ws.State, saveDataSlotNo);
+        StartGame(ws.World, ws.State, saveDataSlotNo, false);
     }
 
-    private void StartGame(WorldData world, SavedGameCoreState state, int saveDataSlotNo)
+    private void StartGame(WorldData world, SavedGameCoreState state, int saveDataSlotNo, bool isNewGame)
     {
         core = new GameCore(world, MainUI, tilemap, this, state, saveDataSlotNo);
         GameCore.Instance = core;
@@ -61,8 +60,22 @@ public class Test : MonoBehaviour
         hold = false;
         holdOnTurnEnd = false;
         setHoldOnHoldEnd = false;
-        
-        core.DoMainLoop().Foreget();
+
+        if (isNewGame)
+        {
+            // 操作キャラを選択してもらう。
+            // 初期表示はランダムにする。
+            MainUI.ShowSelectPlayerCharacterUI(world, chara =>
+            {
+                chara.IsPlayer = true;
+                Debug.Log($"Player selected: {chara.Name}");
+                core.DoMainLoop().Foreget();
+            });
+        }
+        else
+        {
+            core.DoMainLoop().Foreget();
+        }
     }
 
     private async void StrategyPhaseScreen_ActionButtonClicked(object sender, ActionButtonHelper button)
