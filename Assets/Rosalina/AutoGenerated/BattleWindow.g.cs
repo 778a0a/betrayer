@@ -104,8 +104,6 @@ public partial class BattleWindow
 
     public Button buttonResult { get; private set; }
 
-    public VisualElement VisualElement { get; private set; }
-
     public VisualElement Root { get; }
 
     public BattleWindow(VisualElement root)
@@ -156,6 +154,5 @@ public partial class BattleWindow
         buttonAttack = Root?.Q<Button>("buttonAttack");
         buttonRetreat = Root?.Q<Button>("buttonRetreat");
         buttonResult = Root?.Q<Button>("buttonResult");
-        VisualElement = Root?.Q<VisualElement>("VisualElement");
     }
 }
