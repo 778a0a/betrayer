@@ -20,6 +20,19 @@ partial class CommonActions
 
         public override async ValueTask Do(Character chara)
         {
+            var country = World.CountryOf(chara);
+            if (country != null)
+            {
+                var area = country.Areas
+                    .OrderBy(a => a.Position.y)
+                    .ThenBy(a => a.Position.x)
+                    .First();
+                UI.CountryInfo.ShowCellInformation(World, area.Position);
+            }
+            else
+            {
+                UI.CountryInfo.ShowCellInformation(World, World.Map.Areas[0].Position);
+            }
             UI.ShowCountryInfoScreen();
         }
     }
