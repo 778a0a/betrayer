@@ -139,13 +139,13 @@ public class Battle
 
     public static float TerrainDamageAdjustment(Terrain t) => t switch
     {
-        Terrain.LargeRiver => 0.35f,
-        Terrain.River => 0.20f,
+        Terrain.LargeRiver => 0.25f,
+        Terrain.River => 0.15f,
         Terrain.Plain => 0.00f,
         Terrain.Hill => -0.10f,
-        Terrain.Forest => -0.20f,
-        Terrain.Mountain => -0.30f,
-        Terrain.Fort => -0.35f,
+        Terrain.Forest => -0.15f,
+        Terrain.Mountain => -0.20f,
+        Terrain.Fort => -0.25f,
         _ => 0f,
     };
 
