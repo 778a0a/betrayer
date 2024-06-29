@@ -21,7 +21,7 @@ partial class PersonalActions
         public override int Cost(Character chara)
         {
             var averageLevel = chara.Force.Soldiers.Average(s => s.Level);
-            return (int)averageLevel;
+            return Mathf.Max(1, (int)averageLevel);
         }
 
         public override async ValueTask Do(Character chara)
