@@ -16,6 +16,8 @@ partial class PersonalActions
     public SeizeAction Seize { get; } = new();
     public class SeizeAction : PersonalActionBase
     {
+        public override string Description => "エリアを攻撃して奪取します。";
+
         public override bool CanSelect(Character chara) => World.IsFree(chara);
         public override int Cost(Character chara) => 3;
         protected override bool CanDoCore(Character chara) => true;

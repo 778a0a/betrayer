@@ -25,7 +25,7 @@ public partial class StrategyPhaseScreen : IScreen
         };
         foreach (var button in buttons)
         {
-            button.SetEventHandlers(labelCost,
+            button.SetEventHandlers(labelCost, labelHint,
                 () => debugCurrentChara,
                 b =>ActionButtonClicked?.Invoke(this, b));
         }

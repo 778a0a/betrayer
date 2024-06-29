@@ -16,6 +16,8 @@ partial class StrategyActions
     public ResignAction Resign { get; } = new();
     public class ResignAction : StrategyActionBase
     {
+        public override string Description => "勢力を捨てて放浪します。";
+
         public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara)
         {

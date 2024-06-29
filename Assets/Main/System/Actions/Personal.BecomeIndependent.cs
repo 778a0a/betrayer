@@ -16,6 +16,8 @@ partial class PersonalActions
     public BecomeIndependentAction BecomeIndependent { get; } = new();
     public class BecomeIndependentAction : PersonalActionBase
     {
+        public override string Description => "自勢力から独立します。";
+
         public override bool CanSelect(Character chara) =>
             World.IsVassal(chara) &&
             World.CountryOf(chara).Areas.Count > 10 &&

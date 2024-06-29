@@ -17,6 +17,8 @@ partial class MartialActions
     public SubdueAction Subdue { get; } = new();
     public class SubdueAction : MartialActionBase
     {
+        public override string Description => "配下を討伐します。";
+
         public override bool CanSelect(Character chara) => World.IsRuler(chara);
         public override int Cost(Character chara) => 5;
         protected override bool CanDoCore(Character chara) =>

@@ -32,6 +32,7 @@ public class ActionButtonHelper
     private ActionBase _Action;
     
     private Label labelCost;
+    private Label labelHint;
     private Func<Character> currentCharacterGetter;
     private Action<ActionButtonHelper> clickHandler;
 
@@ -43,10 +44,12 @@ public class ActionButtonHelper
 
     public void SetEventHandlers(
         Label labelCost,
+        Label labelHint,
         Func<Character> currentCharacterGetter,
         Action<ActionButtonHelper> clickHandler)
     {
         this.labelCost = labelCost;
+        this.labelHint = labelHint;
         this.currentCharacterGetter = currentCharacterGetter;
         this.clickHandler = clickHandler;
         Element.RegisterCallback<ClickEvent>(OnActionButtonClicked);
@@ -57,6 +60,7 @@ public class ActionButtonHelper
     private void OnActionButtonPointerEnter(PointerEnterEvent evt)
     {
         IsMouseOver = true;
+        labelHint.text = Action.Description;
         if (Action is CommonActionBase)
         {
             labelCost.text = "---";
@@ -70,6 +74,7 @@ public class ActionButtonHelper
     private void OnActionButtonPointerLeave(PointerLeaveEvent evt)
     {
         IsMouseOver = false;
+        labelHint.text = "";
         labelCost.text = "---";
     }
 

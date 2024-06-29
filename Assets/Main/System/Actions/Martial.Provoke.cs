@@ -17,6 +17,8 @@ partial class MartialActions
     public ProvokeAction Provoke { get; } = new();
     public class ProvokeAction : MartialActionBase
     {
+        public override string Description => "他国の将を挑発します。";
+
         public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);
         public override int Cost(Character chara) => 8;
         protected override bool CanDoCore(Character chara)

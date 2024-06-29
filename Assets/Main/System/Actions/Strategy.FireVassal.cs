@@ -16,6 +16,8 @@ partial class StrategyActions
     public FireVassalAction FireVassal { get; } = new();
     public class FireVassalAction : StrategyActionBase
     {
+        public override string Description => "配下を解雇します。";
+
         public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara)
         {

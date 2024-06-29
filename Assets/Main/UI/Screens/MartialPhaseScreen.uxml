@@ -27,7 +27,7 @@
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement style="flex-grow: 1;">
-            <engine:Label text="ここに説明文が表示されます。" name="labelHint" style="font-size: 30px;" />
+            <engine:Label text="" name="labelHint" style="font-size: 25px; height: 40px; -unity-text-align: middle-left;" />
             <engine:VisualElement name="CharaPanel" style="flex-grow: 1;">
                 <engine:VisualElement style="flex-grow: 1;">
                     <engine:VisualElement style="flex-grow: 0; flex-direction: row;" />

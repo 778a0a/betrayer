@@ -16,6 +16,8 @@ partial class PersonalActions
     public RebelAction Rebel { get; } = new();
     public class RebelAction : PersonalActionBase
     {
+        public override string Description => "反乱を起こします。";
+
         public override bool CanSelect(Character chara) => World.IsVassal(chara);
         public override int Cost(Character chara) => 10;
         protected override bool CanDoCore(Character chara) => true;

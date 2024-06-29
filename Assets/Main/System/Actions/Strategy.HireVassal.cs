@@ -16,6 +16,8 @@ partial class StrategyActions
     public HireVassalAction HireVassal { get; } = new();
     public class HireVassalAction : StrategyActionBase
     {
+        public override string Description => "配下を雇います。";
+
         public override int Cost(Character chara) => 8;
         protected override bool CanDoCore(Character chara)
         {

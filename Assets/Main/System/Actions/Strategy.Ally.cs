@@ -16,6 +16,8 @@ partial class StrategyActions
     public AllyAction Ally { get; } = new();
     public class AllyAction : StrategyActionBase
     {
+        public override string Description => "他勢力と同盟を結びます。";
+
         public override bool CanSelect(Character chara) =>
             base.CanSelect(chara) &&
             World.CountryOf(chara).Ally == null;

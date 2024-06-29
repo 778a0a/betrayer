@@ -16,6 +16,8 @@ partial class CommonActions
     public EndPhaseAction EndPhase { get; } = new();
     public class EndPhaseAction : CommonActionBase
     {
+        public override string Description => "次のフェイズに進みます。";
+
         public override async ValueTask Do(Character chara)
         {
             Test.Instance.hold = false;

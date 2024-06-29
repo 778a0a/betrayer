@@ -17,6 +17,8 @@ partial class MartialActions
     public PrivateFightAction PrivateFight { get; } = new();
     public class PrivateFightAction : MartialActionBase
     {
+        public override string Description => "同僚に戦いを仕掛けます。";
+
         public override bool CanSelect(Character chara) => World.IsVassal(chara);
         public override int Cost(Character chara) => 5;
         protected override bool CanDoCore(Character chara) =>

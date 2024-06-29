@@ -17,6 +17,8 @@ partial class MartialActions
     public DecisiveBattleAction DecisiveBattle { get; } = new();
     public class DecisiveBattleAction : MartialActionBase
     {
+        public override string Description => "隣接国と決戦を行います。";
+
         public override bool CanSelect(Character chara) => World.IsRuler(chara);
         public override int Cost(Character chara) => 10;
         protected override bool CanDoCore(Character chara) => true; // TODO

@@ -16,6 +16,8 @@ partial class StrategyActions
     public ChangeAllianceStanceAction ChangeAllianceStance { get; } = new();
     public class ChangeAllianceStanceAction : StrategyActionBase
     {
+        public override string Description => "同盟継続方針を更新します。";
+
         public static int MaxTurnCountToDisableAlliance = 5;
 
         public override bool CanSelect(Character chara) =>

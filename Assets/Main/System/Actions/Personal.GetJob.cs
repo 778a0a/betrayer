@@ -16,6 +16,8 @@ partial class PersonalActions
     public GetJobAction GetJob { get; } = new();
     public class GetJobAction : PersonalActionBase
     {
+        public override string Description => "既存勢力に仕官します。";
+
         public override bool CanSelect(Character chara) => World.IsFree(chara);
         public override int Cost(Character chara) => 10;
         protected override bool CanDoCore(Character chara) => chara.IsPlayer ? 

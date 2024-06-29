@@ -28,6 +28,7 @@ public class ActionBase
     protected MainUI UI => Core.MainUI;
     protected TilemapManager Tilemap => Core.Tilemap; 
 
+    public virtual string Description => $"(説明文なし: {GetType().Name})";
     /// <summary>
     /// 選択肢として表示可能ならtrue
     /// </summary>

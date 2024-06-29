@@ -16,6 +16,8 @@ partial class PersonalActions
     public HireSoldierAction HireSoldier { get; } = new();
     public class HireSoldierAction : PersonalActionBase
     {
+        public override string Description => "兵士を雇います。";
+
         public override int Cost(Character chara) => 2;
         protected override bool CanDoCore(Character chara) => chara.Force.HasEmptySlot;
 

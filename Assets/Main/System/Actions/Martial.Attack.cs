@@ -17,6 +17,8 @@ partial class MartialActions
     public AttackAction Attack { get; } = new();
     public class AttackAction : MartialActionBase
     {
+        public override string Description => "隣接国に侵攻します。";
+
         public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);
         public override int Cost(Character chara) => 3;
         protected override bool CanDoCore(Character chara)

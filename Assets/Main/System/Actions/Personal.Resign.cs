@@ -16,6 +16,8 @@ partial class PersonalActions
     public ResignAction Resign { get; } = new();
     public class ResignAction : PersonalActionBase
     {
+        public override string Description => "勢力を捨てて自由になります。";
+
         public override bool CanSelect(Character chara) => World.IsVassal(chara); // Rulerは戦略フェイズで可能
         public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara) =>
