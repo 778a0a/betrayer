@@ -28,7 +28,12 @@ public class SaveData
             Characters = charas,
             Countries = countries,
         };
-        return saveData.RestoreWorldData(tilemapHelper);
+        var world = saveData.RestoreWorldData(tilemapHelper);
+        foreach (var chara in world.Characters)
+        {
+            foreach (var s in chara.Force.Soldiers) s.Hp = s.MaxHp;
+        }
+        return world;
     }
 
     public static void SaveDefaultWorldData(WorldData world)

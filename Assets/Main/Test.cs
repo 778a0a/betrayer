@@ -71,6 +71,7 @@ public class Test : MonoBehaviour
                 Debug.Log($"Player selected: {chara.Name}");
                 core.DoMainLoop().Foreget();
             });
+            MessageWindow.Show("操作キャラを選択してください。");
         }
         else
         {
