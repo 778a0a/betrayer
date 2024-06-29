@@ -100,7 +100,7 @@ public class Character
     public int Urami { get; set; } = 0;
     public void AddUrami(int value)
     {
-        Urami += value;
+        Urami = Mathf.Clamp(Urami + value, 0, 100);
     }
 
     /// <summary>

@@ -35,6 +35,13 @@ public class StartPhase : PhaseBase
             Debug.Log("[開始フェイズ] オートセーブを行いました。");
         }
 
+        // 恨みを減らす。
+        for (int i = 0; i < Characters.Length; i++)
+        {
+            var chara = Characters[i];
+            chara.AddUrami(-1);
+        }
+
         // タイル状態更新
         foreach (var country in Countries)
         {
