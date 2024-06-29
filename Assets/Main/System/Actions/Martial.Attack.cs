@@ -103,7 +103,6 @@ partial class MartialActions
                 // 配下の場合は本当に侵攻するか確認する。
                 else
                 {
-                    Util.Todo();
                     attacker = chara;
                 }
             }
@@ -121,7 +120,10 @@ partial class MartialActions
                         // 攻撃が得意なキャラが選ばれやすくしてみる。
                         .RandomPickWeighted(c => (float)c.Attack / c.Defense);
                 }
-
+                if (attacker.IsPlayer)
+                {
+                    await MessageWindow.Show("出撃命令が下りました。");
+                }
             }
 
             // 防衛側キャラを選択する。
@@ -213,6 +215,10 @@ partial class MartialActions
                     targetArea,
                     targetCountry,
                     World);
+            }
+            else if (defender.IsPlayer)
+            {
+                await MessageWindow.Show("防衛命令が下りました。");
             }
 
             return defender;
