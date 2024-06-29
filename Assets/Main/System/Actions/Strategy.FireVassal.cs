@@ -30,25 +30,52 @@ partial class StrategyActions
             Assert.IsTrue(CanDo(chara));
 
             var country = World.CountryOf(chara);
-
+            var target = default(Character);
             if (chara.IsPlayer)
             {
                 // どのキャラを解雇するか選択する。
-                var selected = await UI.ShowFireVassalUI(country, World);
-                if (selected == null)
+                target = await UI.ShowFireVassalUI(country, World);
+                if (target == null)
                 {
                     Debug.Log("キャンセルされました。");
                     return;
                 }
-                country.Vassals.Remove(selected);
-                country.RecalculateSalary();
             }
             else
             {
                 // 一番弱い配下を解雇する。
-                var target = country.Vassals.OrderBy(c => c.Power).First();
-                country.Vassals.Remove(target);
-                country.RecalculateSalary();
+                target = country.Vassals.OrderBy(c => c.Power).First();
+            }
+
+            if (!target.IsPlayer)
+            {
+                // 戦力に応じて一定確率で拒否される。
+                var powerBalance = (float)target.Power / chara.Power;
+                if (powerBalance.Chance() || (chara.IsPlayer && target.Urami > 0))
+                {
+                    Debug.Log($"{target.Name}は{chara.Name}の解雇を拒否しました。");
+                    if (chara.IsPlayer)
+                    {
+                        await MessageWindow.Show($"拒否されました。");
+                        target.AddUrami(30);
+                    }
+                    PayCost(chara);
+                    return;
+                }
+            }
+
+            country.Vassals.Remove(target);
+            country.RecalculateSalary();
+            Debug.Log($"{target.Name}は{chara.Name}によって追放されました。");
+
+            if (chara.IsPlayer)
+            {
+                await MessageWindow.Show($"{target.Name}を追放しました。");
+                target.AddUrami(30);
+            }
+            if (target.IsPlayer)
+            {
+                await MessageWindow.Show($"あなたは勢力から追放されました。");
             }
 
             Core.Tilemap.DrawCountryTile();
