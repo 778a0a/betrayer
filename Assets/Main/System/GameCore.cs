@@ -33,6 +33,7 @@ public class GameCore
     public CommonActions CommonActions { get; private set; }
 
     public int TurnCount { get; private set; } = 1;
+    public int LastDecisiveBattleTurnCount { get; set; } = -100;
     public PhaseBase CurrentPhase { get; private set; }
     public int SaveDataSlotNo { get; set; }
 
@@ -60,6 +61,7 @@ public class GameCore
             IsResumingGame = true;
             ResumingGameState = state;
             TurnCount = state.TurnCount;
+            LastDecisiveBattleTurnCount = state.LastDecisiveBattleTurnCount;
         }
 
         Phases = new(this, test);

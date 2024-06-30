@@ -65,6 +65,9 @@ public class Country
 
     public bool IsPlayerCountry => Members.Any(m => m.IsPlayer);
 
+    public int SoldierCount => Members.Sum(m => m.Force.SoldierCount);
+    public int Power => Members.Sum(m => m.Force.Power);
+
     public int TotalIncome => 10 + Areas.Select(IncomeOf).Sum();
     private static int IncomeOf(Area a) => a.Terrain switch
     {

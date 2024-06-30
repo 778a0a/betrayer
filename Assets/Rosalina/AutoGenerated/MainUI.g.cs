@@ -31,6 +31,8 @@ public partial class MainUI
 
     public BattleWindow BattleWindow { get; private set; }
 
+    public KessenWindow KessenWindow { get; private set; }
+
     public SystemWindow SystemWindow { get; private set; }
 
     public MessageWindow MessageWindow { get; private set; }
@@ -50,6 +52,7 @@ public partial class MainUI
         buttonToggleDebugUI = Root?.Q<Button>("buttonToggleDebugUI");
         DebugUI = Root?.Q<VisualElement>("DebugUI");
         BattleWindow = new BattleWindow(Root?.Q<VisualElement>("BattleWindow"));
+        KessenWindow = new KessenWindow(Root?.Q<VisualElement>("KessenWindow"));
         SystemWindow = new SystemWindow(Root?.Q<VisualElement>("SystemWindow"));
         MessageWindow = new MessageWindow(Root?.Q<VisualElement>("MessageWindow"));
         DebugUIParent = Root?.Q<VisualElement>("DebugUIParent");

@@ -24,8 +24,8 @@ public partial class CountryRulerInfo
         labelTotalIncome.text = country.TotalIncome.ToString();
         labelTotalGold.text = country.Members.Select(m => m.Gold).Sum().ToString();
         labelMemberCount.text = country.Members.Count().ToString();
-        labelSoldierCount.text = country.Members.Sum(m => m.Force.SoldierCount).ToString();
-        labelTotalPower.text = country.Members.Select(m => m.Power).Sum().ToString();
+        labelSoldierCount.text = country.SoldierCount.ToString();
+        labelTotalPower.text = country.Power.ToString();
         if (country.Ally != null)
         {
             labelAlly.text = country.Ally.Ruler.Name;

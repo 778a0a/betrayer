@@ -1,0 +1,30 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="BattleSoldierIconDefenceSide" src="project://database/Assets/Main/UI/Parts/BattleSoldierIconDefenceSide.uxml?fileID=9197481963319205126&amp;guid=eb4167ec8e59464468104fe6ed9fc8e3&amp;type=3#BattleSoldierIconDefenceSide" />
+    <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
+    <engine:VisualElement style="flex-direction: row; margin-right: 10px; margin-bottom: 10px; justify-content: flex-end;">
+        <engine:VisualElement name="DefenderSoldiers" style="width: 270px; margin-right:75px; flex-direction: column;">
+            <engine:VisualElement style="flex-direction: row; height: 20px;">
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier10" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier11" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier12" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier13" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier14" />
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-direction: row; height: 20px;">
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier05" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier06" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier07" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier08" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier09" />
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-direction: row; height: 20px;">
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier00" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier01" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier02" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier03" />
+                <engine:Instance template="BattleSoldierIconDefenceSide" name="DefenderSoldier04" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="imageDefender" style="flex-grow: 0; width: 80px; height: 80px;" />
+    </engine:VisualElement>
+</engine:UXML>

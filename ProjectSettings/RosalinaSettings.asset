@@ -72,3 +72,9 @@ MonoBehaviour:
     _path: Assets/Main/UI/Windows/MessageWindow.uxml
   - _type: 1
     _path: Assets/Main/UI/Screens/SelectPlayerCaharacterScreen.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Windows/KessenWindow.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Parts/KessenMemberAttackSide.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Parts/KessenMemberDefenceSide.uxml

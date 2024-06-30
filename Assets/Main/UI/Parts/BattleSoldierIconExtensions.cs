@@ -14,7 +14,7 @@ public static class BattleSoldierIconExtensions
 {
     public static void SetData(this IBattleSoldierIcon el, Soldier soldier)
     {
-        if (soldier.IsEmptySlot)
+        if (soldier == null || soldier.IsEmptySlot)
         {
             el.Root.style.visibility = Visibility.Hidden;
             return;

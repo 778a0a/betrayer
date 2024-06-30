@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.XR;
 
 public partial class MainUI : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public partial class MainUI : MonoBehaviour
         InitializeDocument();
         InitializeScreens();
         BattleWindow.Initialize();
+        KessenWindow.Initialize();
         SystemWindow.Initialize();
         MessageWindow.Initialize();
 
@@ -273,6 +275,25 @@ public partial class MainUI : MonoBehaviour
                 if (target == country) return (false, "自国です。");
                 if (target.Ally != null) return (false, "すでに別の国と同盟を結んでいます。");
                 else return (true, "この国と同盟を結びますか？");
+            });
+    }
+
+    public ValueTask<Country> ShowSelectDecisiveBattleTargetScreen(
+        Country country,
+        List<Country> cands,
+        WorldData world)
+    {
+        ShowScreen(SelectCountry);
+
+        return SelectCountry.Show(
+            "決戦を行う国を選択してください。",
+            world,
+            target =>
+            {
+                if (target == country) return (false, "自国です。");
+                if (!MartialActions.DecisiveBattleAction.CanBattle(country, target)) return (false, "相手が弱小すぎます。");
+                if (!cands.Contains(target)) return (false, "この国とは決戦できません。");
+                else return (true, "この国と決戦を行いますか？");
             });
     }
 

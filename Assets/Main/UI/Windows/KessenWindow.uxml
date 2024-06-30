@@ -1,0 +1,52 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="KessenMemberAttackSide" src="project://database/Assets/Main/UI/Parts/KessenMemberAttackSide.uxml?fileID=9197481963319205126&amp;guid=265149f9f3fee844d91285c5d274c73b&amp;type=3#KessenMemberAttackSide" />
+    <engine:Template name="KessenMemberDefenceSide" src="project://database/Assets/Main/UI/Parts/KessenMemberDefenceSide.uxml?fileID=9197481963319205126&amp;guid=3e4070fe42d562143ae66497548d1747&amp;type=3#KessenMemberDefenceSide" />
+    <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
+    <engine:VisualElement style="flex-grow: 1; position: absolute; top: 0; right: 0; left: 0; bottom: 0; justify-content: center; align-items: center;">
+        <engine:VisualElement class="bg" style="flex-grow: 1; width: 840px; height: 1080px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-self: flex-end; justify-content: center;">
+            <engine:VisualElement class="border" style="flex-grow: 1; display: flex;">
+                <engine:VisualElement style="flex-direction: row;">
+                    <engine:VisualElement class="attacker-info" style="flex-grow: 1; flex-direction: row;">
+                        <engine:Label text="攻撃" />
+                        <engine:Label text="ハイペリオン" name="AttackerName" />
+                    </engine:VisualElement>
+                    <engine:VisualElement class="defender-info" style="flex-grow: 1; flex-direction: row-reverse;">
+                        <engine:Label text="防衛" />
+                        <engine:Label text="ハイペリオン" name="DefenderName" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+                <engine:VisualElement style="flex-direction: row; margin-top: 20px;">
+                    <engine:VisualElement style="flex-shrink: 0; flex-grow: 1;">
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker00" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker01" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker02" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker03" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker04" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker05" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker06" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker07" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker08" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberAttackSide" name="Attacker09" style="flex-shrink: 0;" />
+                    </engine:VisualElement>
+                    <engine:VisualElement style="flex-shrink: 0; flex-grow: 1;">
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender00" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender01" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender02" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender03" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender04" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender05" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender06" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender07" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender08" style="flex-shrink: 0;" />
+                        <engine:Instance template="KessenMemberDefenceSide" name="Defender09" style="flex-shrink: 0;" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: center; bottom: 0; position: absolute; right: 0; left: 0;">
+                <engine:Button text="攻撃" name="buttonAttack" />
+                <engine:Button text="撤退" name="buttonRetreat" />
+                <engine:Button text="攻撃側の勝利" name="buttonResult" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
