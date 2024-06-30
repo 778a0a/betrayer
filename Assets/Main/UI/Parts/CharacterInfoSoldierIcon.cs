@@ -6,7 +6,7 @@ public partial class CharacterInfoSoldierIcon
 {
     public void SetData(Soldier s)
     {
-        if (s.IsEmptySlot)
+        if (s == null || s.IsEmptySlot)
         {
             imageSoldier.image = SoldierImageManager.Instance.GetEmptyTexture();
             labelHp.text = "--";

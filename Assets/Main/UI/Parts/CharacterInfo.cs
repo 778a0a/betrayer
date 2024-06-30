@@ -34,6 +34,11 @@ public partial class CharacterInfo
         if (chara == null)
         {
             Root.style.visibility = Visibility.Hidden;
+            for (int i = 0; i < SoldierIconCount; i++)
+            {
+                var icon = SoldierIconOf(i);
+                icon.SetData(null);
+            }
             return;
         }
         Root.style.visibility = Visibility.Visible;
