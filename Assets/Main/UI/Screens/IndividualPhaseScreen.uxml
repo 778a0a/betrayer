@@ -2,7 +2,7 @@
     <engine:Template name="SoldierInfoLarge" src="project://database/Assets/Main/UI/Parts/SoldierInfoLarge.uxml?fileID=9197481963319205126&amp;guid=9d1bddbc38fcec249a34521a838a749f&amp;type=3#SoldierInfoLarge" />
     <engine:Template name="CountryRulerInfo" src="project://database/Assets/Main/UI/Parts/CountryRulerInfo.uxml?fileID=9197481963319205126&amp;guid=8cb724703f2c9d7498eef4979f2a94b3&amp;type=3#CountryRulerInfo" />
     <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
-    <engine:VisualElement style="flex-grow: 1; flex-direction: row; margin-left: -8px;">
+    <engine:VisualElement style="flex-grow: 1; flex-direction: row; margin-left: -3px;">
         <engine:VisualElement name="ActionsPanel">
             <engine:VisualElement style="flex-grow: 0;">
                 <engine:Label text="個人フェイズ" style="font-size: 30px;" />
