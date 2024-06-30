@@ -104,6 +104,9 @@ partial class MartialActions
                 Util.Todo();
             }
 
+            var attackableArea = World.GetAttackableAreas(target).First();
+            Core.MartialActions.Attack.contexts[chara] = (target, attackableArea);
+
             Core.LastDecisiveBattleTurnCount = Core.TurnCount;
             PayCost(chara);
         }

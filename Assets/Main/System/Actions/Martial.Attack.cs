@@ -17,7 +17,7 @@ partial class MartialActions
     public AttackAction Attack { get; } = new();
     public class AttackAction : MartialActionBase
     {
-        private readonly Dictionary<Character, (Country, Area)> contexts = new();
+        public readonly Dictionary<Character, (Country, Area)> contexts = new();
 
         public override string Description => "隣接国に侵攻します。";
 
