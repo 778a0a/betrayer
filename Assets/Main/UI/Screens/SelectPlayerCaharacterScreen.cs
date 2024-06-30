@@ -84,9 +84,9 @@ public partial class SelectPlayerCaharacterScreen : IScreen
     {
         // デバッグ中なら観戦を有効にする。
 #if UNITY_EDITOR
-        buttonRandom.style.display = DisplayStyle.Flex;
+        buttonWatch.style.display = DisplayStyle.Flex;
 #else
-        buttonRandom.style.display = DisplayStyle.None;
+        buttonWatch.style.display = DisplayStyle.None;
 #endif
 
         if (pos == null && !isShowingFreeList)
