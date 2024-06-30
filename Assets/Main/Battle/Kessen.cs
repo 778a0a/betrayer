@@ -163,6 +163,19 @@ public class Kessen
             m.Character.Prestige += gainPerMember;
         }
 
+        // 攻撃側の勝ち
+        if (result == BattleResult.AttackerWin)
+        {
+            foreach (var m in Attacker.Members) m.Character.Contribution += 30;
+            foreach (var m in Defender.Members) m.Character.Contribution += 5;
+        }
+        // 防衛側の勝ち
+        else
+        {
+            foreach (var m in Attacker.Members) m.Character.Contribution += 5;
+            foreach (var m in Defender.Members) m.Character.Contribution += 30;
+        }
+
         return result;
     }
 

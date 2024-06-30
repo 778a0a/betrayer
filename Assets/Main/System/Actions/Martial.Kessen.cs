@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Random = UnityEngine.Random;
@@ -85,19 +84,6 @@ partial class MartialActions
 
             var kessen = global::Kessen.Prepare(country, target);
             var result = await kessen.Do();
-
-            // 攻撃側の勝ち
-            if (result == BattleResult.AttackerWin)
-            {
-                foreach (var m in kessen.Attacker.Members) m.Character.Contribution += 30;
-                foreach (var m in kessen.Defender.Members) m.Character.Contribution += 5;
-            }
-            // 防衛側の勝ち
-            else
-            {
-                foreach (var m in kessen.Attacker.Members) m.Character.Contribution += 5;
-                foreach (var m in kessen.Defender.Members) m.Character.Contribution += 30;
-            }
 
             if (country.Vassals.Any(m => m.IsPlayer) || target.Members.Any(m => m.IsPlayer))
             {

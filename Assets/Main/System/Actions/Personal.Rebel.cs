@@ -34,31 +34,84 @@ partial class PersonalActions
 
             var country = World.CountryOf(chara);
             var ruler = country.Ruler;
+            country.Vassals.Remove(chara);
 
-            var target = country.Areas.RandomPick();
-            var source = World.Map.GetNeighbors(target).RandomPick();
-            
-            var battle = BattleManager.Prepare(source, target, chara, ruler, this);
-            var result = await battle.Do();
+            var newCountry = new Country()
+            {
+                Id = World.Countries.Max(c => c.Id) + 1,
+                ColorIndex = Enumerable.Range(0, 50)
+                    .Except(World.Countries.Select(c => c.ColorIndex))
+                    .RandomPick(),
+                Areas = new List<Area>(),
+                Ruler = chara,
+                Vassals = new List<Character>(),
+            };
+            World.Countries.Add(newCountry);
 
-            // 勝ったら君主に成り上がる。
+            // 反乱に加担するか確認する。
+            var asked = false;
+            foreach (var vassal in country.Vassals.ToList())
+            {
+                if (vassal.IsPlayer)
+                {
+                    var res = await MessageWindow.Show($"{chara.Name}が君主に対して反乱を起こしました！\n加担しますか？", MessageBoxButton.YesNo);
+                    asked = true;
+                    if (res == MessageBoxResult.Yes)
+                    {
+                        newCountry.Vassals.Add(vassal);
+                        country.Vassals.Remove(vassal);
+                    }
+                }
+                else
+                {
+                    var loyalty = vassal.Loyalty;
+                    var percent = (100f - loyalty) / 30;
+                    if (ruler.IsPlayer && vassal.Urami > 0) percent *= vassal.Urami;
+                    if (percent.Chance())
+                    {
+                        newCountry.Vassals.Add(vassal);
+                        country.Vassals.Remove(vassal);
+                    }
+                }
+            }
+            country.RecalculateSalary();
+            newCountry.RecalculateSalary();
+
+            if (!asked)
+            {
+                await MessageWindow.Show($"{chara.Name}が{ruler.Name}に対して反乱を起こしました！");
+            }
+            var kessen = Kessen.Prepare(newCountry, country);
+            var result = await kessen.Do();
+
+            // 勝ったら元の国を全て取得する。
             if (result == BattleResult.AttackerWin)
             {
-                var oldRuler = country.Ruler;
-                country.Ruler = chara;
-                country.Vassals.Remove(chara);
-                country.RecalculateSalary();
+                foreach (var area in country.Areas.ToList())
+                {
+                    newCountry.Areas.Add(area);
+                    country.Areas.Remove(area);
+                    Core.Tilemap.SetExhausted(area, newCountry.IsExhausted);
+                }
+                Core.Tilemap.DrawCountryTile();
+
+                // 国を削除する。
+                World.Countries.Remove(country);
+                foreach (var c in World.Countries)
+                {
+                    if (c.Ally == country) c.Ally = null;
+                }
+
                 if (chara.IsPlayer)
                 {
                     await MessageWindow.Show("反乱成功！\n新しい君主になりました。");
-                    oldRuler.AddUrami(30);
+                    ruler.AddUrami(30);
                 }
             }
             // 負けたら未所属になる。
             else
             {
-                country.Vassals.Remove(chara);
-                country.RecalculateSalary();
+                World.Countries.Remove(newCountry);
                 if (chara.IsPlayer)
                 {
                     await MessageWindow.Show("反乱は失敗し、勢力を追放されました。");

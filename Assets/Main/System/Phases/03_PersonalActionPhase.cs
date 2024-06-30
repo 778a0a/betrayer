@@ -41,16 +41,6 @@ public class PersonalActionPhase : PhaseBase
             // NPCの場合
             else
             {
-                //if (World.IsVassal(chara) && chara.Loyalty < 90)
-                //{
-                //    // 忠誠度が一定以下なら、一定確率で反抗的行動を行う。
-                //    var percent = (90 - chara.Loyalty) / 100f;
-                //    var hindo = 10;
-                //    if (Random.value <  percent / hindo)
-                //    {
-                //    }
-                //}
-
                 var prevGold = chara.Gold;
                 var prevPower = chara.Power;
                 var hireCount = 0;
@@ -61,6 +51,21 @@ public class PersonalActionPhase : PhaseBase
                     await PersonalActions.HireSoldier.Do(chara);
                     hireCount++;
                 }
+
+                if (PersonalActions.Rebel.CanDo(chara) && chara.Loyalty < 90)
+                {
+                    var country = World.CountryOf(chara);
+
+                    // 忠誠度が一定以下なら、一定確率で反抗的行動を行う。
+                    var percent = (90 - chara.Loyalty) / 100f;
+                    var chance = percent / 50; // 50ターンに1回反乱を起こす確率がpercent
+                    if (country.Ruler.IsPlayer && chara.Urami > 0) chance *= chara.Urami;
+                    if (chance.Chance())
+                    {
+                        await PersonalActions.Rebel.Do(chara);
+                    }
+                }
+
                 // 訓練できるなら訓練する。
                 while (PersonalActions.TrainSoldiers.CanDo(chara))
                 {
