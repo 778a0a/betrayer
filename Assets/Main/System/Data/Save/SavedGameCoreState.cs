@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 public class SavedGameCoreState
 {
     public int TurnCount { get; set; }
-    public int LastDecisiveBattleTurnCount { get; set; }
+    public int LastKessenTurnCount { get; set; }
     public string CurrentPhase { get; set; }
     public int[] CurrentActionOrder { get; set; }
 
@@ -35,6 +35,7 @@ public class SavedGameCoreState
         return new SavedGameCoreState
         {
             TurnCount = core.TurnCount,
+            LastKessenTurnCount = core.LastKessenTurnCount,
             CurrentPhase = phase.GetType().Name,
             CurrentActionOrder = phase.ActionOrder.Select(c => c.Id).ToArray(),
         };

@@ -37,7 +37,9 @@ partial class MartialActions
         /// <summary>
         /// 決戦禁止期間ならtrue
         /// </summary>
-        private bool IsCoolingPeriod => Core.TurnCount - Core.LastDecisiveBattleTurnCount < 5;
+        public bool IsCoolingPeriod => Core.TurnCount - Core.LastKessenTurnCount < CoolingPeriod;
+        public int CoolingPeriod => 5;
+
         /// <summary>
         /// 決戦を仕掛けることができる国のリストを返します。
         /// </summary>
@@ -107,7 +109,7 @@ partial class MartialActions
             var attackableArea = World.GetAttackableAreas(target).First();
             Core.MartialActions.Attack.contexts[chara] = (target, attackableArea);
 
-            Core.LastDecisiveBattleTurnCount = Core.TurnCount;
+            Core.LastKessenTurnCount = Core.TurnCount;
             PayCost(chara);
         }
     }

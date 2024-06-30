@@ -59,15 +59,41 @@ public class ActionButtonHelper
 
     private void OnActionButtonPointerEnter(PointerEnterEvent evt)
     {
+        var chara = currentCharacterGetter();
         IsMouseOver = true;
-        labelHint.text = Action.Description;
+        if (Action is MartialActions.KessenAction kessen)
+        {
+            if (kessen.IsCoolingPeriod)
+            {
+                var turnElapsed = Core.TurnCount - Core.LastKessenTurnCount;
+                var remaining = kessen.CoolingPeriod - turnElapsed;
+                labelHint.text = $"決戦禁止期間です。(残り{remaining}ターン)";
+            }
+            else if (Core.World.Countries.Any(c => c.IsExhausted))
+            {
+                labelHint.text = "軍事フェイズの先頭の国のみ実行可能です。";
+            }
+            else if (!kessen.Candidates(Core.World.CountryOf(chara)).Any())
+            {
+                labelHint.text = "決戦を仕掛けられる国がありません。";
+            }
+            else
+            {
+                labelHint.text = Action.Description;
+            }
+        }
+        else
+        {
+            labelHint.text = Action.Description;
+        }
+
         if (Action is CommonActionBase)
         {
             labelCost.text = "---";
         }
         else
         {
-            labelCost.text = Action.Cost(currentCharacterGetter()).ToString();
+            labelCost.text = Action.Cost(chara).ToString();
         }
     }
 
