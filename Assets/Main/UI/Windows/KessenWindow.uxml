@@ -42,7 +42,7 @@
                     </engine:VisualElement>
                 </engine:VisualElement>
             </engine:VisualElement>
-            <engine:VisualElement style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: center; bottom: 0; position: absolute; right: 0; left: 0;">
+            <engine:VisualElement style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: center; bottom: 10px; position: absolute; right: 0; left: 0;">
                 <engine:Button text="攻撃" name="buttonAttack" />
                 <engine:Button text="撤退" name="buttonRetreat" />
                 <engine:Button text="攻撃側の勝利" name="buttonResult" />
