@@ -118,14 +118,39 @@ public class GameCore
                 {
                     var winner = World.Countries[0];
                     Debug.Log($"ゲーム終了 勝者: {winner} ターン数: {TurnCount}");
+                    var isWin = false;
                     foreach (var c in winner.Members)
                     {
                         if (c.IsPlayer)
                         {
+                            isWin = true;
                             GameCleared = true;
                             break;
                         }
                     }
+
+                    // 兵力を回復させる。
+                    foreach (var c in World.Characters)
+                    {
+                        foreach (var s in c.Force.Soldiers)
+                        {
+                            s.Hp = s.MaxHp;
+                        }
+                    }
+
+                    var powerOrder = World.Characters.OrderByDescending(c => c.Force.SoldierCount)
+                        .ThenBy(c => c.IsPlayer ? 0 : 1)
+                        .ToList();
+                    var player = World.Characters.FirstOrDefault(c => c.IsPlayer) ?? World.Characters[0];
+                    var order = powerOrder.IndexOf(player) + 1;
+
+                    await MessageWindow.Show(string.Join("\n", new[]
+                    {
+                        "ゲーム終了！",
+                        $"結果: {(isWin ? "あなたの勢力が統一を果たしました！" : "あなたは統一を果たせませんでした...")}",
+                        $"最終ターン: {TurnCount}",
+                        $"あなたの最終兵力: {player.Force.SoldierCount} ({order}位)"
+                    }));
                     return;
                 }
 
