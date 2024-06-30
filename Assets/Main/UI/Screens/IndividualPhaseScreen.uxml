@@ -39,12 +39,12 @@
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 1;">
                             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="将軍" name="labelTitle" />
-                                <engine:Label text="ハイペリオン" name="labelName" />
+                                <engine:Label text="将軍" name="labelTitle" style="font-size: 38px;" />
+                                <engine:Label text="ハイペリオン" name="labelName" style="font-size: 38px;" />
                             </engine:VisualElement>
                             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="給料配分%" />
-                                <engine:Label text="888" name="labelSalaryRatio" />
+                                <engine:Label text="給料配分%" style="font-size: 38px;" />
+                                <engine:Label text="888" name="labelSalaryRatio" style="font-size: 38px;" />
                             </engine:VisualElement>
                         </engine:VisualElement>
                     </engine:VisualElement>
