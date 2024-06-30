@@ -47,13 +47,13 @@ public class MartialActionPhase : PhaseBase
                     Debug.Log($"[軍事フェイズ] 君主 {chara.Name} の行動を開始します。G: {chara.Gold}");
 
                     // 決戦する。
-                    if (MartialActions.DecisiveBattle.CanDo(chara))
+                    if (MartialActions.Kessen.CanDo(chara))
                     {
-                        var cands = MartialActions.DecisiveBattle.Candidates(country);
+                        var cands = MartialActions.Kessen.Candidates(country);
                         if (cands.Any(c => country.Power * 0.95f > c.Power) && 0.1.Chance())
                         {
                             Debug.Log($"[軍事フェイズ] 決戦します。");
-                            await MartialActions.DecisiveBattle.Do(chara);
+                            await MartialActions.Kessen.Do(chara);
                         }
                     }
 

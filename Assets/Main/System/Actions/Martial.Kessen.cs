@@ -15,8 +15,8 @@ partial class MartialActions
     /// <summary>
     /// 決戦
     /// </summary>
-    public DecisiveBattleAction DecisiveBattle { get; } = new();
-    public class DecisiveBattleAction : MartialActionBase
+    public KessenAction Kessen { get; } = new();
+    public class KessenAction : MartialActionBase
     {
         public override string Description => "隣接国と決戦を行います。";
 
@@ -81,7 +81,7 @@ partial class MartialActions
 
             await MessageWindow.Show($"{country.Name}が{target.Name}に決戦を仕掛けました。");
 
-            var kessen = Kessen.Prepare(country, target);
+            var kessen = global::Kessen.Prepare(country, target);
             var result = await kessen.Do();
 
             // 攻撃側の勝ち

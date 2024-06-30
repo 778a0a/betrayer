@@ -15,7 +15,7 @@ public partial class MartialPhaseScreen : IScreen
         {
             ActionButtonHelper.Common(buttonShowInfo, a => a.ShowInfo),
             ActionButtonHelper.Martial(buttonAttack, a => a.Attack),
-            ActionButtonHelper.Martial(buttonDecisiveBattle, a => a.DecisiveBattle),
+            ActionButtonHelper.Martial(buttonDecisiveBattle, a => a.Kessen),
             ActionButtonHelper.Martial(buttonProvoke, a => a.Provoke),
             ActionButtonHelper.Martial(buttonSubdue, a => a.Subdue),
             ActionButtonHelper.Martial(buttonPrivateFight, a => a.PrivateFight),

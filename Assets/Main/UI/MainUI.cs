@@ -291,7 +291,7 @@ public partial class MainUI : MonoBehaviour
             target =>
             {
                 if (target == country) return (false, "自国です。");
-                if (!MartialActions.DecisiveBattleAction.CanBattle(country, target)) return (false, "相手が弱小すぎます。");
+                if (!MartialActions.KessenAction.CanBattle(country, target)) return (false, "相手が弱小すぎます。");
                 if (!cands.Contains(target)) return (false, "この国とは決戦できません。");
                 else return (true, "この国と決戦を行いますか？");
             });
