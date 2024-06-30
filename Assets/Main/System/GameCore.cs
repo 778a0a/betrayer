@@ -137,20 +137,38 @@ public class GameCore
                             s.Hp = s.MaxHp;
                         }
                     }
+                    var player = World.Characters.FirstOrDefault(c => c.IsPlayer) ?? World.Characters[0];
 
-                    var powerOrder = World.Characters.OrderByDescending(c => c.Force.SoldierCount)
+                    var powerOrderList = World.Characters.OrderByDescending(c => c.Force.SoldierCount)
                         .ThenBy(c => c.IsPlayer ? 0 : 1)
                         .ToList();
-                    var player = World.Characters.FirstOrDefault(c => c.IsPlayer) ?? World.Characters[0];
-                    var order = powerOrder.IndexOf(player) + 1;
+                    var powerOrder = powerOrderList.IndexOf(player) + 1;
+
+                    var prestigeOrderList = World.Characters.OrderByDescending(c => c.Prestige)
+                        .ThenBy(c => c.IsPlayer ? 0 : 1)
+                        .ToList();
+                    var prestigeOrder = prestigeOrderList.IndexOf(player) + 1;
+
+                    var contributionOrderList = World.Characters.OrderByDescending(c => c.Contribution)
+                        .ThenBy(c => c.IsPlayer ? 0 : 1)
+                        .ToList();
+                    var contributionOrder = contributionOrderList.IndexOf(player) + 1;
 
                     await MessageWindow.Show(string.Join("\n", new[]
                     {
                         "ゲーム終了！",
-                        $"結果: {(isWin ? "あなたの勢力が統一を果たしました！" : "あなたは統一を果たせませんでした...")}",
                         $"最終ターン: {TurnCount}",
-                        $"あなたの最終兵力: {player.Force.SoldierCount} ({order}位)"
+                        $"勝者: {winner.Name}",
+                        $"{(isWin ? "あなたの勢力が統一を果たしました！" : "あなたは統一を果たせませんでした...")}",
+                        $"",
+                        $"あなた: {player.Name}",
+                        $"最終兵力: {player.Force.SoldierCount} ({powerOrder}位)",
+                        $"最終名声: {player.Prestige} ({prestigeOrder}位)",
+                        $"最終功績: {player.Contribution} ({contributionOrder}位)",
                     }));
+
+                    await MessageWindow.Show("タイトル画面に戻ります。");
+                    TitleSceneManager.LoadScene();
                     return;
                 }
 

@@ -72,7 +72,7 @@ public partial class SystemWindow : IWindow
 
         buttonGoToTitle.clicked += async () =>
         {
-            var res = await MessageWindow.Show("タイトルに戻ります。\nよろしいですか？", MessageBoxButton.OkCancel);
+            var res = await MessageWindow.Show("タイトル画面に戻ります。\nよろしいですか？", MessageBoxButton.OkCancel);
             if (res != MessageBoxResult.Ok) return;
             TitleSceneManager.LoadScene();
         };
