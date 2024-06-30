@@ -67,8 +67,17 @@ public class Test : MonoBehaviour
             // 初期表示はランダムにする。
             MainUI.ShowSelectPlayerCharacterUI(world, chara =>
             {
-                chara.IsPlayer = true;
-                Debug.Log($"Player selected: {chara.Name}");
+                // 観戦モード
+                if (chara == null)
+                {
+                    Debug.Log("観戦モードが選択されました。");
+                    core.IsWatchMode = true;
+                }
+                else
+                {
+                    chara.IsPlayer = true;
+                    Debug.Log($"Player selected: {chara.Name}");
+                }
                 core.DoMainLoop().Foreget();
             });
             MessageWindow.Show("操作キャラを選択してください。");

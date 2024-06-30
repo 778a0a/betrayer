@@ -26,6 +26,11 @@ public partial class SelectPlayerCaharacterScreen : IScreen
             OnCharacterSelected(chara);
         };
 
+        buttonWatch.clicked += () =>
+        {
+            OnCharacterSelected(null);
+        };
+
         buttonShowFreeList.clicked += () =>
         {
             isShowingFreeList = !isShowingFreeList;
@@ -51,8 +56,9 @@ public partial class SelectPlayerCaharacterScreen : IScreen
         async void OnCharacterSelected(Character chara)
         {
             var world = GameCore.Instance.World;
-            var res = await MessageWindow.Show(
-                $"「{chara.GetTitle(world)} {chara.Name}」でゲームを始めます。\nよろしいですか？",
+            var res = await MessageWindow.Show(chara != null ?
+                $"「{chara.GetTitle(world)} {chara.Name}」でゲームを始めます。\nよろしいですか？" :
+                "観戦モードでゲームを始めます。\nよろしいですか？",
                 MessageBoxButton.OkCancel);
             if (res != MessageBoxResult.Ok) return;
 
@@ -76,6 +82,13 @@ public partial class SelectPlayerCaharacterScreen : IScreen
 
     public void ShowCellInformation(WorldData world, MapPosition? pos)
     {
+        // デバッグ中なら観戦を有効にする。
+#if UNITY_EDITOR
+        buttonRandom.style.display = DisplayStyle.Flex;
+#else
+        buttonRandom.style.display = DisplayStyle.None;
+#endif
+
         if (pos == null && !isShowingFreeList)
         {
             labelDescription.text = "マップのセルをクリックしてください。";

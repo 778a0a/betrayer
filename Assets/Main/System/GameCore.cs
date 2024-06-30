@@ -40,6 +40,8 @@ public class GameCore
     private SavedGameCoreState ResumingGameState { get; set; } = null;
     public bool IsFirstTurnAfterResumeOrStart { get; set; } = true;
 
+    public bool IsWatchMode { get; set; } = false;
+
     public GameCore(
         WorldData world,
         MainUI mainUI,

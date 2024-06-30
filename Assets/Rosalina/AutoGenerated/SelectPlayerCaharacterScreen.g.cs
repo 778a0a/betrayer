@@ -18,19 +18,21 @@ public partial class SelectPlayerCaharacterScreen
 
     public Button buttonRandom { get; private set; }
 
+    public Button buttonWatch { get; private set; }
+
+    public Label labelDescription { get; private set; }
+
+    public VisualElement CellInformation { get; private set; }
+
+    public CountryRulerInfo CountryRulerInfo { get; private set; }
+
     public Button buttonPrevPage { get; private set; }
 
     public Button buttonNextPage { get; private set; }
 
     public Label labelPageNo { get; private set; }
 
-    public Label labelDescription { get; private set; }
-
     public VisualElement FreeListController { get; private set; }
-
-    public VisualElement CellInformation { get; private set; }
-
-    public CountryRulerInfo CountryRulerInfo { get; private set; }
 
     public CharacterTable CharacterTable { get; private set; }
 
@@ -43,13 +45,14 @@ public partial class SelectPlayerCaharacterScreen
         Root = root;
         buttonShowFreeList = Root?.Q<Button>("buttonShowFreeList");
         buttonRandom = Root?.Q<Button>("buttonRandom");
+        buttonWatch = Root?.Q<Button>("buttonWatch");
+        labelDescription = Root?.Q<Label>("labelDescription");
+        CellInformation = Root?.Q<VisualElement>("CellInformation");
+        CountryRulerInfo = new CountryRulerInfo(Root?.Q<VisualElement>("CountryRulerInfo"));
         buttonPrevPage = Root?.Q<Button>("buttonPrevPage");
         buttonNextPage = Root?.Q<Button>("buttonNextPage");
         labelPageNo = Root?.Q<Label>("labelPageNo");
-        labelDescription = Root?.Q<Label>("labelDescription");
         FreeListController = Root?.Q<VisualElement>("FreeListController");
-        CellInformation = Root?.Q<VisualElement>("CellInformation");
-        CountryRulerInfo = new CountryRulerInfo(Root?.Q<VisualElement>("CountryRulerInfo"));
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
         CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
     }

@@ -50,8 +50,21 @@ public partial class SystemWindow : IWindow
             var currentScreen = core.MainUI.currentScreen;
             GameCore.Instance.MainUI.ShowSelectPlayerCharacterUI(world, chara =>
             {
-                chara.IsPlayer = true;
-                Debug.Log($"Player selected: {chara.Name}");
+                // 観戦モード
+                if (chara == null)
+                {
+                    Debug.Log("観戦モードが選択されました。");
+                    core.IsWatchMode = true;
+                }
+                else
+                {
+                    chara.IsPlayer = true;
+                    Debug.Log($"Player selected: {chara.Name}");
+                    foreach (var c in world.Characters)
+                    {
+                        c.AddUrami(-10000);
+                    }
+                }
                 Test.Instance.hold = false;
                 core.MainUI.ShowScreen(currentScreen);
             });
