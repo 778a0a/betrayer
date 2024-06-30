@@ -42,7 +42,7 @@
                         <engine:Label name="labelCharaSoldierCount" text="10" class="CharaInfo-Value" />
                     </engine:VisualElement>
                 </engine:VisualElement>
-                <engine:VisualElement name="Soldiers" style="flex-grow: 1; flex-direction: row; margin-top: 10px;">
+                <engine:VisualElement name="Soldiers" style="flex-grow: 1; flex-direction: row;">
                     <engine:Instance name="soldier00" template="CharacterInfoSoldierIcon" />
                     <engine:Instance name="soldier01" template="CharacterInfoSoldierIcon" />
                     <engine:Instance name="soldier02" template="CharacterInfoSoldierIcon" />
