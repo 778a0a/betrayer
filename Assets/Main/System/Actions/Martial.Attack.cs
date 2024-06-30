@@ -17,6 +17,8 @@ partial class MartialActions
     public AttackAction Attack { get; } = new();
     public class AttackAction : MartialActionBase
     {
+        private readonly Dictionary<Character, (Country, Area)> contexts = new();
+
         public override string Description => "隣接国に侵攻します。";
 
         public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);
@@ -46,6 +48,24 @@ partial class MartialActions
 
             // 攻撃先エリアを選択する。
             var neighborAreas = World.GetAttackableAreas(country);
+            // 前回攻撃したエリア、国を継続して攻撃しやすくする。
+            if (0.5.Chance() && contexts.TryGetValue(chara, out var context))
+            {
+                var prevCountry = context.Item1;
+                var prevArea = context.Item2;
+                if (0.5.Chance() && neighborAreas.Contains(prevArea))
+                {
+                    neighborAreas = new() { prevArea };
+                }
+                else
+                {
+                    var prevCountryAreas = neighborAreas
+                        .Where(a => World.CountryOf(a) == prevCountry)
+                        .ToList();
+                    if (prevCountryAreas.Count > 0) neighborAreas = prevCountryAreas;
+                }
+            }
+
             var targetArea = neighborAreas.RandomPick();
             if (0.5.Chance())
             {
@@ -148,6 +168,8 @@ partial class MartialActions
                 UI.ShowMartialUI();
                 Util.Todo();
             }
+
+            contexts[chara] = (country, targetArea);
 
             PayCost(chara);
         }
