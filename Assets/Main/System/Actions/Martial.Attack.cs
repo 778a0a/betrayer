@@ -48,42 +48,46 @@ partial class MartialActions
 
             // 攻撃先エリアを選択する。
             var neighborAreas = World.GetAttackableAreas(country);
-            // 前回攻撃したエリア、国を継続して攻撃しやすくする。
-            if (0.5.Chance() && contexts.TryGetValue(chara, out var context))
-            {
-                var prevCountry = context.Item1;
-                var prevArea = context.Item2;
-                if (0.5.Chance() && neighborAreas.Contains(prevArea))
-                {
-                    neighborAreas = new() { prevArea };
-                }
-                else
-                {
-                    var prevCountryAreas = neighborAreas
-                        .Where(a => World.CountryOf(a) == prevCountry)
-                        .ToList();
-                    if (prevCountryAreas.Count > 0) neighborAreas = prevCountryAreas;
-                }
-            }
-
             var targetArea = neighborAreas.RandomPick();
-            if (0.5.Chance())
+
+            if (!chara.IsPlayer)
             {
-                // 有利なエリアを攻撃しやすくする。
-                targetArea = neighborAreas
-                    .Select(a => new
+                // 前回攻撃したエリア、国を継続して攻撃しやすくする。
+                if (0.5.Chance() && contexts.TryGetValue(chara, out var context))
+                {
+                    var prevCountry = context.Item1;
+                    var prevArea = context.Item2;
+                    if (0.5.Chance() && neighborAreas.Contains(prevArea))
                     {
-                        a,
-                        // 敵の地形に対する自分の優位さ。高いほど自分が優位。基本的に0以下の値。
-                        defAdj = Battle.TerrainDamageAdjustment(a.Terrain),
-                        // 敵へ攻め込むときの自身の地形の優位さ。高いほど自分が優位。0.5～-0.5程度
-                        atkAdk = -Battle.TerrainDamageAdjustment(
-                            World.Map.Helper.GetAttackerTerrain(
-                                GetAttackSourceArea(World.Map, targetArea, country).Position,
-                                GetAttackSourceArea(World.Map, targetArea, country).GetDirectionTo(a)))
-                    })
-                    .RandomPickWeighted(x => 2 + x.defAdj + x.atkAdk)
-                    .a;
+                        neighborAreas = new() { prevArea };
+                    }
+                    else
+                    {
+                        var prevCountryAreas = neighborAreas
+                            .Where(a => World.CountryOf(a) == prevCountry)
+                            .ToList();
+                        if (prevCountryAreas.Count > 0) neighborAreas = prevCountryAreas;
+                    }
+                }
+
+                if (0.5.Chance())
+                {
+                    // 有利なエリアを攻撃しやすくする。
+                    targetArea = neighborAreas
+                        .Select(a => new
+                        {
+                            a,
+                            // 敵の地形に対する自分の優位さ。高いほど自分が優位。基本的に0以下の値。
+                            defAdj = Battle.TerrainDamageAdjustment(a.Terrain),
+                            // 敵へ攻め込むときの自身の地形の優位さ。高いほど自分が優位。0.5～-0.5程度
+                            atkAdk = -Battle.TerrainDamageAdjustment(
+                                World.Map.Helper.GetAttackerTerrain(
+                                    GetAttackSourceArea(World.Map, targetArea, country).Position,
+                                    GetAttackSourceArea(World.Map, targetArea, country).GetDirectionTo(a)))
+                        })
+                        .RandomPickWeighted(x => 2 + x.defAdj + x.atkAdk)
+                        .a;
+                }
             }
 
             var targetCountry = World.CountryOf(targetArea);
