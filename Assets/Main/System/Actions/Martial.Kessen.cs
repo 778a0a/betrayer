@@ -92,10 +92,20 @@ partial class MartialActions
                 Util.Todo();
             }
 
-            var attackableArea = World.GetAttackableAreas(country)
-                .Where(a => World.CountryOf(a) == target)
-                .First();
-            Core.MartialActions.Attack.contexts[chara] = (target, attackableArea);
+            // 決戦に負けた国は他の国から狙われやすくしてみる。
+            var winner = result == BattleResult.AttackerWin ? country : target;
+            var loser = result == BattleResult.AttackerWin ? target : country;
+            foreach (var c in World.Countries)
+            {
+                if (c == loser) continue;
+                var attackableArea = World.GetAttackableAreas(c)
+                    .Where(a => World.CountryOf(a) == loser)
+                    .RandomPickDefault();
+                if (attackableArea != null)
+                {
+                    Core.MartialActions.Attack.contexts[c.Ruler] = (loser, attackableArea);
+                }
+            }
 
             Core.LastKessenTurnCount = Core.TurnCount;
             PayCost(chara);
