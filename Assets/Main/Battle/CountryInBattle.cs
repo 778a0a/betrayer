@@ -63,7 +63,8 @@ public record CountryInBattle(
             if (tickCount < 10) return false;
 
             // まだ損耗が多くないなら撤退しない。
-            var manyLoss = Character.Force.Soldiers.Count(s => s.Hp < 10) >= 3;
+            // （現在の戦闘で全滅した兵士も数えるために、IsAliveではなく!IsEmptySlotを使う）
+            var manyLoss = Character.Force.Soldiers.Where(s => !s.IsEmptySlot).Count(s => s.Hp < 10) >= 3;
             if (!manyLoss) return false;
 
             // 敵よりも兵力が多いなら撤退しない。
