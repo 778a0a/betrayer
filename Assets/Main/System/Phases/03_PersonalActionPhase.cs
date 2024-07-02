@@ -52,17 +52,25 @@ public class PersonalActionPhase : PhaseBase
                     hireCount++;
                 }
 
-                if (PersonalActions.Rebel.CanDo(chara) && chara.Loyalty < 90)
+                var canBecomeIndependent = PersonalActions.BecomeIndependent.CanDo(chara);
+                var canRebel = PersonalActions.Rebel.CanDo(chara);
+                if ((canRebel || canBecomeIndependent) && chara.Loyalty < 90)
                 {
                     var country = World.CountryOf(chara);
-
                     // 忠誠度が一定以下なら、一定確率で反抗的行動を行う。
                     var percent = (90 - chara.Loyalty) / 100f;
-                    var chance = percent / 50; // 50ターンに1回反乱を起こす確率がpercent
+                    var chance = percent / 40; // 40ターンに1回反乱を起こす確率がpercent
                     if (country.Ruler.IsPlayer && chara.Urami > 0) chance *= chara.Urami;
                     if (chance.Chance())
                     {
-                        await PersonalActions.Rebel.Do(chara);
+                        if (canBecomeIndependent)
+                        {
+                            await PersonalActions.BecomeIndependent.Do(chara);
+                        }
+                        else if (canRebel)
+                        {
+                            await PersonalActions.Rebel.Do(chara);
+                        }
                     }
                 }
 
