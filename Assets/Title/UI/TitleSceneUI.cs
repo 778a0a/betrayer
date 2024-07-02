@@ -188,8 +188,14 @@ public partial class TitleSceneUI : MonoBehaviour
 
         buttonSubmitText.text = isCopy ? "閉じる" : "確定";
         buttonClearText.style.display = Util.Display(!isCopy);
+#if UNITY_WEBGL
+        // WebGLではクリップボードのコピー・ペーストができないので非表示にする。
+        buttonPasteText.style.display = DisplayStyle.None;
+        buttonCopyText.style.display = DisplayStyle.None;
+#else
         buttonPasteText.style.display = Util.Display(!isCopy);
         buttonCopyText.style.display = Util.Display(isCopy);
+#endif
         labelTextBoxWindowTitle.text = isCopy ? 
             "以下のテキストをコピーして保存してください" :
             "セーブデータを以下にペーストしてください";
