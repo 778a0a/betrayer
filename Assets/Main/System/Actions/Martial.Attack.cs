@@ -169,7 +169,7 @@ partial class MartialActions
                 Util.Todo();
             }
 
-            contexts[chara] = (country, targetArea);
+            contexts[chara] = (targetCountry, targetArea);
 
             PayCost(chara);
         }
