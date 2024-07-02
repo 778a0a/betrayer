@@ -68,16 +68,16 @@ public record CharacterInBattle(
     /// <summary>
     /// 戦闘後の回復処理
     /// </summary>
-    public void Recover(bool win)
+    public static void Recover(Character chara, bool win, float winRate, float loseRate)
     {
-        if (Character == null) return;
+        if (chara == null) return;
 
-        foreach (var s in Character.Force.Soldiers)
+        foreach (var s in chara.Force.Soldiers)
         {
             if (!s.IsAlive) continue;
 
-            var baseAmount = s.MaxHp * (win ? 0.1f : 0.05f);
-            var adj = Mathf.Max(0, (Character.Intelligence - 80) / 100f / 2);
+            var baseAmount = s.MaxHp * (win ? winRate : loseRate);
+            var adj = Mathf.Max(0, (chara.Intelligence - 80) / 100f / 2);
             var amount = (int)(baseAmount * (1 + adj));
             s.Hp = Mathf.Min(s.MaxHp, s.Hp + amount);
         }

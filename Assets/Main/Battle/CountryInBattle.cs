@@ -30,15 +30,7 @@ public record CountryInBattle(
     {
         foreach (var member in Members)
         {
-            foreach (var s in member.Character.Force.Soldiers)
-            {
-                if (!s.IsAlive) continue;
-
-                var baseAmount = s.MaxHp * (win ? 0.5f : 0.1f);
-                var adj = Mathf.Max(0, (member.Character.Intelligence - 80) / 100f / 2);
-                var amount = (int)(baseAmount * (1 + adj));
-                s.Hp = Mathf.Min(s.MaxHp, s.Hp + amount);
-            }
+            CharacterInBattle.Recover(member.Character, win, 0.5f, 0.1f);
         }
     }
 

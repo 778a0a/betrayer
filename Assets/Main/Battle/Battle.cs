@@ -125,8 +125,8 @@ public class Battle
         var loser = result == BattleResult.AttackerWin ? Def : Atk;
 
         // 兵士の回復処理を行う。
-        winner.Recover(true);
-        loser.Recover(false);
+        CharacterInBattle.Recover(winner, true, 0.1f, 0.05f);
+        CharacterInBattle.Recover(loser, false, 0.1f, 0.05f);
 
         // 名声の処理を行う。
         var loserPrestigeLoss = loser.Character.Prestige / 3;
