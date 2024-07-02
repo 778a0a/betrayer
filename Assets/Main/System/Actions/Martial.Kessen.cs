@@ -92,7 +92,9 @@ partial class MartialActions
                 Util.Todo();
             }
 
-            var attackableArea = World.GetAttackableAreas(target).First();
+            var attackableArea = World.GetAttackableAreas(country)
+                .Where(a => World.CountryOf(a) == target)
+                .First();
             Core.MartialActions.Attack.contexts[chara] = (target, attackableArea);
 
             Core.LastKessenTurnCount = Core.TurnCount;
