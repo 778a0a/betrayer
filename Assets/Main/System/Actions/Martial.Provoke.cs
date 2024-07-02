@@ -85,6 +85,11 @@ partial class MartialActions
             var targetArea = GetDefenceArea(World.Map, sourceArea, country);
             var defender = chara;
 
+            var sourcePosition = sourceArea.Position;
+            var targetDirection = sourcePosition.GetDirectionTo(targetArea.Position);
+            Core.Tilemap.ShowAttackDirectionArrow(sourceArea.Position, targetDirection);
+            using var _ = Util.Defer(() => Core.Tilemap.HideAttackDirectionArrow());
+
             // 侵攻する。
             var battle = BattleManager.Prepare(sourceArea, targetArea, attacker, defender, this);
             var result = await battle.Do();
