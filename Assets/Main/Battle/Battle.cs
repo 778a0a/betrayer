@@ -107,7 +107,7 @@ public class Battle
             }
             else
             {
-                await Awaitable.WaitForSecondsAsync(0.5f);
+                await Awaitable.WaitForSecondsAsync(0.45f);
             }
             UI.Root.style.display = DisplayStyle.None;
         }
