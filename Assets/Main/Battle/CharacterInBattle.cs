@@ -44,7 +44,7 @@ public record CharacterInBattle(
         if (tickCount < 3) return false;
 
         // まだ損耗が多くないなら撤退しない。
-        var manyLoss = Character.Force.Soldiers.Count(s => s.Hp < 10) >= 3;
+        var manyLoss = Character.Force.Soldiers.Where(s => s.IsAlive).Count(s => s.Hp < 10) >= 3;
         if (!manyLoss) return false;
 
         // 敵よりも兵力が多いなら撤退しない。
