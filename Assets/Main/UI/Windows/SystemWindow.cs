@@ -46,28 +46,7 @@ public partial class SystemWindow : IWindow
             }
 
             Root.style.display = DisplayStyle.None;
-
-            var currentScreen = core.MainUI.currentScreen;
-            GameCore.Instance.MainUI.ShowSelectPlayerCharacterUI(world, chara =>
-            {
-                // 観戦モード
-                if (chara == null)
-                {
-                    Debug.Log("観戦モードが選択されました。");
-                    core.IsWatchMode = true;
-                }
-                else
-                {
-                    chara.IsPlayer = true;
-                    Debug.Log($"Player selected: {chara.Name}");
-                    foreach (var c in world.Characters)
-                    {
-                        c.AddUrami(-10000);
-                    }
-                }
-                Test.Instance.hold = false;
-                core.MainUI.ShowScreen(currentScreen);
-            });
+            ShowSelectPlayerCharacterUI(core);
         };
 
         buttonGoToTitle.clicked += async () =>
@@ -81,6 +60,33 @@ public partial class SystemWindow : IWindow
         {
             Root.style.display = DisplayStyle.None;
         };
+    }
+
+    public static void ShowSelectPlayerCharacterUI(GameCore core)
+    {
+        var currentScreen = core.MainUI.currentScreen;
+        GameCore.Instance.MainUI.ShowSelectPlayerCharacterUI(core.World, chara =>
+        {
+            // 観戦モード
+            if (chara == null)
+            {
+                Debug.Log("観戦モードが選択されました。");
+                core.IsWatchMode = true;
+                Test.Instance.hold = false;
+                core.MainUI.WatchModeWindow.Show();
+            }
+            else
+            {
+                chara.IsPlayer = true;
+                Debug.Log($"Player selected: {chara.Name}");
+                foreach (var c in core.World.Characters)
+                {
+                    c.AddUrami(-10000);
+                }
+                Test.Instance.hold = false;
+                core.MainUI.ShowScreen(currentScreen);
+            }
+        });
     }
 
     public void Show()

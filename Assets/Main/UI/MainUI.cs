@@ -75,6 +75,7 @@ public partial class MainUI : MonoBehaviour
         InitializeScreens();
         BattleWindow.Initialize();
         KessenWindow.Initialize();
+        WatchModeWindow.Initialize();
         SystemWindow.Initialize();
         MessageWindow.Initialize();
 

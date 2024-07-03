@@ -78,3 +78,5 @@ MonoBehaviour:
     _path: Assets/Main/UI/Parts/KessenMemberAttackSide.uxml
   - _type: 1
     _path: Assets/Main/UI/Parts/KessenMemberDefenceSide.uxml
+  - _type: 1
+    _path: Assets/Main/UI/Windows/WatchModeWindow.uxml

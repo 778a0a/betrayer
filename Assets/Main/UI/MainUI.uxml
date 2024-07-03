@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="BattleWindow" src="project://database/Assets/Main/UI/Windows/BattleWindow.uxml?fileID=9197481963319205126&amp;guid=5f295d9569aa01b4c81796cb69271c51&amp;type=3#BattleWindow" />
+    <ui:Template name="WatchModeWindow" src="project://database/Assets/Main/UI/Windows/WatchModeWindow.uxml?fileID=9197481963319205126&amp;guid=a41cb3021317b1043b3b48a55314fa26&amp;type=3#WatchModeWindow" />
     <ui:Template name="KessenWindow" src="project://database/Assets/Main/UI/Windows/KessenWindow.uxml?fileID=9197481963319205126&amp;guid=6b469579ef15190429d3713dddc7dbca&amp;type=3#KessenWindow" />
     <ui:Template name="SystemWindow" src="project://database/Assets/Main/UI/Windows/SystemWindow.uxml?fileID=9197481963319205126&amp;guid=22f9b7cbe7258a447b65264fb45ecc3d&amp;type=3#SystemWindow" />
     <ui:Template name="MessageWindow" src="project://database/Assets/Main/UI/Windows/MessageWindow.uxml?fileID=9197481963319205126&amp;guid=072bdb62ba8a2cc4eb42b14b3ecc97fe&amp;type=3#MessageWindow" />
@@ -20,6 +21,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="WindowHost" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; right: 0; left: 0; bottom: 0; align-items: center; justify-content: center;">
         <ui:Instance template="BattleWindow" name="BattleWindow" class="window" style="display: flex;" />
+        <ui:Instance template="WatchModeWindow" name="WatchModeWindow" picking-mode="Ignore" class="window" />
         <ui:Instance template="KessenWindow" name="KessenWindow" class="window" />
         <ui:Instance template="SystemWindow" name="SystemWindow" class="window" />
         <ui:Instance template="MessageWindow" name="MessageWindow" class="window" />

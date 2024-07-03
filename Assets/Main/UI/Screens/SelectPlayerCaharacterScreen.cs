@@ -82,12 +82,9 @@ public partial class SelectPlayerCaharacterScreen : IScreen
 
     public void ShowCellInformation(WorldData world, MapPosition? pos)
     {
-        // デバッグ中なら観戦を有効にする。
-#if UNITY_EDITOR
-        buttonWatch.style.display = DisplayStyle.Flex;
-#else
-        buttonWatch.style.display = DisplayStyle.None;
-#endif
+        var cleared = GameCore.GameCleared;
+        buttonWatch.enabledSelf = cleared;
+        buttonWatch.text = cleared ? "観戦" : "観戦（クリア後解放）";
 
         if (pos == null && !isShowingFreeList)
         {

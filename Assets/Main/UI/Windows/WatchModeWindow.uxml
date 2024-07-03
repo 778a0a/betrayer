@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
+    <engine:VisualElement picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; right: 0; left: 0; bottom: 0; justify-content: center; align-items: center;">
+        <engine:VisualElement picking-mode="Ignore" class="bg" style="width: 840px; height: 1080px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-self: flex-end; justify-content: flex-start; align-items: flex-end; background-color: rgba(0, 17, 34, 0);">
+            <engine:Button text="操作キャラ変更" name="buttonChangeCharacter" style="font-size: 30px;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

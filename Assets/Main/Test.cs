@@ -72,6 +72,7 @@ public class Test : MonoBehaviour
                 {
                     Debug.Log("観戦モードが選択されました。");
                     core.IsWatchMode = true;
+                    core.MainUI.WatchModeWindow.Show();
                 }
                 else
                 {
@@ -233,6 +234,10 @@ public class Test : MonoBehaviour
     {
         while (hold)
         {
+            if (MainUI.WatchModeWindow.IsVisible)
+            {
+                MainUI.WatchModeWindow.Hide();
+            }
             await Awaitable.WaitForSecondsAsync(0.1f);
         }
         hold = setHoldOnHoldEnd;
