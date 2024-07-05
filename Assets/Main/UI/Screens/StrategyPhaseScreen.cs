@@ -40,6 +40,7 @@ public partial class StrategyPhaseScreen : IScreen
     {
         this.world = world;
         debugCurrentChara = chara;
+        labelTurnCount.text = GameCore.Instance.TurnCount.ToString();
         if (chara == null && world == null) return;
         var country = world.CountryOf(chara);
 

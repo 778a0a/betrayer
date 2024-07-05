@@ -39,6 +39,8 @@ public partial class IndividualPhaseScreen : IScreen
     public void SetData(Character chara, WorldData world)
     {
         debugCurrentChara = chara;
+
+        labelTurnCount.text = GameCore.Instance.TurnCount.ToString();
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
         labelTitle.text = chara.GetTitle(world);

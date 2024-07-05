@@ -14,6 +14,8 @@ using UnityEngine.UIElements;
 
 public partial class StrategyPhaseScreen
 {
+    public Label labelTurnCount { get; private set; }
+
     public Button buttonShowInfo { get; private set; }
 
     public Button buttonOrganize { get; private set; }
@@ -109,6 +111,7 @@ public partial class StrategyPhaseScreen
     public StrategyPhaseScreen(VisualElement root)
     {
         Root = root;
+        labelTurnCount = Root?.Q<Label>("labelTurnCount");
         buttonShowInfo = Root?.Q<Button>("buttonShowInfo");
         buttonOrganize = Root?.Q<Button>("buttonOrganize");
         buttonHireVassal = Root?.Q<Button>("buttonHireVassal");

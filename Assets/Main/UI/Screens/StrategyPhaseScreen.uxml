@@ -5,7 +5,12 @@
     <engine:VisualElement style="flex-grow: 1; flex-direction: row; margin-left: -3px;">
         <engine:VisualElement name="ActionsPanel">
             <engine:VisualElement style="flex-grow: 0;">
-                <engine:Label text="戦略フェイズ" style="font-size: 30px;" />
+                <engine:VisualElement style="flex-direction: row;">
+                    <engine:Label name="labelTurnCount" text="888" style="font-size: 30px; margin-right: 0; padding-right: 0;" />
+                    <engine:Label text="ターン" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto;" />
+                    <engine:Label text="戦略" style="font-size: 30px; margin-right: 0; padding-right: 0;" />
+                    <engine:Label text="フェイズ" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto; margin-right: 0; padding-right: 0;" />
+                </engine:VisualElement>
                 <engine:Button text="情報" name="buttonShowInfo" class="Action-Button" />
                 <engine:Button text="任命" name="buttonOrganize" class="Action-Button" />
                 <engine:Button text="探索" name="buttonHireVassal" class="Action-Button" />

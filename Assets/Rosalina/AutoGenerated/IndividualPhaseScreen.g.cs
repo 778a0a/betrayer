@@ -14,6 +14,8 @@ using UnityEngine.UIElements;
 
 public partial class IndividualPhaseScreen
 {
+    public Label labelTurnCount { get; private set; }
+
     public Button buttonShowInfo { get; private set; }
 
     public Button buttonHireSoldier { get; private set; }
@@ -46,9 +48,9 @@ public partial class IndividualPhaseScreen
 
     public Label labelTitle { get; private set; }
 
-    public Label labelSalaryRatio { get; private set; }
-
     public Label labelName { get; private set; }
+
+    public Label labelSalaryRatio { get; private set; }
 
     public Label labelCharaAttack { get; private set; }
 
@@ -107,6 +109,7 @@ public partial class IndividualPhaseScreen
     public IndividualPhaseScreen(VisualElement root)
     {
         Root = root;
+        labelTurnCount = Root?.Q<Label>("labelTurnCount");
         buttonShowInfo = Root?.Q<Button>("buttonShowInfo");
         buttonHireSoldier = Root?.Q<Button>("buttonHireSoldier");
         buttonTrainSoldiers = Root?.Q<Button>("buttonTrainSoldiers");
@@ -123,8 +126,8 @@ public partial class IndividualPhaseScreen
         GoldPanel = Root?.Q<VisualElement>("GoldPanel");
         imageChara = Root?.Q<Image>("imageChara");
         labelTitle = Root?.Q<Label>("labelTitle");
-        labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
         labelName = Root?.Q<Label>("labelName");
+        labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
         labelCharaAttack = Root?.Q<Label>("labelCharaAttack");
         labelCharaDefense = Root?.Q<Label>("labelCharaDefense");
         labelCharaIntelligence = Root?.Q<Label>("labelCharaIntelligence");

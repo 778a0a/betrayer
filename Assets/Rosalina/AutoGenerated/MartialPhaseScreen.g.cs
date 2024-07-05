@@ -14,6 +14,8 @@ using UnityEngine.UIElements;
 
 public partial class MartialPhaseScreen
 {
+    public Label labelTurnCount { get; private set; }
+
     public Button buttonShowInfo { get; private set; }
 
     public Button buttonAttack { get; private set; }
@@ -42,9 +44,9 @@ public partial class MartialPhaseScreen
 
     public Label labelTitle { get; private set; }
 
-    public Label labelSalaryRatio { get; private set; }
-
     public Label labelName { get; private set; }
+
+    public Label labelSalaryRatio { get; private set; }
 
     public Label labelCharaAttack { get; private set; }
 
@@ -103,6 +105,7 @@ public partial class MartialPhaseScreen
     public MartialPhaseScreen(VisualElement root)
     {
         Root = root;
+        labelTurnCount = Root?.Q<Label>("labelTurnCount");
         buttonShowInfo = Root?.Q<Button>("buttonShowInfo");
         buttonAttack = Root?.Q<Button>("buttonAttack");
         buttonDecisiveBattle = Root?.Q<Button>("buttonDecisiveBattle");
@@ -117,8 +120,8 @@ public partial class MartialPhaseScreen
         GoldPanel = Root?.Q<VisualElement>("GoldPanel");
         imageChara = Root?.Q<Image>("imageChara");
         labelTitle = Root?.Q<Label>("labelTitle");
-        labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
         labelName = Root?.Q<Label>("labelName");
+        labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
         labelCharaAttack = Root?.Q<Label>("labelCharaAttack");
         labelCharaDefense = Root?.Q<Label>("labelCharaDefense");
         labelCharaIntelligence = Root?.Q<Label>("labelCharaIntelligence");
