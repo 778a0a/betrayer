@@ -34,6 +34,18 @@ public class MainSceneManager : MonoBehaviour
         var ws = new WorldAndState(worldData, saveData.State);
         test.ResumeGame(ws, saveData.Summary.SaveDataSlotNo);
     }
+
+    private void Update()
+    {
+        // Ctrl+Alt+Shift+Tでタイトルに戻る。
+        var ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+        var alt = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
+        var shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        if (ctrl && shift && alt && Input.GetKeyDown(KeyCode.T))
+        {
+            TitleSceneManager.LoadScene();
+        }
+    }
 }
 
 public class MainSceneStartArguments
