@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 1257746123}
   - component: {fileID: 1257746122}
   - component: {fileID: 1257746124}
+  - component: {fileID: 1257746125}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -183,8 +184,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _document: {fileID: 1257746122}
-  saves: {fileID: 0}
-  selectScenario: {fileID: 0}
+  localization: {fileID: 1257746125}
+--- !u!114 &1257746125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257746121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d170ad9c8cfc0646ac04a73d9fd7ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tables: {fileID: 11400000, guid: a7cb9f1cb859f944593a689d190d8b31, type: 2}
 --- !u!1 &1315396283
 GameObject:
   m_ObjectHideFlags: 0

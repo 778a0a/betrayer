@@ -1,6 +1,7 @@
 using System;
 using System.IO.Compression;
 using System.Threading.Tasks;
+using UnityEditor.Localization;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ using UnityEngine.UIElements;
 public partial class TitleSceneUI : MonoBehaviour
 {
     private int currentSelectedSlotNo = 0;
+
+    [SerializeField] private LocalizationManager localization;
 
     private void OnEnable()
     {
@@ -19,6 +22,7 @@ public partial class TitleSceneUI : MonoBehaviour
         InitializeLicenseWindow();
         MessageWindow.Initialize();
         SaveDataList.Initialize(this);
+        localization.SetData(_document);
 
         buttonCloseApplication.clicked += () =>
         {

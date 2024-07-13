@@ -17,7 +17,63 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: c388fa1381ccb0a488571acd4fd5d128, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 881210145366016
+    m_Localized: License Information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878184083456
+    m_Localized: Close Application
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878184083457
+    m_Localized: Start New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878184083458
+    m_Localized: Load Text Data
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277760
+    m_Localized: Copy From Slot 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277761
+    m_Localized: Copy From Slot 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277762
+    m_Localized: Copy From Slot 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277763
+    m_Localized: Copy From Auto Save Slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277764
+    m_Localized: Text Data
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277765
+    m_Localized: Paste save data here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277766
+    m_Localized: Clear Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277767
+    m_Localized: Paste Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277768
+    m_Localized: Copy to Clipboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277769
+    m_Localized: Submit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

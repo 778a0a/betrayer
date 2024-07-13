@@ -14,7 +14,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: TextTable
   m_TableCollectionNameGuidString: c388fa1381ccb0a488571acd4fd5d128
-  m_Entries: []
+  m_Entries:
+  - m_Id: 881210145366016
+    m_Key: buttonShowLicense
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878184083456
+    m_Key: buttonCloseApplication
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878184083457
+    m_Key: buttonStartNewGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878184083458
+    m_Key: buttonLoadTextData
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277760
+    m_Key: buttonCopyFromSlot1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277761
+    m_Key: buttonCopyFromSlot2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277762
+    m_Key: buttonCopyFromSlot3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277763
+    m_Key: buttonCopyFromSlotAuto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277764
+    m_Key: labelTextBoxWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277765
+    m_Key: textTextBoxWindow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277766
+    m_Key: buttonClearText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277767
+    m_Key: buttonPasteText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277768
+    m_Key: buttonCopyText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277769
+    m_Key: buttonSubmitText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
