@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainSceneManager : MonoBehaviour
@@ -38,10 +39,10 @@ public class MainSceneManager : MonoBehaviour
     private void Update()
     {
         // Ctrl+Alt+Shift+Tでタイトルに戻る。
-        var ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-        var alt = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
-        var shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        if (ctrl && shift && alt && Input.GetKeyDown(KeyCode.T))
+        var ctrl = Keyboard.current.ctrlKey.isPressed;
+        var alt = Keyboard.current.altKey.isPressed;
+        var shift = Keyboard.current.shiftKey.isPressed;
+        if (ctrl && shift && alt && Keyboard.current.tKey.wasPressedThisFrame)
         {
             TitleSceneManager.LoadScene();
         }

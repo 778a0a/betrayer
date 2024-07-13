@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
@@ -35,8 +36,9 @@ public class TilemapManager : MonoBehaviour
     private MapPosition currentMousePosition = MapPosition.Of(0, 0);
     void Update()
     {
+        var mousePoint = Mouse.current.position.ReadValue();
         // マウスカーソル上のセルを取得する。
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(mousePoint);
         var hit = Physics2D.GetRayIntersection(ray);
         // マウスカーソルがマップ上にない場合は何もしない。
         if (hit.collider == null)
@@ -50,7 +52,6 @@ public class TilemapManager : MonoBehaviour
             return;
         }
 
-        var mousePoint = Input.mousePosition;
         var uiScale = MainUI.Root.panel.scaledPixelsPerPoint;
         var uiPoint = new Vector2(mousePoint.x, Screen.height - mousePoint.y) / uiScale;
         var element = MainUI.Root.panel.Pick(uiPoint);
@@ -79,7 +80,7 @@ public class TilemapManager : MonoBehaviour
 
         }
         // 必要ならクリックイベントを起こす。
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             InvokeCellClickHandler(pos);
         }
