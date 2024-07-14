@@ -71,6 +71,54 @@ MonoBehaviour:
     m_Key: buttonSubmitText
     m_Metadata:
       m_Items: []
+  - m_Id: 1257102239588352
+    m_Key: labelProgressWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531392
+    m_Key: labelLicenseWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 883878188277769
+    m_Key: buttonSubmitText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531393
+    m_Key: labelSoldiersCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531394
+    m_Key: labelGoldCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531395
+    m_Key: labelSavedTimeCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531396
+    m_Key: labelTurnCountCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531397
+    m_Key: buttonDownload
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531398
+    m_Key: buttonDelete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531399
+    m_Key: buttonNoData
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531400
+    m_Key: labelSaveDataListWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531401
+    m_Key: labelAutoSaveSlotTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

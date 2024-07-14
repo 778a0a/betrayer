@@ -74,6 +74,50 @@ MonoBehaviour:
     m_Localized: Submit
     m_Metadata:
       m_Items: []
+  - m_Id: 1257102239588352
+    m_Localized: Loading...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531392
+    m_Localized: Lisence Information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531393
+    m_Localized: 'Sols:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531394
+    m_Localized: 'Golds:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531395
+    m_Localized: 'Saved at:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531396
+    m_Localized: 'Turn:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531397
+    m_Localized: Download
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531398
+    m_Localized: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531399
+    m_Localized: NO DATA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531400
+    m_Localized: Save Data List
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1257102281531401
+    m_Localized: Auto Saved Data
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
