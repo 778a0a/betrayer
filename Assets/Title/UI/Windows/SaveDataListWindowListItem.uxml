@@ -8,20 +8,20 @@
                     <ui:Label text="君主" name="labelTitle" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                     <ui:Label text="ハイペリオン" name="labelName" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                     <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-left: 10px;">
-                        <ui:Label text="兵数:" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
+                        <ui:Label text="兵数:" name="labelSoldiersCaption" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                         <ui:Label text="88888" name="labelSoldiers" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                     </ui:VisualElement>
                     <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-left: 10px;">
-                        <ui:Label text="所持金:" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
+                        <ui:Label text="所持金:" name="labelGoldCaption" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                         <ui:Label text="88888" name="labelGold" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
                     <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
-                        <ui:Label text="保存:" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
+                        <ui:Label text="保存:" name="labelSavedTimeCaption" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                         <ui:Label text="2024-02-01 18:40" name="labelSavedTime" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left; margin-right: 8px;" />
                         <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-left: 10px; margin-right: 8px;">
-                            <ui:Label text="ターン:" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
+                            <ui:Label text="ターン:" name="labelTurnCountCaption" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                             <ui:Label text="888" name="labelTurnCount" style="align-items: stretch; align-self: stretch; -unity-text-align: middle-left;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
