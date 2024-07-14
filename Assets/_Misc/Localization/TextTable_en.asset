@@ -118,6 +118,67 @@ MonoBehaviour:
     m_Localized: Auto Saved Data
     m_Metadata:
       m_Items: []
+  - m_Id: 1276020299653120
+    m_Localized: Failed to load save data.\n({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847424
+    m_Localized: Failed to paste from clipboard.\n({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847425
+    m_Localized: Failed to copy to clipboard.\n({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847426
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847427
+    m_Localized: Submit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847428
+    m_Localized: Please copy and save the following text.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847429
+    m_Localized: Please paste a save data text below.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847430
+    m_Localized: The following is a list of third-party components and their licenses
+      included in this software.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847431
+    m_Localized: Failed to load save data.\n{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847432
+    m_Localized: Failed to download save data.\n({0})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847433
+    m_Localized: Do you want to delete the save data?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847434
+    m_Localized: Failed to delete save data.\n{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847435
+    m_Localized: ' (Slot {0})'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847436
+    m_Localized: NEW GAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1276020303847437
+    m_Localized: NO DATA
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

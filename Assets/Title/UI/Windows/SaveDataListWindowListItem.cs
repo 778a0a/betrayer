@@ -16,6 +16,7 @@ public partial class SaveDataListWindowListItem
     }
 
     private SaveDataListWindow parent;
+    private string T(string key, params object[] args) => parent.T(key, args);
 
     public int SlotNo { get; private set; }
     public bool IsAutoSaveData { get; private set; }
@@ -39,10 +40,10 @@ public partial class SaveDataListWindowListItem
         {
             SaveDataLisItemRoot.style.display = DisplayStyle.None;
             buttonNoData.style.display = DisplayStyle.Flex;
-            buttonNoData.text = "NEW GAME";
+            buttonNoData.text = T("NEW GAME");
             if (IsAutoSaveData)
             {
-                buttonNoData.text = "NO DATA";
+                buttonNoData.text = T("NO DATA");
                 buttonNoData.enabledSelf = false;
                 parent.labelAutoSaveOriginalSlotNo.text = "";
             }
@@ -61,7 +62,7 @@ public partial class SaveDataListWindowListItem
 
         if (IsAutoSaveData)
         {
-            parent.labelAutoSaveOriginalSlotNo.text = $"（スロット{data.SaveDataSlotNo + 1}）";
+            parent.labelAutoSaveOriginalSlotNo.text = T("（スロット{0}）", data.SaveDataSlotNo + 1);
         }
     }
 }

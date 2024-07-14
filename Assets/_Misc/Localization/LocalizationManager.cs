@@ -8,6 +8,23 @@ public class LocalizationManager : MonoBehaviour
 {
     [SerializeField] private StringTableCollection tables;
 
+    public string T(string key, params object[] args)
+    {
+        key = key.Replace("\n", "\\n");
+
+        var locale = LocalizationSettings.SelectedLocale;
+        var table = (StringTable)tables.GetTable(locale.Identifier);
+        var entry = table[key];
+        if (entry == null)
+        {
+            Debug.LogWarning($"Key not found: {key}");
+            return string.Format(key, args);
+        }
+        var value = table[key].LocalizedValue;
+        value = value.Replace("\\n", "\n");
+        return string.Format(value, args);
+    }
+
     public void SetData(UIDocument doc)
     {
         var locale = LocalizationSettings.SelectedLocale;

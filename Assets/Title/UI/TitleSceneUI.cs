@@ -11,7 +11,8 @@ public partial class TitleSceneUI : MonoBehaviour
 {
     private int currentSelectedSlotNo = 0;
 
-    [SerializeField] private LocalizationManager localization;
+    [SerializeField] public LocalizationManager localization;
+    private string T(string key, params object[] args) => localization.T(key, args);
 
     private void OnEnable()
     {
@@ -84,7 +85,7 @@ public partial class TitleSceneUI : MonoBehaviour
                 }
                 catch (Exception ex)
                 {
-                    MessageWindow!.Show($"セーブデータの読み込みに失敗しました。\n({ex.Message})");
+                    MessageWindow!.Show(T("セーブデータの読み込みに失敗しました。\n({0})", ex.Message));
                     Debug.LogError($"セーブデータの読み込みに失敗しました。 {ex}");
                 }
             }, isCopy: false);
@@ -153,7 +154,7 @@ public partial class TitleSceneUI : MonoBehaviour
             }
             catch (Exception ex)
             {
-                MessageWindow!.Show($"クリップボードからの貼り付けに失敗しました。\n({ex.Message})");
+                MessageWindow!.Show(T("クリップボードからの貼り付けに失敗しました。\n({0})", ex.Message));
                 Debug.LogError($"クリップボードからの貼り付けに失敗しました。 {ex}");
             }
         };
@@ -165,7 +166,7 @@ public partial class TitleSceneUI : MonoBehaviour
             }
             catch (Exception ex)
             {
-                MessageWindow!.Show($"クリップボードへのコピーに失敗しました。\n({ex.Message})");
+                MessageWindow!.Show(T("クリップボードへのコピーに失敗しました。\n({0})", ex.Message));
                 Debug.LogError($"クリップボードへのコピーに失敗しました。 {ex}");
             }
         };
@@ -190,7 +191,7 @@ public partial class TitleSceneUI : MonoBehaviour
         textTextBoxWindow.value = initialText;
         TextBoxWindow.style.display = DisplayStyle.Flex;
 
-        buttonSubmitText.text = isCopy ? "閉じる" : "確定";
+        buttonSubmitText.text = isCopy ? T("閉じる") : T("確定");
         buttonClearText.style.display = Util.Display(!isCopy);
 #if UNITY_WEBGL
         // WebGLではクリップボードのコピー・ペーストができないので非表示にする。
@@ -201,8 +202,8 @@ public partial class TitleSceneUI : MonoBehaviour
         buttonCopyText.style.display = Util.Display(isCopy);
 #endif
         labelTextBoxWindowTitle.text = isCopy ? 
-            "以下のテキストをコピーして保存してください" :
-            "セーブデータを以下にペーストしてください";
+            T("以下のテキストをコピーして保存してください") :
+            T("セーブデータを以下にペーストしてください");
     }
     #endregion
 
@@ -239,16 +240,17 @@ public partial class TitleSceneUI : MonoBehaviour
 
     public void ShowLicenseWindow()
     {
-        if (string.IsNullOrEmpty(textLicenseWindow.text))
+        var license = GetLicense().Trim();
+        if (!license.Equals(textLicenseWindow.text))
         {
-            textLicenseWindow.value = License.Trim();
+            textLicenseWindow.value = license;
         }
 
         LicenseWindow.style.display = DisplayStyle.Flex;
     }
 
-    private static string License = @"
-本ソフトの配布にあたって同梱されているサードパーティーコンポーネントとそのライセンス情報を以下に示します。
+    private string GetLicense() =>
+        T("本ソフトの配布にあたって同梱されているサードパーティーコンポーネントとそのライセンス情報を以下に示します。") + @"
 
 Morisawa BIZ UDGothic
 =====================
