@@ -20,6 +20,7 @@ public partial class TitleSceneUI : MonoBehaviour
         InitializeTextBoxWindow();
         InitializeProgressWindow();
         InitializeLicenseWindow();
+        MessageWindow.L = L;
         MessageWindow.Initialize();
         SaveDataList.Initialize(this);
 

@@ -22,7 +22,7 @@ public partial class MessageWindow
 
     public Button buttonMessageCancel { get; private set; }
 
-    public Label labelTitle { get; private set; }
+    public Label labelMessageWindowTitle { get; private set; }
 
     public Label labelMessageText { get; private set; }
 
@@ -35,7 +35,7 @@ public partial class MessageWindow
         buttonMessageYes = Root?.Q<Button>("buttonMessageYes");
         buttonMessageNo = Root?.Q<Button>("buttonMessageNo");
         buttonMessageCancel = Root?.Q<Button>("buttonMessageCancel");
-        labelTitle = Root?.Q<Label>("labelTitle");
+        labelMessageWindowTitle = Root?.Q<Label>("labelMessageWindowTitle");
         labelMessageText = Root?.Q<Label>("labelMessageText");
     }
 }

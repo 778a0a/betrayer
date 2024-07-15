@@ -8,11 +8,15 @@ public partial class MessageWindow : IWindow
 {
     public static MessageWindow Instance { get; private set; }
 
+    public LocalizationManager L { get; set; }
+
     private ValueTaskCompletionSource<MessageBoxResult> tcsMessageWindow;
 
     public void Initialize()
     {
         Instance = this;
+        L.Register(this);
+        
         void OnClick(MessageBoxResult result)
         {
             tcsMessageWindow.SetResult(result);

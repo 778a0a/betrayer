@@ -179,6 +179,26 @@ MonoBehaviour:
     m_Key: NO DATA
     m_Metadata:
       m_Items: []
+  - m_Id: 1509840726777856
+    m_Key: buttonMessageOK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509843813785600
+    m_Key: buttonMessageYes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509845919326208
+    m_Key: buttonMessageNo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509848343633920
+    m_Key: buttonMessageCancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1510195883663360
+    m_Key: labelMessageWindowTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

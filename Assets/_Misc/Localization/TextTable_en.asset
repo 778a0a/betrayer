@@ -179,6 +179,26 @@ MonoBehaviour:
     m_Localized: NO DATA
     m_Metadata:
       m_Items: []
+  - m_Id: 1509840726777856
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509843813785600
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509845919326208
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509848343633920
+    m_Localized: Cancell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1510195883663360
+    m_Localized: System Message
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
