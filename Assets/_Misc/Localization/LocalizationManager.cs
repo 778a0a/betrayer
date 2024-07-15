@@ -52,7 +52,7 @@ public class LocalizationManager : MonoBehaviour
                         //Debug.Log($"[L.Apply] {entry.Key} = {entry.LocalizedValue}");
                         break;
                     case TextField textField:
-                        //textField. = entry.LocalizedValue;
+                        textField.textEdition.placeholder = entry.LocalizedValue;
                         break;
                     default:
                         Debug.LogWarning($"[L.Apply] {entry.Key} is unknown type: {propValue.GetType()}");
