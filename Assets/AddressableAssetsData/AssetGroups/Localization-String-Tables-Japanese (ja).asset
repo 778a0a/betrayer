@@ -16,7 +16,13 @@ MonoBehaviour:
   m_GUID: f79046d6efe62584b97f9633d95a9033
   m_SerializeEntries:
   - m_GUID: 14b61833b87fa5b49b03218277bd3b8a
-    m_Address: TextTable_ja
+    m_Address: TitleStringTable_ja
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f42c67430cbd2364b8120c085f3e0066
+    m_Address: MainStringTable_ja
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja
