@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public partial class KessenWindow : IWindow
 {
-    private LocalizationManager L => GameCore.Instance.MainUI.L;
+    private LocalizationManager L => MainUI.Instance.L;
     
     private KessenMemberAttackSide[] _attackers;
     private KessenMemberDefenceSide[] _defenders;

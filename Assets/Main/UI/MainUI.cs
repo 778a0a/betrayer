@@ -8,6 +8,8 @@ using UnityEngine.XR;
 
 public partial class MainUI : MonoBehaviour
 {
+    public static MainUI Instance { get; private set; }
+
     public event EventHandler<MainUIButton> MainUIButtonClick;
     public enum MainUIButton
     {
@@ -68,6 +70,11 @@ public partial class MainUI : MonoBehaviour
             Application.Quit();
 #endif
         }
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     private void OnEnable()

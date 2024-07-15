@@ -8,7 +8,7 @@ public partial class CountryInfoScreen : IScreen
 {
     public event EventHandler CloseButtonClicked;
 
-    public LocalizationManager L => GameCore.Instance.MainUI.L;
+    public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
         CharacterTable.Initialize();

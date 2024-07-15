@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public partial class CountryRulerInfo
 {
-    private LocalizationManager L => GameCore.Instance.MainUI.L;
+    private LocalizationManager L => MainUI.Instance.L;
 
     public void SetData(Country country, WorldData world)
     {

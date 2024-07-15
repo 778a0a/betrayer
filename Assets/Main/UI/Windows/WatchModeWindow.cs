@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public partial class WatchModeWindow : IWindow
 {
-    private LocalizationManager L => GameCore.Instance.MainUI.L;
+    private LocalizationManager L => MainUI.Instance.L;
 
     public bool IsVisible { get; private set; }
 

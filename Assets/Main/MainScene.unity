@@ -4656,6 +4656,7 @@ GameObject:
   - component: {fileID: 1796006450}
   - component: {fileID: 1796006451}
   - component: {fileID: 1796006452}
+  - component: {fileID: 1796006453}
   m_Layer: 0
   m_Name: Information
   m_TagString: Untagged
@@ -4720,7 +4721,21 @@ MonoBehaviour:
   - {fileID: 9197481963319205126, guid: a0ada1b9a88716c41847078a404b63fe, type: 3}
   - {fileID: 9197481963319205126, guid: 2ecfa30e667ddeb4aa0d7451adae634a, type: 3}
   - {fileID: 9197481963319205126, guid: 7f99b93ee5b56eb42ad59fbca209b021, type: 3}
+  <L>k__BackingField: {fileID: 1796006453}
   _document: {fileID: 1796006451}
+--- !u!114 &1796006453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796006449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d170ad9c8cfc0646ac04a73d9fd7ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tables: {fileID: 11400000, guid: 61c7bc139efa42541b5b523491baa941, type: 2}
 --- !u!1 &1877343546
 GameObject:
   m_ObjectHideFlags: 0

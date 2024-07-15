@@ -37,7 +37,7 @@ public class Kessen
     private KessenWindow UI => GameCore.Instance.MainUI.KessenWindow;
     public bool NeedInteraction => Attacker.HasPlayer || Defender.HasPlayer;
     private bool NeedWatchBattle => Test.Instance.showOthersBattle;
-    private LocalizationManager L => GameCore.Instance.MainUI.L;
+    private LocalizationManager L => MainUI.Instance.L;
 
     public async ValueTask<BattleResult> Do()
     {

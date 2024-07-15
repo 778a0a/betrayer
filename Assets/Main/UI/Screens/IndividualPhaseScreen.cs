@@ -10,7 +10,7 @@ public partial class IndividualPhaseScreen : IScreen
 
     private ActionButtonHelper[] buttons;
 
-    public LocalizationManager L => GameCore.Instance.MainUI.L;
+    public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
         buttons = new[]

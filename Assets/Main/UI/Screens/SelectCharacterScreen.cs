@@ -9,7 +9,7 @@ public partial class SelectCharacterScreen : IScreen
 {
     private ValueTaskCompletionSource<Character> tcs;
 
-    public LocalizationManager L => GameCore.Instance.MainUI.L;
+    public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
         CharacterTable.Initialize();

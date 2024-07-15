@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public partial class BattleWindow : IWindow
 {
-    private LocalizationManager L => GameCore.Instance.MainUI.L;
+    private LocalizationManager L => MainUI.Instance.L;
     
     private IBattleSoldierIcon[] _attackerSoldiers;
     private IBattleSoldierIcon[] _defenderSoldiers;
