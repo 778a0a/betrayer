@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _document: {fileID: 1257746122}
-  localization: {fileID: 1257746125}
+  L: {fileID: 1257746125}
 --- !u!114 &1257746125
 MonoBehaviour:
   m_ObjectHideFlags: 0

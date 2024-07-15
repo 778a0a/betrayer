@@ -16,7 +16,7 @@ public partial class SaveDataListWindowListItem
     }
 
     private SaveDataListWindow parent;
-    private string T(string key, params object[] args) => parent.T(key, args);
+    private LocalizationManager L => parent.L;
 
     public int SlotNo { get; private set; }
     public bool IsAutoSaveData { get; private set; }
@@ -25,6 +25,7 @@ public partial class SaveDataListWindowListItem
     public void Initialize(SaveDataListWindow parent, int slotNo, bool isAutoSaveData)
     {
         this.parent = parent;
+        L.Register(this);
         SlotNo = slotNo;
         IsAutoSaveData = isAutoSaveData;
         buttonMain.clicked += () => ButtonClick?.Invoke(this, ButtonType.Main);
@@ -40,10 +41,10 @@ public partial class SaveDataListWindowListItem
         {
             SaveDataLisItemRoot.style.display = DisplayStyle.None;
             buttonNoData.style.display = DisplayStyle.Flex;
-            buttonNoData.text = T("NEW GAME");
+            buttonNoData.text = L["NEW GAME"];
             if (IsAutoSaveData)
             {
-                buttonNoData.text = T("NO DATA");
+                buttonNoData.text = L["NO DATA"];
                 buttonNoData.enabledSelf = false;
                 parent.labelAutoSaveOriginalSlotNo.text = "";
             }
@@ -62,7 +63,7 @@ public partial class SaveDataListWindowListItem
 
         if (IsAutoSaveData)
         {
-            parent.labelAutoSaveOriginalSlotNo.text = T("（スロット{0}）", data.SaveDataSlotNo + 1);
+            parent.labelAutoSaveOriginalSlotNo.text = L["（スロット{0}）", data.SaveDataSlotNo + 1];
         }
     }
 }

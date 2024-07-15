@@ -7,11 +7,13 @@ public partial class SaveDataListWindow
 {
     private TitleSceneUI uiTitle;
     private SaveDataManager saves;
-    public string T(string key, params object[] args) => uiTitle.localization.T(key, args);
+    public LocalizationManager L => uiTitle.L;
 
     public void Initialize(TitleSceneUI uiTitle)
     {
         this.uiTitle = uiTitle;
+        L.Register(this);
+
         var manualSlots = new[] { SaveSlot1, SaveSlot2, SaveSlot3 };
         for (int i = 0; i < manualSlots.Length; i++)
         {
@@ -42,7 +44,7 @@ public partial class SaveDataListWindow
                     }
                     catch (Exception ex)
                     {
-                        await MessageWindow.Show(T("セーブデータの読み込みに失敗しました。\n{0}", ex.ToString()));
+                        await MessageWindow.Show(L["セーブデータの読み込みに失敗しました。\n{0}", ex.ToString()]);
                         Debug.LogError($"セーブデータの読み込みに失敗しました。 {ex}");
                     }
                 }
@@ -57,21 +59,21 @@ public partial class SaveDataListWindow
                 }
                 catch (Exception ex)
                 {
-                    await MessageWindow.Show(T("セーブデータのダウンロードに失敗しました。\n({0})", ex.Message));
+                    await MessageWindow.Show(L["セーブデータのダウンロードに失敗しました。\n({0})", ex.Message]);
                     Debug.LogError($"セーブデータのダウンロードに失敗しました。 {ex}");
                 }
                 break;
             case SaveDataListWindowListItem.ButtonType.Delete:
                 try
                 {
-                    var res = await MessageWindow.Show(T("セーブデータを削除しますか？"), MessageBoxButton.YesNo);
+                    var res = await MessageWindow.Show(L["セーブデータを削除しますか？"], MessageBoxButton.YesNo);
                     if (res != MessageBoxResult.Yes) return;
                     SaveDataManager.Instance.Delete(slot.SlotNo);
                     slot.SetData(null);
                 }
                 catch (Exception ex)
                 {
-                    await MessageWindow.Show(T("セーブデータの削除に失敗しました。\n{0}", ex.ToString()));
+                    await MessageWindow.Show(L["セーブデータの削除に失敗しました。\n{0}", ex.ToString()]);
                     Debug.LogError($"セーブデータの削除に失敗しました。 {ex}");
                 }
                 break;
