@@ -49,7 +49,11 @@ public partial class TitleSceneUI
 
     public Button buttonSubmitText { get; private set; }
 
+    public Label labelProgressWindowTitle { get; private set; }
+
     public ProgressBar progressLoading { get; private set; }
+
+    public Label labelLicenseWindowTitle { get; private set; }
 
     public Button buttonCloseLicenseWindow { get; private set; }
 
@@ -87,7 +91,9 @@ public partial class TitleSceneUI
         textTextBoxWindow = Root?.Q<TextField>("textTextBoxWindow");
         buttonCopyText = Root?.Q<Button>("buttonCopyText");
         buttonSubmitText = Root?.Q<Button>("buttonSubmitText");
+        labelProgressWindowTitle = Root?.Q<Label>("labelProgressWindowTitle");
         progressLoading = Root?.Q<ProgressBar>("progressLoading");
+        labelLicenseWindowTitle = Root?.Q<Label>("labelLicenseWindowTitle");
         buttonCloseLicenseWindow = Root?.Q<Button>("buttonCloseLicenseWindow");
         textLicenseWindow = Root?.Q<TextField>("textLicenseWindow");
         NewGameMenu = Root?.Q<VisualElement>("NewGameMenu");

@@ -14,7 +14,11 @@ using UnityEngine.UIElements;
 
 public partial class SaveDataListWindowListItem
 {
+    public Label labelSoldiersCaption { get; private set; }
+
     public Label labelSoldiers { get; private set; }
+
+    public Label labelGoldCaption { get; private set; }
 
     public Label labelGold { get; private set; }
 
@@ -22,7 +26,11 @@ public partial class SaveDataListWindowListItem
 
     public Label labelName { get; private set; }
 
+    public Label labelTurnCountCaption { get; private set; }
+
     public Label labelTurnCount { get; private set; }
+
+    public Label labelSavedTimeCaption { get; private set; }
 
     public Label labelSavedTime { get; private set; }
 
@@ -43,11 +51,15 @@ public partial class SaveDataListWindowListItem
     public SaveDataListWindowListItem(VisualElement root)
     {
         Root = root;
+        labelSoldiersCaption = Root?.Q<Label>("labelSoldiersCaption");
         labelSoldiers = Root?.Q<Label>("labelSoldiers");
+        labelGoldCaption = Root?.Q<Label>("labelGoldCaption");
         labelGold = Root?.Q<Label>("labelGold");
         labelTitle = Root?.Q<Label>("labelTitle");
         labelName = Root?.Q<Label>("labelName");
+        labelTurnCountCaption = Root?.Q<Label>("labelTurnCountCaption");
         labelTurnCount = Root?.Q<Label>("labelTurnCount");
+        labelSavedTimeCaption = Root?.Q<Label>("labelSavedTimeCaption");
         labelSavedTime = Root?.Q<Label>("labelSavedTime");
         imageCharacter = Root?.Q<Image>("imageCharacter");
         buttonMain = Root?.Q<Button>("buttonMain");
