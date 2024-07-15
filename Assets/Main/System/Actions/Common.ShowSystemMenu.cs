@@ -16,7 +16,7 @@ partial class CommonActions
     public ShowSystemMenuAction ShowSystemMenu { get; } = new();
     public class ShowSystemMenuAction : CommonActionBase
     {
-        public override string Description => "システムメニューを表示します。";
+        public override string Description => L["システムメニューを表示します。"];
 
         public override async ValueTask Do(Character chara)
         {

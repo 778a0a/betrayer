@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public partial class CountryRulerInfo
 {
+    private LocalizationManager L => GameCore.Instance.MainUI.L;
+
     public void SetData(Country country, WorldData world)
     {
         if (country == null)
@@ -18,7 +20,7 @@ public partial class CountryRulerInfo
 
         imageRuler.image = FaceImageManager.Instance.GetImage(country.Ruler);
         imageCountryColor.sprite = world.Map.Helper.GetCountryImage(country);
-        labelRulerTitle.text = country.Ruler.GetTitle(world);
+        labelRulerTitle.text = country.Ruler.GetTitle(world, L);
         labelRulerName.text = country.Ruler.Name;
         labelAreaCount.text = country.Areas.Count.ToString();
         labelTotalIncome.text = country.TotalIncome.ToString();
@@ -34,7 +36,7 @@ public partial class CountryRulerInfo
         }
         else
         {
-            labelAlly.text = "なし";
+            labelAlly.text = L["なし"];
             imageAllyCountryColor.sprite = null;
             imageAllyCountryColor.style.display = DisplayStyle.None;
         }

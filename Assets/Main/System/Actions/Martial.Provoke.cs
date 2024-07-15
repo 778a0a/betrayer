@@ -17,7 +17,7 @@ partial class MartialActions
     public ProvokeAction Provoke { get; } = new();
     public class ProvokeAction : MartialActionBase
     {
-        public override string Description => "他国の将を挑発します。";
+        public override string Description => L["他国の将を挑発します。"];
 
         public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);
         public override int Cost(Character chara) => 8;
@@ -61,21 +61,21 @@ partial class MartialActions
                 Debug.Log("挑発に成功しました。");
                 if (chara.IsPlayer)
                 {
-                    await MessageWindow.Show("挑発に成功しました。");
+                    await MessageWindow.Show(L["挑発に成功しました。"]);
                 }
             }
             else
             {
                 if (chara.IsPlayer)
                 {
-                    await MessageWindow.Show("挑発は失敗しました。");
+                    await MessageWindow.Show(L["挑発は失敗しました。"]);
                     PayCost(chara);
                     return;
                 }
             }
             if (attacker.IsPlayer)
             {
-                await MessageWindow.Show($"{chara.Name}に挑発されました。");
+                await MessageWindow.Show(L["{0}に挑発されました。", chara.Name]);
             }
 
             var sourceCountry = World.CountryOf(attacker);

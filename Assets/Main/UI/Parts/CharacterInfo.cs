@@ -48,7 +48,7 @@ public partial class CharacterInfo
         labelCharaAttack.text = chara.Attack.ToString();
         labelCharaDefense.text = chara.Defense.ToString();
         labelCharaIntelligence.text = chara.Intelligence.ToString();
-        labelCharaStatus.text = chara.GetTitle(GameCore.Instance.World);
+        labelCharaStatus.text = chara.GetTitle(GameCore.Instance.World, GameCore.Instance.MainUI.L);
         if (country == null)
         {
             labelCharaLoyalty.text = "--";

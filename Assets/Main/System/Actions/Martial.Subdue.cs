@@ -17,7 +17,7 @@ partial class MartialActions
     public SubdueAction Subdue { get; } = new();
     public class SubdueAction : MartialActionBase
     {
-        public override string Description => "配下を討伐します。";
+        public override string Description => L["配下を討伐します。"];
 
         public override bool CanSelect(Character chara) => World.IsRuler(chara);
         public override int Cost(Character chara) => 5;
@@ -69,8 +69,8 @@ partial class MartialActions
             if (chara.IsPlayer)
             {
                 await MessageWindow.Show(result == BattleResult.AttackerWin ?
-                    $"討伐成功！\n{target.Name}は追放されました。" :
-                    $"討伐失敗！{target.Name}はあなたを恨んでいるようです。");
+                    L["討伐成功！\n{0}は追放されました。", target.Name] :
+                    L["討伐失敗！{0}はあなたを恨んでいるようです。", target.Name]);
                 target.AddUrami(30);
             }
 

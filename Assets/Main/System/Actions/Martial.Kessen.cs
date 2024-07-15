@@ -17,7 +17,7 @@ partial class MartialActions
     public KessenAction Kessen { get; } = new();
     public class KessenAction : MartialActionBase
     {
-        public override string Description => "隣接国と決戦を行います。";
+        public override string Description => L["隣接国と決戦を行います。"];
 
         public override bool CanSelect(Character chara) => World.IsRuler(chara);
         public override int Cost(Character chara) => 10;
@@ -80,7 +80,9 @@ partial class MartialActions
                 target = cands.OrderBy(c => c.Members.Sum(m => m.Power)).First();
             }
 
-            await MessageWindow.Show($"{country.Name}が{target.Name}に決戦を仕掛けました。");
+            await MessageWindow.Show(L["{0}が{1}に決戦を仕掛けました。",
+                country.Name,
+                target.Name]);
 
             var kessen = global::Kessen.Prepare(country, target);
             var result = await kessen.Do();

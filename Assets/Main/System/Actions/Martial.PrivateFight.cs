@@ -17,7 +17,7 @@ partial class MartialActions
     public PrivateFightAction PrivateFight { get; } = new();
     public class PrivateFightAction : MartialActionBase
     {
-        public override string Description => "同僚に戦いを仕掛けます。";
+        public override string Description => L["同僚に戦いを仕掛けます。"];
 
         public override bool CanSelect(Character chara) => World.IsVassal(chara);
         public override int Cost(Character chara) => 5;
@@ -64,7 +64,7 @@ partial class MartialActions
                 country.RecalculateSalary();
                 if (chara.IsPlayer)
                 {
-                    await MessageWindow.Show($"{target.Name}は勢力を去りました。");
+                    await MessageWindow.Show(L["{0}は勢力を去りました。", target.Name]);
                     target.AddUrami(30);
                 }
             }

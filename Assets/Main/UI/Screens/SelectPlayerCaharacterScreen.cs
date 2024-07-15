@@ -8,6 +8,7 @@ public partial class SelectPlayerCaharacterScreen : IScreen
 {
     public event EventHandler<Character> CharacterSelected;
 
+    public LocalizationManager L => GameCore.Instance.MainUI.L;
     public void Initialize()
     {
         CharacterTable.Initialize();
@@ -57,8 +58,8 @@ public partial class SelectPlayerCaharacterScreen : IScreen
         {
             var world = GameCore.Instance.World;
             var res = await MessageWindow.Show(chara != null ?
-                $"「{chara.GetTitle(world)} {chara.Name}」でゲームを始めます。\nよろしいですか？" :
-                "観戦モードでゲームを始めます。\nよろしいですか？",
+                L["「{0}」でゲームを始めます。\nよろしいですか？", $"{chara.GetTitle(world, L)} {chara.Name}"]:
+                L["観戦モードでゲームを始めます。\nよろしいですか？"],
                 MessageBoxButton.OkCancel);
             if (res != MessageBoxResult.Ok) return;
 
@@ -84,11 +85,11 @@ public partial class SelectPlayerCaharacterScreen : IScreen
     {
         var cleared = GameCore.GameCleared;
         buttonWatch.enabledSelf = cleared;
-        buttonWatch.text = cleared ? "観戦" : "観戦（クリア後解放）";
+        buttonWatch.text = cleared ? L["観戦"] : L["観戦（クリア後解放）"];
 
         if (pos == null && !isShowingFreeList)
         {
-            labelDescription.text = "マップのセルをクリックしてください。";
+            labelDescription.text = L["マップのセルをクリックしてください。"];
             FreeListController.style.display = DisplayStyle.None;
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
             CharacterTable.Root.style.display = DisplayStyle.None;
@@ -97,7 +98,7 @@ public partial class SelectPlayerCaharacterScreen : IScreen
         }
         if (pos == null && isShowingFreeList)
         {
-            labelDescription.text = "一覧表から操作するキャラをクリックしてください。";
+            labelDescription.text = L["一覧表から操作するキャラをクリックしてください。"];
             FreeListController.style.display = DisplayStyle.Flex;
             CountryRulerInfo.Root.style.display = DisplayStyle.None;
             CharacterTable.Root.style.display = DisplayStyle.Flex;
@@ -115,7 +116,7 @@ public partial class SelectPlayerCaharacterScreen : IScreen
         }
         isShowingFreeList = false;
 
-        labelDescription.text = "一覧表から操作するキャラをクリックしてください。";
+        labelDescription.text = L["一覧表から操作するキャラをクリックしてください。"];
         FreeListController.style.display = DisplayStyle.None;
         CountryRulerInfo.Root.style.display = DisplayStyle.Flex;
         CharacterTable.Root.style.display = DisplayStyle.Flex;

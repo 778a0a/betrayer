@@ -9,6 +9,7 @@ public partial class SelectCharacterScreen : IScreen
 {
     private ValueTaskCompletionSource<Character> tcs;
 
+    public LocalizationManager L => GameCore.Instance.MainUI.L;
     public void Initialize()
     {
         CharacterTable.Initialize();
@@ -74,7 +75,7 @@ public partial class SelectCharacterScreen : IScreen
         characterInfoTarget = null;
 
         labelDescription.text = description;
-        buttonClose.text = "キャンセル";
+        buttonClose.text = L["キャンセル"];
 
         void OnTileClick(object sender, MapPosition pos)
         {

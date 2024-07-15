@@ -16,7 +16,7 @@ partial class StrategyActions
     public FireVassalAction FireVassal { get; } = new();
     public class FireVassalAction : StrategyActionBase
     {
-        public override string Description => "配下を解雇します。";
+        public override string Description => L["配下を解雇します。"];
 
         public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara)
@@ -56,7 +56,7 @@ partial class StrategyActions
                     Debug.Log($"{target.Name}は{chara.Name}の解雇を拒否しました。");
                     if (chara.IsPlayer)
                     {
-                        await MessageWindow.Show($"拒否されました。");
+                        await MessageWindow.Show(L["拒否されました。"]);
                         target.AddUrami(30);
                     }
                     PayCost(chara);
@@ -70,12 +70,12 @@ partial class StrategyActions
 
             if (chara.IsPlayer)
             {
-                await MessageWindow.Show($"{target.Name}を追放しました。");
+                await MessageWindow.Show(L["{0}を追放しました。", target.Name]);
                 target.AddUrami(30);
             }
             if (target.IsPlayer)
             {
-                await MessageWindow.Show($"あなたは勢力から追放されました。");
+                await MessageWindow.Show(L["あなたは勢力から追放されました。"]);
             }
 
             Core.Tilemap.DrawCountryTile();

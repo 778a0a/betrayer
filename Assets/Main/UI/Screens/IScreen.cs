@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public interface IScreen
 {
+    LocalizationManager L { get; }
     void Initialize();
     VisualElement Root { get; }
 }
@@ -14,6 +15,7 @@ public interface IScreen
 public class ActionButtonHelper
 {
     private static GameCore Core => GameCore.Instance;
+    private LocalizationManager L => Core.MainUI.L;
     public static ActionButtonHelper Common(Button b, Func<CommonActions, ActionBase> getter)
         => new(b, () => getter(Core.CommonActions));
     public static ActionButtonHelper Strategy(Button b, Func<StrategyActions, ActionBase> getter)
@@ -67,15 +69,15 @@ public class ActionButtonHelper
             {
                 var turnElapsed = Core.TurnCount - Core.LastKessenTurnCount;
                 var remaining = kessen.CoolingPeriod - turnElapsed;
-                labelHint.text = $"決戦禁止期間です。(残り{remaining}ターン)";
+                labelHint.text = L["決戦禁止期間です。(残り{0}ターン)", remaining];
             }
             else if (Core.World.Countries.Any(c => c.IsExhausted))
             {
-                labelHint.text = "軍事フェイズの先頭の国のみ実行可能です。";
+                labelHint.text = L["軍事フェイズの先頭の国のみ実行可能です。"];
             }
             else if (!kessen.Candidates(Core.World.CountryOf(chara)).Any())
             {
-                labelHint.text = "決戦を仕掛けられる国がありません。";
+                labelHint.text = L["決戦を仕掛けられる国がありません。"];
             }
             else
             {

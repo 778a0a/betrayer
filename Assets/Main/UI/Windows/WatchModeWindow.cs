@@ -4,14 +4,17 @@ using UnityEngine.UIElements;
 
 public partial class WatchModeWindow : IWindow
 {
+    private LocalizationManager L => GameCore.Instance.MainUI.L;
+
     public bool IsVisible { get; private set; }
 
     public void Initialize()
     {
         Hide();
+        L.Register(this);
         buttonChangeCharacter.clicked += () =>
         {
-            buttonChangeCharacter.text = "ターン終了までお待ちください...";
+            buttonChangeCharacter.text = L["ターン終了までお待ちください..."];
             buttonChangeCharacter.enabledSelf = false;
             Test.Instance.hold = true;
             SystemWindow.ShowSelectPlayerCharacterUI(GameCore.Instance);
@@ -20,7 +23,7 @@ public partial class WatchModeWindow : IWindow
 
     public void Show()
     {
-        buttonChangeCharacter.text = "操作キャラ変更";
+        buttonChangeCharacter.text = L["操作キャラ変更"];
         buttonChangeCharacter.enabledSelf = true;
         Root.style.display = DisplayStyle.Flex;
         IsVisible = true;

@@ -16,7 +16,7 @@ partial class PersonalActions
     public ResignAction Resign { get; } = new();
     public class ResignAction : PersonalActionBase
     {
-        public override string Description => "勢力を捨てて自由になります。";
+        public override string Description => L["勢力を捨てて自由になります。"];
 
         public override bool CanSelect(Character chara) => World.IsVassal(chara); // Rulerは戦略フェイズで可能
         public override int Cost(Character chara) => 1;
@@ -29,7 +29,7 @@ partial class PersonalActions
 
             if (chara.IsPlayer)
             {
-                var res = await MessageWindow.Show("勢力を捨てて浪士になります。\nよろしいですか？", MessageBoxButton.OkCancel);
+                var res = await MessageWindow.Show(L["勢力を捨てて浪士になります。\nよろしいですか？"], MessageBoxButton.OkCancel);
                 if (res != MessageBoxResult.Ok) return;
             }
             var country = World.CountryOf(chara);

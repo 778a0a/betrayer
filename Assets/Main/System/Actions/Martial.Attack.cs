@@ -19,7 +19,7 @@ partial class MartialActions
     {
         public readonly Dictionary<Character, (Country, Area)> contexts = new();
 
-        public override string Description => "隣接国に侵攻します。";
+        public override string Description => L["隣接国に侵攻します。"];
 
         public override bool CanSelect(Character chara) => World.IsRulerOrVassal(chara);
         public override int Cost(Character chara) => 3;
@@ -146,7 +146,7 @@ partial class MartialActions
                 }
                 if (attacker.IsPlayer)
                 {
-                    await MessageWindow.Show("出撃命令が下りました。");
+                    await MessageWindow.Show(L["出撃命令が下りました。"]);
                 }
             }
 
@@ -244,7 +244,7 @@ partial class MartialActions
             }
             else if (defender.IsPlayer)
             {
-                await MessageWindow.Show("防衛命令が下りました。");
+                await MessageWindow.Show(L["防衛命令が下りました。"]);
             }
 
             return defender;

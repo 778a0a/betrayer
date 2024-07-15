@@ -9,6 +9,7 @@ public partial class OrganizeScreen : IScreen
 {
     private ValueTaskCompletionSource<bool> tcs;
 
+    public LocalizationManager L => GameCore.Instance.MainUI.L;
     public void Initialize()
     {
         CharacterTable.Initialize();

@@ -5,12 +5,15 @@ using UnityEngine.UIElements;
 
 public partial class BattleWindow : IWindow
 {
+    private LocalizationManager L => GameCore.Instance.MainUI.L;
+    
     private IBattleSoldierIcon[] _attackerSoldiers;
     private IBattleSoldierIcon[] _defenderSoldiers;
 
     public void Initialize()
     {
         Root.style.display = DisplayStyle.None;
+        L.Register(this);
 
         _attackerSoldiers = new[]
         {
@@ -34,7 +37,7 @@ public partial class BattleWindow : IWindow
             buttonAttack.style.display = DisplayStyle.None;
             buttonRetreat.style.display = DisplayStyle.None;
             buttonResult.style.display = DisplayStyle.Flex;
-            buttonResult.text = result == BattleResult.AttackerWin ? "攻撃側の勝利" : "防衛側の勝利";
+            buttonResult.text = result == BattleResult.AttackerWin ? L["攻撃側の勝利"] : L["防衛側の勝利"];
             if (result == BattleResult.AttackerWin)
             {
                 Root.AddToClassList("attacker-win");

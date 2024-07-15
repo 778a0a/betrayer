@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using UnityEngine;
 
 public class SaveDataSummary
 {
@@ -30,6 +31,7 @@ public class SaveDataSummary
         WorldData world,
         SavedGameCoreState state,
         int saveDataSlotNo,
+        LocalizationManager L,
         DateTime savedTime = default)
     {
         savedTime = savedTime == default ? DateTime.Now : savedTime;
@@ -37,7 +39,7 @@ public class SaveDataSummary
         var summary = new SaveDataSummary
         {
             FaceImageId = chara.Id,
-            Title = chara.GetTitle(world),
+            Title = chara.GetTitle(world, L),
             Name = chara.Name,
             SoldierCount = chara.Force.SoldierCount,
             Gold = chara.Gold,

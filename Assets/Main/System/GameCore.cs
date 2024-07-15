@@ -43,6 +43,8 @@ public class GameCore
 
     public bool IsWatchMode { get; set; } = false;
 
+    private LocalizationManager L => MainUI.L;
+
     public GameCore(
         WorldData world,
         MainUI mainUI,
@@ -156,18 +158,18 @@ public class GameCore
 
                     await MessageWindow.Show(string.Join("\n", new[]
                     {
-                        "ゲーム終了！",
-                        $"最終ターン: {TurnCount}",
-                        $"勝者: {winner.Name}",
-                        $"{(isWin ? "あなたの勢力が統一を果たしました！" : "あなたは統一を果たせませんでした...")}",
+                        L["ゲーム終了！"],
+                        L["最終ターン: {0}", TurnCount],
+                        L["勝者: {0}", winner.Name],
+                        isWin ? L["あなたの勢力が統一を果たしました！"] : L["あなたは統一を果たせませんでした..."],
                         $"",
-                        $"あなた: {player.Name}",
-                        $"最終兵力: {player.Force.SoldierCount} ({powerOrder}位)",
-                        $"最終名声: {player.Prestige} ({prestigeOrder}位)",
-                        $"最終功績: {player.Contribution} ({contributionOrder}位)",
+                        L["あなた: {0}", player.Name],
+                        L["最終兵力: {0} ({1}位)", player.Force.SoldierCount, powerOrder],
+                        L["最終名声: {0} ({1}位)", player.Prestige, prestigeOrder],
+                        L["最終功績: {0} ({1}位)", player.Contribution, contributionOrder],
                     }));
 
-                    await MessageWindow.Show("タイトル画面に戻ります。");
+                    await MessageWindow.Show(L["タイトル画面に戻ります。"]);
                     TitleSceneManager.LoadScene();
                     return;
                 }

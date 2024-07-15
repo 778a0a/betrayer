@@ -16,7 +16,7 @@ partial class StrategyActions
     public OrganizeAction Organize { get; } = new();
     public class OrganizeAction : StrategyActionBase
     {
-        public override string Description => "勢力の序列と給料配分を調整します。";
+        public override string Description => L["勢力の序列と給料配分を調整します。"];
 
         public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara) => true;

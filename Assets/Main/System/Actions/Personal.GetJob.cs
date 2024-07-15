@@ -16,7 +16,7 @@ partial class PersonalActions
     public GetJobAction GetJob { get; } = new();
     public class GetJobAction : PersonalActionBase
     {
-        public override string Description => "既存勢力に仕官します。";
+        public override string Description => L["既存勢力に仕官します。"];
 
         public override bool CanSelect(Character chara) => World.IsFree(chara);
         public override int Cost(Character chara) => 10;
@@ -50,7 +50,7 @@ partial class PersonalActions
             {
                 if (country.Ruler.Urami > 0)
                 {
-                    await MessageWindow.Show($"拒否されました。");
+                    await MessageWindow.Show(L["拒否されました。"]);
                     PayCost(chara);
                     return;
                 }
@@ -60,7 +60,7 @@ partial class PersonalActions
 
             if (chara.IsPlayer)
             {
-                await MessageWindow.Show($"{country.Name}に仕官しました。");
+                await MessageWindow.Show(L["{0}に仕官しました。", country.Name]);
             }
 
             Core.Tilemap.DrawCountryTile();

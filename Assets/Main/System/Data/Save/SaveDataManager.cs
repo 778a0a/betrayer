@@ -25,19 +25,12 @@ public class SaveDataManager
         Debug.Log(saveDataText);
     }
 
-    public void SaveToClipboard(GameCore core)
-    {
-        var saveData = CreateSaveDataText(core);
-        GUIUtility.systemCopyBuffer = saveData.PlainText();
-        Debug.Log(saveData);
-    }
-
     private SaveDataText CreateSaveDataText(GameCore core)
     {
         var world = core.World;
         var saveDataSlotNo = core.SaveDataSlotNo;
         var state = SavedGameCoreState.Create(core);
-        var saveData = SaveDataText.Serialize(world, state, saveDataSlotNo);
+        var saveData = SaveDataText.Serialize(world, state, saveDataSlotNo, core.MainUI.L);
         return saveData;
     }
 

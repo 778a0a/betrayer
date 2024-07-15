@@ -10,6 +10,7 @@ public partial class IndividualPhaseScreen : IScreen
 
     private ActionButtonHelper[] buttons;
 
+    public LocalizationManager L => GameCore.Instance.MainUI.L;
     public void Initialize()
     {
         buttons = new[]
@@ -43,7 +44,7 @@ public partial class IndividualPhaseScreen : IScreen
         labelTurnCount.text = GameCore.Instance.TurnCount.ToString();
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
-        labelTitle.text = chara.GetTitle(world);
+        labelTitle.text = chara.GetTitle(world, L);
         labelSalaryRatio.text = chara.SalaryRatio.ToString();
 
         labelCharaAttack.text = chara.Attack.ToString();

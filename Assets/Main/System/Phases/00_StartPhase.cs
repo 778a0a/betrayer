@@ -12,6 +12,8 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class StartPhase : PhaseBase
 {
+    private LocalizationManager L => Core.MainUI.L;
+
     public override async ValueTask Phase()
     {
         Debug.Log("[開始フェイズ] 開始");
@@ -60,7 +62,7 @@ public class StartPhase : PhaseBase
                 if (Countries[0].Ruler.IsPlayer ||
                     Countries[1].Ruler.IsPlayer)
                 {
-                    await MessageWindow.Show("残り勢力数が2になったため、\n同盟が解消されました。");
+                    await MessageWindow.Show(L["残り勢力数が2になったため、\n同盟が解消されました。"]);
                 }
             }
         }
@@ -81,7 +83,8 @@ public class StartPhase : PhaseBase
                 Debug.Log($"[開始フェイズ] {country.Name} と {ally.Name} の同盟が解消されました。(合意による解消)");
                 if (country.Ruler.IsPlayer || ally.Ruler.IsPlayer)
                 {
-                    await MessageWindow.Show($"{country.Name}と{ally.Name}の同盟が解消されました。\n(合意による解消)");
+                    await MessageWindow.Show(
+                        L["{0}と{1}の同盟が解消されました。\n(合意による解消)", country.Name, ally.Name]);
                 }
                 continue;
             }
@@ -95,7 +98,8 @@ public class StartPhase : PhaseBase
                 Debug.Log($"[開始フェイズ] {country.Name} と {ally.Name} の同盟が解消されました。({country.Name}からの破棄)");
                 if (country.Ruler.IsPlayer || ally.Ruler.IsPlayer)
                 {
-                    await MessageWindow.Show($"{country.Name}と{ally.Name}の同盟が解消されました。\n({country.Name}からの破棄)");
+                    await MessageWindow.Show(
+                        L["{0}と{1}の同盟が解消されました。\n({0}からの破棄)", country.Name, ally.Name]);
                 }
             }
             else

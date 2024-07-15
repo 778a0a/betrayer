@@ -26,9 +26,10 @@ public class ActionBase
     public GameCore Core { get; set; }
     protected WorldData World => Core.World;
     protected MainUI UI => Core.MainUI;
-    protected TilemapManager Tilemap => Core.Tilemap; 
+    protected TilemapManager Tilemap => Core.Tilemap;
+    protected LocalizationManager L => Core.MainUI.L;
 
-    public virtual string Description => $"(説明文なし: {GetType().Name})";
+    public virtual string Description => L["(説明文なし: {0})", GetType().Name];
     /// <summary>
     /// 選択肢として表示可能ならtrue
     /// </summary>

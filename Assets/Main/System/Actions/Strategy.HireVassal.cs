@@ -16,7 +16,7 @@ partial class StrategyActions
     public HireVassalAction HireVassal { get; } = new();
     public class HireVassalAction : StrategyActionBase
     {
-        public override string Description => "配下を雇います。";
+        public override string Description => L["配下を雇います。"];
 
         public override int Cost(Character chara) => 8;
         protected override bool CanDoCore(Character chara)
@@ -84,7 +84,7 @@ partial class StrategyActions
             {
                 if ((target.Urami / 100f * 10).Chance())
                 {
-                    await MessageWindow.Show($"拒否されました。");
+                    await MessageWindow.Show(L["拒否されました。"]);
                     target.AddUrami(-1);
                     return;
                 }
@@ -93,7 +93,7 @@ partial class StrategyActions
             country.AddVassal(target);
             if (chara.IsPlayer)
             {
-                await MessageWindow.Show($"{target.Name}を配下にしました。");
+                await MessageWindow.Show(L["{0}を配下にしました。", target.Name]);
             }
 
             Core.Tilemap.DrawCountryTile();

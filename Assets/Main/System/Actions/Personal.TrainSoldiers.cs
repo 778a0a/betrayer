@@ -16,7 +16,7 @@ partial class PersonalActions
     public TrainSoldiersAction TrainSoldiers { get; } = new();
     public class TrainSoldiersAction : PersonalActionBase
     {
-        public override string Description => "兵士を訓練します。";
+        public override string Description => L["兵士を訓練します。"];
 
         public override int Cost(Character chara)
         {

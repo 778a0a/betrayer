@@ -37,6 +37,7 @@ public class Kessen
     private KessenWindow UI => GameCore.Instance.MainUI.KessenWindow;
     public bool NeedInteraction => Attacker.HasPlayer || Defender.HasPlayer;
     private bool NeedWatchBattle => Test.Instance.showOthersBattle;
+    private LocalizationManager L => GameCore.Instance.MainUI.L;
 
     public async ValueTask<BattleResult> Do()
     {
@@ -124,7 +125,7 @@ public class Kessen
         {
             UI.SetData(this, result, needInteraction: needInteraction);
 
-            await MessageWindow.Show($"{winner.Country.Ruler.Name}が決戦に勝利しました。");
+            await MessageWindow.Show(L["{0}が決戦に勝利しました。", winner.Country.Ruler.Name]);
             if (needInteraction)
             {
                 await UI.WaitPlayerClick();

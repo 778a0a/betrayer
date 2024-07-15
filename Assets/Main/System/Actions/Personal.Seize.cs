@@ -16,7 +16,7 @@ partial class PersonalActions
     public SeizeAction Seize { get; } = new();
     public class SeizeAction : PersonalActionBase
     {
-        public override string Description => "エリアを攻撃して奪取します。";
+        public override string Description => L["エリアを攻撃して奪取します。"];
 
         public override bool CanSelect(Character chara) => World.IsFree(chara);
         public override int Cost(Character chara) => 3;
@@ -34,7 +34,7 @@ partial class PersonalActions
                 targetArea = await UI.ShowSelectAreaScreen(
                     World.Map.Areas,
                     World,
-                    "奪取する地域を選択してください。");
+                    L["奪取する地域を選択してください。"]);
                 if (targetArea == null)
                 {
                     Debug.Log("キャンセルされました。");

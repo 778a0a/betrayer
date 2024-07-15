@@ -47,7 +47,7 @@ public partial class CharacterTableRowItem
         labelAttack.text = chara.Attack.ToString();
         labelDefense.text = chara.Defense.ToString();
         labelIntelligence.text = chara.Intelligence.ToString();
-        labelStatus.text = chara.GetTitle(world);
+        labelStatus.text = chara.GetTitle(world, GameCore.Instance.MainUI.L);
         if (country == null)
         {
             labelLoyalty.text = "--";

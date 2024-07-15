@@ -19,6 +19,7 @@ public class Test : MonoBehaviour
     public bool showOthersBattle = true;
 
     private GameCore core;
+    private LocalizationManager L => core.MainUI.L;
 
     private void Awake()
     {
@@ -81,7 +82,7 @@ public class Test : MonoBehaviour
                 }
                 core.DoMainLoop().Foreget();
             });
-            MessageWindow.Show("操作キャラを選択してください。");
+            MessageWindow.Show(L["操作キャラを選択してください。"]);
         }
         else
         {

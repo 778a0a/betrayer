@@ -19,6 +19,7 @@ public partial class MainUI : MonoBehaviour
     }
 
     [SerializeField] private VisualTreeAsset[] screenVisualTreeAssets;
+    [field: SerializeField] public LocalizationManager L { get; set; }
 
     public SelectPlayerCaharacterScreen SelectPlayerCaharacter { get; private set; }
     public CountryInfoScreen CountryInfo { get; private set; }
@@ -77,6 +78,7 @@ public partial class MainUI : MonoBehaviour
         KessenWindow.Initialize();
         WatchModeWindow.Initialize();
         SystemWindow.Initialize();
+        MessageWindow.L = L;
         MessageWindow.Initialize();
 
         buttonToggleDebugUI.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.ToggleDebugUI);
@@ -149,8 +151,8 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCharacter);
         
         return SelectCharacter.Show(
-            "採用する人物をクリックしてください。",
-            "採用しない",
+            L["採用する人物をクリックしてください。"],
+            L["採用しない"],
             charas,
             world,
             _ => true);
@@ -161,7 +163,7 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCharacter);
 
         return SelectCharacter.Show(
-            "追放する人物をクリックしてください。",
+            L["追放する人物をクリックしてください。"],
             "キャンセル",
             country.Vassals,
             world,
@@ -176,8 +178,8 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCharacter);
 
         return SelectCharacter.Show(
-            "侵攻を行う人物をクリックしてください。",
-            "キャンセル",
+            L["侵攻を行う人物をクリックしてください。"],
+            L["キャンセル"],
             country.Members.ToList(),
             world,
             c => !c.IsAttacked);
@@ -191,8 +193,8 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCharacter);
 
         return SelectCharacter.Show(
-            "討伐する人物をクリックしてください。",
-            "キャンセル",
+            L["討伐する人物をクリックしてください。"],
+            L["キャンセル"],
             country.Vassals,
             world,
             _ => true);
@@ -206,8 +208,8 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCharacter);
 
         return SelectCharacter.Show(
-            "攻撃する人物をクリックしてください。",
-            "キャンセル",
+            L["攻撃する人物をクリックしてください。"],
+            L["キャンセル"],
             targets,
             world,
             _ => true);
@@ -225,8 +227,8 @@ public partial class MainUI : MonoBehaviour
         
         // TODO
         return SelectCharacter.Show(
-            "防衛する人物をクリックしてください。",
-            "放棄する",
+            L["防衛する人物をクリックしてください。"],
+            L["放棄する"],
             defenderCountry.Members.ToList(),
             world,
             c => !c.IsAttacked);
@@ -249,17 +251,17 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCharacter);
 
         return SelectCharacter.ShowForProvoke(
-            "挑発する国を選択してください。",
+            L["挑発する国を選択してください。"],
             world,
             area =>
             {
                 if (candidateCountries.Any(c => c.Areas.Contains(area)))
                 {
-                    return (true, "挑発する人物を選択してください。");
+                    return (true, L["挑発する人物を選択してください。"]);
                 }
                 else
                 {
-                    return (false, "この国には挑発できません。");
+                    return (false, L["この国には挑発できません。"]);
                 }
             });
     }
@@ -269,13 +271,13 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCountry);
         
         return SelectCountry.Show(
-            "同盟を結ぶ国を選択してください。",
+            L["同盟を結ぶ国を選択してください。"],
             world,
             target =>
             {
-                if (target == country) return (false, "自国です。");
-                if (target.Ally != null) return (false, "すでに別の国と同盟を結んでいます。");
-                else return (true, "この国と同盟を結びますか？");
+                if (target == country) return (false, L["自国です。"]);
+                if (target.Ally != null) return (false, L["すでに別の国と同盟を結んでいます。"]);
+                else return (true, L["この国と同盟を結びますか？"]);
             });
     }
 
@@ -287,14 +289,14 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCountry);
 
         return SelectCountry.Show(
-            "決戦を行う国を選択してください。",
+            L["決戦を行う国を選択してください。"],
             world,
             target =>
             {
-                if (target == country) return (false, "自国です。");
-                if (!MartialActions.KessenAction.CanBattle(country, target)) return (false, "相手が弱小すぎます。");
-                if (!cands.Contains(target)) return (false, "この国とは決戦できません。");
-                else return (true, "この国と決戦を行いますか？");
+                if (target == country) return (false, L["自国です。"]);
+                if (!MartialActions.KessenAction.CanBattle(country, target)) return (false, L["相手が弱小すぎます。"]);
+                if (!cands.Contains(target)) return (false, L["この国とは決戦できません。"]);
+                else return (true, L["この国と決戦を行いますか？"]);
             });
     }
 
@@ -303,18 +305,18 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(SelectCountry);
 
         return SelectCountry.Show(
-            "仕官する国を選択してください。",
+            L["仕官する国を選択してください。"],
             world,
             country =>
             {
                 //if (country.Vassals.Count >= country.VassalCountMax)
                 if (country.Vassals.Count >= Country.VassalCountMaxLimit)
                 {
-                    return (false, "この国はこれ以上配下を雇えません。");
+                    return (false, L["この国はこれ以上配下を雇えません。"]);
                 }
                 else
                 {
-                    return (true, "この国に仕官しますか？");
+                    return (true, L["この国に仕官しますか？"]);
                 }
             });
     }
@@ -322,8 +324,9 @@ public partial class MainUI : MonoBehaviour
     public ValueTask<Area> ShowSelectAreaScreen(
         IList<Area> targetAreas,
         WorldData world,
-        string text = "侵攻する地域を選択してください。")
+        string text = null)
     {
+        text ??= L["侵攻する地域を選択してください。"];
         ShowScreen(SelectArea);
 
         return SelectArea.Show(
@@ -333,11 +336,11 @@ public partial class MainUI : MonoBehaviour
             {
                 if (targetAreas.Contains(a))
                 {
-                    return (true, "この地域に侵攻しますか？");
+                    return (true, L["この地域に侵攻しますか？"]);
                 }
                 else
                 {
-                    return (false, "この地域には侵攻できません。");
+                    return (false, L["この地域には侵攻できません。"]);
                 }
 
             });
@@ -350,9 +353,9 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(RespondCountryAction);
 
         return RespondCountryAction.Show(
-            "以下の勢力から同盟の申し込みがありました。",
-            "受諾",
-            "拒否",
+            L["以下の勢力から同盟の申し込みがありました。"],
+            L["受諾"],
+            L["拒否"],
             reqester,
             world);
     }
@@ -364,9 +367,9 @@ public partial class MainUI : MonoBehaviour
         ShowScreen(RespondCountryAction);
 
         return RespondCountryAction.Show(
-            "以下の勢力から仕官の誘いがありました。",
-            "受諾",
-            "拒否",
+            L["以下の勢力から仕官の誘いがありました。"],
+            L["受諾"],
+            L["拒否"],
             reqester,
             world);
     }

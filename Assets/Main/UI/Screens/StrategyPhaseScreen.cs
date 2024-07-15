@@ -9,6 +9,7 @@ public partial class StrategyPhaseScreen : IScreen
 
     private ActionButtonHelper[] buttons;
 
+    public LocalizationManager L => GameCore.Instance.MainUI.L;
     public void Initialize()
     {
         buttons = new[]
@@ -46,14 +47,14 @@ public partial class StrategyPhaseScreen : IScreen
 
         imageChara.image = FaceImageManager.Instance.GetImage(chara);
         labelName.text = chara.Name;
-        labelTitle.text = chara.GetTitle(world);
+        labelTitle.text = chara.GetTitle(world, L);
         labelSalaryRatio.text = chara.SalaryRatio.ToString();
 
         if (world.IsRuler(chara) && country.Ally != null)
         {
             containerAllianceStance.style.display = DisplayStyle.Flex;
             var yes = country.WantsToContinueAlliance;
-            var text = yes ? "継続" : "解消";
+            var text = yes ? L["継続"] : L["解消"];
             var turns = country.TurnCountToDisableAlliance;
             labelAllianceStance.text = text + (yes ? "" : $"({turns})");
         }

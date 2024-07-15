@@ -16,7 +16,7 @@ partial class CommonActions
     public ShowInfoAction ShowInfo { get; } = new();
     public class ShowInfoAction : CommonActionBase
     {
-        public override string Description => "マップをクリックして各国の情報を表示します。";
+        public override string Description => L["マップをクリックして各国の情報を表示します。"];
 
         public override async ValueTask Do(Character chara)
         {

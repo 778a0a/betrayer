@@ -16,7 +16,7 @@ partial class StrategyActions
     public ResignAction Resign { get; } = new();
     public class ResignAction : StrategyActionBase
     {
-        public override string Description => "勢力を捨てて放浪します。";
+        public override string Description => L["勢力を捨てて放浪します。"];
 
         public override int Cost(Character chara) => 1;
         protected override bool CanDoCore(Character chara)
@@ -32,7 +32,7 @@ partial class StrategyActions
 
             if (chara.IsPlayer)
             {
-                var res = await MessageWindow.Show("勢力を捨てて放浪します。\nよろしいですか？", MessageBoxButton.OkCancel);
+                var res = await MessageWindow.Show(L["勢力を捨てて放浪します。\nよろしいですか？"], MessageBoxButton.OkCancel);
                 if (res != MessageBoxResult.Ok) return;
             }
 
@@ -42,7 +42,9 @@ partial class StrategyActions
             country.Vassals.RemoveAt(0);
             country.Ruler = successor;
             country.RecalculateSalary();
-            await MessageWindow.Show($"{chara.Name}が勢力を捨て、\n{successor.Name}が新たな君主となりました。");
+            await MessageWindow.Show(L["{0}が勢力を捨て、\n{1}が新たな君主となりました。",
+                chara.Name,
+                successor.Name]);
 
             Core.Tilemap.DrawCountryTile();
 

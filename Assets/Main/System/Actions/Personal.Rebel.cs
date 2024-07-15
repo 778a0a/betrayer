@@ -16,7 +16,7 @@ partial class PersonalActions
     public RebelAction Rebel { get; } = new();
     public class RebelAction : PersonalActionBase
     {
-        public override string Description => "反乱を起こします。";
+        public override string Description => L["反乱を起こします。"];
 
         public override bool CanSelect(Character chara) => World.IsVassal(chara);
         public override int Cost(Character chara) => 10;
@@ -28,7 +28,7 @@ partial class PersonalActions
 
             if (chara.IsPlayer)
             {
-                var res = await MessageWindow.Show("本当に反乱を起こしますか？", MessageBoxButton.OkCancel);
+                var res = await MessageWindow.Show(L["本当に反乱を起こしますか？"], MessageBoxButton.OkCancel);
                 if (res != MessageBoxResult.Ok) return;
             }
 
@@ -79,7 +79,9 @@ partial class PersonalActions
 
             if (!asked)
             {
-                await MessageWindow.Show($"{chara.Name}が{ruler.Name}に対して反乱を起こしました！");
+                await MessageWindow.Show(L["{0}が{1}に対して反乱を起こしました！",
+                    chara.Name,
+                    ruler.Name]);
             }
             var kessen = Kessen.Prepare(newCountry, country);
             var result = await kessen.Do();
@@ -104,7 +106,7 @@ partial class PersonalActions
 
                 if (chara.IsPlayer)
                 {
-                    await MessageWindow.Show("反乱成功！\n新しい君主になりました。");
+                    await MessageWindow.Show(L["反乱成功！\n新しい君主になりました。"]);
                     ruler.AddUrami(30);
                 }
             }
@@ -114,7 +116,7 @@ partial class PersonalActions
                 World.Countries.Remove(newCountry);
                 if (chara.IsPlayer)
                 {
-                    await MessageWindow.Show("反乱は失敗し、勢力を追放されました。");
+                    await MessageWindow.Show(L["反乱は失敗し、勢力を追放されました。"]);
                     country.Ruler.AddUrami(30);
                 }
             }

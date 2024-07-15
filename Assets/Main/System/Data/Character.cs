@@ -106,24 +106,24 @@ public class Character
     /// <summary>
     /// 地位
     /// </summary>
-    public string GetTitle(WorldData world)
+    public string GetTitle(WorldData world, LocalizationManager L)
     {
         if (world.IsRuler(this))
         {
             var country = world.CountryOf(this);
-            return country.CountryRank switch
+            return L[country.CountryRank switch
             {
                 CountryRank.Empire => "皇帝",
                 CountryRank.Kingdom => "王",
                 CountryRank.Duchy => "大公",
                 _ => "君主",
-            };
+            }];
         }
         else if (world.IsVassal(this))
         {
             var country = world.CountryOf(this);
             var order = Mathf.Max(country.Vassals.Count, country.VassalCountMax) - country.Vassals.IndexOf(this) - 1;
-            return new[]
+            return L[new[]
             {
                 "従士",
                 "従士",
@@ -133,11 +133,11 @@ public class Character
                 "宰相",
                 "総督",
                 "副王",
-            }[order];
+            }[order]];
         }
         else
         {
-            return "浪士";
+            return L["浪士"];
         }
     }
 

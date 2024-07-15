@@ -38,11 +38,12 @@ public class SaveDataText
         WorldData world,
         SavedGameCoreState state,
         int saveDataSlotNo,
+        LocalizationManager L,
         DateTime savedTime = default)
     {
         var charas = SavedCharacters.Extract(world);
         var countries = SavedCountries.Extract(world);
-        var summary = SaveDataSummary.Create(world, state, saveDataSlotNo, savedTime);
+        var summary = SaveDataSummary.Create(world, state, saveDataSlotNo, L, savedTime);
         var saveData = new SaveData
         {
             Characters = charas,

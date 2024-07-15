@@ -16,7 +16,7 @@ partial class PersonalActions
     public BecomeIndependentAction BecomeIndependent { get; } = new();
     public class BecomeIndependentAction : PersonalActionBase
     {
-        public override string Description => "自勢力から独立します。";
+        public override string Description => L["自勢力から独立します。"];
 
         public override bool CanSelect(Character chara) =>
             World.IsVassal(chara) &&
@@ -31,7 +31,7 @@ partial class PersonalActions
 
             if (chara.IsPlayer)
             {
-                var res = await MessageWindow.Show("本当に独立しますか？", MessageBoxButton.OkCancel);
+                var res = await MessageWindow.Show(L["本当に独立しますか？"], MessageBoxButton.OkCancel);
                 if (res != MessageBoxResult.Ok) return;
             }
 
@@ -73,12 +73,14 @@ partial class PersonalActions
 
             if (chara.IsPlayer)
             {
-                await MessageWindow.Show("独立しました。");
+                await MessageWindow.Show(L["独立しました。"]);
                 oldCountry.Ruler.AddUrami(30);
             }
             else
             {
-                await MessageWindow.Show($"{chara.Name}が{oldCountry.Ruler.Name}から独立しました。");
+                await MessageWindow.Show(L["{0}が{1}から独立しました。",
+                    chara.Name,
+                    oldCountry.Ruler.Name]);
             }
         }
     }

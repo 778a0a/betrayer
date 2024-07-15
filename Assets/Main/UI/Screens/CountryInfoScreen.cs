@@ -8,6 +8,7 @@ public partial class CountryInfoScreen : IScreen
 {
     public event EventHandler CloseButtonClicked;
 
+    public LocalizationManager L => GameCore.Instance.MainUI.L;
     public void Initialize()
     {
         CharacterTable.Initialize();
@@ -48,15 +49,16 @@ public partial class CountryInfoScreen : IScreen
 
     public static string TerrainName(Terrain terrain)
     {
+        var L = GameCore.Instance.MainUI.L;
         return terrain switch
         {
-            Terrain.LargeRiver => "大河",
-            Terrain.River => "河川",
-            Terrain.Plain => "平地",
-            Terrain.Hill => "丘陵",
-            Terrain.Forest => "森林",
-            Terrain.Mountain => "山岳",
-            Terrain.Fort => "城砦",
+            Terrain.LargeRiver => L["大河"],
+            Terrain.River => L["河川"],
+            Terrain.Plain => L["平地"],
+            Terrain.Hill => L["丘陵"],
+            Terrain.Forest => L["森林"],
+            Terrain.Mountain => L["山岳"],
+            Terrain.Fort => L["城砦"],
             _ => throw new ArgumentOutOfRangeException(nameof(terrain)),
         };
     }
