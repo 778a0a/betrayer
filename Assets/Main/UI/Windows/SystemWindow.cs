@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public partial class SystemWindow : IWindow
 {
-    private LocalizationManager L => GameCore.Instance.MainUI.L;
+    private LocalizationManager L => MainUI.Instance.L;
 
     public void Initialize()
     {
