@@ -14,7 +14,7 @@ using UnityEngine.UIElements;
 
 public partial class CountryInfoScreen
 {
-    public Label Label { get; private set; }
+    public Label labelTerrainCaption { get; private set; }
 
     public Label labelTerrain { get; private set; }
 
@@ -35,7 +35,7 @@ public partial class CountryInfoScreen
     public CountryInfoScreen(VisualElement root)
     {
         Root = root;
-        Label = Root?.Q<Label>("Label");
+        labelTerrainCaption = Root?.Q<Label>("labelTerrainCaption");
         labelTerrain = Root?.Q<Label>("labelTerrain");
         labelPosition = Root?.Q<Label>("labelPosition");
         CellInformation = Root?.Q<VisualElement>("CellInformation");

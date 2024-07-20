@@ -20,17 +20,31 @@ public partial class CountryRulerInfo
 
     public Label labelRulerName { get; private set; }
 
+    public Label labelAreaCountCaption { get; private set; }
+
     public Label labelAreaCount { get; private set; }
+
+    public Label labelTotalIncomeCaption { get; private set; }
 
     public Label labelTotalIncome { get; private set; }
 
+    public Label labelTotalGoldCaption { get; private set; }
+
     public Label labelTotalGold { get; private set; }
+
+    public Label labelMemberCountCaption { get; private set; }
 
     public Label labelMemberCount { get; private set; }
 
+    public Label labelSoldierCountCaption { get; private set; }
+
     public Label labelSoldierCount { get; private set; }
 
+    public Label labelTotalPowerCaption { get; private set; }
+
     public Label labelTotalPower { get; private set; }
+
+    public Label labelAllyCaption { get; private set; }
 
     public Image imageAllyCountryColor { get; private set; }
 
@@ -48,12 +62,19 @@ public partial class CountryRulerInfo
         imageCountryColor = Root?.Q<Image>("imageCountryColor");
         labelRulerTitle = Root?.Q<Label>("labelRulerTitle");
         labelRulerName = Root?.Q<Label>("labelRulerName");
+        labelAreaCountCaption = Root?.Q<Label>("labelAreaCountCaption");
         labelAreaCount = Root?.Q<Label>("labelAreaCount");
+        labelTotalIncomeCaption = Root?.Q<Label>("labelTotalIncomeCaption");
         labelTotalIncome = Root?.Q<Label>("labelTotalIncome");
+        labelTotalGoldCaption = Root?.Q<Label>("labelTotalGoldCaption");
         labelTotalGold = Root?.Q<Label>("labelTotalGold");
+        labelMemberCountCaption = Root?.Q<Label>("labelMemberCountCaption");
         labelMemberCount = Root?.Q<Label>("labelMemberCount");
+        labelSoldierCountCaption = Root?.Q<Label>("labelSoldierCountCaption");
         labelSoldierCount = Root?.Q<Label>("labelSoldierCount");
+        labelTotalPowerCaption = Root?.Q<Label>("labelTotalPowerCaption");
         labelTotalPower = Root?.Q<Label>("labelTotalPower");
+        labelAllyCaption = Root?.Q<Label>("labelAllyCaption");
         imageAllyCountryColor = Root?.Q<Image>("imageAllyCountryColor");
         labelAlly = Root?.Q<Label>("labelAlly");
         imageRuler = Root?.Q<Image>("imageRuler");
