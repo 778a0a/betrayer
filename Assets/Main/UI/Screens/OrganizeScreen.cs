@@ -79,7 +79,7 @@ public partial class OrganizeScreen : IScreen
         };
 
         // 完了
-        buttonClose.clicked += () =>
+        buttonFinish.clicked += () =>
         {
             tcs.SetResult(true);
         };

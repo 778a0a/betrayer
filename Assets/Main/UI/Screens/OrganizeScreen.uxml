@@ -2,18 +2,18 @@
     <ui:Template name="CharacterTable" src="project://database/Assets/Main/UI/Parts/CharacterTable.uxml?fileID=9197481963319205126&amp;guid=f9d3bd81086d4614ebef680da3ffdaf1&amp;type=3#CharacterTable" />
     <ui:Template name="CharacterInfo" src="project://database/Assets/Main/UI/Parts/CharacterInfo.uxml?fileID=9197481963319205126&amp;guid=040ff9351467d2543b73d34712de87fb&amp;type=3#CharacterInfo" />
     <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
-    <ui:Label name="labelDescription" text="配下の昇格・降格、給料配分の調整を行います。" />
+    <ui:Label name="labelDescriptionOrganizeScreen" text="配下の昇格・降格、給料配分の調整を行います。" />
     <ui:VisualElement>
         <ui:Instance template="CharacterTable" name="CharacterTable" />
         <ui:Instance template="CharacterInfo" name="CharacterInfo" />
     </ui:VisualElement>
     <ui:VisualElement style="flex-direction: row;">
         <ui:VisualElement style="flex-direction: row;">
-            <ui:Label text="給料配分" />
+            <ui:Label name="labelTargetSalaryRatiocaption" text="給料配分" />
             <ui:Label name="labelTargetSalaryRatio" text="0" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-direction: row;">
-            <ui:Label text="忠誠" />
+            <ui:Label name="labelTargetLoyaltyCaption" text="忠誠" />
             <ui:Label name="labelTargetLoyalty" text="0" />
         </ui:VisualElement>
     </ui:VisualElement>
@@ -23,5 +23,5 @@
         <ui:Button name="buttonDecrease" text="減らす" />
         <ui:Button name="buttonIncrease" text="増やす" />
     </ui:VisualElement>
-    <ui:Button name="buttonClose" text="完了" />
+    <ui:Button name="buttonFinish" text="完了" />
 </ui:UXML>

@@ -18,19 +18,35 @@ public partial class CharacterInfo
 
     public Label labelCharaName { get; private set; }
 
+    public Label labelCharaAttackCaption { get; private set; }
+
     public Label labelCharaAttack { get; private set; }
+
+    public Label labelCharaDefenseCaption { get; private set; }
 
     public Label labelCharaDefense { get; private set; }
 
+    public Label labelCharaIntelligenceCaption { get; private set; }
+
     public Label labelCharaIntelligence { get; private set; }
+
+    public Label labelCharaLoyaltyCaption { get; private set; }
 
     public Label labelCharaLoyalty { get; private set; }
 
+    public Label labelCharaPrestigeCaption { get; private set; }
+
     public Label labelCharaPrestige { get; private set; }
+
+    public Label labelCharaContributionCaption { get; private set; }
 
     public Label labelCharaContribution { get; private set; }
 
+    public Label labelCharaSalaryRatioCaption { get; private set; }
+
     public Label labelCharaSalaryRatio { get; private set; }
+
+    public Label labelCharaSoldierCountCaption { get; private set; }
 
     public Label labelCharaSoldierCount { get; private set; }
 
@@ -77,13 +93,21 @@ public partial class CharacterInfo
         Root = root;
         labelCharaStatus = Root?.Q<Label>("labelCharaStatus");
         labelCharaName = Root?.Q<Label>("labelCharaName");
+        labelCharaAttackCaption = Root?.Q<Label>("labelCharaAttackCaption");
         labelCharaAttack = Root?.Q<Label>("labelCharaAttack");
+        labelCharaDefenseCaption = Root?.Q<Label>("labelCharaDefenseCaption");
         labelCharaDefense = Root?.Q<Label>("labelCharaDefense");
+        labelCharaIntelligenceCaption = Root?.Q<Label>("labelCharaIntelligenceCaption");
         labelCharaIntelligence = Root?.Q<Label>("labelCharaIntelligence");
+        labelCharaLoyaltyCaption = Root?.Q<Label>("labelCharaLoyaltyCaption");
         labelCharaLoyalty = Root?.Q<Label>("labelCharaLoyalty");
+        labelCharaPrestigeCaption = Root?.Q<Label>("labelCharaPrestigeCaption");
         labelCharaPrestige = Root?.Q<Label>("labelCharaPrestige");
+        labelCharaContributionCaption = Root?.Q<Label>("labelCharaContributionCaption");
         labelCharaContribution = Root?.Q<Label>("labelCharaContribution");
+        labelCharaSalaryRatioCaption = Root?.Q<Label>("labelCharaSalaryRatioCaption");
         labelCharaSalaryRatio = Root?.Q<Label>("labelCharaSalaryRatio");
+        labelCharaSoldierCountCaption = Root?.Q<Label>("labelCharaSoldierCountCaption");
         labelCharaSoldierCount = Root?.Q<Label>("labelCharaSoldierCount");
         soldier00 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier00"));
         soldier01 = new CharacterInfoSoldierIcon(Root?.Q<VisualElement>("soldier01"));

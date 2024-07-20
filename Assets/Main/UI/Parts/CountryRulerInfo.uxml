@@ -13,31 +13,31 @@
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 1; flex-direction: row; flex-wrap: wrap;">
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="領地数" class="CountryInfo-Label" />
+                            <engine:Label name="labelAreaCountCaption" text="領地数" class="CountryInfo-Label" />
                             <engine:Label name="labelAreaCount" text="10" class="CountryInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="総収入" class="CountryInfo-Label" />
+                            <engine:Label name="labelTotalIncomeCaption" text="総収入" class="CountryInfo-Label" />
                             <engine:Label name="labelTotalIncome" text="10" class="CountryInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="総資金" class="CountryInfo-Label" />
+                            <engine:Label name="labelTotalGoldCaption" text="総資金" class="CountryInfo-Label" />
                             <engine:Label name="labelTotalGold" text="10" class="CountryInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="総人数" class="CountryInfo-Label" />
+                            <engine:Label name="labelMemberCountCaption" text="総人数" class="CountryInfo-Label" />
                             <engine:Label name="labelMemberCount" text="10" class="CountryInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="総兵数" class="CountryInfo-Label" />
+                            <engine:Label name="labelSoldierCountCaption" text="総兵数" class="CountryInfo-Label" />
                             <engine:Label name="labelSoldierCount" text="10" class="CountryInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="総戦力" class="CountryInfo-Label" />
+                            <engine:Label name="labelTotalPowerCaption" text="総戦力" class="CountryInfo-Label" />
                             <engine:Label name="labelTotalPower" text="10" class="CountryInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="同盟" class="CountryInfo-Label" />
+                            <engine:Label name="labelAllyCaption" text="同盟" class="CountryInfo-Label" />
                             <engine:Image name="imageAllyCountryColor" style="margin-right: 10px; flex-grow: 0; width: 40px; height: 40px; flex-shrink: 0; background-color: rgba(0, 229, 255, 0.35); align-self: center;" />
                             <engine:Label name="labelAlly" text="なし" class="CountryInfo-Value" />
                         </engine:VisualElement>

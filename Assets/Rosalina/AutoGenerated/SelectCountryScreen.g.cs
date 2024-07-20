@@ -24,7 +24,7 @@ public partial class SelectCountryScreen
 
     public Button buttonSelect { get; private set; }
 
-    public Button buttonClose { get; private set; }
+    public Button buttonCancel { get; private set; }
 
     public VisualElement Root { get; }
 
@@ -36,6 +36,6 @@ public partial class SelectCountryScreen
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
         CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
         buttonSelect = Root?.Q<Button>("buttonSelect");
-        buttonClose = Root?.Q<Button>("buttonClose");
+        buttonCancel = Root?.Q<Button>("buttonCancel");
     }
 }

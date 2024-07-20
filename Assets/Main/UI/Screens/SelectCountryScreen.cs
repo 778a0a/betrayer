@@ -29,7 +29,7 @@ public partial class SelectCountryScreen : IScreen
         };
 
         // キャンセルされた場合
-        buttonClose.clicked += () =>
+        buttonCancel.clicked += () =>
         {
             tcs.SetResult(null);
         };

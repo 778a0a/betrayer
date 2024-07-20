@@ -14,7 +14,11 @@ using UnityEngine.UIElements;
 
 public partial class KessenWindow
 {
+    public Label labelAttackerNameCaption { get; private set; }
+
     public Label AttackerName { get; private set; }
+
+    public Label labelDefenderNameCaption { get; private set; }
 
     public Label DefenderName { get; private set; }
 
@@ -69,7 +73,9 @@ public partial class KessenWindow
     public KessenWindow(VisualElement root)
     {
         Root = root;
+        labelAttackerNameCaption = Root?.Q<Label>("labelAttackerNameCaption");
         AttackerName = Root?.Q<Label>("AttackerName");
+        labelDefenderNameCaption = Root?.Q<Label>("labelDefenderNameCaption");
         DefenderName = Root?.Q<Label>("DefenderName");
         Attacker00 = new KessenMemberAttackSide(Root?.Q<VisualElement>("Attacker00"));
         Attacker01 = new KessenMemberAttackSide(Root?.Q<VisualElement>("Attacker01"));

@@ -18,7 +18,11 @@ public partial class OrganizeScreen
 
     public CharacterInfo CharacterInfo { get; private set; }
 
+    public Label labelTargetSalaryRatiocaption { get; private set; }
+
     public Label labelTargetSalaryRatio { get; private set; }
+
+    public Label labelTargetLoyaltyCaption { get; private set; }
 
     public Label labelTargetLoyalty { get; private set; }
 
@@ -30,9 +34,9 @@ public partial class OrganizeScreen
 
     public Button buttonIncrease { get; private set; }
 
-    public Label labelDescription { get; private set; }
+    public Label labelDescriptionOrganizeScreen { get; private set; }
 
-    public Button buttonClose { get; private set; }
+    public Button buttonFinish { get; private set; }
 
     public VisualElement Root { get; }
 
@@ -41,13 +45,15 @@ public partial class OrganizeScreen
         Root = root;
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
         CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
+        labelTargetSalaryRatiocaption = Root?.Q<Label>("labelTargetSalaryRatiocaption");
         labelTargetSalaryRatio = Root?.Q<Label>("labelTargetSalaryRatio");
+        labelTargetLoyaltyCaption = Root?.Q<Label>("labelTargetLoyaltyCaption");
         labelTargetLoyalty = Root?.Q<Label>("labelTargetLoyalty");
         buttonUp = Root?.Q<Button>("buttonUp");
         buttonDown = Root?.Q<Button>("buttonDown");
         buttonDecrease = Root?.Q<Button>("buttonDecrease");
         buttonIncrease = Root?.Q<Button>("buttonIncrease");
-        labelDescription = Root?.Q<Label>("labelDescription");
-        buttonClose = Root?.Q<Button>("buttonClose");
+        labelDescriptionOrganizeScreen = Root?.Q<Label>("labelDescriptionOrganizeScreen");
+        buttonFinish = Root?.Q<Button>("buttonFinish");
     }
 }

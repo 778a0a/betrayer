@@ -7,9 +7,9 @@
             <engine:VisualElement style="flex-grow: 0;">
                 <engine:VisualElement style="flex-direction: row;">
                     <engine:Label name="labelTurnCount" text="888" style="font-size: 30px; margin-right: 0; padding-right: 0;" />
-                    <engine:Label text="ターン" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto;" />
-                    <engine:Label text="戦略" style="font-size: 30px; margin-right: 0; padding-right: 0;" />
-                    <engine:Label text="フェイズ" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto; margin-right: 0; padding-right: 0;" />
+                    <engine:Label text="ターン" name="labelTurnCountCaption" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto;" />
+                    <engine:Label text="戦略" name="labelStrategyPhase" style="font-size: 30px; margin-right: 0; padding-right: 0;" />
+                    <engine:Label text="フェイズ" name="labelStrategyPhaseCaption" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto; margin-right: 0; padding-right: 0;" />
                 </engine:VisualElement>
                 <engine:Button text="情報" name="buttonShowInfo" class="Action-Button" />
                 <engine:Button text="任命" name="buttonOrganize" class="Action-Button" />
@@ -23,11 +23,11 @@
             </engine:VisualElement>
             <engine:VisualElement>
                 <engine:VisualElement name="ActionCostPanel" style="flex-grow: 1; flex-direction: row;">
-                    <engine:Label text="消費金" style="width: 150px;" />
+                    <engine:Label name="labelCostCaption" text="消費金" style="width: 150px;" />
                     <engine:Label name="labelCost" text="---" style="width: 90px;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="GoldPanel" style="flex-grow: 1; flex-direction: row;">
-                    <engine:Label text="資金" style="width: 150px;" />
+                    <engine:Label name="labelGoldCaption" text="資金" style="width: 150px;" />
                     <engine:Label name="labelGold" text="888" style="width: 90px;" />
                 </engine:VisualElement>
             </engine:VisualElement>
@@ -47,40 +47,40 @@
                                 <engine:Label text="ハイペリオン" name="labelName" style="font-size: 38px;" />
                             </engine:VisualElement>
                             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="給料配分%" style="font-size: 38px;" />
+                                <engine:Label text="給料配分%" name="labelSalaryRatioCaption" style="font-size: 38px;" />
                                 <engine:Label text="888" name="labelSalaryRatio" style="font-size: 38px;" />
                             </engine:VisualElement>
                             <engine:VisualElement name="containerAllianceStance" style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="同盟方針" style="font-size: 38px;" />
+                                <engine:Label text="同盟方針" name="labelAllianceStanceCaption" style="font-size: 38px;" />
                                 <engine:Label text="解消(5)" name="labelAllianceStance" style="font-size: 38px;" />
                             </engine:VisualElement>
                         </engine:VisualElement>
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="攻撃" class="CharaInfo-Label" />
+                            <engine:Label text="攻撃" name="labelCharaAttackCaption" class="CharaInfo-Label" />
                             <engine:Label name="labelCharaAttack" text="10" class="CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="防衛" class="CharaInfo-Label" />
+                            <engine:Label text="防衛" name="labelCharaDefenseCaption" class="CharaInfo-Label" />
                             <engine:Label name="labelCharaDefense" text="10" class="CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="智謀" class="CharaInfo-Label" />
+                            <engine:Label text="智謀" name="labelCharaIntelligenceCaption" class="CharaInfo-Label" />
                             <engine:Label name="labelCharaIntelligence" text="10" class="CharaInfo-Value" />
                         </engine:VisualElement>
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="忠誠" class="CharaInfo-Label" />
+                            <engine:Label text="忠誠" name="labelCharaLoyaltyCaption" class="CharaInfo-Label" />
                             <engine:Label name="labelCharaLoyalty" text="10" class="CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="名声" class="CharaInfo-Label" />
+                            <engine:Label text="名声" name="labelCharaPrestigeCaption" class="CharaInfo-Label" />
                             <engine:Label name="labelCharaPrestige" text="10" class="CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="功績" class="CharaInfo-Label" />
+                            <engine:Label text="功績" name="labelCharaContributionCaption" class="CharaInfo-Label" />
                             <engine:Label name="labelCharaContribution" text="10" class="CharaInfo-Value" />
                         </engine:VisualElement>
                     </engine:VisualElement>

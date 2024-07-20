@@ -14,6 +14,8 @@ using UnityEngine.UIElements;
 
 public partial class SystemWindow
 {
+    public Label labelSystemWindowTitle { get; private set; }
+
     public Button buttonCloseSystemWindow { get; private set; }
 
     public Button buttonSave { get; private set; }
@@ -27,6 +29,7 @@ public partial class SystemWindow
     public SystemWindow(VisualElement root)
     {
         Root = root;
+        labelSystemWindowTitle = Root?.Q<Label>("labelSystemWindowTitle");
         buttonCloseSystemWindow = Root?.Q<Button>("buttonCloseSystemWindow");
         buttonSave = Root?.Q<Button>("buttonSave");
         buttonChangeCharacter = Root?.Q<Button>("buttonChangeCharacter");

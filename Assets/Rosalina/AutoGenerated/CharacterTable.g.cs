@@ -14,6 +14,24 @@ using UnityEngine.UIElements;
 
 public partial class CharacterTable
 {
+    public Label labelHeaderName { get; private set; }
+
+    public Label labelHeaderAttack { get; private set; }
+
+    public Label labelHeaderDefence { get; private set; }
+
+    public Label labelHeaderIntelligence { get; private set; }
+
+    public Label labelHeaderStatus { get; private set; }
+
+    public Label labelHeaderLoyalty { get; private set; }
+
+    public Label labelHeaderPrestige { get; private set; }
+
+    public Label labelHeaderContribution { get; private set; }
+
+    public Label labelHeaderSalaryRatio { get; private set; }
+
     public VisualElement Header { get; private set; }
 
     public CharacterTableRowItem row00 { get; private set; }
@@ -41,6 +59,15 @@ public partial class CharacterTable
     public CharacterTable(VisualElement root)
     {
         Root = root;
+        labelHeaderName = Root?.Q<Label>("labelHeaderName");
+        labelHeaderAttack = Root?.Q<Label>("labelHeaderAttack");
+        labelHeaderDefence = Root?.Q<Label>("labelHeaderDefence");
+        labelHeaderIntelligence = Root?.Q<Label>("labelHeaderIntelligence");
+        labelHeaderStatus = Root?.Q<Label>("labelHeaderStatus");
+        labelHeaderLoyalty = Root?.Q<Label>("labelHeaderLoyalty");
+        labelHeaderPrestige = Root?.Q<Label>("labelHeaderPrestige");
+        labelHeaderContribution = Root?.Q<Label>("labelHeaderContribution");
+        labelHeaderSalaryRatio = Root?.Q<Label>("labelHeaderSalaryRatio");
         Header = Root?.Q<VisualElement>("Header");
         row00 = new CharacterTableRowItem(Root?.Q<VisualElement>("row00"));
         row01 = new CharacterTableRowItem(Root?.Q<VisualElement>("row01"));

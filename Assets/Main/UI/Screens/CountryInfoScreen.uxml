@@ -5,7 +5,7 @@
     <Style src="project://database/Assets/Main/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
     <engine:VisualElement>
         <engine:VisualElement name="CellInformation" style="flex-grow: 0; flex-direction: row; position: absolute; right: 0;">
-            <engine:Label text="地形" name="Label" style="-unity-font-style: bold; font-size: 30px;" />
+            <engine:Label text="地形" name="labelTerrainCaption" style="-unity-font-style: bold; font-size: 30px;" />
             <engine:Label text="丘陵" name="labelTerrain" style="font-size: 30px;" />
             <engine:Label text="座標" style="-unity-font-style: bold; margin-left: 30px; font-size: 30px;" />
             <engine:Label text="(10, 10)" name="labelPosition" style="font-size: 30px;" />

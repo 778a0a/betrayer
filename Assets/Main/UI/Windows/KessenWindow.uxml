@@ -7,11 +7,11 @@
             <engine:VisualElement class="border" style="flex-grow: 1; display: flex;">
                 <engine:VisualElement style="flex-direction: row;">
                     <engine:VisualElement class="attacker-info" style="flex-grow: 1; flex-direction: row;">
-                        <engine:Label text="攻撃" />
+                        <engine:Label text="攻撃" name="labelAttackerNameCaption" />
                         <engine:Label text="ハイペリオン" name="AttackerName" />
                     </engine:VisualElement>
                     <engine:VisualElement class="defender-info" style="flex-grow: 1; flex-direction: row-reverse;">
-                        <engine:Label text="防衛" />
+                        <engine:Label text="防衛" name="labelDefenderNameCaption" />
                         <engine:Label text="ハイペリオン" name="DefenderName" />
                     </engine:VisualElement>
                 </engine:VisualElement>

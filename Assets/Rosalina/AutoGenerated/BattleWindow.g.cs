@@ -14,7 +14,11 @@ using UnityEngine.UIElements;
 
 public partial class BattleWindow
 {
+    public Label labelAttackerNameCaption { get; private set; }
+
     public Label AttackerName { get; private set; }
+
+    public Label labelDefenderNameCaption { get; private set; }
 
     public Label DefenderName { get; private set; }
 
@@ -82,19 +86,31 @@ public partial class BattleWindow
 
     public VisualElement DefenderSoldiers { get; private set; }
 
+    public Label labelAttackerAttackCaption { get; private set; }
+
     public Label labelAttackerAttack { get; private set; }
+
+    public Label labelAttackerIntelligenseCaption { get; private set; }
 
     public Label labelAttackerIntelligense { get; private set; }
 
     public VisualElement imageAttacker { get; private set; }
 
+    public Label labelAttackerTerrainCaption { get; private set; }
+
     public Label labelAttackerTerrain { get; private set; }
 
+    public Label labelDefenderDefenceCaption { get; private set; }
+
     public Label labelDefenderDefence { get; private set; }
+
+    public Label labelDefenderIntelligenseCaption { get; private set; }
 
     public Label labelDefenderIntelligense { get; private set; }
 
     public VisualElement imageDefender { get; private set; }
+
+    public Label labelDefenderTerrainCaption { get; private set; }
 
     public Label labelDefenderTerrain { get; private set; }
 
@@ -109,7 +125,9 @@ public partial class BattleWindow
     public BattleWindow(VisualElement root)
     {
         Root = root;
+        labelAttackerNameCaption = Root?.Q<Label>("labelAttackerNameCaption");
         AttackerName = Root?.Q<Label>("AttackerName");
+        labelDefenderNameCaption = Root?.Q<Label>("labelDefenderNameCaption");
         DefenderName = Root?.Q<Label>("DefenderName");
         AttackerSoldier10 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier10"));
         AttackerSoldier11 = new BattleSoldierIconAttackSide(Root?.Q<VisualElement>("AttackerSoldier11"));
@@ -143,13 +161,19 @@ public partial class BattleWindow
         DefenderSoldier14 = new BattleSoldierIconDefenceSide(Root?.Q<VisualElement>("DefenderSoldier14"));
         AttackerSoldiers = Root?.Q<VisualElement>("AttackerSoldiers");
         DefenderSoldiers = Root?.Q<VisualElement>("DefenderSoldiers");
+        labelAttackerAttackCaption = Root?.Q<Label>("labelAttackerAttackCaption");
         labelAttackerAttack = Root?.Q<Label>("labelAttackerAttack");
+        labelAttackerIntelligenseCaption = Root?.Q<Label>("labelAttackerIntelligenseCaption");
         labelAttackerIntelligense = Root?.Q<Label>("labelAttackerIntelligense");
         imageAttacker = Root?.Q<VisualElement>("imageAttacker");
+        labelAttackerTerrainCaption = Root?.Q<Label>("labelAttackerTerrainCaption");
         labelAttackerTerrain = Root?.Q<Label>("labelAttackerTerrain");
+        labelDefenderDefenceCaption = Root?.Q<Label>("labelDefenderDefenceCaption");
         labelDefenderDefence = Root?.Q<Label>("labelDefenderDefence");
+        labelDefenderIntelligenseCaption = Root?.Q<Label>("labelDefenderIntelligenseCaption");
         labelDefenderIntelligense = Root?.Q<Label>("labelDefenderIntelligense");
         imageDefender = Root?.Q<VisualElement>("imageDefender");
+        labelDefenderTerrainCaption = Root?.Q<Label>("labelDefenderTerrainCaption");
         labelDefenderTerrain = Root?.Q<Label>("labelDefenderTerrain");
         buttonAttack = Root?.Q<Button>("buttonAttack");
         buttonRetreat = Root?.Q<Button>("buttonRetreat");

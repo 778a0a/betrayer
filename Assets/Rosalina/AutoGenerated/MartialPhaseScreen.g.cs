@@ -16,6 +16,12 @@ public partial class MartialPhaseScreen
 {
     public Label labelTurnCount { get; private set; }
 
+    public Label labelTurnCountCaption { get; private set; }
+
+    public Label labelMartialPhase { get; private set; }
+
+    public Label labelMartialPhaseCaption { get; private set; }
+
     public Button buttonShowInfo { get; private set; }
 
     public Button buttonAttack { get; private set; }
@@ -32,7 +38,11 @@ public partial class MartialPhaseScreen
 
     public Button buttonEndTurn { get; private set; }
 
+    public Label labelCostCaption { get; private set; }
+
     public Label labelCost { get; private set; }
+
+    public Label labelGoldCaption { get; private set; }
 
     public Label labelGold { get; private set; }
 
@@ -46,17 +56,31 @@ public partial class MartialPhaseScreen
 
     public Label labelName { get; private set; }
 
+    public Label labelSalaryRatioCaption { get; private set; }
+
     public Label labelSalaryRatio { get; private set; }
+
+    public Label labelCharaAttackCaption { get; private set; }
 
     public Label labelCharaAttack { get; private set; }
 
+    public Label labelCharaDefenseCaption { get; private set; }
+
     public Label labelCharaDefense { get; private set; }
+
+    public Label labelCharaIntelligenceCaption { get; private set; }
 
     public Label labelCharaIntelligence { get; private set; }
 
+    public Label labelCharaLoyaltyCaption { get; private set; }
+
     public Label labelCharaLoyalty { get; private set; }
 
+    public Label labelCharaPrestigeCaption { get; private set; }
+
     public Label labelCharaPrestige { get; private set; }
+
+    public Label labelCharaContributionCaption { get; private set; }
 
     public Label labelCharaContribution { get; private set; }
 
@@ -106,6 +130,9 @@ public partial class MartialPhaseScreen
     {
         Root = root;
         labelTurnCount = Root?.Q<Label>("labelTurnCount");
+        labelTurnCountCaption = Root?.Q<Label>("labelTurnCountCaption");
+        labelMartialPhase = Root?.Q<Label>("labelMartialPhase");
+        labelMartialPhaseCaption = Root?.Q<Label>("labelMartialPhaseCaption");
         buttonShowInfo = Root?.Q<Button>("buttonShowInfo");
         buttonAttack = Root?.Q<Button>("buttonAttack");
         buttonDecisiveBattle = Root?.Q<Button>("buttonDecisiveBattle");
@@ -114,19 +141,28 @@ public partial class MartialPhaseScreen
         buttonPrivateFight = Root?.Q<Button>("buttonPrivateFight");
         buttonShowSystemMenu = Root?.Q<Button>("buttonShowSystemMenu");
         buttonEndTurn = Root?.Q<Button>("buttonEndTurn");
+        labelCostCaption = Root?.Q<Label>("labelCostCaption");
         labelCost = Root?.Q<Label>("labelCost");
+        labelGoldCaption = Root?.Q<Label>("labelGoldCaption");
         labelGold = Root?.Q<Label>("labelGold");
         ActionCostPanel = Root?.Q<VisualElement>("ActionCostPanel");
         GoldPanel = Root?.Q<VisualElement>("GoldPanel");
         imageChara = Root?.Q<Image>("imageChara");
         labelTitle = Root?.Q<Label>("labelTitle");
         labelName = Root?.Q<Label>("labelName");
+        labelSalaryRatioCaption = Root?.Q<Label>("labelSalaryRatioCaption");
         labelSalaryRatio = Root?.Q<Label>("labelSalaryRatio");
+        labelCharaAttackCaption = Root?.Q<Label>("labelCharaAttackCaption");
         labelCharaAttack = Root?.Q<Label>("labelCharaAttack");
+        labelCharaDefenseCaption = Root?.Q<Label>("labelCharaDefenseCaption");
         labelCharaDefense = Root?.Q<Label>("labelCharaDefense");
+        labelCharaIntelligenceCaption = Root?.Q<Label>("labelCharaIntelligenceCaption");
         labelCharaIntelligence = Root?.Q<Label>("labelCharaIntelligence");
+        labelCharaLoyaltyCaption = Root?.Q<Label>("labelCharaLoyaltyCaption");
         labelCharaLoyalty = Root?.Q<Label>("labelCharaLoyalty");
+        labelCharaPrestigeCaption = Root?.Q<Label>("labelCharaPrestigeCaption");
         labelCharaPrestige = Root?.Q<Label>("labelCharaPrestige");
+        labelCharaContributionCaption = Root?.Q<Label>("labelCharaContributionCaption");
         labelCharaContribution = Root?.Q<Label>("labelCharaContribution");
         soldier00 = new SoldierInfoLarge(Root?.Q<VisualElement>("soldier00"));
         soldier01 = new SoldierInfoLarge(Root?.Q<VisualElement>("soldier01"));
