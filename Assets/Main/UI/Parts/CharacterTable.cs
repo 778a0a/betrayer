@@ -10,8 +10,10 @@ public partial class CharacterTable
     public event EventHandler<Character> RowMouseMove;
     public event EventHandler<Character> RowMouseDown;
 
+    public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
+        L.Register(this);
         foreach (var row in Rows)
         {
             row.Initialize();

@@ -12,6 +12,8 @@ public partial class MartialPhaseScreen : IScreen
     public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
+        L.Register(this);
+        CountryRulerInfo.Initialize();
         buttons = new[]
         {
             ActionButtonHelper.Common(buttonShowInfo, a => a.ShowInfo),

@@ -12,7 +12,9 @@ public partial class SelectCharacterScreen : IScreen
     public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
+        L.Register(this);
         CharacterTable.Initialize();
+        CharacterInfo.Initialize();
 
         // マウスオーバー時
         CharacterTable.RowMouseMove += (sender, chara) =>

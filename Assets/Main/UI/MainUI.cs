@@ -87,6 +87,7 @@ public partial class MainUI : MonoBehaviour
         SystemWindow.Initialize();
         MessageWindow.L = L;
         MessageWindow.Initialize();
+        L.Apply();
 
         buttonToggleDebugUI.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.NextPhase);

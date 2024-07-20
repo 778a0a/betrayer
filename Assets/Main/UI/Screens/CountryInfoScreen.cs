@@ -11,8 +11,11 @@ public partial class CountryInfoScreen : IScreen
     public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
+        L.Register(this);
         CharacterTable.Initialize();
+        CountryRulerInfo.Initialize();
         CharacterTable.RowMouseMove += CharacterTable_RowMouseMove; ;
+
 
         buttonClose.clicked += () => CloseButtonClicked?.Invoke(this, EventArgs.Empty);
     }

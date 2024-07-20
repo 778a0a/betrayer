@@ -9,6 +9,11 @@ public partial class CountryRulerInfo
 {
     private LocalizationManager L => MainUI.Instance.L;
 
+    public void Initialize()
+    {
+        L.Register(this);
+    }
+
     public void SetData(Country country, WorldData world)
     {
         if (country == null)

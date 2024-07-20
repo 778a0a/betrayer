@@ -11,7 +11,10 @@ public partial class SelectPlayerCaharacterScreen : IScreen
     public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
+        L.Register(this);
         CharacterTable.Initialize();
+        CountryRulerInfo.Initialize();
+        CharacterInfo.Initialize();
         CharacterTable.RowMouseMove += CharacterTable_RowMouseMove;
 
         CharacterTable.RowMouseDown += (sender, chara) =>

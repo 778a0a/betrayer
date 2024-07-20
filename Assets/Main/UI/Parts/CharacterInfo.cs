@@ -26,6 +26,12 @@ public partial class CharacterInfo
         _ => throw new System.ArgumentOutOfRangeException(),
     };
 
+    public LocalizationManager L => MainUI.Instance.L;
+    public void Initialize()
+    {
+        L.Register(this);
+    }
+
     public void SetData(Character chara, WorldData world) => SetData(chara, world.CountryOf(chara));
     public void SetData(Character chara, Country country)
     {

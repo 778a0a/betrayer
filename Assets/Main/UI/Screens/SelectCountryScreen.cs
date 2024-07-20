@@ -12,7 +12,10 @@ public partial class SelectCountryScreen : IScreen
     public LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
+        L.Register(this);
         CharacterTable.Initialize();
+        CharacterInfo.Initialize();
+        CountryRulerInfo.Initialize();
 
         // マウスオーバー時
         CharacterTable.RowMouseMove += (sender, chara) =>
