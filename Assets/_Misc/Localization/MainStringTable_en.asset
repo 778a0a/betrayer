@@ -555,35 +555,35 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153327108096
-    m_Localized: Attack
+    m_Localized: Atk
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885312
-    m_Localized: Defense
+    m_Localized: Def
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885313
-    m_Localized: Intelligence
+    m_Localized: Intl
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885314
-    m_Localized: Loyalty
+    m_Localized: Lylty
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885315
-    m_Localized: Prestige
+    m_Localized: Pres
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885316
-    m_Localized: Contribution
+    m_Localized: Ctrb
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885317
-    m_Localized: Salary%
+    m_Localized: Sal%
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885318
-    m_Localized: Soldiers
+    m_Localized: Sols
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885319
@@ -591,35 +591,35 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885320
-    m_Localized: Attack
+    m_Localized: Atk
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885321
-    m_Localized: Defense
+    m_Localized: Def
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885322
-    m_Localized: Intelligence
+    m_Localized: Intl
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885323
-    m_Localized: Status
+    m_Localized: Stat
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885324
-    m_Localized: Loyalty
+    m_Localized: Lylty
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885325
-    m_Localized: Prestige
+    m_Localized: Pres
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885326
-    m_Localized: Contribution
+    m_Localized: Ctrb
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885327
-    m_Localized: Salary%
+    m_Localized: Sal%
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885328
@@ -639,23 +639,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885332
-    m_Localized: Total Income
+    m_Localized: Income
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885333
-    m_Localized: Total Gold
+    m_Localized: Gold
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885334
-    m_Localized: Total Members
+    m_Localized: Members
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885335
-    m_Localized: Total Soldiers
+    m_Localized: Soldiers
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885336
-    m_Localized: Total Power
+    m_Localized: Power
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885337
@@ -747,11 +747,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079629
-    m_Localized: Hire Soldiers
+    m_Localized: Hire
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079630
-    m_Localized: Train Soldiers
+    m_Localized: Train
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079631
@@ -815,7 +815,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079646
-    m_Localized: Hire Vassal
+    m_Localized: Explore
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079647
