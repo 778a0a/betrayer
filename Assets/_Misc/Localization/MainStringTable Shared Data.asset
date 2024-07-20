@@ -15,6 +15,370 @@ MonoBehaviour:
   m_TableCollectionName: MainStringTable
   m_TableCollectionNameGuidString: 02ebde7d9091c864192f80b54e1ac99d
   m_Entries:
+  - m_Id: 1918153327108096
+    m_Key: labelCharaAttackCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885312
+    m_Key: labelCharaDefenseCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885313
+    m_Key: labelCharaIntelligenceCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885314
+    m_Key: labelCharaLoyaltyCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885315
+    m_Key: labelCharaPrestigeCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885316
+    m_Key: labelCharaContributionCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885317
+    m_Key: labelCharaSalaryRatioCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885318
+    m_Key: labelCharaSoldierCountCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885319
+    m_Key: labelHeaderName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885320
+    m_Key: labelHeaderAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885321
+    m_Key: labelHeaderDefence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885322
+    m_Key: labelHeaderIntelligence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885323
+    m_Key: labelHeaderStatus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885324
+    m_Key: labelHeaderLoyalty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885325
+    m_Key: labelHeaderPrestige
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885326
+    m_Key: labelHeaderContribution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885327
+    m_Key: labelHeaderSalaryRatio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885328
+    m_Key: labelName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885329
+    m_Key: labelIsAttacked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885330
+    m_Key: labelStatus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885331
+    m_Key: labelAreaCountCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885332
+    m_Key: labelTotalIncomeCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885333
+    m_Key: labelTotalGoldCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885334
+    m_Key: labelMemberCountCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885335
+    m_Key: labelSoldierCountCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885336
+    m_Key: labelTotalPowerCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885337
+    m_Key: labelAllyCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885338
+    m_Key: labelTerrainCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885339
+    m_Key: buttonClose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885340
+    m_Key: labelTurnCountCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885341
+    m_Key: labelIndividualPhaseCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885342
+    m_Key: labelCostCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885343
+    m_Key: labelGoldCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885344
+    m_Key: labelSalaryRatioCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885316
+    m_Key: labelCharaContributionCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885345
+    m_Key: labelMartialPhaseCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885346
+    m_Key: labelTargetSalaryRatiocaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079616
+    m_Key: labelTargetLoyaltyCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079617
+    m_Key: labelStrategyPhaseCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079618
+    m_Key: labelAllianceStanceCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079619
+    m_Key: labelAttackerNameCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079620
+    m_Key: labelDefenderNameCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079621
+    m_Key: labelAttackerAttackCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079622
+    m_Key: labelAttackerIntelligenseCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079623
+    m_Key: labelAttackerTerrainCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079624
+    m_Key: labelDefenderDefenceCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079625
+    m_Key: labelDefenderIntelligenseCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079626
+    m_Key: labelDefenderTerrainCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079627
+    m_Key: labelIndividualPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079628
+    m_Key: buttonShowInfo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079629
+    m_Key: buttonHireSoldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079630
+    m_Key: buttonTrainSoldiers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079631
+    m_Key: buttonGetJob
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079632
+    m_Key: buttonResign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079633
+    m_Key: buttonRebel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079634
+    m_Key: buttonBecomeIndependent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079635
+    m_Key: buttonSeize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079636
+    m_Key: buttonShowSystemMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079637
+    m_Key: buttonEndTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079638
+    m_Key: labelMartialPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079639
+    m_Key: buttonAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079640
+    m_Key: buttonDecisiveBattle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079641
+    m_Key: buttonProvoke
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079642
+    m_Key: buttonSubdue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079643
+    m_Key: buttonPrivateFight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079644
+    m_Key: labelStrategyPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079645
+    m_Key: buttonOrganize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079646
+    m_Key: buttonHireVassal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079647
+    m_Key: buttonFireVassal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079648
+    m_Key: buttonAlly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079649
+    m_Key: buttonChangeAllianceStance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079632
+    m_Key: buttonResign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079650
+    m_Key: labelDescriptionOrganizeScreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079651
+    m_Key: buttonUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079652
+    m_Key: buttonDown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079653
+    m_Key: buttonDecrease
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079654
+    m_Key: buttonIncrease
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079655
+    m_Key: buttonFinish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079656
+    m_Key: buttonSelect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079657
+    m_Key: buttonCancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079658
+    m_Key: buttonShowFreeList
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079659
+    m_Key: buttonRandom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079660
+    m_Key: buttonPrevPage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079661
+    m_Key: buttonNextPage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079662
+    m_Key: buttonAttack222222
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079663
+    m_Key: buttonRetreat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079664
+    m_Key: labelMessageWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079665
+    m_Key: labelSystemWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079666
+    m_Key: buttonSave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079667
+    m_Key: buttonChangeCharacter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079668
+    m_Key: buttonGoToTitle
+    m_Metadata:
+      m_Items: []
   - m_Id: 62716944310272
     m_Key: "{0}\u304C\u6C7A\u6226\u306B\u52DD\u5229\u3057\u307E\u3057\u305F\u3002"
     m_Metadata:

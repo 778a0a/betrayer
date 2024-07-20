@@ -554,6 +554,358 @@ MonoBehaviour:
     m_Localized: Change character
     m_Metadata:
       m_Items: []
+  - m_Id: 1918153327108096
+    m_Localized: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885312
+    m_Localized: Defense
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885313
+    m_Localized: Intelligence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885314
+    m_Localized: Loyalty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885315
+    m_Localized: Prestige
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885316
+    m_Localized: Contribution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885317
+    m_Localized: Salary%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885318
+    m_Localized: Soldiers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885319
+    m_Localized: Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885320
+    m_Localized: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885321
+    m_Localized: Defense
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885322
+    m_Localized: Intelligence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885323
+    m_Localized: Status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885324
+    m_Localized: Loyalty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885325
+    m_Localized: Prestige
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885326
+    m_Localized: Contribution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885327
+    m_Localized: Salary%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885328
+    m_Localized: Hyperion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885329
+    m_Localized: (E)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885330
+    m_Localized: Lord
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885331
+    m_Localized: Areas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885332
+    m_Localized: Total Income
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885333
+    m_Localized: Total Gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885334
+    m_Localized: Total Members
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885335
+    m_Localized: Total Soldiers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885336
+    m_Localized: Total Power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885337
+    m_Localized: Alliance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885338
+    m_Localized: Terrain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885339
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885340
+    m_Localized: Turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885341
+    m_Localized: Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885342
+    m_Localized: Cost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885343
+    m_Localized: Gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885344
+    m_Localized: Salary%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885345
+    m_Localized: Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079616
+    m_Localized: Loyalty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079617
+    m_Localized: Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079618
+    m_Localized: Alliance Stance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079619
+    m_Localized: Attacker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079620
+    m_Localized: Defender
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079621
+    m_Localized: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079622
+    m_Localized: Intelligence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079623
+    m_Localized: Terrain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079624
+    m_Localized: Defense
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079625
+    m_Localized: Intelligence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079626
+    m_Localized: Terrain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079627
+    m_Localized: Personal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079628
+    m_Localized: Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079629
+    m_Localized: Hire Soldiers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079630
+    m_Localized: Train Soldiers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079631
+    m_Localized: Get Job
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079632
+    m_Localized: Resign
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079633
+    m_Localized: Rebel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079634
+    m_Localized: Become Independent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079635
+    m_Localized: Seize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079636
+    m_Localized: System
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079637
+    m_Localized: End Turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079638
+    m_Localized: Military
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079639
+    m_Localized: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079640
+    m_Localized: Decisive Battle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079641
+    m_Localized: Provoke
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079642
+    m_Localized: Subdue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079643
+    m_Localized: Private Fight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079644
+    m_Localized: Strategy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079645
+    m_Localized: Organize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079646
+    m_Localized: Hire Vassal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079647
+    m_Localized: Fire Vassal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079648
+    m_Localized: Ally
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079649
+    m_Localized: Change Alliance Stance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079650
+    m_Localized: Change sally and promote and demote your vassals.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079651
+    m_Localized: Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079652
+    m_Localized: Down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079653
+    m_Localized: Decrease
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079654
+    m_Localized: Increase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079655
+    m_Localized: Finish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079656
+    m_Localized: Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079657
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079658
+    m_Localized: Wanderers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079659
+    m_Localized: Random
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079660
+    m_Localized: Prev
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079661
+    m_Localized: Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079662
+    m_Localized: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079663
+    m_Localized: Retreat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079664
+    m_Localized: System Message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079665
+    m_Localized: System Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079666
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079667
+    m_Localized: Change Character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153348079668
+    m_Localized: Go to Title
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
