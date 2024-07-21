@@ -36,23 +36,35 @@ public class LocalizationManager : MonoBehaviour
                     continue;
                 }
                 var value = entry.LocalizedValue;
+                const string FontSizeSepalator = "@@";
+                var fontSize = -1;
+                if (value.Contains(FontSizeSepalator))
+                {
+                    var segs = value.Split(FontSizeSepalator);
+                    fontSize = int.Parse(segs[0]);
+                    value = segs[1];
+                }
+
                 var propValue = prop.GetValue(c);
                 switch (propValue)
                 {
                     case string:
                         prop.SetValue(c, value);
-                        //Debug.Log($"[L.Apply] {entry.Key} = {entry.LocalizedValue}");
+                        //Debug.Log($"[L.Apply] {entry.Key} = {value}");
                         break;
                     case Label label:
-                        label.text = entry.LocalizedValue;
-                        //Debug.Log($"[L.Apply] {entry.Key} = {entry.LocalizedValue}");
+                        label.text = value;
+                        if (fontSize != -1) label.style.fontSize = fontSize;
+                        //Debug.Log($"[L.Apply] {entry.Key} = {value}");
                         break;
                     case Button button:
-                        button.text = entry.LocalizedValue;
-                        //Debug.Log($"[L.Apply] {entry.Key} = {entry.LocalizedValue}");
+                        button.text = value;
+                        if (fontSize != -1) button.style.fontSize = fontSize;
+                        //Debug.Log($"[L.Apply] {entry.Key} = {value}");
                         break;
                     case TextField textField:
-                        textField.textEdition.placeholder = entry.LocalizedValue;
+                        textField.textEdition.placeholder = value;
+                        if (fontSize != -1) textField.style.fontSize = fontSize;
                         break;
                     default:
                         Debug.LogWarning($"[L.Apply] {entry.Key} is unknown type: {propValue.GetType()}");

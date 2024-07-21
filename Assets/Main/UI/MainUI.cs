@@ -89,11 +89,16 @@ public partial class MainUI : MonoBehaviour
         MessageWindow.Initialize();
         L.Apply();
 
+#if UNITY_EDITOR
+        DebugUIParent.style.display = DisplayStyle.Flex;
+#endif
+
         buttonToggleDebugUI.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.ToggleDebugUI);
         buttonNextPhase.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.NextPhase);
         buttonNextTurn.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.NextTurn);
         buttonAuto.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.Auto);
         buttonHold.clicked += () => MainUIButtonClick?.Invoke(this, MainUIButton.Hold);
+        buttonUpdateLocalization.clicked += () => L.Apply();
     }
 
     public bool IsPlayerCharacterSelecting { get; set; } = false;

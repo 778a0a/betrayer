@@ -25,6 +25,8 @@ public partial class MainUI
 
     public Button buttonHold { get; private set; }
 
+    public Button buttonUpdateLocalization { get; private set; }
+
     public Button buttonToggleDebugUI { get; private set; }
 
     public VisualElement DebugUI { get; private set; }
@@ -51,6 +53,7 @@ public partial class MainUI
         buttonNextTurn = Root?.Q<Button>("buttonNextTurn");
         buttonAuto = Root?.Q<Button>("buttonAuto");
         buttonHold = Root?.Q<Button>("buttonHold");
+        buttonUpdateLocalization = Root?.Q<Button>("buttonUpdateLocalization");
         buttonToggleDebugUI = Root?.Q<Button>("buttonToggleDebugUI");
         DebugUI = Root?.Q<VisualElement>("DebugUI");
         BattleWindow = new BattleWindow(Root?.Q<VisualElement>("BattleWindow"));

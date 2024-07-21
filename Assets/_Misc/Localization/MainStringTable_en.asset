@@ -567,11 +567,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885314
-    m_Localized: Lylty
+    m_Localized: 20@@Loyalty
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885315
-    m_Localized: Pres
+    m_Localized: 18@@Prestige
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885316
@@ -579,7 +579,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885317
-    m_Localized: Sal%
+    m_Localized: 25@@Sal%
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885318
@@ -603,15 +603,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885323
-    m_Localized: Stat
+    m_Localized: 22@@Status
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885324
-    m_Localized: Lylty
+    m_Localized: 20@@Loyalty
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885325
-    m_Localized: Pres
+    m_Localized: 18@@Prestige
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885326
@@ -619,7 +619,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885327
-    m_Localized: Sal%
+    m_Localized: 25@@Sal%
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885328
@@ -635,31 +635,41 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885331
-    m_Localized: Areas
+    m_Localized: 28@@Areas
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885332
-    m_Localized: Income
+    m_Localized: '20@@Total
+
+      Income'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885333
-    m_Localized: Gold
+    m_Localized: '20@@Total
+
+      Gold'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885334
-    m_Localized: Members
+    m_Localized: '20@@Total
+
+      Members'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885335
-    m_Localized: Soldiers
+    m_Localized: '20@@Total
+
+      Soldiers'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885336
-    m_Localized: Power
+    m_Localized: '20@@Total
+
+      Power'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885337
-    m_Localized: Alliance
+    m_Localized: 28@@Alliance
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885338

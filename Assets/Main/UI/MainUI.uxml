@@ -8,7 +8,7 @@
     <ui:VisualElement class="bg" style="flex-grow: 1; align-self: flex-end; width: 840px; height: 1080px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 5px;">
         <ui:VisualElement name="UIContainer" style="flex-grow: 1;" />
     </ui:VisualElement>
-    <ui:VisualElement name="DebugUIParent" picking-mode="Ignore" style="flex-grow: 1; position: absolute; left: 0; right: 0; bottom: 0; top: 0; display: none; visibility: hidden;">
+    <ui:VisualElement name="DebugUIParent" picking-mode="Ignore" style="flex-grow: 1; position: absolute; left: 0; right: 0; bottom: 0; top: 0; display: none;">
         <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-right: 0; margin-top: 10px; position: relative; justify-content: flex-start;">
             <ui:Button text="Debug" name="buttonToggleDebugUI" style="font-size: 24px;" />
             <ui:VisualElement name="DebugUI" style="flex-grow: 0; flex-direction: row;">
@@ -16,6 +16,7 @@
                 <ui:Button text="次ターン" name="buttonNextTurn" style="font-size: 24px;" />
                 <ui:Button text="全自動" name="buttonAuto" style="font-size: 24px;" />
                 <ui:Button text="ホールド" name="buttonHold" style="font-size: 24px;" />
+                <ui:Button text="言語更新" name="buttonUpdateLocalization" style="font-size: 24px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
