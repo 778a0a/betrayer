@@ -607,7 +607,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885323
-    m_Localized: 22@@Status
+    m_Localized: Status
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885324
@@ -619,7 +619,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885326
-    m_Localized: Ctrb
+    m_Localized: 25@@Ctrb
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885327

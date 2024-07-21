@@ -115,7 +115,11 @@ Label {
 }
 
 .MemberInfo-Col-Name {
-    width: 180px;
+    width: 90px;
+    -unity-text-align: middle-left;
+}
+.MemberInfo-Col-Status {
+    width: 140px;
     -unity-text-align: middle-left;
 }
 .MemberInfo-Col-IsAttacked {
