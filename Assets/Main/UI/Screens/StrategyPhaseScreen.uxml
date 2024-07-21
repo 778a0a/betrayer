@@ -47,12 +47,12 @@
                                 <engine:Label text="ハイペリオン" name="labelName" style="font-size: 38px;" />
                             </engine:VisualElement>
                             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="給料配分%" name="labelSalaryRatioCaption" style="font-size: 38px;" />
-                                <engine:Label text="888" name="labelSalaryRatio" style="font-size: 38px;" />
+                                <engine:Label text="給料配分%" name="labelSalaryRatioCaption" style="font-size: 38px; -unity-text-align: middle-left;" />
+                                <engine:Label text="888" name="labelSalaryRatio" style="font-size: 38px; -unity-text-align: middle-left;" />
                             </engine:VisualElement>
                             <engine:VisualElement name="containerAllianceStance" style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="同盟方針" name="labelAllianceStanceCaption" style="font-size: 38px;" />
-                                <engine:Label text="解消(5)" name="labelAllianceStance" style="font-size: 38px;" />
+                                <engine:Label text="同盟方針" name="labelAllianceStanceCaption" style="font-size: 38px; -unity-text-align: middle-left;" />
+                                <engine:Label text="解消(5)" name="labelAllianceStance" style="font-size: 38px; -unity-text-align: middle-left;" />
                             </engine:VisualElement>
                         </engine:VisualElement>
                     </engine:VisualElement>

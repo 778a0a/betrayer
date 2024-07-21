@@ -14,6 +14,7 @@ public partial class CountryInfoScreen : IScreen
         L.Register(this);
         CharacterTable.Initialize();
         CountryRulerInfo.Initialize();
+        CharacterInfo.Initialize();
         CharacterTable.RowMouseMove += CharacterTable_RowMouseMove; ;
 
 

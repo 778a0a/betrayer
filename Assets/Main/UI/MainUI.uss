@@ -44,7 +44,7 @@
 .Phase-CharaInfo-Label {
     width: 120px;
     padding: 2px;
-    -unity-text-align: middle-left;
+    -unity-text-align: lower-left;
     font-size: 30px;
     margin-top: 0;
     margin-bottom: 0;
@@ -55,7 +55,7 @@
 .Phase-CharaInfo-Value {
     width: 80px;
     padding: 2px;
-    -unity-text-align: middle-left;
+    -unity-text-align: lower-left;
     font-size: 30px;
     margin-top: 0;
     margin-bottom: 0;

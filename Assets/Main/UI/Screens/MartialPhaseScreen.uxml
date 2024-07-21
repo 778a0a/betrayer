@@ -46,8 +46,8 @@
                                 <engine:Label text="ハイペリオン" name="labelName" style="font-size: 38px;" />
                             </engine:VisualElement>
                             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                                <engine:Label text="給料配分%" name="labelSalaryRatioCaption" style="font-size: 38px;" />
-                                <engine:Label text="888" name="labelSalaryRatio" style="font-size: 38px;" />
+                                <engine:Label text="給料配分%" name="labelSalaryRatioCaption" style="font-size: 38px; -unity-text-align: middle-left;" />
+                                <engine:Label text="888" name="labelSalaryRatio" style="font-size: 38px; -unity-text-align: middle-left;" />
                             </engine:VisualElement>
                         </engine:VisualElement>
                     </engine:VisualElement>

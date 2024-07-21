@@ -575,7 +575,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885316
-    m_Localized: 20@@Contribution
+    m_Localized: 18@@Contribution
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885317
@@ -635,7 +635,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885331
-    m_Localized: 28@@Areas
+    m_Localized: '20@@Total
+
+      Areas'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885332
@@ -685,7 +687,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885341
-    m_Localized: Phase
+    m_Localized: ' Phase'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885342
@@ -697,11 +699,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885344
-    m_Localized: Salary%
+    m_Localized: 25@@Salary%
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885345
-    m_Localized: Phase
+    m_Localized: ' Phase'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079616
@@ -709,11 +711,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079617
-    m_Localized: Phase
+    m_Localized: ' Phase'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079618
-    m_Localized: Alliance Stance
+    m_Localized: '20@@Alliance
+
+      Stance'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079619
