@@ -1,5 +1,5 @@
 .CountryInfo-Label {
-    width: 110px;
+    width: 85px;
     -unity-text-align: middle-left;
     font-size: 35px;
     padding:0;
@@ -10,7 +10,7 @@
 }
 
 .CountryInfo-Value {
-    width: 80px;
+    width: 105px;
     -unity-text-align: middle-left;
     padding:0;
     margin-top: 5px;

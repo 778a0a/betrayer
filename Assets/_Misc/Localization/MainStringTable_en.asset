@@ -318,7 +318,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62717003030576
-    m_Localized: Select the character to play.
+    m_Localized: Select a character to play.
     m_Metadata:
       m_Items: []
   - m_Id: 62717003030577
@@ -559,27 +559,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153327108096
-    m_Localized: Attack
+    m_Localized: 25@@Attack
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885312
-    m_Localized: Defense
+    m_Localized: 25@@Defense
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885313
-    m_Localized: 20@@Intelligence
+    m_Localized: 21@@Intelligence
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885314
-    m_Localized: Loyalty
+    m_Localized: 25@@Loyalty
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885315
-    m_Localized: Prestige
+    m_Localized: 25@@Prestige
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885316
-    m_Localized: 18@@Contribution
+    m_Localized: 19@@Contribution
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885317
@@ -657,7 +657,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885334
-    m_Localized: '20@@Total
+    m_Localized: '18@@Total
 
       Members'
     m_Metadata:
@@ -675,7 +675,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885337
-    m_Localized: 28@@Alliance
+    m_Localized: 22@@Alliance
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885338
