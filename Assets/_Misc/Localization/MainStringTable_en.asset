@@ -687,7 +687,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885340
-    m_Localized: Turn
+    m_Localized: ' Turn'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885341
@@ -757,7 +757,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079627
-    m_Localized: Personal
+    m_Localized: 25@@Personal
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079628
@@ -803,7 +803,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079638
-    m_Localized: Military
+    m_Localized: 25@@Military
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079639
@@ -827,7 +827,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079644
-    m_Localized: Strategy
+    m_Localized: 25@@Strategy
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079645
@@ -921,7 +921,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079667
-    m_Localized: Change Character
+    m_Localized: Change character
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079668

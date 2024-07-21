@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
     <engine:Button name="CharacterTableRowItemRoot" style="flex-grow: 0; flex-direction: row;">
         <engine:Label name="labelName" text="ハイペリオン" class="MemberInfo-Cell MemberInfo-Col-Name" />
-        <engine:Label name="labelIsAttacked" text="(済)" class="MemberInfo-Cell MemberInfo-Col-IsAttack" />
+        <engine:Label name="labelIsAttacked" text="(済)" class="MemberInfo-Cell MemberInfo-Col-IsAttacked" />
         <engine:Label name="labelAttack" text="88" class="MemberInfo-Cell MemberInfo-Col-Attack" />
         <engine:Label name="labelDefense" text="88" class="MemberInfo-Cell MemberInfo-Col-Defense" />
         <engine:Label name="labelIntelligence" text="88" class="MemberInfo-Cell MemberInfo-Col-Intelligence" />

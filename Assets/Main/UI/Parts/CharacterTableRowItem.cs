@@ -10,8 +10,11 @@ public partial class CharacterTableRowItem
 
     public Character Character { get; private set; }
 
+    private LocalizationManager L => MainUI.Instance.L;
     public void Initialize()
     {
+        L.Register(this);
+
         Root.RegisterCallback<MouseMoveEvent>(OnMouseMove);
         CharacterTableRowItemRoot.RegisterCallback<ClickEvent>(OnMouseDown);
     }
