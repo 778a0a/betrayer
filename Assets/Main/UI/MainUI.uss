@@ -64,6 +64,7 @@
 }
 
 .Action-Button {
+    min-height: 64px;
 }
 
 .SoldierInfoLarge-Label {

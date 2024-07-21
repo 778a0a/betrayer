@@ -9,7 +9,7 @@
     </ui:VisualElement>
     <ui:VisualElement style="flex-direction: row;">
         <ui:VisualElement style="flex-direction: row;">
-            <ui:Label name="labelTargetSalaryRatiocaption" text="給料配分" />
+            <ui:Label name="labelTargetSalaryRatioCaption" text="給料配分" />
             <ui:Label name="labelTargetSalaryRatio" text="0" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-direction: row;">

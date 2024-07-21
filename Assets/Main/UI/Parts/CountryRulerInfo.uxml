@@ -37,9 +37,9 @@
                             <engine:Label name="labelTotalPower" text="10" class="CountryInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label name="labelAllyCaption" text="同盟" class="CountryInfo-Label" />
+                            <engine:Label name="labelAllyCaption" text="同盟" class="CountryInfo-Label" style="-unity-text-align: middle-left; margin-top:10px;" />
                             <engine:Image name="imageAllyCountryColor" style="margin-right: 10px; flex-grow: 0; width: 40px; height: 40px; flex-shrink: 0; background-color: rgba(0, 229, 255, 0.35); align-self: center;" />
-                            <engine:Label name="labelAlly" text="なし" class="CountryInfo-Value" />
+                            <engine:Label name="labelAlly" text="なし" class="CountryInfo-Value" style="-unity-text-align: middle-left;" />
                         </engine:VisualElement>
                     </engine:VisualElement>
                 </engine:VisualElement>

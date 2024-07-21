@@ -4,7 +4,7 @@
     <engine:Template name="CharacterInfo" src="project://database/Assets/Main/UI/Parts/CharacterInfo.uxml?fileID=9197481963319205126&amp;guid=040ff9351467d2543b73d34712de87fb&amp;type=3#CharacterInfo" />
     <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
     <engine:VisualElement>
-        <engine:Label name="labelDescription" style="height: 48px;" />
+        <engine:Label name="labelDescription" style="height: 48px; font-size: 30px;"  />
         <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" />
         <engine:Instance template="CharacterTable" name="CharacterTable" />
         <engine:Instance template="CharacterInfo" name="CharacterInfo" />

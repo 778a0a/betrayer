@@ -223,7 +223,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62717003030553
-    m_Localized: Grand Duke
+    m_Localized: Duke
     m_Metadata:
       m_Items: []
   - m_Id: 62717003030554
@@ -239,7 +239,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62717003030557
-    m_Localized: Prime Minister
+    m_Localized: Minister
     m_Metadata:
       m_Items: []
   - m_Id: 62717003030558
@@ -378,7 +378,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62717007224832
-    m_Localized: You are already allied with another country.
+    m_Localized: The country is already allied with another country.
     m_Metadata:
       m_Items: []
   - m_Id: 62717007224833
@@ -523,11 +523,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578953
-    m_Localized: Attackers win
+    m_Localized: Attackers won
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578954
-    m_Localized: Defenders win
+    m_Localized: Defenders won
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578955
@@ -721,35 +721,35 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079619
-    m_Localized: Attacker
+    m_Localized: 30@@Attacker
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079620
-    m_Localized: Defender
+    m_Localized: 30@@Defender
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079621
-    m_Localized: Attack
+    m_Localized: 25@@Attack
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079622
-    m_Localized: Intelligence
+    m_Localized: 25@@Intellig.
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079623
-    m_Localized: Terrain
+    m_Localized: 25@@Terrain
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079624
-    m_Localized: Defense
+    m_Localized: 25@@Defense
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079625
-    m_Localized: Intelligence
+    m_Localized: 25@@Intellig.
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079626
-    m_Localized: Terrain
+    m_Localized: 25@@Terrain
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079627
@@ -781,7 +781,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079634
-    m_Localized: Become Independent
+    m_Localized: '20@@Become
+
+      Independent'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079635
@@ -805,7 +807,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079640
-    m_Localized: Decisive Battle
+    m_Localized: 30@@Decisive Battle
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079641
@@ -817,7 +819,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079643
-    m_Localized: Private Fight
+    m_Localized: 28@@Private Fight
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079644
@@ -847,7 +849,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079650
-    m_Localized: Change sally and promote and demote your vassals.
+    m_Localized: 30@@Change sally and promote and demote your vassals.
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079651
@@ -952,6 +954,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2180415409348614
     m_Localized: Sols
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1918153343885346
+    m_Localized: Salary%
     m_Metadata:
       m_Items: []
   references:

@@ -18,7 +18,7 @@ public partial class OrganizeScreen
 
     public CharacterInfo CharacterInfo { get; private set; }
 
-    public Label labelTargetSalaryRatiocaption { get; private set; }
+    public Label labelTargetSalaryRatioCaption { get; private set; }
 
     public Label labelTargetSalaryRatio { get; private set; }
 
@@ -45,7 +45,7 @@ public partial class OrganizeScreen
         Root = root;
         CharacterTable = new CharacterTable(Root?.Q<VisualElement>("CharacterTable"));
         CharacterInfo = new CharacterInfo(Root?.Q<VisualElement>("CharacterInfo"));
-        labelTargetSalaryRatiocaption = Root?.Q<Label>("labelTargetSalaryRatiocaption");
+        labelTargetSalaryRatioCaption = Root?.Q<Label>("labelTargetSalaryRatioCaption");
         labelTargetSalaryRatio = Root?.Q<Label>("labelTargetSalaryRatio");
         labelTargetLoyaltyCaption = Root?.Q<Label>("labelTargetLoyaltyCaption");
         labelTargetLoyalty = Root?.Q<Label>("labelTargetLoyalty");
