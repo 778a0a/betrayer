@@ -555,27 +555,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153327108096
-    m_Localized: Atk
+    m_Localized: Attack
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885312
-    m_Localized: Def
+    m_Localized: Defense
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885313
-    m_Localized: Intl
+    m_Localized: 20@@Intelligence
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885314
-    m_Localized: 20@@Loyalty
+    m_Localized: Loyalty
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885315
-    m_Localized: 18@@Prestige
+    m_Localized: Prestige
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885316
-    m_Localized: Ctrb
+    m_Localized: 20@@Contribution
     m_Metadata:
       m_Items: []
   - m_Id: 1918153343885317
@@ -837,7 +837,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079649
-    m_Localized: Change Alliance Stance
+    m_Localized: '20@@Change
+
+      Alliance Stance'
     m_Metadata:
       m_Items: []
   - m_Id: 1918153348079650
@@ -914,6 +916,38 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1918153348079668
     m_Localized: Go to Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415367405568
+    m_Localized: Atk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348608
+    m_Localized: Def
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348609
+    m_Localized: Intl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348610
+    m_Localized: 20@@Loyalty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348611
+    m_Localized: 18@@Prestige
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348612
+    m_Localized: Ctrb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348613
+    m_Localized: 25@@Sal%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348614
+    m_Localized: Sols
     m_Metadata:
       m_Items: []
   references:

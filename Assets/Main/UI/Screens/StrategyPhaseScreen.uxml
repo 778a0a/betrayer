@@ -58,30 +58,30 @@
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="攻撃" name="labelCharaAttackCaption" class="CharaInfo-Label" />
-                            <engine:Label name="labelCharaAttack" text="10" class="CharaInfo-Value" />
+                            <engine:Label text="攻撃" name="labelCharaAttackCaption" class="Phase-CharaInfo-Label" />
+                            <engine:Label name="labelCharaAttack" text="10" class="Phase-CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="防衛" name="labelCharaDefenseCaption" class="CharaInfo-Label" />
-                            <engine:Label name="labelCharaDefense" text="10" class="CharaInfo-Value" />
+                            <engine:Label text="防衛" name="labelCharaDefenseCaption" class="Phase-CharaInfo-Label" />
+                            <engine:Label name="labelCharaDefense" text="10" class="Phase-CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="智謀" name="labelCharaIntelligenceCaption" class="CharaInfo-Label" />
-                            <engine:Label name="labelCharaIntelligence" text="10" class="CharaInfo-Value" />
+                            <engine:Label text="智謀" name="labelCharaIntelligenceCaption" class="Phase-CharaInfo-Label" />
+                            <engine:Label name="labelCharaIntelligence" text="10" class="Phase-CharaInfo-Value" />
                         </engine:VisualElement>
                     </engine:VisualElement>
                     <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="忠誠" name="labelCharaLoyaltyCaption" class="CharaInfo-Label" />
-                            <engine:Label name="labelCharaLoyalty" text="10" class="CharaInfo-Value" />
+                            <engine:Label text="忠誠" name="labelCharaLoyaltyCaption" class="Phase-CharaInfo-Label" />
+                            <engine:Label name="labelCharaLoyalty" text="10" class="Phase-CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="名声" name="labelCharaPrestigeCaption" class="CharaInfo-Label" />
-                            <engine:Label name="labelCharaPrestige" text="10" class="CharaInfo-Value" />
+                            <engine:Label text="名声" name="labelCharaPrestigeCaption" class="Phase-CharaInfo-Label" />
+                            <engine:Label name="labelCharaPrestige" text="10" class="Phase-CharaInfo-Value" />
                         </engine:VisualElement>
                         <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <engine:Label text="功績" name="labelCharaContributionCaption" class="CharaInfo-Label" />
-                            <engine:Label name="labelCharaContribution" text="10" class="CharaInfo-Value" />
+                            <engine:Label text="功績" name="labelCharaContributionCaption" class="Phase-CharaInfo-Label" />
+                            <engine:Label name="labelCharaContribution" text="10" class="Phase-CharaInfo-Value" />
                         </engine:VisualElement>
                     </engine:VisualElement>
                     <engine:VisualElement name="Soldiers" style="flex-direction: row; flex-wrap: wrap;">

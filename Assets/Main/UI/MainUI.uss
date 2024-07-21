@@ -41,17 +41,39 @@
     margin-right: 2px;
 }
 
+.Phase-CharaInfo-Label {
+    width: 120px;
+    padding: 2px;
+    -unity-text-align: middle-left;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 2px;
+    margin-right: 0;
+}
+
+.Phase-CharaInfo-Value {
+    width: 80px;
+    padding: 2px;
+    -unity-text-align: middle-left;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0px;
+    margin-right: 2px;
+}
+
 .Action-Button {
 }
 
 .SoldierInfoLarge-Label {
-    width: 15px;
+    width: 28px;
     font-size: 20px;
     -unity-text-align: lower-left;
     margin-top: 0;
-    margin-right: 5px;
+    margin-right: 0px;
     margin-bottom: 0;
-    margin-left: 5px;
+    margin-left: 0px;
     padding-top: 0;
     padding-right: 0;
     padding-bottom: 0;
@@ -65,7 +87,7 @@
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
-    margin-left: 2px;
+    margin-left: 0;
     padding-top: 0;
     padding-right: 0;
     padding-bottom: 0;

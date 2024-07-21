@@ -1,8 +1,8 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Main/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
+    <Style src="project://database/Assets/Main/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=58784b5e2f0cb174d8cf6549c5d2f08c&amp;type=3#MainUI" />
     <engine:VisualElement style="flex-grow: 0; flex-direction: row; margin-top: 5px; margin-right: 0; margin-bottom: 5px; margin-left: 0;">
-        <engine:Image name="imageSoldier" class="SoldierInfoLarge-Image" style="--unity-image: url('/Assets/Main/UI/Images/Soldier.asset'); --unity-image-size: stretch-to-fill; flex-grow: 0; flex-shrink: 0; align-self: center;" />
-        <engine:VisualElement style="flex-grow: 1;">
+        <engine:Image name="imageSoldier" class="SoldierInfoLarge-Image" style="--unity-image: url(&quot;project://database/Assets/Main/UI/Images/Soldier.asset?fileID=21300000&amp;guid=b0076df2f47e76e4fb86934dcb590602&amp;type=2#Soldier&quot;); --unity-image-size: stretch-to-fill; flex-grow: 0; flex-shrink: 0; align-self: center; margin-top: 0; margin-left: -10px; width: 60px; height: 55px;" />
+        <engine:VisualElement style="flex-grow: 1; justify-content: flex-end;">
             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
                 <engine:Label text="Lv" class="SoldierInfoLarge-Label" />
                 <engine:Label text="10" name="labelLevel" class="SoldierInfoLarge-Value" />

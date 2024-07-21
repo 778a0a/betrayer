@@ -15,6 +15,38 @@ MonoBehaviour:
   m_TableCollectionName: MainStringTable
   m_TableCollectionNameGuidString: 02ebde7d9091c864192f80b54e1ac99d
   m_Entries:
+  - m_Id: 2180415367405568
+    m_Key: CharacterInfo.labelCharaAttackCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348608
+    m_Key: CharacterInfo.labelCharaDefenseCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348609
+    m_Key: CharacterInfo.labelCharaIntelligenceCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348610
+    m_Key: CharacterInfo.labelCharaLoyaltyCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348611
+    m_Key: CharacterInfo.labelCharaPrestigeCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348612
+    m_Key: CharacterInfo.labelCharaContributionCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348613
+    m_Key: CharacterInfo.labelCharaSalaryRatioCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180415409348614
+    m_Key: CharacterInfo.labelCharaSoldierCountCaption
+    m_Metadata:
+      m_Items: []
   - m_Id: 1918153327108096
     m_Key: labelCharaAttackCaption
     m_Metadata:

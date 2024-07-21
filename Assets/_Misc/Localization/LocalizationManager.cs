@@ -29,7 +29,7 @@ public class LocalizationManager : MonoBehaviour
             var props = c.GetType().GetProperties();
             foreach (var prop in props)
             {
-                var entry = table[prop.Name];
+                var entry = table[$"{typeName}.{prop.Name}"] ?? table[prop.Name];
                 if (entry == null)
                 {
                     //Debug.Log($"[L.Apply] Key not found: {prop.Name} of {typeName}");
