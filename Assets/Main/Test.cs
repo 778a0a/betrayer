@@ -49,6 +49,12 @@ public class Test : MonoBehaviour
 
     private void StartGame(WorldData world, SavedGameCoreState state, int saveDataSlotNo, bool isNewGame)
     {
+        // 人物名を現在の言語に変換する。
+        foreach (var c in world.Characters)
+        {
+            c.Name = MainUI.L.TranslateName(c.Name);
+        }
+        
         core = new GameCore(world, MainUI, tilemap, this, state, saveDataSlotNo);
         GameCore.Instance = core;
         tilemap.DrawCountryTile();

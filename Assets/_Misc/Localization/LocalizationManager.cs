@@ -93,4 +93,139 @@ public class LocalizationManager : MonoBehaviour
         value = value.Replace("\\n", "\n");
         return string.Format(value, args);
     }
+
+    public string TranslateName(string name)
+    {
+        var locale = LocalizationSettings.SelectedLocale;
+        var isEn = locale.Identifier.Code == "en";
+        return isEn ? NameJaToEn(name) : NameEnToJa(name);
+    }
+
+    public string NameJaToEn(string nameJa)
+    {
+        if (dictNameJaToEn.TryGetValue(nameJa, out var nameEn))
+        {
+            return nameEn;
+        }
+        return nameJa;
+    }
+
+    public string NameEnToJa(string nameEn)
+    {
+        foreach (var pair in dictNameJaToEn)
+        {
+            if (pair.Value == nameEn)
+            {
+                return pair.Key;
+            }
+        }
+        return nameEn;
+    }
+
+    private readonly Dictionary<string, string> dictNameJaToEn = new()
+    {
+        {"イヴァ", "Iva"},
+        {"アストレア", "Astraea"},
+        {"アネモネ", "Anemone"},
+        {"アマンダ", "Amanda"},
+        {"アリアドネ", "Ariadne"},
+        {"アリアナ", "Ariana"},
+        {"アリエル", "Ariel"},
+        {"アルタイル", "Altair"},
+        {"アルバート", "Albert"},
+        {"アーサー", "Arthur"},
+        {"イカロス", "Icarus"},
+        {"イグレイン", "Igraine"},
+        {"イゾルデ", "Isolde"},
+        {"イシュタル", "Ishtar"},
+        {"エスメラルダ", "Esmeralda"},
+        {"エマ", "Emma"},
+        {"エルロン", "Elron"},
+        {"エレノア", "Eleanor"},
+        {"オスカー", "Oscar"},
+        {"オベロン", "Oberon"},
+        {"オリビア", "Olivia"},
+        {"カトリーナ", "Katrina"},
+        {"キャスパー", "Casper"},
+        {"グリフィン", "Griffin"},
+        {"ケイルン", "Kaelen"},
+        {"ケイロス", "Kairos"},
+        {"シエナ", "Sienna"},
+        {"シャーロット", "Charlotte"},
+        {"シルバーン", "Silvan"},
+        {"ジェームズ", "James"},
+        {"ジャスパー", "Jasper"},
+        {"ジャスミン", "Jasmine"},
+        {"ジークフリート", "Siegfried"},
+        {"セバスチャン", "Sebastian"},
+        {"セレーネ", "Selene"},
+        {"ゼノン", "Xenon"},
+        {"ソフィア", "Sophia"},
+        {"ソレイユ", "Soleil"},
+        {"タリシア", "Talisha"},
+        {"チャールズ", "Charles"},
+        {"デューン", "Dune"},
+        {"ドレイク", "Drake"},
+        {"ナイア", "Naiad"},
+        {"ネメア", "Nemea"},
+        {"ネロ", "Nero"},
+        {"ノクターン", "Nocturne"},
+        {"フェニックス", "Phoenix"},
+        {"ヘリオス", "Helios"},
+        {"ヘンリー", "Henry"},
+        {"ペルシヴァル", "Percival"},
+        {"ミリアム", "Miriam"},
+        {"ライオネル", "Lionel"},
+        {"ライラ", "Laila"},
+        {"リリス", "Lilith"},
+        {"ルシアン", "Lucian"},
+        {"ルナ", "Luna"},
+        {"ロザリンド", "Rosalind"},
+        {"ロゼッタ", "Rosetta"},
+        {"ローズマリー", "Rosemary"},
+        {"ヴァルカン", "Vulcan"},
+        {"ヴィオレット", "Violet"},
+        {"レオナルド", "Leonardo"},
+        {"ジョージ", "George"},
+        {"セレスティア", "Celestia"},
+        {"ビクトリア", "Victoria"},
+        {"オーロラ", "Aurora"},
+        {"ナオミ", "Naomi"},
+        {"プロメテウス", "Prometheus"},
+        {"トリスタン", "Tristan"},
+        {"エルシア", "Elcia"},
+        {"イゼルト", "Isolde"},
+        {"ドラゴミール", "Dragomir"},
+        {"エドワード", "Edward"},
+        {"マーガレット", "Margaret"},
+        {"ハイペリオン", "Hyperion"},
+        {"フレデリック", "Frederick"},
+        {"ガイアス", "Gaius"},
+        {"レイヴン", "Raven"},
+        {"ザファーラ", "Zafara"},
+        {"ザンダー", "Xander"},
+        {"ビアンカ", "Bianca"},
+        {"オリオン", "Orion"},
+        {"ウィリアム", "William"},
+        {"アクエリアス", "Aquarius"},
+        {"ザフィール", "Zephyr"},
+        {"ローエン", "Rowan"},
+        {"ナディア", "Nadia"},
+        {"アステル", "Aster"},
+        {"イザベラ", "Isabella"},
+        {"カリオペ", "Calliope"},
+        {"アリシア", "Alicia"},
+        {"ゼラン", "Zelan"},
+        {"フリージア", "Freesia"},
+        {"レイモンド", "Raymond"},
+        {"セレスト", "Celestin"},
+        {"ラベンダー", "Lavender"},
+        {"シャノン", "Shannon"},
+        {"ケルベロス", "Cerberus"},
+        {"ファエリン", "Faerin"},
+        {"イリス", "Iris"},
+        {"シエラ", "Sierra"},
+        {"アトラス", "Atlas"},
+        {"イゼリア", "Izelia"},
+    };
 }
