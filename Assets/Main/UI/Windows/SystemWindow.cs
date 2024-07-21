@@ -90,7 +90,7 @@ public partial class SystemWindow : IWindow
         buttonChangeCharacter.enabledSelf = cleared;
         if (!cleared)
         {
-            buttonChangeCharacter.text += L[" (クリア後解放)"];
+            buttonChangeCharacter.text = L["操作キャラ変更 (クリア後解放)"];
             buttonChangeCharacter.style.fontSize = 30;
         }
 

@@ -52,6 +52,8 @@ public partial class CountryRulerInfo
 
     public Image imageRuler { get; private set; }
 
+    public Label labelCountryRulerInfoTitle { get; private set; }
+
     public VisualElement Country { get; private set; }
 
     public VisualElement Root { get; }
@@ -78,6 +80,7 @@ public partial class CountryRulerInfo
         imageAllyCountryColor = Root?.Q<Image>("imageAllyCountryColor");
         labelAlly = Root?.Q<Label>("labelAlly");
         imageRuler = Root?.Q<Image>("imageRuler");
+        labelCountryRulerInfoTitle = Root?.Q<Label>("labelCountryRulerInfoTitle");
         Country = Root?.Q<VisualElement>("Country");
     }
 }

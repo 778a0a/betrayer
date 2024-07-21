@@ -7,7 +7,7 @@
         <engine:VisualElement name="CellInformation" style="flex-grow: 0; flex-direction: row; position: absolute; right: 0;">
             <engine:Label text="地形" name="labelTerrainCaption" style="-unity-font-style: bold; font-size: 30px;" />
             <engine:Label text="丘陵" name="labelTerrain" style="font-size: 30px;" />
-            <engine:Label text="座標" style="-unity-font-style: bold; margin-left: 30px; font-size: 30px;" />
+            <engine:Label text="座標" name="labelPositionCaption" style="-unity-font-style: bold; margin-left: 30px; font-size: 30px;" />
             <engine:Label text="(10, 10)" name="labelPosition" style="font-size: 30px;" />
         </engine:VisualElement>
         <engine:Instance template="CountryRulerInfo" name="CountryRulerInfo" />

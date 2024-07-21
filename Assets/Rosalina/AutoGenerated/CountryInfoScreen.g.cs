@@ -18,6 +18,8 @@ public partial class CountryInfoScreen
 
     public Label labelTerrain { get; private set; }
 
+    public Label labelPositionCaption { get; private set; }
+
     public Label labelPosition { get; private set; }
 
     public VisualElement CellInformation { get; private set; }
@@ -37,6 +39,7 @@ public partial class CountryInfoScreen
         Root = root;
         labelTerrainCaption = Root?.Q<Label>("labelTerrainCaption");
         labelTerrain = Root?.Q<Label>("labelTerrain");
+        labelPositionCaption = Root?.Q<Label>("labelPositionCaption");
         labelPosition = Root?.Q<Label>("labelPosition");
         CellInformation = Root?.Q<VisualElement>("CellInformation");
         CountryRulerInfo = new CountryRulerInfo(Root?.Q<VisualElement>("CountryRulerInfo"));

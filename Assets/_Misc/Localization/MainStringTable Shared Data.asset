@@ -892,7 +892,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578948
-    m_Key: " (\u30AF\u30EA\u30A2\u5F8C\u89E3\u653E)"
+    m_Key: "\u64CD\u4F5C\u30AD\u30E3\u30E9\u5909\u66F4 (\u30AF\u30EA\u30A2\u5F8C\u89E3\u653E)"
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578949
@@ -941,6 +941,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 64204634578960
     m_Key: "\u64CD\u4F5C\u30AD\u30E3\u30E9\u5909\u66F4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2227604496048128
+    m_Key: labelPositionCaption
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2227701569019904
+    m_Key: labelCountryRulerInfoTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232026890493952
+    m_Key: buttonMessageOK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232052991647744
+    m_Key: buttonMessageYes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232077536714752
+    m_Key: buttonMessageNo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232094586560512
+    m_Key: buttonMessageCancel
     m_Metadata:
       m_Items: []
   m_Metadata:

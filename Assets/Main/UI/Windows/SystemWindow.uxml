@@ -7,7 +7,7 @@
                 <engine:Button text="×" name="buttonCloseSystemWindow" style="position: absolute; top: 0; right: 0; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; height: 48px; width: 48px;" />
             </engine:VisualElement>
             <engine:Button text="セーブ" name="buttonSave" />
-            <engine:Button text="操作キャラ変更" name="buttonChangeCharacter" style="height: 62px; font-size: 40px;" />
+            <engine:Button text="操作キャラ変更" name="buttonChangeCharacter" style="font-size: 40px;" />
             <engine:Button text="タイトルへ" name="buttonGoToTitle" />
         </engine:VisualElement>
     </engine:VisualElement>

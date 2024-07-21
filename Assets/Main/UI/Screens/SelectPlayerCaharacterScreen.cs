@@ -88,7 +88,15 @@ public partial class SelectPlayerCaharacterScreen : IScreen
     {
         var cleared = GameCore.GameCleared;
         buttonWatch.enabledSelf = cleared;
-        buttonWatch.text = cleared ? L["観戦"] : L["観戦（クリア後解放）"];
+        if (cleared)
+        {
+            buttonWatch.text = L["観戦"];
+        }
+        else
+        {
+            buttonWatch.text = L["観戦（クリア後解放）"];
+            buttonWatch.style.fontSize = 20;
+        }
 
         if (pos == null && !isShowingFreeList)
         {

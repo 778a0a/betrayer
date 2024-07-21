@@ -499,11 +499,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578947
-    m_Localized: Spectator (unlocked after clearing)
+    m_Localized: 'Spectator
+
+      (unlocked after clearing)'
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578948
-    m_Localized: ' (unlocked after clearing)'
+    m_Localized: 'Change character
+
+      (unlocked after clearing)'
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578949
@@ -958,6 +962,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1918153343885346
     m_Localized: Salary%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2227604496048128
+    m_Localized: Position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2227701569019904
+    m_Localized: Country
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232026890493952
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232052991647744
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232077536714752
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232094586560512
+    m_Localized: Cancel
     m_Metadata:
       m_Items: []
   references:
