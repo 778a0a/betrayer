@@ -265,14 +265,14 @@ public partial class TitleSceneUI : MonoBehaviour
     private string GetLicense() =>
         L["本ソフトの配布にあたって同梱されているサードパーティーコンポーネントとそのライセンス情報を以下に示します。"] + @"
 
-Morisawa BIZ UDGothic
-=====================
+Noto Sans Japanese
+===========================================================
 
-Copyright 2022 The BIZ UDGothic Project Authors (https://github.com/googlefonts/morisawa-biz-ud-gothic)
+Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
-https://scripts.sil.org/OFL
+https://openfontlicense.org
 
 
 -----------------------------------------------------------
