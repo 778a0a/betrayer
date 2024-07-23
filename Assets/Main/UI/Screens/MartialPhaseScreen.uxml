@@ -6,7 +6,7 @@
         <engine:VisualElement name="ActionsPanel">
             <engine:VisualElement style="flex-grow: 0;">
                 <engine:VisualElement style="flex-direction: row;">
-                    <engine:Label name="labelTurnCount" text="888" style="font-size: 30px; margin-right: 0; padding-right: 0;" />
+                    <engine:Label name="labelTurnCount" text="888" style="font-size: 25px; margin-right: 0; padding-right: 0;" />
                     <engine:Label text="ターン" name="labelTurnCountCaption" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto;" />
                     <engine:Label text="軍事" name="labelMartialPhase" style="font-size: 30px; margin-right: 0; padding-right: 0; -unity-text-align: lower-right;" />
                     <engine:Label text="フェイズ" name="labelMartialPhaseCaption" style="font-size: 17px; margin-left: 0; padding-left: 0; margin-top: auto; margin-right: 0; padding-right: 0;" />
