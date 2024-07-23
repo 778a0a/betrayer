@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: f9700fecb2b040b47b6e978402acb7cd
   m_currentHash:
     serializedVersion: 2
-    Hash: bc38b2d408a04319dab1540bf620dfd6
+    Hash: cbe46e3997acfc6ffe03d834d3dea10a
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -76,13 +76,13 @@ MonoBehaviour:
       - m_Id: 05bdcaf3455f6a444873fada592bd0a8
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
       - m_Id: 10485f67fe9c02d4e8d5babde4948ad7
-        m_Value: 'ServerData/[BuildTarget]'
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: 99f4fc5f64762904f99ad23974d3a97c
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: b49691053909beb45824ef4e70aada5e
         m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: f264499dd0b855c4bb297bc5d90180ae
-        m_Value: <undefined>
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
     m_ProfileEntryNames:
     - m_Id: 05bdcaf3455f6a444873fada592bd0a8
       m_Name: BuildTarget
@@ -106,6 +106,7 @@ MonoBehaviour:
     - Locale
     - Locale-en
     - Locale-ja
+    - Preload
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: ba3ac210771afd74a809334bd14a2c57, type: 2}
