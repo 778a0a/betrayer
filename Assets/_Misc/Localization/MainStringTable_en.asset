@@ -474,16 +474,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62717007224856
-    m_Localized: It is a period of prohibition of decisive battles. (Remaining {0}
-      turns)
+    m_Localized: Decisive battles prohibited ({0} turns left)
     m_Metadata:
       m_Items: []
   - m_Id: 62717007224857
-    m_Localized: Only the first country in the military phase can execute it.
+    m_Localized: Only the first country in the phase can act this.
     m_Metadata:
       m_Items: []
   - m_Id: 62717007224858
-    m_Localized: There is no country that can be challenged to a decisive battle.
+    m_Localized: No country can be challenged to a decisive battle.
     m_Metadata:
       m_Items: []
   - m_Id: 64204634578944
