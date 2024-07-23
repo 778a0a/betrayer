@@ -4735,7 +4735,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d170ad9c8cfc0646ac04a73d9fd7ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tables: {fileID: 11400000, guid: 61c7bc139efa42541b5b523491baa941, type: 2}
+  ltable:
+    m_TableReference:
+      m_TableCollectionName: GUID:02ebde7d9091c864192f80b54e1ac99d
 --- !u!1 &1877343546
 GameObject:
   m_ObjectHideFlags: 0

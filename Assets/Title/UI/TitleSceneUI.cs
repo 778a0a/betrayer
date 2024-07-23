@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 using System.IO.Compression;
 using System.Threading.Tasks;
-using UnityEditor.Localization;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -15,7 +16,14 @@ public partial class TitleSceneUI : MonoBehaviour
 
     private void OnEnable()
     {
+        Root.visible = false;
         InitializeDocument();
+    }
+
+    private IEnumerator Start()
+    {
+        yield return LocalizationSettings.InitializationOperation;
+
         InitializeNewGameWindow();
         InitializeTextBoxWindow();
         InitializeProgressWindow();
@@ -25,6 +33,7 @@ public partial class TitleSceneUI : MonoBehaviour
         SaveDataList.Initialize(this);
 
         L.Register(this);
+
         L.Apply();
 
         buttonCloseApplication.clicked += () =>
@@ -42,6 +51,8 @@ public partial class TitleSceneUI : MonoBehaviour
         };
 
         SaveDataList.SetData(SaveDataManager.Instance);
+
+        Root.visible = true;
     }
 
 

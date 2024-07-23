@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Localization;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Tables;
 using UnityEngine.UIElements;
 
 public class LocalizationManager : MonoBehaviour
 {
-    [SerializeField] private StringTableCollection tables;
+    [SerializeField] private LocalizedStringTable ltable;
 
     private readonly List<object> components = new();
 
@@ -20,8 +19,7 @@ public class LocalizationManager : MonoBehaviour
 
     public void Apply()
     {
-        var locale = LocalizationSettings.SelectedLocale;
-        var table = (StringTable)tables.GetTable(locale.Identifier);
+        var table = ltable.GetTable();
 
         foreach (var c in components)
         {
@@ -81,8 +79,7 @@ public class LocalizationManager : MonoBehaviour
     {
         key = key.Replace("\n", "\\n");
 
-        var locale = LocalizationSettings.SelectedLocale;
-        var table = (StringTable)tables.GetTable(locale.Identifier);
+        var table = ltable.GetTable();
         var entry = table[key];
         if (entry == null)
         {
