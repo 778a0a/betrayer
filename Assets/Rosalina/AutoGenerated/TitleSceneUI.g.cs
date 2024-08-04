@@ -15,11 +15,13 @@ public partial class TitleSceneUI
 {
     [SerializeField]
     private UIDocument _document;
+    public Button buttonShowSystemSettings { get; private set; }
+
+    public Button buttonShowLicense { get; private set; }
+
     public SaveDataListWindow SaveDataList { get; private set; }
 
     public Button buttonCloseApplication { get; private set; }
-
-    public Button buttonShowLicense { get; private set; }
 
     public Button buttonCloseNewGameWindow { get; private set; }
 
@@ -67,6 +69,8 @@ public partial class TitleSceneUI
 
     public VisualElement LicenseWindow { get; private set; }
 
+    public SystemSettingsWindow SystemSettingsWindow { get; private set; }
+
     public MessageWindow MessageWindow { get; private set; }
 
     public VisualElement Windows { get; private set; }
@@ -74,9 +78,10 @@ public partial class TitleSceneUI
     public VisualElement Root => _document?.rootVisualElement;
     public void InitializeDocument()
     {
+        buttonShowSystemSettings = Root?.Q<Button>("buttonShowSystemSettings");
+        buttonShowLicense = Root?.Q<Button>("buttonShowLicense");
         SaveDataList = new SaveDataListWindow(Root?.Q<VisualElement>("SaveDataList"));
         buttonCloseApplication = Root?.Q<Button>("buttonCloseApplication");
-        buttonShowLicense = Root?.Q<Button>("buttonShowLicense");
         buttonCloseNewGameWindow = Root?.Q<Button>("buttonCloseNewGameWindow");
         buttonStartNewGame = Root?.Q<Button>("buttonStartNewGame");
         buttonLoadTextData = Root?.Q<Button>("buttonLoadTextData");
@@ -100,6 +105,7 @@ public partial class TitleSceneUI
         TextBoxWindow = Root?.Q<VisualElement>("TextBoxWindow");
         ProgressWindow = Root?.Q<VisualElement>("ProgressWindow");
         LicenseWindow = Root?.Q<VisualElement>("LicenseWindow");
+        SystemSettingsWindow = new SystemSettingsWindow(Root?.Q<VisualElement>("SystemSettingsWindow"));
         MessageWindow = new MessageWindow(Root?.Q<VisualElement>("MessageWindow"));
         Windows = Root?.Q<VisualElement>("Windows");
     }

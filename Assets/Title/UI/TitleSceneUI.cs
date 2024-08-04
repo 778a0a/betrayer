@@ -22,6 +22,8 @@ public partial class TitleSceneUI : MonoBehaviour
 
     private IEnumerator Start()
     {
+        SystemSettingsManager.Instance.ApplyOrientation();
+
         yield return LocalizationSettings.InitializationOperation;
 
         InitializeNewGameWindow();
@@ -30,6 +32,8 @@ public partial class TitleSceneUI : MonoBehaviour
         InitializeLicenseWindow();
         MessageWindow.L = L;
         MessageWindow.Initialize();
+        SystemSettingsWindow.L = L;
+        SystemSettingsWindow.Initialize();
         SaveDataList.Initialize(this);
 
         L.Register(this);
@@ -48,6 +52,11 @@ public partial class TitleSceneUI : MonoBehaviour
         buttonShowLicense.clicked += () =>
         {
             ShowLicenseWindow();
+        };
+
+        buttonShowSystemSettings.clicked += () =>
+        {
+            SystemSettingsWindow.Show();
         };
 
         SaveDataList.SetData(SaveDataManager.Instance);

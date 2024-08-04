@@ -82,3 +82,5 @@ MonoBehaviour:
     _path: Assets/Main/UI/Windows/WatchModeWindow.uxml
   - _type: 1
     _path: Assets/Main/UI/Windows/SystemWindow.uxml
+  - _type: 1
+    _path: Assets/Title/UI/Windows/SystemSettingsWindow.uxml
