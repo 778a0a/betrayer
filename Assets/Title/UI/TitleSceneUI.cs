@@ -14,10 +14,21 @@ public partial class TitleSceneUI : MonoBehaviour
 
     [SerializeField] public LocalizationManager L;
 
+    private bool isInitialized = false;
     private void OnEnable()
     {
+        using var _ = Util.Defer(() => isInitialized = true);
+
         Root.visible = false;
         InitializeDocument();
+        
+        // UIBuilderで要素を操作するとUIDocumentが作り直しになるので
+        // Startを呼んでUIを再構築する。
+        if (isInitialized)
+        {
+            StartCoroutine(Start());
+            return;
+        }
     }
 
     private IEnumerator Start()
