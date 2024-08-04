@@ -19,13 +19,6 @@ public partial class SystemSettingsWindow : IWindow
             SystemSettings.ApplyOrientation();
         });
 
-        var layouts = Util.EnumArray<LayoutSetting>();
-        comboLayout.index = Array.IndexOf(layouts, SystemSettings.Layout);
-        comboLayout.RegisterValueChangedCallback(e =>
-        {
-            SystemSettings.Layout = layouts[comboLayout.index];
-        });
-
         CloseButton.clicked += () => Root.style.display = DisplayStyle.None;
     }
 
@@ -41,14 +34,8 @@ public class SystemSettingsManager
 
     public OrientationSetting Orientation
     {
-        get => (OrientationSetting)PlayerPrefs.GetInt(nameof(Orientation), (int)OrientationSetting.UserSetting);
+        get => (OrientationSetting)PlayerPrefs.GetInt(nameof(Orientation), (int)OrientationSetting.Auto);
         set => PlayerPrefs.SetInt(nameof(Orientation), (int)value);
-    }
-
-    public LayoutSetting Layout
-    {
-        get => (LayoutSetting)PlayerPrefs.GetInt(nameof(Layout), (int)LayoutSetting.Auto);
-        set => PlayerPrefs.SetInt(nameof(Layout), (int)value);
     }
 
     public void ApplyOrientation()
@@ -56,21 +43,12 @@ public class SystemSettingsManager
         var orientation = Orientation;
         switch (orientation)
         {
-            case OrientationSetting.UserSetting:
+            case OrientationSetting.Auto:
                 Screen.orientation = ScreenOrientation.AutoRotation;
-                break;
-            case OrientationSetting.Sensor:
-                Screen.orientation = ScreenOrientation.AutoRotation;
-                //Screen.autorotateToPortrait = true;
-                //Screen.autorotateToPortraitUpsideDown = true;
-                //Screen.autorotateToLandscapeLeft = true;
-                //Screen.autorotateToLandscapeRight = true;
-                break;
-            case OrientationSetting.Portrait:
-                Screen.orientation = ScreenOrientation.Portrait;
-                break;
-            case OrientationSetting.PortraitUpsideDown:
-                Screen.orientation = ScreenOrientation.PortraitUpsideDown;
+                Screen.autorotateToLandscapeLeft = true;
+                Screen.autorotateToLandscapeRight = true;
+                Screen.autorotateToPortrait = false;
+                Screen.autorotateToPortraitUpsideDown = false;
                 break;
             case OrientationSetting.LandscapeLeft:
                 Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -84,17 +62,14 @@ public class SystemSettingsManager
 
 public enum OrientationSetting
 {
-    UserSetting = 0,
-    Sensor,
-    Portrait,
-    PortraitUpsideDown,
+    Auto,
     LandscapeLeft,
     LandscapeRight,
 }
 
-public enum LayoutSetting
+public enum LanguageSetting
 {
-    Auto = 0,
-    Columns,
-    Rows,
+    Auto,
+    Japanese,
+    English,
 }

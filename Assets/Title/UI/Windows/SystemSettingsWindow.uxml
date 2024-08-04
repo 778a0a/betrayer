@@ -5,8 +5,8 @@
             <ui:Label text="システム設定" name="labelSaveDataListWindowTitle" style="color: rgb(255, 255, 255);" />
             <ui:Button text="×" name="CloseButton" style="position: absolute; align-items: stretch; align-self: auto; right: 2px; width: 50px; height: 50px;" />
             <ui:VisualElement style="flex-grow: 1; background-color: rgb(204, 204, 204); width: 500px;">
-                <ui:DropdownField label="画面回転" choices="端末設定,自動(センサー),縦,縦(上下反転),横,横(上下反転)" index="0" name="comboOrientation" />
-                <ui:DropdownField label="レイアウト" choices="自動,横並び,横並び(十字パッドあり),縦積み,縦積み(十字パッドあり)" index="0" name="comboLayout" />
+                <ui:DropdownField label="画面回転" choices="自動,通常,反転" index="0" name="comboOrientation" />
+                <ui:DropdownField label="言語" choices="自動,日本語,English" index="0" name="comboLayout" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
