@@ -5,8 +5,14 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private float panSpeed = 5f;
     [SerializeField] private float panBorderThickness = 0.1f;
-    [SerializeField] private Vector2 panLimitUpLeft;
-    [SerializeField] private Vector2 panLimitDownRight;
+    [SerializeField] private Transform panLimitUpLeftObject;
+    private Vector2 panLimitUpLeft => panLimitUpLeftObject.position;
+    [SerializeField] private Transform panLimitDownRightObject;
+    private Vector2 panLimitDownRight => panLimitDownRightObject.position;
+    private new Camera camera;
+
+    private float zoomMin = 2f;
+    private float zoomMax = 10f;
 
     private float accelerationMultiplier = 4;
     private float vAccelaration = 0;
@@ -23,8 +29,8 @@ public class CameraMovement : MonoBehaviour
 
     private void Start()
     {
-        var cam = GetComponent<Camera>();
-        var rect = cam.rect;
+        TryGetComponent(out camera);
+        var rect = camera.rect;
         topPanBorder = Screen.height * rect.yMax - Screen.height * rect.height * panBorderThickness;
         bottomPanBorder = Screen.height * rect.yMin + Screen.height * rect.height * panBorderThickness;
         leftPanBorder = Screen.width * rect.xMin + Screen.width * rect.width * panBorderThickness;
@@ -126,5 +132,11 @@ public class CameraMovement : MonoBehaviour
 
 
         transform.position = pos;
+
+
+        // ズーム処理
+        var scroll = Mouse.current.scroll.ReadValue();
+        var zoom = camera.orthographicSize - scroll.y / 2;
+        camera.orthographicSize = Mathf.Clamp(zoom, zoomMin, zoomMax);
     }
 }
